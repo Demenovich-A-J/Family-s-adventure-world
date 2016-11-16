@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using DataContext.Contracts;
-using DataContext.EF;
+using Core.DataContext.Contracts;
+using Core.DataContext.EF;
 
 namespace Faw.DataContext
 {
@@ -14,8 +14,6 @@ namespace Faw.DataContext
         protected override void BuildModel(DbModelBuilder builder)
         {
             builder.Conventions.Remove<PluralizingTableNameConvention>();
-
-            throw new System.NotImplementedException();
         }
 
         public override IDataContext CreateDataContext()

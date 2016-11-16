@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using DataContext.EF;
+using Core.DataContext.EF;
 
 namespace Faw.DataContext
 {

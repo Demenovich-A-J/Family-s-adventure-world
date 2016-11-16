@@ -1,4 +1,4 @@
-﻿using DataContext.Contracts;
+﻿using Core.DataContext.Contracts;
 
 namespace Faw.Repositories
 {

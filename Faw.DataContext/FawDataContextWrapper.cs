@@ -1,7 +1,6 @@
-﻿using System;
-using System.Data.Entity.Infrastructure;
-using DataContext.Contracts;
-using DataContext.EF;
+﻿using System.Data.Entity.Infrastructure;
+using Core.DataContext.Contracts;
+using Core.DataContext.EF;
 
 namespace Faw.DataContext
 {

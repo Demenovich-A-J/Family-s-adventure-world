@@ -49,17 +49,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataContext.EF\DataContext.EF.csproj">
-      <Project>{F5919DD9-0A55-49F2-86A6-BA8C6FDDBB41}</Project>
-      <Name>DataContext.EF</Name>
+    <ProjectReference Include="..\Core.DataContext.EF\Core.DataContext.EF.csproj">
+      <Project>{8E96360C-B00B-4F0B-AB58-DAC9C737AA96}</Project>
+      <Name>Core.DataContext.EF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataContext\DataContext.csproj">
-      <Project>{81ec0511-1a90-4f82-b79d-66db8686611e}</Project>
-      <Name>DataContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Faw.Models\Faw.Models.csproj">
-      <Project>{1948c4bc-23fa-467c-97d9-6f520bb2bfc4}</Project>
-      <Name>Faw.Models</Name>
+    <ProjectReference Include="..\Core.DataContext\Core.DataContext.csproj">
+      <Project>{614B31F8-1537-4307-B3C5-EDB3E3F062B6}</Project>
+      <Name>Core.DataContext</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

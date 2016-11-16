@@ -40,18 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Faw.Models\Faw.Models.csproj">
-      <Project>{1948c4bc-23fa-467c-97d9-6f520bb2bfc4}</Project>
-      <Name>Faw.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Faw.Repositories\Faw.Repositories.csproj">
       <Project>{a6002ffe-8118-4c65-890b-49abc52ffd14}</Project>
       <Name>Faw.Repositories</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="DataAccess\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
