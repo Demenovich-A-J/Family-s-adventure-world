@@ -4,18 +4,18 @@
 IF OBJECT_ID('[dbo].[Account]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[Account](
-		[AccountId] [uniqueidentifier] NOT NULL,
+		[AccountId] [uniqueidentifier] NOT NULL CONSTRAINT DF_AccountId DEFAULT newsequentialid(),
 		[UserName] [nvarchar](100) NOT NULL,
 		[PasswordHash] [nvarchar](100) NOT NULL,
 		[PasswordSalt] [nvarchar](100) NOT NULL,
 		[Token] [uniqueidentifier] NULL,
 		[Email] [nvarchar](255) NOT NULL,
 		[VerifiedOn] [datetime] NULL,
-	 CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
-	(
-		[AccountId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_Account] PRIMARY KEY 
+		(
+			[AccountId] 
+		)
+	)
 END
 
 /*==============================================================*/
@@ -24,14 +24,14 @@ END
 IF OBJECT_ID('[dbo].[Claim]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[Claim](
-		[ClaimId] [uniqueidentifier] NOT NULL,
+		[ClaimId] [uniqueidentifier] NOT NULL CONSTRAINT DF_ClaimId DEFAULT newsequentialid(),
 		[Name] [nvarchar](255) NOT NULL,
 		[Description] [nvarchar](255) NOT NULL,
-	 CONSTRAINT [PK_Claim] PRIMARY KEY CLUSTERED 
-	(
-		[ClaimId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_Claim] PRIMARY KEY 
+		(
+			[ClaimId] 
+		)
+	)
 END
 
 /*==============================================================*/
@@ -40,16 +40,16 @@ END
 IF OBJECT_ID('[dbo].[Family]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[Family](
-		[FamilyId] [uniqueidentifier] NOT NULL,
+		[FamilyId] [uniqueidentifier] NOT NULL CONSTRAINT DF_FamilyId DEFAULT newsequentialid(),
 		[Name] [nvarchar](100) NOT NULL,
 		[CreatedOn] [timestamp] NOT NULL,
 		[UpdatedOn] [datetime] NOT NULL,
 		[CreatedById] [uniqueidentifier] NOT NULL,
-	 CONSTRAINT [PK_Family] PRIMARY KEY CLUSTERED 
-	(
-		[FamilyId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_Family] PRIMARY KEY 
+		(
+			[FamilyId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -58,18 +58,18 @@ END
 IF OBJECT_ID('[dbo].[Item]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[Item](
-		[ItemId] [uniqueidentifier] NOT NULL,
+		[ItemId] [uniqueidentifier] NOT NULL CONSTRAINT DF_ItemId DEFAULT newsequentialid(),
 		[Name] [nvarchar](300) NOT NULL,
 		[Description] [nvarchar](max) NOT NULL,
 		[ImagePath] [nvarchar](255) NULL,
 		[SiteUrl] [nvarchar](max) NOT NULL,
 		[Cost] [decimal](9, 4) NOT NULL,
 		[CreatedBy] [uniqueidentifier] NULL,
-	 CONSTRAINT [PK_Item] PRIMARY KEY CLUSTERED 
-	(
-		[ItemId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+		CONSTRAINT [PK_Item] PRIMARY KEY 
+		(
+			[ItemId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -78,7 +78,7 @@ END
 IF OBJECT_ID('[dbo].[Quest]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[Quest](
-		[QuestId] [uniqueidentifier] NOT NULL,
+		[QuestId] [uniqueidentifier] NOT NULL CONSTRAINT DF_QuestId DEFAULT newsequentialid(),
 		[Name] [nvarchar](255) NOT NULL,
 		[Description] [nvarchar](max) NOT NULL,
 		[ParentQuestId] [uniqueidentifier] NULL,
@@ -87,11 +87,11 @@ BEGIN
 		[Expirience] [int] NOT NULL,
 		[Coins] [decimal](10, 2) NOT NULL,
 		[RequiredLVL] [int] NOT NULL,
-	 CONSTRAINT [PK_Quest] PRIMARY KEY CLUSTERED 
-	(
-		[QuestId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+		CONSTRAINT [PK_Quest] PRIMARY KEY 
+		(
+			[QuestId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -100,14 +100,14 @@ END
 IF OBJECT_ID('[dbo].[Seetting]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[Seetting](
-		[SettingId] [uniqueidentifier] NOT NULL,
+		[SettingId] [uniqueidentifier] NOT NULL CONSTRAINT DF_SettingId DEFAULT newsequentialid(),
 		[Name] [nvarchar](100) NOT NULL,
 		[Value] [nvarchar](100) NOT NULL,
-	 CONSTRAINT [PK_Seetting] PRIMARY KEY CLUSTERED 
-	(
-		[SettingId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_Seetting] PRIMARY KEY 
+		(
+			[SettingId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -116,7 +116,7 @@ END
 IF OBJECT_ID('[dbo].[User]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[User](
-		[UserId] [uniqueidentifier] NOT NULL,
+		[UserId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserId DEFAULT newsequentialid(),
 		[Email] [nvarchar](255) NOT NULL,
 		[FirstName] [nvarchar](255) NOT NULL,
 		[LastName] [nvarchar](255) NOT NULL,
@@ -124,11 +124,11 @@ BEGIN
 		[UserTypeId] [uniqueidentifier] NOT NULL,
 		[Gender] [nvarchar](50) NOT NULL,
 		[BirthDate] [date] NOT NULL,
-	 CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
-	(
-		[UserId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_User] PRIMARY KEY 
+		(
+			[UserId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -137,14 +137,14 @@ END
 IF OBJECT_ID('[dbo].[UserFamily]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[UserFamily](
-		[UserFamilyId] [uniqueidentifier] NOT NULL,
+		[UserFamilyId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserFamilyId DEFAULT newsequentialid(),
 		[UserId] [uniqueidentifier] NOT NULL,
 		[FamilyId] [uniqueidentifier] NOT NULL,
-	 CONSTRAINT [PK_UserFamily] PRIMARY KEY CLUSTERED 
-	(
-		[UserFamilyId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_UserFamily] PRIMARY KEY 
+		(
+			[UserFamilyId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -153,14 +153,14 @@ END
 IF OBJECT_ID('[dbo].[UserItem]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[UserItem](
-		[UserItemId] [uniqueidentifier] NOT NULL,
+		[UserItemId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserItemId DEFAULT newsequentialid(),
 		[UserId] [uniqueidentifier] NOT NULL,
 		[ItemId] [uniqueidentifier] NOT NULL,
-	 CONSTRAINT [PK_UserItem] PRIMARY KEY CLUSTERED 
-	(
-		[UserItemId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_UserItem] PRIMARY KEY 
+		(
+			[UserItemId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -169,14 +169,14 @@ END
 IF OBJECT_ID('[dbo].[UserQuest]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[UserQuest](
-		[UserQuestId] [uniqueidentifier] NOT NULL,
+		[UserQuestId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserQuestId DEFAULT newsequentialid(),
 		[UserId] [uniqueidentifier] NOT NULL,
 		[QuestId] [uniqueidentifier] NOT NULL,
-	 CONSTRAINT [PK_UserQuest] PRIMARY KEY CLUSTERED 
-	(
-		[UserQuestId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_UserQuest] PRIMARY KEY 
+		(
+			[UserQuestId]
+		)
+	)
 END
 
 /*==============================================================*/
@@ -185,13 +185,13 @@ END
 IF OBJECT_ID('[dbo].[UserType]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[UserType](
-		[UserTypeId] [uniqueidentifier] NOT NULL,
+		[UserTypeId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserTypeId DEFAULT newsequentialid(),
 		[Name] [nvarchar](255) NOT NULL,
-	 CONSTRAINT [PK_UserType] PRIMARY KEY CLUSTERED 
-	(
-		[UserTypeId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_UserType] PRIMARY KEY 
+		(
+			[UserTypeId] 
+		)
+	)
 END
 
 /*==============================================================*/
@@ -200,122 +200,136 @@ END
 IF OBJECT_ID('[dbo].[UserTypeClaim]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[UserTypeClaim](
-		[UserTypeClaimId] [uniqueidentifier] NOT NULL,
+		[UserTypeClaimId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserTypeClaimID DEFAULT newsequentialid(),
 		[ClaimId] [uniqueidentifier] NOT NULL,
 		[UserTypeId] [uniqueidentifier] NOT NULL,
-	 CONSTRAINT [PK_UserTypeClaim] PRIMARY KEY CLUSTERED 
-	(
-		[UserTypeClaimId] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+		CONSTRAINT [PK_UserTypeClaim] PRIMARY KEY 
+		(
+			[UserTypeClaimId]
+		)
+	)
 END
 GO
 
-IF OBJECT_ID('[FK_Family_User]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_Family_User')
+			AND parent_object_id = OBJECT_ID(N'Family'))
 BEGIN
 	ALTER TABLE [dbo].[Family]  WITH CHECK ADD  CONSTRAINT [FK_Family_User] FOREIGN KEY([CreatedById])
 		REFERENCES [dbo].[User] ([UserId])
-
-	ALTER TABLE [dbo].[Family] CHECK CONSTRAINT [FK_Family_User]
 END
 
-IF OBJECT_ID('[FK_Item_User]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_Item_User')
+			AND parent_object_id = OBJECT_ID(N'Item'))
 BEGIN
 	ALTER TABLE [dbo].[Item]  WITH CHECK ADD  CONSTRAINT [FK_Item_User] FOREIGN KEY([CreatedBy])
 		REFERENCES [dbo].[User] ([UserId])
-
-	ALTER TABLE [dbo].[Item] CHECK CONSTRAINT [FK_Item_User]
 END
 
-IF OBJECT_ID('[FK_Quest_User]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_Quest_User')
+			AND parent_object_id = OBJECT_ID(N'Quest'))
 BEGIN
 	ALTER TABLE [dbo].[Quest]  WITH CHECK ADD  CONSTRAINT [FK_Quest_User] FOREIGN KEY([CreatedById])
 		REFERENCES [dbo].[User] ([UserId])
-	
-	ALTER TABLE [dbo].[Quest] CHECK CONSTRAINT [FK_Quest_User]
 END
 
-IF OBJECT_ID('[FK_User_Account]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_User_Account')
+			AND parent_object_id = OBJECT_ID(N'User'))
 BEGIN
 	ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Account] FOREIGN KEY([AccountId])
 		REFERENCES [dbo].[Account] ([AccountId])
 			ON UPDATE CASCADE
 				ON DELETE CASCADE
-	ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Account]
 END
 
-IF OBJECT_ID('[FK_User_UserType]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_User_UserType')
+			AND parent_object_id = OBJECT_ID(N'User'))
 BEGIN
 	ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_UserType] FOREIGN KEY([UserTypeId])
 		REFERENCES [dbo].[UserType] ([UserTypeId])
-
-	ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_UserType]
 END
 
-IF OBJECT_ID('[FK_UserFamily_Family]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserFamily_Family')
+			AND parent_object_id = OBJECT_ID(N'UserFamily'))
 BEGIN
 	ALTER TABLE [dbo].[UserFamily]  WITH CHECK ADD  CONSTRAINT [FK_UserFamily_Family] FOREIGN KEY([FamilyId])
 		REFERENCES [dbo].[Family] ([FamilyId])
-
-	ALTER TABLE [dbo].[UserFamily] CHECK CONSTRAINT [FK_UserFamily_Family]
 END
 
-IF OBJECT_ID('[FK_UserFamily_User]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserFamily_User')
+			AND parent_object_id = OBJECT_ID(N'UserFamily'))
 BEGIN
 	ALTER TABLE [dbo].[UserFamily]  WITH CHECK ADD  CONSTRAINT [FK_UserFamily_User] FOREIGN KEY([UserId])
 		REFERENCES [dbo].[User] ([UserId])
-	
-	ALTER TABLE [dbo].[UserFamily] CHECK CONSTRAINT [FK_UserFamily_User]
 END
 
-IF OBJECT_ID('[FK_Item_User]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_Item_User')
+			AND parent_object_id = OBJECT_ID(N'UserItem'))
 BEGIN
 	ALTER TABLE [dbo].[UserItem]  WITH CHECK ADD  CONSTRAINT [FK_UserItem_Item] FOREIGN KEY([ItemId])
 		REFERENCES [dbo].[Item] ([ItemId])
 			ON DELETE CASCADE
-
-	ALTER TABLE [dbo].[UserItem] CHECK CONSTRAINT [FK_UserItem_Item]
 END
 
-IF OBJECT_ID('[FK_Item_User]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserItem_User')
+			AND parent_object_id = OBJECT_ID(N'UserItem'))
 BEGIN
 	ALTER TABLE [dbo].[UserItem]  WITH CHECK ADD  CONSTRAINT [FK_UserItem_User] FOREIGN KEY([UserId])
 		REFERENCES [dbo].[User] ([UserId])
 			ON DELETE CASCADE
-
-	ALTER TABLE [dbo].[UserItem] CHECK CONSTRAINT [FK_UserItem_User]
 END
 
-IF OBJECT_ID('[FK_UserQuest_Quest]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserQuest_Quest')
+			AND parent_object_id = OBJECT_ID(N'UserQuest'))
 BEGIN
 	ALTER TABLE [dbo].[UserQuest]  WITH CHECK ADD  CONSTRAINT [FK_UserQuest_Quest] FOREIGN KEY([QuestId])
 		REFERENCES [dbo].[Quest] ([QuestId])
 			ON DELETE CASCADE
-
-	ALTER TABLE [dbo].[UserQuest] CHECK CONSTRAINT [FK_UserQuest_Quest]
 END
 
-IF OBJECT_ID('[FK_UserQuest_User]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserQuest_User')
+			AND parent_object_id = OBJECT_ID(N'UserQuest'))
 BEGIN
 	ALTER TABLE [dbo].[UserQuest]  WITH CHECK ADD  CONSTRAINT [FK_UserQuest_User] FOREIGN KEY([UserId])
 		REFERENCES [dbo].[User] ([UserId])
 			ON DELETE CASCADE
-
-	ALTER TABLE [dbo].[UserQuest] CHECK CONSTRAINT [FK_UserQuest_User]
 END
 
-IF OBJECT_ID('[FK_UserTypeClaim_Claim]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserTypeClaim_Claim')
+			AND parent_object_id = OBJECT_ID(N'UserTypeClaim'))
 BEGIN
 	ALTER TABLE [dbo].[UserTypeClaim]  WITH CHECK ADD  CONSTRAINT [FK_UserTypeClaim_Claim] FOREIGN KEY([ClaimId])
 		REFERENCES [dbo].[Claim] ([ClaimId])
-
-	ALTER TABLE [dbo].[UserTypeClaim] CHECK CONSTRAINT [FK_UserTypeClaim_Claim]
 END
 
-IF OBJECT_ID('[FK_UserTypeClaim_UserType]') IS NULL
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserTypeClaim_UserType')
+			AND parent_object_id = OBJECT_ID(N'UserTypeClaim'))
 BEGIN
 	ALTER TABLE [dbo].[UserTypeClaim]  WITH CHECK ADD  CONSTRAINT [FK_UserTypeClaim_UserType] FOREIGN KEY([UserTypeId])
 		REFERENCES [dbo].[UserType] ([UserTypeId])
-
-	ALTER TABLE [dbo].[UserTypeClaim] CHECK CONSTRAINT [FK_UserTypeClaim_UserType]
 END
