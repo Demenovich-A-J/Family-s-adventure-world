@@ -9,6 +9,7 @@ BEGIN
 		[PasswordHash] [nvarchar](100) NOT NULL,
 		[PasswordSalt] [nvarchar](100) NOT NULL,
 		[Token] [uniqueidentifier] NULL,
+		[TokenExpireDate] [datetime] NULL,
 		[Email] [nvarchar](255) NOT NULL,
 		[VerifiedOn] [datetime] NULL,
 		CONSTRAINT [PK_Account] PRIMARY KEY 
@@ -64,7 +65,9 @@ BEGIN
 		[ImagePath] [nvarchar](255) NULL,
 		[SiteUrl] [nvarchar](max) NOT NULL,
 		[Cost] [decimal](9, 4) NOT NULL,
-		[CreatedBy] [uniqueidentifier] NULL,
+		[CreatedById] [uniqueidentifier] NULL,
+		[CreatedOn] [timestamp] NOT NULL,
+		[UpdatedOn] [datetime] NOT NULL,
 		CONSTRAINT [PK_Item] PRIMARY KEY 
 		(
 			[ItemId]
@@ -87,6 +90,8 @@ BEGIN
 		[Expirience] [int] NOT NULL,
 		[Coins] [decimal](10, 2) NOT NULL,
 		[RequiredLVL] [int] NOT NULL,
+		[CreatedOn] [timestamp] NOT NULL,
+		[UpdatedOn] [datetime] NOT NULL,
 		CONSTRAINT [PK_Quest] PRIMARY KEY 
 		(
 			[QuestId]
@@ -225,7 +230,7 @@ IF NOT EXISTS (SELECT *
 		WHERE object_id = OBJECT_ID(N'FK_Item_User')
 			AND parent_object_id = OBJECT_ID(N'Item'))
 BEGIN
-	ALTER TABLE [dbo].[Item]  WITH CHECK ADD  CONSTRAINT [FK_Item_User] FOREIGN KEY([CreatedBy])
+	ALTER TABLE [dbo].[Item]  WITH CHECK ADD  CONSTRAINT [FK_Item_User] FOREIGN KEY([CreatedById])
 		REFERENCES [dbo].[User] ([UserId])
 END
 
