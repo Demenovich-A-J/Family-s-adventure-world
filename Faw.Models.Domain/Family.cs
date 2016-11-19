@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Faw.Repositories.DTO
+namespace Faw.Models.Domain
 {
     public class Family
     {
@@ -13,7 +13,7 @@ namespace Faw.Repositories.DTO
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
 
-        public virtual User CretedBy { get; set; }
+        public virtual User CreatedBy { get; set; }
         public virtual IList<User> FamilyMemebers { get; set; }
     }
 }

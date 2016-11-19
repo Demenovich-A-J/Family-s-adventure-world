@@ -1,4 +1,4 @@
-﻿namespace Faw.Repositories.DTO
+﻿namespace Faw.Models.Domain.Enums
 {
     public enum Gender
     {

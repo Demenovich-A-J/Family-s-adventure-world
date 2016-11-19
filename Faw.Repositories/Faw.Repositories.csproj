@@ -40,14 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\Account.cs" />
-    <Compile Include="DTO\Claim.cs" />
-    <Compile Include="DTO\Family.cs" />
-    <Compile Include="DTO\Enums\Gender.cs" />
-    <Compile Include="DTO\Item.cs" />
-    <Compile Include="DTO\Quest.cs" />
-    <Compile Include="DTO\User.cs" />
-    <Compile Include="DTO\UserType.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

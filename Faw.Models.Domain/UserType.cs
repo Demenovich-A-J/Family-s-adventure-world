@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Faw.Repositories.DTO
+namespace Faw.Models.Domain
 {
     public class UserType
     {

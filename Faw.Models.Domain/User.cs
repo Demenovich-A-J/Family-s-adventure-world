@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Faw.Models.Domain.Enums;
 
-namespace Faw.Repositories.DTO
+namespace Faw.Models.Domain
 {
     public class User
     {
         public Guid UserId { get; set; }
         public Guid AccountId { get; set; }
         public Guid UserTypeId { get; set; }
+        public Guid FamilyId { get; set; }
 
         public string Email { get; set; }
         public string FirstName { get; set; }
@@ -18,6 +20,8 @@ namespace Faw.Repositories.DTO
 
         public virtual Account Account { get; set; }
         public virtual UserType UserType { get; set; }
+        public virtual Family Family { get; set; }
+
         public virtual IList<Quest> Quests { get; set; }
     }
 }

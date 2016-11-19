@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Faw.Repositories.DTO
+namespace Faw.Models.Domain
 {
     public class Account
     {
@@ -13,10 +13,10 @@ namespace Faw.Repositories.DTO
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
 
-        public Guid Token { get; set; }
+        public Guid? Token { get; set; }
 
-        public DateTime TokenExpireDate { get; set; }
-        public DateTime VerifiedOn { get; set; }
+        public DateTime? TokenExpireDate { get; set; }
+        public DateTime? VerifiedOn { get; set; }
 
         public virtual IList<User> Users { get; set; }
     }

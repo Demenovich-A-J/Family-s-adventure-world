@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Faw.Repositories.DTO
+namespace Faw.Models.Domain
 {
     public class Quest
     {

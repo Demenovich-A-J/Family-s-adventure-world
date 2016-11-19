@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Faw.Models")]
+[assembly: AssemblyTitle("Faw.Models.Domain")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Faw.Models")]
+[assembly: AssemblyProduct("Faw.Models.Domain")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1948c4bc-23fa-467c-97d9-6f520bb2bfc4")]
+[assembly: Guid("f9658c83-8f7c-475e-af3f-46da39848278")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -122,6 +122,7 @@ IF OBJECT_ID('[dbo].[User]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[User](
 		[UserId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserId DEFAULT newsequentialid(),
+		[FamilyId] [uniqueidentifier] NOT NULL,
 		[Email] [nvarchar](255) NOT NULL,
 		[FirstName] [nvarchar](255) NOT NULL,
 		[LastName] [nvarchar](255) NOT NULL,
@@ -132,22 +133,6 @@ BEGIN
 		CONSTRAINT [PK_User] PRIMARY KEY 
 		(
 			[UserId]
-		)
-	)
-END
-
-/*==============================================================*/
-/* Table: UserFamily                                            */
-/*==============================================================*/
-IF OBJECT_ID('[dbo].[UserFamily]') IS NULL
-BEGIN
-	CREATE TABLE [dbo].[UserFamily](
-		[UserFamilyId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserFamilyId DEFAULT newsequentialid(),
-		[UserId] [uniqueidentifier] NOT NULL,
-		[FamilyId] [uniqueidentifier] NOT NULL,
-		CONSTRAINT [PK_UserFamily] PRIMARY KEY 
-		(
-			[UserFamilyId]
 		)
 	)
 END
@@ -265,20 +250,11 @@ END
 
 IF NOT EXISTS (SELECT * 
 	FROM sys.foreign_keys 
-		WHERE object_id = OBJECT_ID(N'FK_UserFamily_Family')
-			AND parent_object_id = OBJECT_ID(N'UserFamily'))
+		WHERE object_id = OBJECT_ID(N'FK_User_Family')
+			AND parent_object_id = OBJECT_ID(N'User'))
 BEGIN
-	ALTER TABLE [dbo].[UserFamily]  WITH CHECK ADD  CONSTRAINT [FK_UserFamily_Family] FOREIGN KEY([FamilyId])
+	ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Family] FOREIGN KEY([FamilyId])
 		REFERENCES [dbo].[Family] ([FamilyId])
-END
-
-IF NOT EXISTS (SELECT * 
-	FROM sys.foreign_keys 
-		WHERE object_id = OBJECT_ID(N'FK_UserFamily_User')
-			AND parent_object_id = OBJECT_ID(N'UserFamily'))
-BEGIN
-	ALTER TABLE [dbo].[UserFamily]  WITH CHECK ADD  CONSTRAINT [FK_UserFamily_User] FOREIGN KEY([UserId])
-		REFERENCES [dbo].[User] ([UserId])
 END
 
 IF NOT EXISTS (SELECT * 
