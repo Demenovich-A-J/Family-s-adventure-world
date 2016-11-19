@@ -1,8 +1,9 @@
 ﻿using Core.DataContext.Contracts;
+using Faw.Repositories.Contracts;
 
-namespace Faw.Repositories
+namespace Faw.Repositories.EntityFrameworkRepositories
 {
-    public abstract class Repository<TEntity> where TEntity : class
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly IDataContext DataContext;
 
