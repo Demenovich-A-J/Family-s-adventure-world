@@ -17,6 +17,7 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             using (var uow = DataContext.CreateUnitOfWork())
             {
                 uow.Add(entity);
+                uow.SaveChanges();
             }
         }
 
@@ -25,6 +26,7 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             using (var uow = DataContext.CreateUnitOfWork())
             {
                 uow.Delete(entityToDelete);
+                uow.SaveChanges();
             }
         }
 
@@ -33,6 +35,7 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             using (var uow = DataContext.CreateUnitOfWork())
             {
                 uow.Update(entityToUpdate);
+                uow.SaveChanges();
             }
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Faw.Repositories.Contracts
+﻿namespace Faw.Repositories.Contracts
 {
     public interface IRepository<in T>
     {
