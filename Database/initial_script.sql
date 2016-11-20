@@ -102,9 +102,9 @@ END
 /*==============================================================*/
 /* Table: Seetting                                              */
 /*==============================================================*/
-IF OBJECT_ID('[dbo].[Seetting]') IS NULL
+IF OBJECT_ID('[dbo].[Setting]') IS NULL
 BEGIN
-	CREATE TABLE [dbo].[Seetting](
+	CREATE TABLE [dbo].[Setting](
 		[SettingId] [uniqueidentifier] NOT NULL CONSTRAINT DF_SettingId DEFAULT newsequentialid(),
 		[Name] [nvarchar](100) NOT NULL,
 		[Value] [nvarchar](100) NOT NULL,
