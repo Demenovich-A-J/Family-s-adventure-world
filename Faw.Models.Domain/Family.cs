@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Faw.Models.Domain
 {
-    public class Family
+    public class Family : BaseEntity
     {
-        public Guid FamilyId { get; set; }
         public Guid CreatedById { get; set; }
 
         public string Name { get; set; }

@@ -11,10 +11,5 @@ namespace Faw.Repositories.EntityFrameworkRepositories
         public SettingRepository(IDataContext dataContext) : base(dataContext)
         {
         }
-
-        public Setting GetById(Guid settingId)
-        {
-            return DataContext.Query<Setting>().FirstOrDefault(x => x.SettingId == settingId);
-        }
     }
 }

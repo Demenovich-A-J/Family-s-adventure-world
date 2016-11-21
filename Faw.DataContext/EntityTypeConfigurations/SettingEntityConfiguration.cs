@@ -8,9 +8,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public SettingEntityConfiguration()
         {
-            HasKey(s => s.SettingId);
+            HasKey(s => s.EntityId);
 
-            Property(s => s.SettingId)
+            Property(s => s.EntityId)
+                .HasColumnName("SettingId")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }

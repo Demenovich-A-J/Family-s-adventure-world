@@ -4,9 +4,8 @@ using Faw.Models.Domain.Enums;
 
 namespace Faw.Models.Domain
 {
-    public class User
+    public class User : BaseEntity
     {
-        public Guid UserId { get; set; }
         public Guid AccountId { get; set; }
         public Guid UserTypeId { get; set; }
         public Guid FamilyId { get; set; }

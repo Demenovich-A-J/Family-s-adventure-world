@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -49,19 +47,19 @@ namespace Faw.DataContext.Tests
 
             var setting = new Setting
             {
-                SettingId = settingId,
+                EntityId = settingId,
                 Name = "TEST_SETTING",
                 Value = "TEST_VALUE"
             };
 
             settingRepo.Insert(setting);
 
-            var settingFromDb = settingRepo.GetById(setting.SettingId);
+            var settingFromDb = settingRepo.GetById(setting.EntityId);
 
             settingRepo.Delete(setting);
 
             Assert.IsNotNull(settingFromDb);
-            Assert.AreEqual(settingFromDb.SettingId, setting.SettingId);
+            Assert.AreEqual(settingFromDb.EntityId, setting.EntityId);
         }
     }
 }

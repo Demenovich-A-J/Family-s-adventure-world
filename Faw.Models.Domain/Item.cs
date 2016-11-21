@@ -2,9 +2,8 @@
 
 namespace Faw.Models.Domain
 {
-    public class Item
+    public class Item : BaseEntity
     {
-        public Guid ItemId { get; set; }
         public Guid CreatedById { get; set; }
 
         public string Name { get; set; }

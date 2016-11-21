@@ -1,9 +1,12 @@
-﻿using Core.DataContext.Contracts;
+﻿using System;
+using System.Linq;
+using Core.DataContext.Contracts;
+using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
 
 namespace Faw.Repositories.EntityFrameworkRepositories
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly IDataContext DataContext;
 
@@ -21,13 +24,28 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             }
         }
 
-        public virtual void Delete(TEntity entityToDelete)
+        public virtual void Delete(TEntity item)
         {
             using (var uow = DataContext.CreateUnitOfWork())
             {
-                uow.Delete(entityToDelete);
+                uow.Delete(item);
                 uow.SaveChanges();
             }
+        }
+
+        public virtual void Delete(Guid entityId)
+        {
+            var item = GetById(entityId);
+
+            if(item == null)
+                throw new ArgumentNullException("entityId", "Item with such entityId can not be found.");
+
+            Delete(item);
+        }
+
+        public virtual TEntity GetById(Guid entityId)
+        {
+            return DataContext.Query<TEntity>().FirstOrDefault(x => x.EntityId == entityId);
         }
 
         public virtual void Update(TEntity entityToUpdate)

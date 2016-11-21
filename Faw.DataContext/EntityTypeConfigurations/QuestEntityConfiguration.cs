@@ -8,9 +8,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public QuestEntityConfiguration()
         {
-            HasKey(q => q.QuestId);
+            HasKey(q => q.EntityId);
 
-            Property(q => q.QuestId)
+            Property(q => q.EntityId)
+                .HasColumnName("QuestId")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }

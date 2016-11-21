@@ -8,9 +8,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public UserTypeEntityConfiguration()
         {
-            HasKey(ut => ut.UserTypeId);
+            HasKey(ut => ut.EntityId);
 
-            Property(ut => ut.UserTypeId)
+            Property(ut => ut.EntityId)
+                .HasColumnName("UserTypeId")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }

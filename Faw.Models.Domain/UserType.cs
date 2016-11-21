@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Faw.Models.Domain
 {
-    public class UserType
+    public class UserType : BaseEntity
     {
-        public Guid UserTypeId { get; set; }
         public string Name { get; set; }
 
         public virtual IList<Claim> Claims { get; set; }

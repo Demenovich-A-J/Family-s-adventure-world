@@ -8,9 +8,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public FamilyEntityConfiguration()
         {
-            HasKey(f => f.FamilyId);
+            HasKey(f => f.EntityId);
 
-            Property(f => f.FamilyId)
+            Property(f => f.EntityId)
+                .HasColumnName("FamilyId")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             HasRequired(f => f.CreatedBy)

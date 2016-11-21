@@ -8,9 +8,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public ClaimEntityConfiguration()
         {
-            HasKey(c => c.ClaimId);
+            HasKey(c => c.EntityId);
 
-            Property(c => c.ClaimId)
+            Property(c => c.EntityId)
+                .HasColumnName("ClaimId")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }

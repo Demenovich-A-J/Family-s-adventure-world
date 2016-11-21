@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Faw.Models.Domain
 {
-    public class Account
+    public class Account : BaseEntity
     {
-        public Guid AccountId { get; set; }
-
         public string UserName { get; set; }
         public string Email { get; set; }
 
