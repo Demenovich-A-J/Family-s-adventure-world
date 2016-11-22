@@ -7,8 +7,12 @@ namespace Faw.Services.Models.AutoMapper
     {
         protected override void Configure()
         {
-            CreateMap<User, Faw.Models.Domain.User>();
-            CreateMap<Account, Faw.Models.Domain.Account>();
+            CreateMap<User, Faw.Models.Domain.User>()
+                .ForMember(m => m.EntityId, opt => opt.MapFrom(x => x.UserId));
+
+            CreateMap<Account, Faw.Models.Domain.Account>()
+                .ForMember(m => m.EntityId, opt => opt.MapFrom(x => x.AccountId));
+
             CreateMap<Claim, Faw.Models.Domain.Claim>();
             CreateMap<Family, Faw.Models.Domain.Family>();
             CreateMap<Item, Faw.Models.Domain.Item>();

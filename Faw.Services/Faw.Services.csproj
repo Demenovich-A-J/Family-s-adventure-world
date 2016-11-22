@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="DataAccess\UserService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AutoMapper\BuisnessModelsToDomainProfile.cs" />
@@ -62,6 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Infrastructure\Core.Infrastructure.csproj">
+      <Project>{25D48997-FACD-4AF9-9B27-56BFB5FE7FBF}</Project>
+      <Name>Core.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Faw.Models.Domain\Faw.Models.Domain.csproj">
       <Project>{f9658c83-8f7c-475e-af3f-46da39848278}</Project>
       <Name>Faw.Models.Domain</Name>
@@ -71,10 +77,7 @@
       <Name>Faw.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="DataAccess\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

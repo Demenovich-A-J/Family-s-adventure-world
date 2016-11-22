@@ -19,7 +19,7 @@ namespace Faw.DataContext.EntityTypeConfigurations
                 .HasForeignKey(f => f.CreatedById);
 
             HasMany(f => f.FamilyMemebers)
-                .WithRequired(u => u.Family)
+                .WithOptional(u => u.Family)
                 .HasForeignKey(u => u.FamilyId);
         }
     }

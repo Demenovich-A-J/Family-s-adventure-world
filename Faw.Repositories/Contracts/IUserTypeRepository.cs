@@ -4,6 +4,6 @@ namespace Faw.Repositories.Contracts
 {
     public interface IUserTypeRepository : IRepository<UserType>
     {
-        
+        UserType GetByName(string name);
     }
 }

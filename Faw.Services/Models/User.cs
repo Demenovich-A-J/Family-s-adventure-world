@@ -13,12 +13,13 @@ namespace Faw.Services.Models
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
         public Gender Gender { get; set; }
 
         public DateTime BirthDate { get; set; }
 
-        public virtual Account Account { get; set; }
-        public virtual UserType UserType { get; set; }
-        public virtual IList<Quest> Quests { get; set; }
+        public Account Account { get; set; }
+        public UserType UserType { get; set; }
+        public IList<Quest> Quests { get; set; }
     }
 }

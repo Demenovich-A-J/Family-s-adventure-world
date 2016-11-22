@@ -1,4 +1,6 @@
-﻿using Ninject.Modules;
+﻿using Faw.Services.Contracts;
+using Faw.Services.DataAccess;
+using Ninject.Modules;
 
 namespace Faw.Services.Infrastructure
 {
@@ -6,7 +8,7 @@ namespace Faw.Services.Infrastructure
     {
         public override void Load()
         {
-
+            Bind<IUserService>().To<UserService>();
         }
     }
 }

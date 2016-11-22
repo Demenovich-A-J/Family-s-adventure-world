@@ -8,11 +8,15 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public AccountEntityConfiguration()
         {
-            HasKey(a => a.EntityId);
-
             Property(a => a.EntityId)
                 .HasColumnName("AccountId")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            HasKey(a => a.EntityId);
+
+            HasMany(x => x.Users)
+                .WithRequired(x => x.Account)
+                .HasForeignKey(x => x.AccountId);
         }
     }
 }

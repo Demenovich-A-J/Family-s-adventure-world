@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -60,6 +64,7 @@
     <Compile Include="UnitTestRepositories.cs" />
     <Compile Include="UnitTestDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.DataContext\Core.DataContext.csproj">
@@ -73,6 +78,10 @@
     <ProjectReference Include="..\Faw.Repositories\Faw.Repositories.csproj">
       <Project>{a6002ffe-8118-4c65-890b-49abc52ffd14}</Project>
       <Name>Faw.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Faw.Services\Faw.Services.csproj">
+      <Project>{b1c7b6e7-0274-4897-9a46-d4869f1c3742}</Project>
+      <Name>Faw.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

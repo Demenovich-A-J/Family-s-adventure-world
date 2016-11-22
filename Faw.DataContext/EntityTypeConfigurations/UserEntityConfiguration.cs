@@ -14,13 +14,14 @@ namespace Faw.DataContext.EntityTypeConfigurations
                 .HasColumnName("UserId")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            HasRequired(u => u.Account)
-                .WithMany()
-                .HasForeignKey(u => u.AccountId);
-
             HasRequired(u => u.UserType)
                 .WithMany()
                 .HasForeignKey(u => u.UserTypeId);
+
+            Property(u => u.GenderString)
+                .HasColumnName("Gender");
+
+            Ignore(u => u.Gender);
         }
     }
 }

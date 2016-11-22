@@ -15,6 +15,8 @@ namespace Faw.Models.Domain
 
         public DateTime? TokenExpireDate { get; set; }
         public DateTime? VerifiedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
 
         public virtual IList<User> Users { get; set; }
     }

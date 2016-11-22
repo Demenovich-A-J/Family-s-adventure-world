@@ -10,6 +10,8 @@ BEGIN
 		[PasswordSalt] [nvarchar](100) NOT NULL,
 		[Token] [uniqueidentifier] NULL,
 		[TokenExpireDate] [datetime] NULL,
+		[CreatedOn] [datetime] NOT NULL CONSTRAINT DF_Account_CreatedOn DEFAULT getdate(),
+		[UpdatedOn] [datetime] NOT NULL CONSTRAINT DF_Account_UpdatedOn DEFAULT getdate(),
 		[Email] [nvarchar](255) NOT NULL,
 		[VerifiedOn] [datetime] NULL,
 		CONSTRAINT [PK_Account] PRIMARY KEY 
@@ -122,7 +124,7 @@ IF OBJECT_ID('[dbo].[User]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[User](
 		[UserId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserId DEFAULT newsequentialid(),
-		[FamilyId] [uniqueidentifier] NOT NULL,
+		[FamilyId] [uniqueidentifier] NULL,
 		[Email] [nvarchar](255) NOT NULL,
 		[FirstName] [nvarchar](255) NOT NULL,
 		[LastName] [nvarchar](255) NOT NULL,
