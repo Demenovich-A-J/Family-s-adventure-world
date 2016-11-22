@@ -50,7 +50,6 @@ namespace Faw.Services.DataAccess
             domainUser.UserTypeId = userType.EntityId;
             domainUser.AccountId = domainUser.Account.EntityId;
 
-            _accountRepository.Insert(domainUser.Account);
             _userRepository.Insert(domainUser);
         }
 

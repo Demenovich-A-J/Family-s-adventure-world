@@ -11,6 +11,19 @@ namespace Faw.Repositories.EntityFrameworkRepositories
         {
         }
 
+        public override void Insert(User entity)
+        {
+            if(entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            using (var uow = DataContext.CreateUnitOfWork())
+            {
+                uow.Add(entity);
+                uow.Add(entity.Account);
+
+                uow.SaveChanges();   
+            }
+        }
 
         public override void Update(User entityToUpdate)
         {
