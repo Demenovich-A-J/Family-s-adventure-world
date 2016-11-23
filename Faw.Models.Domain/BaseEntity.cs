@@ -1,85 +1,36 @@
 ﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace Faw.Models.Domain
 {
-    public abstract class BaseEntity : INotifyPropertyChanged, INotifyPropertyChanging, ICloneable
+    [Serializable]
+    public abstract class BaseEntity : ICloneable
     {
         #region Fields
 
-        private static readonly PropertyChangingEventArgs EmptyChangingEventArgs =
-            new PropertyChangingEventArgs(string.Empty);
         private Guid _entityId = Guid.NewGuid();
-        private bool _isNewEntity = true;
 
         #endregion Fields
 
         #region Public Properties
 
+        [DataMember]
         public Guid EntityId
         {
-            get
-            {
-                return _entityId;
-            }
-            set
-            {
-                if (value != _entityId)
-                {
-                    SendPropertyChanging();
-                    _entityId = value;
-                    SendPropertyChanged("EntityId");
-                }
-            }
+            get { return _entityId; }
+            set { _entityId = value; }
         }
 
-        [NotMapped]
-        public bool IsNewEntity
-        {
-            get { return _isNewEntity; }
-            set
-            {
-                if (value != _isNewEntity)
-                {
-                    SendPropertyChanging();
-                    _isNewEntity = value;
-                    SendPropertyChanged("IsNew");
-                }
-            }
-        }
 
         #endregion Public Properties
-
-        #region Public Events
-
-        public event PropertyChangingEventHandler PropertyChanging;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Public Events
 
         #region ICloneable Members
 
         public virtual object Clone()
         {
-            return MemberwiseClone();
+            return this.MemberwiseClone();
         }
 
         #endregion ICloneable Members
-
-        #region Non-Public Virtual Methods
-
-        protected virtual void SendPropertyChanging()
-        {
-            PropertyChanging?.Invoke(this, EmptyChangingEventArgs);
-        }
-
-        protected virtual void SendPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion Non-Public Virtual Methods
     }
 }

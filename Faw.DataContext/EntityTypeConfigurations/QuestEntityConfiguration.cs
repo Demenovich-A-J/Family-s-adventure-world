@@ -1,18 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using Faw.Models.Domain;
+﻿using Faw.Models.Domain;
 
 namespace Faw.DataContext.EntityTypeConfigurations
 {
-    public class QuestEntityConfiguration : EntityTypeConfiguration<Quest>
+    public class QuestEntityConfiguration : BaseEntityTypeConfiguration<Quest>
     {
-        public QuestEntityConfiguration()
+        public QuestEntityConfiguration() : base("QuestId")
         {
-            HasKey(q => q.EntityId);
 
-            Property(q => q.EntityId)
-                .HasColumnName("QuestId")
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }
