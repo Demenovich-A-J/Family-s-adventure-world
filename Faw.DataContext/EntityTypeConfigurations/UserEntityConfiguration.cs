@@ -4,16 +4,10 @@ using Faw.Models.Domain;
 
 namespace Faw.DataContext.EntityTypeConfigurations
 {
-    public class UserEntityConfiguration : EntityTypeConfiguration<User>
+    public class UserEntityConfiguration : BaseEntityTypeConfiguration<User>
     {
-        public UserEntityConfiguration()
+        public UserEntityConfiguration() : base("UserId")
         {
-            HasKey(u => u.EntityId);
-
-            Property(u => u.EntityId)
-                .HasColumnName("UserId")
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
             HasRequired(u => u.UserType)
                 .WithMany()
                 .HasForeignKey(u => u.UserTypeId);

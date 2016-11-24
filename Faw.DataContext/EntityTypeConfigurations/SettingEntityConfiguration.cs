@@ -1,18 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using Faw.Models.Domain;
+﻿using Faw.Models.Domain;
 
 namespace Faw.DataContext.EntityTypeConfigurations
 {
-    public class SettingEntityConfiguration : EntityTypeConfiguration<Setting>
+    public class SettingEntityConfiguration : BaseEntityTypeConfiguration<Setting>
     {
-        public SettingEntityConfiguration()
+        public SettingEntityConfiguration() : base("SettingId")
         {
-            HasKey(s => s.EntityId);
-
-            Property(s => s.EntityId)
-                .HasColumnName("SettingId")
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+           
         }
     }
 }

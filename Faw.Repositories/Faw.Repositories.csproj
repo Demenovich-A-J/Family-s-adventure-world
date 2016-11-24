@@ -30,11 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -67,14 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.DataContext.EF\Core.DataContext.EF.csproj">
-      <Project>{8E96360C-B00B-4F0B-AB58-DAC9C737AA96}</Project>
-      <Name>Core.DataContext.EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.DataContext\Core.DataContext.csproj">
-      <Project>{614B31F8-1537-4307-B3C5-EDB3E3F062B6}</Project>
-      <Name>Core.DataContext</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FAW.DataContext\Faw.DataContext.csproj">
       <Project>{008ee560-6f39-4444-b37d-34f787cd71f3}</Project>
       <Name>Faw.DataContext</Name>
@@ -83,8 +80,13 @@
       <Project>{F9658C83-8F7C-475E-AF3F-46DA39848278}</Project>
       <Name>Faw.Models.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mehdime.Entity\Mehdime.Entity.csproj">
+      <Project>{4830BAFD-4163-473E-B00F-65F274AC165F}</Project>
+      <Name>Mehdime.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

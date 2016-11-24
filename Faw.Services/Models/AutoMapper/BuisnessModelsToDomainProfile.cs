@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Faw.Services.Models.Enums;
 
@@ -5,6 +6,7 @@ namespace Faw.Services.Models.AutoMapper
 {
     public class BuisnessModelsToDomainProfile : Profile
     {
+        [Obsolete]
         protected override void Configure()
         {
             CreateMap<User, Faw.Models.Domain.User>()

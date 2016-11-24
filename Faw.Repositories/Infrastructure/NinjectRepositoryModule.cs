@@ -1,9 +1,8 @@
 ﻿using System.Configuration;
-using Core.DataContext.Contracts;
 using Faw.DataContext;
 using Faw.Repositories.Contracts;
 using Faw.Repositories.EntityFrameworkRepositories;
-using Ninject;
+using Mehdime.Entity;
 using Ninject.Modules;
 
 namespace Faw.Repositories.Infrastructure
@@ -16,11 +15,10 @@ namespace Faw.Repositories.Infrastructure
         {
             var connectionString = ConfigurationManager.ConnectionStrings[DefaultConnectionStringKey].ConnectionString;
 
-            Bind<IDataContextFactory>().To<FawDataContextFactory>()
-                .InSingletonScope()
-                .WithConstructorArgument("connectionString", connectionString);
-
-            Bind<IDataContext>().ToMethod(context => Kernel.Get<IDataContextFactory>().CreateDataContext());
+            EfDbContextFactory.ConnectionStrings[typeof(FawDataContext)] = connectionString;
+            Bind<IDbContextFactory>().To<EfDbContextFactory>().InSingletonScope();
+            Bind<IDbContextScopeFactory>().To<DbContextScopeFactory>().InSingletonScope();
+            Bind<IAmbientDbContextLocator>().To<AmbientDbContextLocator>().InSingletonScope();
 
             Bind<IAccountRepository>().To<AccountRepository>();
             Bind<IClaimRepository>().To<ClaimRepository>();

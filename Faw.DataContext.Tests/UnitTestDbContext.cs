@@ -1,4 +1,4 @@
-﻿using Core.DataContext.Contracts;
+﻿using Mehdime.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 
@@ -13,14 +13,6 @@ namespace Faw.DataContext.Tests
         public void TestInitialize()
         {
             _kernel = NinjectInitializer.InitntKernel();
-        }
-
-        [TestMethod]
-        public void DataContext_NotNull()
-        {
-            var dataConstext = _kernel.Get<IDataContext>();
-
-            Assert.IsNotNull(dataConstext);
         }
     }
 }

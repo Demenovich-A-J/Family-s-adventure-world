@@ -5,10 +5,8 @@ namespace Faw.Repositories.Contracts
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        void Insert(T item);
-        void Update(T item);
-        void Delete(T item);
-
+        void Insert(T entity);
+        void Update(T entity);
         void Delete(Guid entityId);
 
         T GetById(Guid entityId);

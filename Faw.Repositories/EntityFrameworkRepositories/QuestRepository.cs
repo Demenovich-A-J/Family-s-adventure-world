@@ -1,12 +1,12 @@
-﻿using Core.DataContext.Contracts;
-using Faw.Models.Domain;
+﻿using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
+using Mehdime.Entity;
 
 namespace Faw.Repositories.EntityFrameworkRepositories
 {
     public class QuestRepository : Repository<Quest>, IQuestRepository
     {
-        public QuestRepository(IDataContext dataContext) : base(dataContext)
+        public QuestRepository(IAmbientDbContextLocator dataContext) : base(dataContext)
         {
         }
     }
