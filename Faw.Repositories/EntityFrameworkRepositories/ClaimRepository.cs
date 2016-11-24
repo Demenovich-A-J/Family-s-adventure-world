@@ -1,12 +1,12 @@
-using Core.DataContext.Contracts;
 using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
+using Mehdime.Entity;
 
 namespace Faw.Repositories.EntityFrameworkRepositories
 {
     public class ClaimRepository : Repository<Claim>, IClaimRepository
     {
-        public ClaimRepository(IDataContext dataContext) : base(dataContext)
+        public ClaimRepository(IAmbientDbContextLocator dataContext) : base(dataContext)
         {
         }
     }

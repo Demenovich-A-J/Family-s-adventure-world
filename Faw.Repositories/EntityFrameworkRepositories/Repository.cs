@@ -1,60 +1,69 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Linq;
-using Core.DataContext.Contracts;
+using Faw.DataContext;
 using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
+using Mehdime.Entity;
 
 namespace Faw.Repositories.EntityFrameworkRepositories
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
-        protected readonly IDataContext DataContext;
+        private readonly IAmbientDbContextLocator _ambientDbContextLocator;
 
-        protected Repository(IDataContext dataContext)
+        protected FawDataContext DbContext
         {
-            DataContext = dataContext;
+            get
+            {
+                var dbContext = _ambientDbContextLocator.Get<FawDataContext>();
+
+                if (dbContext == null)
+                    throw new InvalidOperationException(
+                        "No ambient DbContext of type FawDataContext found. " +
+                        "This means that this repository method has been called outside of the scope of a DbContextScope. " +
+                        "A repository must only be accessed within the scope of a DbContextScope, which takes care of creating the DbContext instances that the repositories need and making them available as ambient contexts. " +
+                        "This is what ensures that, for any given DbContext-derived type, the same instance is used throughout the duration of a business transaction. " +
+                        "To fix this issue, use IDbContextScopeFactory in your top-level business logic service method to create a DbContextScope that wraps the entire business transaction that your service method implements. " +
+                        "Then access this repository within that scope. Refer to the comments in the IDbContextScope.cs file for more details.");
+
+                return dbContext;
+            }
+        }
+        protected Repository(IAmbientDbContextLocator dataContext)
+        {
+            _ambientDbContextLocator = dataContext;
         }
 
         public virtual void Insert(TEntity entity)
         {
-            using (var uow = DataContext.CreateUnitOfWork())
-            {
-                uow.Add(entity);
-                uow.SaveChanges();
-            }
-        }
-
-        public virtual void Delete(TEntity item)
-        {
-            using (var uow = DataContext.CreateUnitOfWork())
-            {
-                uow.Delete(item);
-                uow.SaveChanges();
-            }
+            DbContext.Set<TEntity>().Add(entity);
         }
 
         public virtual void Delete(Guid entityId)
         {
-            var item = GetById(entityId);
+            var entityToDelete = GetById(entityId);
 
-            if(item == null)
-                throw new ArgumentNullException("entityId", "Item with such entityId can not be found.");
+            if (entityToDelete == null)
+                throw new ObjectNotFoundException();
 
-            Delete(item);
+            Delete(entityToDelete);
         }
 
-        public virtual TEntity GetById(Guid entityId)
+        public TEntity GetById(Guid entityId)
         {
-            return DataContext.Query<TEntity>().FirstOrDefault(x => x.EntityId == entityId);
+            return DbContext.Set<TEntity>().FirstOrDefault(x => x.EntityId == entityId);
         }
 
         public virtual void Update(TEntity entityToUpdate)
         {
-            using (var uow = DataContext.CreateUnitOfWork())
-            {
-                uow.Update(entityToUpdate);
-                uow.SaveChanges();
-            }
+            DbContext.Entry(entityToUpdate).State = EntityState.Modified;
+        }
+
+        private void Delete(TEntity entity)
+        {
+            DbContext.Entry(entity).State = EntityState.Deleted;
         }
     }
 }

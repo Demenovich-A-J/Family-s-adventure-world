@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Core.DataContext")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Mehdime.Entity")]
+[assembly: AssemblyDescription("A simple and flexible way to manage your Entity Framework DbContext instances.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Core.DataContext")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("Mehdi El Gueddari")]
+[assembly: AssemblyProduct("Mehdime.Entity")]
+[assembly: AssemblyCopyright("Copyright ©  2015 Mehdi El Gueddari")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("614b31f8-1537-4307-b3c5-edb3e3f062b6")]
+[assembly: Guid("4e66338f-702c-4511-850f-0f89186b1286")]
 
 // Version information for an assembly consists of the following four values:
 //

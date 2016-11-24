@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Linq;
-using Core.DataContext.Contracts;
 using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
+using Mehdime.Entity;
 
 namespace Faw.Repositories.EntityFrameworkRepositories
 {
     public class SettingRepository : Repository<Setting>, ISettingRepository
     {
-        public SettingRepository(IDataContext dataContext) : base(dataContext)
+        public SettingRepository(IAmbientDbContextLocator dataContext) : base(dataContext)
         {
         }
     }

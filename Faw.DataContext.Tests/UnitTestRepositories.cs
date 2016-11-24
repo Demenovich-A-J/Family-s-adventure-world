@@ -1,6 +1,7 @@
 ﻿using System;
 using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
+using Mehdime.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 
@@ -43,6 +44,8 @@ namespace Faw.DataContext.Tests
         public void InsertAndGetBackSetting_NotNull()
         {
             var settingRepo = _kernel.Get<ISettingRepository>();
+            var dbconstextScopeFactory = _kernel.Get<IDbContextScopeFactory>();
+
             var settingId = new Guid("5A01F9B0-BC41-4D68-A4F6-897B20643A52");
 
             var setting = new Setting
@@ -52,11 +55,23 @@ namespace Faw.DataContext.Tests
                 Value = "TEST_VALUE"
             };
 
-            settingRepo.Insert(setting);
+            Setting settingFromDb;
 
-            var settingFromDb = settingRepo.GetById(setting.EntityId);
+            using (var dbContextScope = dbconstextScopeFactory.Create())
+            {
+                settingRepo.Insert(setting);
 
-            settingRepo.Delete(setting);
+                dbContextScope.SaveChanges();
+            }
+
+            using (var dbContextScope = dbconstextScopeFactory.Create())
+            {
+                settingFromDb = settingRepo.GetById(setting.EntityId);
+
+                settingRepo.Delete(settingId);
+
+                dbContextScope.SaveChanges();
+            }
 
             Assert.IsNotNull(settingFromDb);
             Assert.AreEqual(settingFromDb.EntityId, setting.EntityId);
