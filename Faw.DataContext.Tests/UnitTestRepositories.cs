@@ -64,10 +64,13 @@ namespace Faw.DataContext.Tests
                 dbContextScope.SaveChanges();
             }
 
-            using (var dbContextScope = dbconstextScopeFactory.Create())
+            using (var dbContextScope = dbconstextScopeFactory.CreateReadOnly())
             {
                 settingFromDb = settingRepo.GetById(setting.EntityId);
+            }
 
+            using (var dbContextScope = dbconstextScopeFactory.Create())
+            {
                 settingRepo.Delete(settingId);
 
                 dbContextScope.SaveChanges();

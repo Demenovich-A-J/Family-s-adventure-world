@@ -16,8 +16,15 @@ namespace Faw.DataContext
             if (!ConnectionStrings.ContainsKey(contextType))
                 throw new InvalidOperationException($"No connection string specified for context of type {contextType.Name}");
 
+            
             if (contextType == typeof(FawDataContext))
-                return new FawDataContext(ConnectionStrings[contextType]) as TDbContext;
+            {
+                var dc = new FawDataContext(ConnectionStrings[contextType]) as TDbContext;
+
+                dc.Configuration.ProxyCreationEnabled = false;
+                dc.Configuration.LazyLoadingEnabled = false;
+                return dc;
+            }
 
             throw new NotImplementedException();
         }

@@ -28,7 +28,7 @@ namespace Faw.DataContext.Tests
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestRegisterUser_NotNull()
         {
             var userService = _kernel.Get<IUserService>();
             var serviceUser = new User

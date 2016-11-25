@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Contracts\IUserTypeService.cs" />
     <Compile Include="DataAccess\UserService.cs" />
+    <Compile Include="DataAccess\UserTypeService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AutoMapper\BuisnessModelsToDomainProfile.cs" />
@@ -75,6 +77,10 @@
     <ProjectReference Include="..\Faw.Repositories\Faw.Repositories.csproj">
       <Project>{a6002ffe-8118-4c65-890b-49abc52ffd14}</Project>
       <Name>Faw.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mehdime.Entity\Mehdime.Entity.csproj">
+      <Project>{4830BAFD-4163-473E-B00F-65F274AC165F}</Project>
+      <Name>Mehdime.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -9,6 +9,7 @@ namespace Faw.Services.Infrastructure
         public override void Load()
         {
             Bind<IUserService>().To<UserService>();
+            Bind<IUserTypeService>().To<UserTypeService>();
         }
     }
 }

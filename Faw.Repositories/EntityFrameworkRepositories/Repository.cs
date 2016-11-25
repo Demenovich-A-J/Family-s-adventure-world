@@ -51,7 +51,7 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             Delete(entityToDelete);
         }
 
-        public TEntity GetById(Guid entityId)
+        public virtual TEntity GetById(Guid entityId)
         {
             return DbContext.Set<TEntity>().FirstOrDefault(x => x.EntityId == entityId);
         }
