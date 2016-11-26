@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IUserService.cs" />
-    <Compile Include="Contracts\IUserTypeService.cs" />
+    <Compile Include="Contracts\DataAccess\IUserService.cs" />
+    <Compile Include="Contracts\DataAccess\IUserTypeService.cs" />
+    <Compile Include="Contracts\QueryServices\IUserQueryService.cs" />
+    <Compile Include="Contracts\QueryServices\IUserTypeQueryService.cs" />
     <Compile Include="DataAccess\UserService.cs" />
     <Compile Include="DataAccess\UserTypeService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryServices\UserQueryService.cs" />
+    <Compile Include="QueryServices\UserTypeQueryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Infrastructure\Core.Infrastructure.csproj">

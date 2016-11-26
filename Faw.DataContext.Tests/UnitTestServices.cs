@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
-using Faw.Services.Contracts;
-using Faw.Services.DataAccess;
+using Faw.Services.Contracts.DataAccess;
+using Faw.Services.Contracts.QueryServices;
 using Faw.Services.Models;
 using Faw.Services.Models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,6 +31,7 @@ namespace Faw.DataContext.Tests
         public void TestRegisterUser_NotNull()
         {
             var userService = _kernel.Get<IUserService>();
+            var userQueryService = _kernel.Get<IUserQueryService>();
             var serviceUser = new User
             {
                 UserId = Guid.NewGuid(),
@@ -50,7 +51,7 @@ namespace Faw.DataContext.Tests
 
             userService.Register(serviceUser);
 
-            var resultUser = userService.GetUserById(serviceUser.UserId);
+            var resultUser = userQueryService.GetUserById(serviceUser.UserId);
 
             Assert.IsNotNull(resultUser);
         }

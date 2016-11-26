@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
@@ -54,6 +55,11 @@ namespace Faw.Repositories.EntityFrameworkRepositories
         public virtual TEntity GetById(Guid entityId)
         {
             return DbContext.Set<TEntity>().FirstOrDefault(x => x.EntityId == entityId);
+        }
+
+        public virtual IEnumerable<TEntity> GetWhere(Func<TEntity, bool> predicate)
+        {
+            return DbContext.Set<TEntity>().Where(predicate);
         }
 
         public virtual void Update(TEntity entityToUpdate)

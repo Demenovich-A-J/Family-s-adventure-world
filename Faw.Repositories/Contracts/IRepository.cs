@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Faw.Models.Domain;
 
 namespace Faw.Repositories.Contracts
@@ -10,5 +11,7 @@ namespace Faw.Repositories.Contracts
         void Delete(Guid entityId);
 
         T GetById(Guid entityId);
+
+        IEnumerable<T> GetWhere(Func<T, bool> predicate);
     }
 }

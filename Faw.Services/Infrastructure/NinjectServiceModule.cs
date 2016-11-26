@@ -1,4 +1,5 @@
 ﻿using Faw.Services.Contracts;
+using Faw.Services.Contracts.DataAccess;
 using Faw.Services.DataAccess;
 using Ninject.Modules;
 

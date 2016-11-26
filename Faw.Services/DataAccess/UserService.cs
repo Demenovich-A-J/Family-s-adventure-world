@@ -2,7 +2,8 @@
 using AutoMapper;
 using Core.Infrastructure;
 using Faw.Repositories.Contracts;
-using Faw.Services.Contracts;
+using Faw.Services.Contracts.DataAccess;
+using Faw.Services.Contracts.QueryServices;
 using Faw.Services.Models;
 using Mehdime.Entity;
 
@@ -12,7 +13,7 @@ namespace Faw.Services.DataAccess
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly IUserTypeService _userTypeService;
+        private readonly IUserTypeQueryService _userTypeQueryService;
         private readonly IAccountRepository _accountRepository;
         private readonly IDbContextScopeFactory _contextScopeFactory;
 
@@ -21,13 +22,13 @@ namespace Faw.Services.DataAccess
             IMapper mapper, 
             IAccountRepository accountRepository, 
             IDbContextScopeFactory contextScopeFactory,
-            IUserTypeService userTypeService)
+            IUserTypeQueryService userTypeQueryService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _accountRepository = accountRepository;
             _contextScopeFactory = contextScopeFactory;
-            _userTypeService = userTypeService;
+            _userTypeQueryService = userTypeQueryService;
         }
 
         public void Register(User user)
@@ -45,7 +46,7 @@ namespace Faw.Services.DataAccess
             domainUser.Account.Token = Guid.NewGuid();
             domainUser.Account.TokenExpireDate = now.AddHours(1);
 
-            var userType = _userTypeService.GetByName(user.Account.UserType);
+            var userType = _userTypeQueryService.GetByName(user.Account.UserType);
 
             if (userType == null)
                 throw new ArgumentNullException(nameof(userType));
@@ -62,12 +63,6 @@ namespace Faw.Services.DataAccess
             }
         }
 
-        public User GetUserById(Guid userId)
-        {
-            using (var dbContextScope = _contextScopeFactory.CreateReadOnly())
-            {
-                return _mapper.Map<User>(_userRepository.GetById(userId));
-            }
-        }
+
     }
 }
