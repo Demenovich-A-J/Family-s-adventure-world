@@ -1,6 +1,6 @@
 ﻿using Faw.Services.Models;
 
-namespace Faw.Services.Contracts.DataAccess
+namespace Faw.Services.Contracts.DataManagementContracts
 {
     public interface IUserTypeService
     {

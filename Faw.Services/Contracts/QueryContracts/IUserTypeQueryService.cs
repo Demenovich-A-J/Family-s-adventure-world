@@ -1,6 +1,6 @@
 ﻿using Faw.Services.Models;
 
-namespace Faw.Services.Contracts.QueryServices
+namespace Faw.Services.Contracts.QueryContracts
 {
     public interface IUserTypeQueryService
     {

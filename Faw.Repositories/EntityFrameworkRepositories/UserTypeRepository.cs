@@ -10,10 +10,5 @@ namespace Faw.Repositories.EntityFrameworkRepositories
         public UserTypeRepository(IAmbientDbContextLocator dataContext) : base(dataContext)
         {
         }
-
-        public UserType GetByName(string name)
-        {
-            return DbContext.UserTypes.FirstOrDefault(x => x.Name == name);
-        }
     }
 }

@@ -48,12 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\DataAccess\IUserService.cs" />
-    <Compile Include="Contracts\DataAccess\IUserTypeService.cs" />
-    <Compile Include="Contracts\QueryServices\IUserQueryService.cs" />
-    <Compile Include="Contracts\QueryServices\IUserTypeQueryService.cs" />
-    <Compile Include="DataAccess\UserService.cs" />
-    <Compile Include="DataAccess\UserTypeService.cs" />
+    <Compile Include="Contracts\QueryContracts\IAccountQueryService.cs" />
+    <Compile Include="Contracts\DataManagementContracts\IUserService.cs" />
+    <Compile Include="Contracts\DataManagementContracts\IUserTypeService.cs" />
+    <Compile Include="Contracts\QueryContracts\IUserQueryService.cs" />
+    <Compile Include="Contracts\QueryContracts\IUserTypeQueryService.cs" />
+    <Compile Include="DataManagementServices\UserService.cs" />
+    <Compile Include="DataManagementServices\UserTypeService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AutoMapper\BuisnessModelsToDomainProfile.cs" />
@@ -66,8 +67,10 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryServices\AccountQueryService.cs" />
     <Compile Include="QueryServices\UserQueryService.cs" />
     <Compile Include="QueryServices\UserTypeQueryService.cs" />
+    <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Infrastructure\Core.Infrastructure.csproj">

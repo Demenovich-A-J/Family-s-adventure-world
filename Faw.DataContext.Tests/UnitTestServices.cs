@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
-using Faw.Services.Contracts.DataAccess;
-using Faw.Services.Contracts.QueryServices;
+using Faw.Services.Contracts.DataManagementContracts;
+using Faw.Services.Contracts.QueryContracts;
 using Faw.Services.Models;
 using Faw.Services.Models.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

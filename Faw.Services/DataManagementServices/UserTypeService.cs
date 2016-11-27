@@ -1,23 +1,24 @@
 ﻿using System;
 using AutoMapper;
 using Faw.Repositories.Contracts;
-using Faw.Services.Contracts.QueryContracts;
+using Faw.Services.Contracts.DataManagementContracts;
 using Faw.Services.Models;
 using Mehdime.Entity;
 
-namespace Faw.Services.QueryServices
+namespace Faw.Services.DataManagementServices
 {
-    public class UserTypeQueryService : Service, IUserTypeQueryService
+    public class UserTypeService : Service, IUserTypeService
     {
         private readonly IUserTypeRepository _userTypeRepository;
 
-        public UserTypeQueryService(
-            IDbContextScopeFactory contextScopeFactory,
-            IUserTypeRepository userTypeRepository,
+        public UserTypeService(
+            IDbContextScopeFactory contextScopeFactory, 
+            IUserTypeRepository userTypeRepository, 
             IMapper mapper) : base(mapper, contextScopeFactory)
         {
             _userTypeRepository = userTypeRepository;
         }
+
 
         public UserType GetByName(string name)
         {
