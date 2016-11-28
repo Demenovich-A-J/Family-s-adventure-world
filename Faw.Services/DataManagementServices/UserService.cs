@@ -16,6 +16,7 @@ namespace Faw.Services.DataManagementServices
 
         private readonly IUserTypeQueryService _userTypeQueryService;
         private readonly IAccountQueryService _accountQueryService;
+        private readonly IUserQueryService _userQueryService;
 
         public UserService(
             IUserRepository userRepository, 
@@ -23,12 +24,14 @@ namespace Faw.Services.DataManagementServices
             IAccountRepository accountRepository, 
             IDbContextScopeFactory contextScopeFactory,
             IUserTypeQueryService userTypeQueryService, 
-            IAccountQueryService accountQueryService) : base(mapper, contextScopeFactory)
+            IAccountQueryService accountQueryService,
+            IUserQueryService userQueryService) : base(mapper, contextScopeFactory)
         {
             _userRepository = userRepository;
             _accountRepository = accountRepository;
             _userTypeQueryService = userTypeQueryService;
             _accountQueryService = accountQueryService;
+            _userQueryService = userQueryService;
         }
 
         public void Register(User user)
@@ -90,16 +93,28 @@ namespace Faw.Services.DataManagementServices
             return true;
         }
 
+        public void Edit(User user)
+        {
+            var domainUser = _userQueryService.GetUserById(user.UserId);
+
+            _mapper.Map(user, domainUser);
+
+            using (var contextScope = _contextScopeFactory.Create())
+            {
+                _accountRepository.Insert(_mapper.Map<Faw.Models.Domain.Account>(domainUser.Account));
+                _userRepository.Insert(_mapper.Map<Faw.Models.Domain.User>(domainUser));
+
+                contextScope.SaveChanges();
+            }
+        }
+
         public bool Authenticate(string emailOrlogin, string password)
         {
             var account = _accountQueryService.GetByEmailOrLogin(emailOrlogin);
 
-            return account != null && SaltedHash.Verify(password, account.PasswordHash, account.PasswordSalt);
-        }
-
-        public void Edit(User user)
-        {
-            throw new NotImplementedException();
+            return 
+                account != null
+                && SaltedHash.Verify(password, account.PasswordHash, account.PasswordSalt);
         }
     }
 }

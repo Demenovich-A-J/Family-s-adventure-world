@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="NinjectInitializer.cs" />
     <Compile Include="UnitTestRepositories.cs" />
-    <Compile Include="UnitTestDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestServices.cs" />
   </ItemGroup>

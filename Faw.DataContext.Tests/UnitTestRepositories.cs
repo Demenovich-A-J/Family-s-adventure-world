@@ -64,7 +64,7 @@ namespace Faw.DataContext.Tests
                 dbContextScope.SaveChanges();
             }
 
-            using (var dbContextScope = dbconstextScopeFactory.CreateReadOnly())
+            using (dbconstextScopeFactory.CreateReadOnly())
             {
                 settingFromDb = settingRepo.GetById(setting.EntityId);
             }
