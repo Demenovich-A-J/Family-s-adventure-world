@@ -10,6 +10,7 @@ BEGIN
 		[PasswordSalt] [nvarchar](100) NOT NULL,
 		[Token] [uniqueidentifier] NULL,
 		[TokenExpireDate] [datetime] NULL,
+		[Status] [integer] NOT NULL,
 		[CreatedOn] [datetime] NOT NULL CONSTRAINT DF_Account_CreatedOn DEFAULT getdate(),
 		[UpdatedOn] [datetime] NOT NULL CONSTRAINT DF_Account_UpdatedOn DEFAULT getdate(),
 		[Email] [nvarchar](255) NOT NULL,

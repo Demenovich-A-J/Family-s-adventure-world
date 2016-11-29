@@ -1,11 +1,12 @@
 ﻿using System;
 using AutoMapper;
 using Core.Infrastructure;
+using Faw.Models.Domain.Enums;
 using Faw.Repositories.Contracts;
 using Faw.Services.Contracts.DataManagementContracts;
 using Faw.Services.Contracts.QueryContracts;
-using Faw.Services.Models;
 using Mehdime.Entity;
+using User = Faw.Services.Models.User;
 
 namespace Faw.Services.DataManagementServices
 {
@@ -49,6 +50,8 @@ namespace Faw.Services.DataManagementServices
             domainUser.Account.Token = Guid.NewGuid();
             domainUser.Account.TokenExpireDate = now.AddHours(1);
 
+            domainUser.Account.Status = AccountStatus.PendingActivation;
+
             var userType = _userTypeQueryService.GetByName(user.Account.UserType);
 
             if (userType == null)
@@ -84,6 +87,7 @@ namespace Faw.Services.DataManagementServices
                 account.VerifiedOn = DateTime.Now;
                 account.Token = null;
                 account.TokenExpireDate = null;
+                account.Status = AccountStatus.Active;
 
                 _accountRepository.Update(_mapper.Map<Faw.Models.Domain.Account>(account));
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Faw.Models.Domain.Enums;
 
 namespace Faw.Services.Models
 {
@@ -13,6 +14,7 @@ namespace Faw.Services.Models
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
 
+        public AccountStatus Status { get; set; }
         public string UserType { get; set; }
 
         public Guid? Token { get; set; }
