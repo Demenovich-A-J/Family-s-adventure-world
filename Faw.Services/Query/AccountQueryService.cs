@@ -1,11 +1,11 @@
 ﻿using System;
 using AutoMapper;
 using Faw.Repositories.Contracts;
-using Faw.Services.Contracts.QueryContracts;
+using Faw.Services.Contracts.Query;
 using Faw.Services.Models;
 using Mehdime.Entity;
 
-namespace Faw.Services.QueryServices
+namespace Faw.Services.Query
 {
     public class AccountQueryService : Service, IAccountQueryService
     {

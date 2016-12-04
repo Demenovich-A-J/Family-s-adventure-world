@@ -48,13 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\QueryContracts\IAccountQueryService.cs" />
-    <Compile Include="Contracts\DataManagementContracts\IUserService.cs" />
-    <Compile Include="Contracts\DataManagementContracts\IUserTypeService.cs" />
-    <Compile Include="Contracts\QueryContracts\IUserQueryService.cs" />
-    <Compile Include="Contracts\QueryContracts\IUserTypeQueryService.cs" />
-    <Compile Include="DataManagementServices\UserService.cs" />
-    <Compile Include="DataManagementServices\UserTypeService.cs" />
+    <Compile Include="Contracts\DataManagement\IFamilyService.cs" />
+    <Compile Include="Contracts\Query\IAccountQueryService.cs" />
+    <Compile Include="Contracts\DataManagement\IUserService.cs" />
+    <Compile Include="Contracts\DataManagement\IUserTypeService.cs" />
+    <Compile Include="Contracts\Query\IFamilyQueryService.cs" />
+    <Compile Include="Contracts\Query\IUserQueryService.cs" />
+    <Compile Include="Contracts\Query\IUserTypeQueryService.cs" />
+    <Compile Include="DataManagement\FamilyService.cs" />
+    <Compile Include="DataManagement\UserService.cs" />
+    <Compile Include="DataManagement\UserTypeService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AutoMapper\BuisnessModelsToDomainProfile.cs" />
@@ -67,9 +70,10 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryServices\AccountQueryService.cs" />
-    <Compile Include="QueryServices\UserQueryService.cs" />
-    <Compile Include="QueryServices\UserTypeQueryService.cs" />
+    <Compile Include="Query\AccountQueryService.cs" />
+    <Compile Include="Query\FamilyQueryService.cs" />
+    <Compile Include="Query\UserQueryService.cs" />
+    <Compile Include="Query\UserTypeQueryService.cs" />
     <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>

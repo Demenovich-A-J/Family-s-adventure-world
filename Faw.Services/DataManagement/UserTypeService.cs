@@ -1,11 +1,11 @@
 ﻿using System;
 using AutoMapper;
 using Faw.Repositories.Contracts;
-using Faw.Services.Contracts.DataManagementContracts;
+using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Models;
 using Mehdime.Entity;
 
-namespace Faw.Services.DataManagementServices
+namespace Faw.Services.DataManagement
 {
     public class UserTypeService : Service, IUserTypeService
     {

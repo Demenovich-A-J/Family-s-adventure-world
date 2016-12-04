@@ -3,12 +3,12 @@ using AutoMapper;
 using Core.Infrastructure;
 using Faw.Models.Domain.Enums;
 using Faw.Repositories.Contracts;
-using Faw.Services.Contracts.DataManagementContracts;
-using Faw.Services.Contracts.QueryContracts;
+using Faw.Services.Contracts.DataManagement;
+using Faw.Services.Contracts.Query;
 using Mehdime.Entity;
 using User = Faw.Services.Models.User;
 
-namespace Faw.Services.DataManagementServices
+namespace Faw.Services.DataManagement
 {
     public class UserService : Service, IUserService
     {
@@ -35,7 +35,7 @@ namespace Faw.Services.DataManagementServices
             _userQueryService = userQueryService;
         }
 
-        public void Register(User user)
+        public Guid Register(User user)
         {
             var domainUser = _mapper.Map<Faw.Models.Domain.User>(user);
             var sh = new SaltedHash(user.Account.Password);
@@ -67,20 +67,24 @@ namespace Faw.Services.DataManagementServices
 
                 contextScope.SaveChanges();
             }
+
+            return domainUser.Account.Token.Value;
         }
 
-        public bool Verify(Guid token)
+        public UserVerifyResult Verify(Guid token)
         {
             var account = _accountQueryService.GetByToken(token);
 
             if (account == null)
-                throw new ArgumentNullException(
-                    $"Account with {token} not found. This case may be when user request another activation email. Or user already verify his account.");
+                return UserVerifyResult.TokenChanged;
 
             var now = DateTime.UtcNow;
 
             if (account.TokenExpireDate > now)
-                return false;
+                return UserVerifyResult.TokenExpired;
+
+            if (account.VerifiedOn.HasValue)
+                return UserVerifyResult.AlreadyVerified;
 
             using (var contextScope = _contextScopeFactory.Create())
             {
@@ -94,7 +98,7 @@ namespace Faw.Services.DataManagementServices
                 contextScope.SaveChanges();
             }
 
-            return true;
+            return UserVerifyResult.Ok;
         }
 
         public void Edit(User user)
@@ -116,9 +120,7 @@ namespace Faw.Services.DataManagementServices
         {
             var account = _accountQueryService.GetByEmailOrLogin(emailOrlogin);
 
-            return 
-                account != null
-                && SaltedHash.Verify(password, account.PasswordHash, account.PasswordSalt);
+            return account != null && SaltedHash.Verify(password, account.PasswordHash, account.PasswordSalt);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Faw.Services.Contracts;
-using Faw.Services.Contracts.DataManagementContracts;
-using Faw.Services.DataManagementServices;
+using Faw.Services.Contracts.DataManagement;
+using Faw.Services.DataManagement;
 using Ninject.Modules;
 
 namespace Faw.Services.Infrastructure
