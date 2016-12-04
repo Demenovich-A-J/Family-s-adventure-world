@@ -9,13 +9,55 @@ namespace Faw.Services.Models.AutoMapper
         [Obsolete]
         protected override void Configure()
         {
-            CreateMap<User, Faw.Models.Domain.User>();
-            CreateMap<Account, Faw.Models.Domain.Account>();
-            CreateMap<Claim, Faw.Models.Domain.Claim>();
-            CreateMap<Family, Faw.Models.Domain.Family>();
-            CreateMap<Item, Faw.Models.Domain.Item>();
-            CreateMap<Quest, Faw.Models.Domain.User>();
-            CreateMap<UserType, Faw.Models.Domain.UserType>();
+            CreateMap<User, Faw.Models.Domain.User>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.UserId != Guid.Empty);
+                    o.MapFrom(s => s.UserId);
+                });
+
+            CreateMap<Account, Faw.Models.Domain.Account>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.AccountId != Guid.Empty);
+                    o.MapFrom(s => s.AccountId);
+                });
+
+            CreateMap<UserType, Faw.Models.Domain.UserType>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.UserTypeId != Guid.Empty);
+                    o.MapFrom(s => s.UserTypeId);
+                });
+
+            CreateMap<Claim, Faw.Models.Domain.Claim>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.ClaimId != Guid.Empty);
+                    o.MapFrom(s => s.ClaimId);
+                });
+
+            CreateMap<Family, Faw.Models.Domain.Family>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.FamilyId != Guid.Empty);
+                    o.MapFrom(s => s.FamilyId);
+                });
+
+            CreateMap<Item, Faw.Models.Domain.Item>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.ItemId != Guid.Empty);
+                    o.MapFrom(s => s.ItemId);
+                });
+
+            CreateMap<Quest, Faw.Models.Domain.User>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.QuestId != Guid.Empty);
+                    o.MapFrom(s => s.QuestId);
+                });
+
             CreateMap<Gender, Faw.Models.Domain.Enums.Gender>();
         }
     }

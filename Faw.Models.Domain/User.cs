@@ -8,11 +8,18 @@ namespace Faw.Models.Domain
     {
         public Guid AccountId { get; set; }
         public Guid UserTypeId { get; set; }
-        public Guid FamilyId { get; set; }
+        public Guid? FamilyId { get; set; }
 
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public string GenderString
+        {
+            get { return Gender.ToString(); }
+            set { Gender = (Gender)Enum.Parse(typeof(Gender), value); }
+        }
+
         public Gender Gender { get; set; }
 
         public DateTime BirthDate { get; set; }

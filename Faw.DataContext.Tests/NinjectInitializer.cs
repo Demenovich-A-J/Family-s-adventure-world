@@ -1,4 +1,5 @@
 ﻿using Faw.Repositories.Infrastructure;
+using Faw.Services.Infrastructure;
 using Ninject;
 
 namespace Faw.DataContext.Tests
@@ -10,6 +11,7 @@ namespace Faw.DataContext.Tests
             var kernel = new StandardKernel();
 
             kernel.Load(typeof(NinjectRepositoryModule).Assembly);
+            kernel.Load(typeof(NinjectServiceModule).Assembly);
 
             return kernel;
         }

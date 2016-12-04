@@ -1,4 +1,5 @@
-﻿using Faw.Models.Domain;
+﻿using System.Linq;
+using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
 using Mehdime.Entity;
 
