@@ -51,9 +51,11 @@
     <Compile Include="EntityTypeConfigurations\BaseEntityTypeConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\FamilyEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\ItemEntityConfiguration.cs" />
+    <Compile Include="EntityTypeConfigurations\PalyerInfoEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\QuestEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\SettingEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\UserEntityConfiguration.cs" />
+    <Compile Include="EntityTypeConfigurations\UserQuestEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\UserTypeEntityConfiguration.cs" />
     <Compile Include="FawDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

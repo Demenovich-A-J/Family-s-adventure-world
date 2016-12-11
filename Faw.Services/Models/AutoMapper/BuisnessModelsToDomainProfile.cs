@@ -51,11 +51,25 @@ namespace Faw.Services.Models.AutoMapper
                     o.MapFrom(s => s.ItemId);
                 });
 
-            CreateMap<Quest, Faw.Models.Domain.User>()
+            CreateMap<Quest, Faw.Models.Domain.Quest>()
                 .ForMember(d => d.EntityId, o =>
                 {
                     o.Condition(s => s.QuestId != Guid.Empty);
                     o.MapFrom(s => s.QuestId);
+                });
+
+            CreateMap<PlayerInfo, Faw.Models.Domain.PlayerInfo>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.PlayerInfoId != Guid.Empty);
+                    o.MapFrom(s => s.PlayerInfoId);
+                });
+
+            CreateMap<UserQuest, Faw.Models.Domain.UserQuest>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.UserQuestId != Guid.Empty);
+                    o.MapFrom(s => s.UserQuestId);
                 });
 
             CreateMap<Gender, Faw.Models.Domain.Enums.Gender>();

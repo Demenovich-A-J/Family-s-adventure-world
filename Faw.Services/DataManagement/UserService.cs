@@ -14,6 +14,7 @@ namespace Faw.Services.DataManagement
     {
         private readonly IUserRepository _userRepository;
         private readonly IAccountRepository _accountRepository;
+        private readonly IPlayerInfoRepository _playerInfoRepository;
 
         private readonly IUserTypeQueryService _userTypeQueryService;
         private readonly IAccountQueryService _accountQueryService;
@@ -26,13 +27,15 @@ namespace Faw.Services.DataManagement
             IDbContextScopeFactory contextScopeFactory,
             IUserTypeQueryService userTypeQueryService, 
             IAccountQueryService accountQueryService,
-            IUserQueryService userQueryService) : base(mapper, contextScopeFactory)
+            IUserQueryService userQueryService,
+            IPlayerInfoRepository playerInfoRepository) : base(mapper, contextScopeFactory)
         {
             _userRepository = userRepository;
             _accountRepository = accountRepository;
             _userTypeQueryService = userTypeQueryService;
             _accountQueryService = accountQueryService;
             _userQueryService = userQueryService;
+            _playerInfoRepository = playerInfoRepository;
         }
 
         public Guid Register(User user)
@@ -60,9 +63,13 @@ namespace Faw.Services.DataManagement
             domainUser.UserTypeId = userType.UserTypeId;
             domainUser.AccountId = domainUser.Account.EntityId;
 
+            domainUser.PlayerInfo.ExpirienceAmount = 0;
+            domainUser.PlayerInfo.Level = 1;
+
             using (var contextScope = _contextScopeFactory.Create())
             {
                 _accountRepository.Insert(domainUser.Account);
+                _playerInfoRepository.Insert(domainUser.PlayerInfo);
                 _userRepository.Insert(domainUser);
 
                 contextScope.SaveChanges();
@@ -107,10 +114,14 @@ namespace Faw.Services.DataManagement
 
             _mapper.Map(user, domainUser);
 
+            //TODO: Prevent player info update when just update user.
+            //Need to use player info service to update it.
+            domainUser.PlayerInfo = null;
+            
             using (var contextScope = _contextScopeFactory.Create())
             {
-                _accountRepository.Insert(_mapper.Map<Faw.Models.Domain.Account>(domainUser.Account));
-                _userRepository.Insert(_mapper.Map<Faw.Models.Domain.User>(domainUser));
+                _accountRepository.Update(_mapper.Map<Faw.Models.Domain.Account>(domainUser.Account));
+                _userRepository.Update(_mapper.Map<Faw.Models.Domain.User>(domainUser));
 
                 contextScope.SaveChanges();
             }

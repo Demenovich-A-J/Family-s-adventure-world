@@ -30,6 +30,12 @@ namespace Faw.Services.Models.AutoMapper
             CreateMap<Faw.Models.Domain.UserType, UserType>()
                 .ForMember(dest => dest.UserTypeId, opt => opt.MapFrom(x => x.EntityId));
 
+            CreateMap<Faw.Models.Domain.PlayerInfo, PlayerInfo>()
+                .ForMember(dest => dest.PlayerInfoId, opt => opt.MapFrom(x => x.EntityId));
+
+            CreateMap<Faw.Models.Domain.UserQuest, UserQuest>()
+                .ForMember(dest => dest.UserQuestId, opt => opt.MapFrom(x => x.EntityId));
+
             CreateMap<Faw.Models.Domain.Enums.Gender, Gender>();
         }
     }

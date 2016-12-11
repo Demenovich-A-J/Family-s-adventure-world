@@ -165,6 +165,10 @@ BEGIN
 		[UserQuestId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserQuestId DEFAULT newsequentialid(),
 		[UserId] [uniqueidentifier] NOT NULL,
 		[QuestId] [uniqueidentifier] NOT NULL,
+		[ParentUserQuestId] [uniqueidentifier] NULL,
+		[Status] nvarchar(50) NOT NULL,
+		[CreatedOn] datetime NOT NULL,
+		[UpdatedOn] datetime NOT NULL,
 		CONSTRAINT [PK_UserQuest] PRIMARY KEY 
 		(
 			[UserQuestId]
@@ -182,7 +186,7 @@ BEGIN
 		[Name] [nvarchar](255) NOT NULL,
 		CONSTRAINT [PK_UserType] PRIMARY KEY 
 		(
-			[UserTypeId] 
+			[UserTypeId]
 		)
 	)
 END
@@ -203,6 +207,47 @@ BEGIN
 	)
 END
 GO
+
+/*==============================================================*/
+/* Table: PalyerInfo                                            */
+/*==============================================================*/
+IF OBJECT_ID('[dbo].[PalyerInfo]') IS NULL
+BEGIN
+	CREATE TABLE PalyerInfo (
+	   PlayerInfoId         uniqueidentifier     not null,
+	   Level                int                  not null,
+	   ExpirienceAmount     float                not null,
+	   CONSTRAINT PK_PALYERINFO primary key nonclustered (PlayerInfoId)
+	)
+END
+GO
+
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_UserQuest_ParentUserQuest')
+			AND parent_object_id = OBJECT_ID(N'UserQuest'))
+BEGIN
+	ALTER TABLE [dbo].[UserQuest]  WITH CHECK ADD  CONSTRAINT [FK_UserQuest_ParentUserQuest] FOREIGN KEY([ParentUserQuestId])
+		REFERENCES [dbo].[UserQuest] ([UserQuestId])
+END
+
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_Quest_ParentQuest')
+			AND parent_object_id = OBJECT_ID(N'Quest'))
+BEGIN
+	ALTER TABLE [dbo].[Quest]  WITH CHECK ADD  CONSTRAINT [FK_Quest_ParentQuest] FOREIGN KEY([ParentQuestId])
+		REFERENCES [dbo].[Quest] ([QuestId])
+END
+
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_User_PlayerInfo')
+			AND parent_object_id = OBJECT_ID(N'User'))
+BEGIN
+	ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_PlayerInfo] FOREIGN KEY([PlayerInfoId])
+		REFERENCES [dbo].[PlayerInfo] ([PlayerInfoId])
+END
 
 IF NOT EXISTS (SELECT * 
 	FROM sys.foreign_keys 

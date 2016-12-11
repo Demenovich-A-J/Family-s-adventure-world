@@ -1,4 +1,5 @@
-﻿using Faw.Services.Models;
+﻿using System;
+using Faw.Services.Models;
 
 namespace Faw.Services.Contracts.DataManagement
 {
@@ -6,5 +7,6 @@ namespace Faw.Services.Contracts.DataManagement
     {
         void Create(Family family);
         void Edit(Family family);
+        void AddNewFamilyMember(Guid familyId, Guid userId);
     }
 }

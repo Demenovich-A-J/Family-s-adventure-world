@@ -28,6 +28,8 @@ namespace Faw.Repositories.Infrastructure
             Bind<ISettingRepository>().To<SettingRepository>();
             Bind<IUserRepository>().To<UserRepository>();
             Bind<IUserTypeRepository>().To<UserTypeRepository>();
+            Bind<IUserQuestRepository>().To<UserQuestRepository>();
+            Bind<IPlayerInfoRepository>().To<PlayerInfoRepository>();
         }
     }
 }

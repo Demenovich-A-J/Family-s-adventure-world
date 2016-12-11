@@ -6,7 +6,13 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public QuestEntityConfiguration() : base("QuestId")
         {
+            HasRequired(x => x.CreatedBy)
+                .WithMany()
+                .HasForeignKey(x => x.CreatedById);
 
+            HasOptional(x => x.ParentQuest)
+                .WithMany()
+                .HasForeignKey(x => x.ParentQuestId);
         }
     }
 }

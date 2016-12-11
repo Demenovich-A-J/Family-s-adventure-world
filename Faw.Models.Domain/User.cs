@@ -9,6 +9,7 @@ namespace Faw.Models.Domain
         public Guid AccountId { get; set; }
         public Guid UserTypeId { get; set; }
         public Guid? FamilyId { get; set; }
+        public Guid PlayerInfoId { get; set; }
 
         public string Email { get; set; }
         public string FirstName { get; set; }
@@ -27,6 +28,7 @@ namespace Faw.Models.Domain
         public virtual Account Account { get; set; }
         public virtual UserType UserType { get; set; }
         public virtual Family Family { get; set; }
+        public virtual PlayerInfo PlayerInfo { get; set; }
 
         public virtual IList<Quest> Quests { get; set; }
     }

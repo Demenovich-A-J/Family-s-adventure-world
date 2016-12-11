@@ -35,6 +35,8 @@ namespace Faw.DataContext
         public DbSet<Family> Families { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<PlayerInfo> PalyerInfos { get; set; }
+        public DbSet<UserQuest> UserQuests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -50,6 +52,8 @@ namespace Faw.DataContext
             modelBuilder.Configurations.Add(new SettingEntityConfiguration());
             modelBuilder.Configurations.Add(new UserEntityConfiguration());
             modelBuilder.Configurations.Add(new UserTypeEntityConfiguration());
+            modelBuilder.Configurations.Add(new PalyerInfoEntityConfiguration());
+            modelBuilder.Configurations.Add(new UserQuestEntityConfiguration());
         }
 
         public override int SaveChanges()

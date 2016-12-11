@@ -1,4 +1,7 @@
-﻿using Faw.Models.Domain;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
 using Mehdime.Entity;
 
@@ -8,6 +11,14 @@ namespace Faw.Repositories.EntityFrameworkRepositories
     {
         public FamilyRepository(IAmbientDbContextLocator dataContext) : base(dataContext)
         {
+        }
+
+        public override Family GetById(Guid entityId)
+        {
+            return
+                DbContext.Families.Include(x => x.CreatedBy)
+                    .Include(x => x.FamilyMemebers)
+                    .FirstOrDefault(x => x.EntityId == entityId);
         }
     }
 }

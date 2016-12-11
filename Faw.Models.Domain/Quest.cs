@@ -15,12 +15,12 @@ namespace Faw.Models.Domain
         public decimal Expirience { get; set; }
         public decimal? Coins { get; set; }
 
-        public int RequiredLVL { get; set; }
+        public int RequiredLevel { get; set; }
 
         public DateTime CreateOn { get; set; }
         public DateTime UpdatedOn { get; set; }
 
         public virtual Quest ParentQuest { get; set; }
-        public virtual User User { get; set; }
+        public virtual User CreatedBy { get; set; }
     }
 }

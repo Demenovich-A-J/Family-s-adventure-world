@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IPlayerInfoRepository.cs" />
+    <Compile Include="Contracts\IUserQuestRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\ClaimRepository.cs" />
     <Compile Include="Contracts\IAccountRepository.cs" />
     <Compile Include="Contracts\IClaimRepository.cs" />
@@ -63,9 +65,11 @@
     <Compile Include="EntityFrameworkRepositories\AccountRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\FamilyRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\ItemRepository.cs" />
+    <Compile Include="EntityFrameworkRepositories\PlayerInfoRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\QuestRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\Repository.cs" />
     <Compile Include="EntityFrameworkRepositories\SettingRepository.cs" />
+    <Compile Include="EntityFrameworkRepositories\UserQuestRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\UserRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\UserTypeRepository.cs" />
     <Compile Include="Infrastructure\NinjectRepositoryModule.cs" />

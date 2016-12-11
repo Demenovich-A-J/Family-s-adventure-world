@@ -57,9 +57,9 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             return DbContext.Set<TEntity>().FirstOrDefault(x => x.EntityId == entityId);
         }
 
-        public virtual IEnumerable<TEntity> GetWhere(Func<TEntity, bool> predicate)
+        public virtual IQueryable<TEntity> GetWhere(Func<TEntity, bool> predicate)
         {
-            return DbContext.Set<TEntity>().Where(predicate);
+            return DbContext.Set<TEntity>().Where(predicate).AsQueryable();
         }
 
         public virtual void Update(TEntity entityToUpdate)

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using Faw.Models.Domain;
+﻿using Faw.Models.Domain;
 
 namespace Faw.DataContext.EntityTypeConfigurations
 {
@@ -16,6 +14,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
                 .HasColumnName("Gender");
 
             Ignore(u => u.Gender);
+
+            HasRequired(u => u.PlayerInfo)
+                .WithMany()
+                .HasForeignKey(u => u.PlayerInfoId);
         }
     }
 }

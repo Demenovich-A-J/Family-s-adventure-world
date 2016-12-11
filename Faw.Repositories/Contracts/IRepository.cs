@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using Faw.Models.Domain;
 
 namespace Faw.Repositories.Contracts
@@ -12,6 +12,6 @@ namespace Faw.Repositories.Contracts
 
         T GetById(Guid entityId);
 
-        IEnumerable<T> GetWhere(Func<T, bool> predicate);
+        IQueryable<T> GetWhere(Func<T, bool> predicate);
     }
 }
