@@ -1,0 +1,17 @@
+@import '../../styles/variables/colors';
+
+#loginLayout {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	resize: vertical;
+	height: 100%;
+	background-color: $faw-color-blue-1;
+
+	.login-section{
+		max-width: 400px;
+		padding: 30px;
+		margin: 0 auto;
+		resize: vertical;
+	}
+}
