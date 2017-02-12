@@ -1,17 +1,16 @@
+import React from 'react'
+
 import {
 	connect
 } from 'react-redux'
 
 import Register from '../components/Register'
 
-/*  Object of action creators (can also be function that returns object).
-    Keys will be passed as props to presentational components. Here we are
-    implementing our wrapper around increment; the component doesn't care   */
-
 const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
+	genders: state.register.genders
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

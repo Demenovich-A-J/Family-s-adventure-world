@@ -1,4 +1,6 @@
-const initialState = 0
-export default function counterReducer(state = initialState, action) {
+const initialState = {
+	genders: ['male', 'female']
+}
+export default function registerReducer(state = initialState, action) {
 	return state
 }

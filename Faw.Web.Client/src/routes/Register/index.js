@@ -11,7 +11,7 @@ export default (store) => ({
 		require.ensure([], (require) => {
 			/*  Webpack - use require callback to define
 			    dependencies for bundling   */
-			const Counter = require('./containers/RegisterContainer').default
+			const register = require('./containers/RegisterContainer').default
 			const reducer = require('./modules/register').default
 
 			/*  Add the reducer to the store on key 'counter'  */
@@ -21,7 +21,7 @@ export default (store) => ({
 			})
 
 			/*  Return getComponent   */
-			cb(null, Counter)
+			cb(null, register)
 
 			/* Webpack named bundle   */
 		}, 'register')
