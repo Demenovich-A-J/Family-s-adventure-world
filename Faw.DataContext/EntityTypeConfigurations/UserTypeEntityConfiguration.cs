@@ -6,7 +6,6 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public UserTypeEntityConfiguration() : base("UserTypeId")
         {
-
         }
     }
 }

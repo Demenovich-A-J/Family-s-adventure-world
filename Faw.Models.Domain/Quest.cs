@@ -4,7 +4,7 @@ namespace Faw.Models.Domain
 {
     public class Quest : BaseEntity
     {
-        public Guid ParentQuestId { get; set; }
+        public Guid? ParentQuestId { get; set; }
         public Guid CreatedById { get; set; }
         
         public string Name { get; set; }

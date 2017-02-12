@@ -23,9 +23,7 @@ namespace Faw.Services.Query
         {
             using (_contextScopeFactory.CreateReadOnly())
             {
-                return
-                    _mapper.Map<UserType>(
-                        _userTypeRepository.GetWhere(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)));
+                return _mapper.Map<UserType>(_userTypeRepository.Get(name));
             }
         }
     }

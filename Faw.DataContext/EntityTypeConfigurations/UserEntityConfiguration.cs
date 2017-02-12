@@ -18,6 +18,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
             HasRequired(u => u.PlayerInfo)
                 .WithMany()
                 .HasForeignKey(u => u.PlayerInfoId);
+
+            HasOptional(u => u.Family)
+                .WithMany()
+                .HasForeignKey(u => u.FamilyId);
         }
     }
 }

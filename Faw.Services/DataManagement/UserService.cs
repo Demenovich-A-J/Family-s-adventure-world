@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Core.Infrastructure;
+using Faw.Models.Domain;
 using Faw.Models.Domain.Enums;
 using Faw.Repositories.Contracts;
 using Faw.Services.Contracts.DataManagement;
@@ -63,8 +64,11 @@ namespace Faw.Services.DataManagement
             domainUser.UserTypeId = userType.UserTypeId;
             domainUser.AccountId = domainUser.Account.EntityId;
 
-            domainUser.PlayerInfo.ExpirienceAmount = 0;
-            domainUser.PlayerInfo.Level = 1;
+            domainUser.PlayerInfo = new PlayerInfo
+            {
+                ExpirienceAmount = 0,
+                Level = 1
+            };
 
             using (var contextScope = _contextScopeFactory.Create())
             {

@@ -39,7 +39,7 @@ namespace Faw.Services.Query
                         _accountRepository.GetWhere(
                             x =>
                                 x.Email.Equals(emailOrlogin, StringComparison.OrdinalIgnoreCase) ||
-                                x.UserName.Equals(emailOrlogin, StringComparison.OrdinalIgnoreCase)));
+                                x.Login.Equals(emailOrlogin, StringComparison.OrdinalIgnoreCase)));
             }
         }
     }

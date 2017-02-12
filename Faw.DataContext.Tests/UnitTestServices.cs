@@ -39,13 +39,12 @@ namespace Faw.DataContext.Tests
                 LastName = "LastName",
                 BirthDate = DateTime.Today,
                 Gender = Gender.Male,
-                Email = "email@email.com",
                 Account = new Account
                 {
                     UserType = "Admin",
                     Email = "email@email.com",
                     Password = "123456",
-                    UserName = "Admin"
+                    Login = "Admin"
                 }
             };
 

@@ -5,7 +5,7 @@ IF OBJECT_ID('[dbo].[Account]') IS NULL
 BEGIN
 	CREATE TABLE [dbo].[Account](
 		[AccountId] [uniqueidentifier] NOT NULL CONSTRAINT DF_AccountId DEFAULT newsequentialid(),
-		[UserName] [nvarchar](100) NOT NULL,
+		[Login] [nvarchar](100) NOT NULL,
 		[PasswordHash] [nvarchar](100) NOT NULL,
 		[PasswordSalt] [nvarchar](100) NOT NULL,
 		[Token] [uniqueidentifier] NULL,
@@ -126,7 +126,7 @@ BEGIN
 	CREATE TABLE [dbo].[User](
 		[UserId] [uniqueidentifier] NOT NULL CONSTRAINT DF_UserId DEFAULT newsequentialid(),
 		[FamilyId] [uniqueidentifier] NULL,
-		[Email] [nvarchar](255) NOT NULL,
+		[PlayerInfoId] [uniqueidentifier] NOT NULL,
 		[FirstName] [nvarchar](255) NOT NULL,
 		[LastName] [nvarchar](255) NOT NULL,
 		[AccountId] [uniqueidentifier] NOT NULL,
@@ -303,6 +303,16 @@ IF NOT EXISTS (SELECT *
 BEGIN
 	ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Family] FOREIGN KEY([FamilyId])
 		REFERENCES [dbo].[Family] ([FamilyId])
+END
+
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_User_PlayerInfo')
+			AND parent_object_id = OBJECT_ID(N'User'))
+BEGIN
+	alter table [User]
+		add constraint FK_User_PlayerInfo foreign key (PlayerInfoId)
+			references PlayerInfo (PlayerInfoId)
 END
 
 IF NOT EXISTS (SELECT * 
