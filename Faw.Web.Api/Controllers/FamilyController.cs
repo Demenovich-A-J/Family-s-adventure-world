@@ -25,7 +25,7 @@ namespace Faw.Web.Api.Controllers
         [Route("Create")]
         public IHttpActionResult Create(FamilyViewModel family)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             _familyService.Create(_mapper.Map<Family>(family));
@@ -37,7 +37,7 @@ namespace Faw.Web.Api.Controllers
         [Route("Edit")]
         public IHttpActionResult Edit(FamilyViewModel family)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             _familyService.Edit(_mapper.Map<Family>(family));

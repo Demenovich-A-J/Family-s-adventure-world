@@ -6,8 +6,7 @@ namespace Faw.Services.Models.AutoMapper
 {
     public class BuisnessModelsToDomainProfile : Profile
     {
-        [Obsolete]
-        protected override void Configure()
+        public BuisnessModelsToDomainProfile()
         {
             CreateMap<User, Faw.Models.Domain.User>()
                 .ForMember(d => d.EntityId, o =>

@@ -1,9 +1,12 @@
 using System;
 using System.Web;
+using System.Web.Http;
+using AutoMapper;
 using Faw.Web.Api;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
+using WebApiContrib.IoC.Ninject;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
@@ -38,13 +41,17 @@ namespace Faw.Web.Api
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var kernel = new StandardKernel(new NinjectSettings() { LoadExtensions = false });
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
+
+
                 return kernel;
             }
             catch
@@ -61,6 +68,12 @@ namespace Faw.Web.Api
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Load(AppDomain.CurrentDomain.GetAssemblies());
-        }     
+
+            Mapper.Initialize(cfg => cfg.AddProfiles(AppDomain.CurrentDomain.GetAssemblies()));
+
+            kernel.Bind<IMapper>().ToMethod(x => Mapper.Configuration.CreateMapper()).InSingletonScope();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
+        }        
     }
 }
