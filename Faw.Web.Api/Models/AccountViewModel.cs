@@ -9,19 +9,24 @@ namespace Faw.Web.Api.Models
         public Guid AccountId { get; set; }
 
         [Required]
+        [MaxLength(255)]
         public string Login { get; set; }
+
         [Required]
+        [MaxLength(500)]
         public string Email { get; set; }
 
         [Required]
+        [MinLength(6)]
         public string Password { get; set; }
 
         [Required]
+        [MinLength(6)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string RepeatPassword { get; set; }
 
         public AccountStatus Status { get; set; }
 
-        [Required]
         public string UserType { get; set; }
 
         public Guid? Token { get; set; }
