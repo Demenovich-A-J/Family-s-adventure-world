@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using Faw.Repositories.Contracts;
 using Faw.Services.Contracts.Query;
@@ -39,7 +40,7 @@ namespace Faw.Services.Query
                         _accountRepository.GetWhere(
                             x =>
                                 x.Email.Equals(emailOrlogin, StringComparison.OrdinalIgnoreCase) ||
-                                x.Login.Equals(emailOrlogin, StringComparison.OrdinalIgnoreCase)));
+                                x.Login.Equals(emailOrlogin, StringComparison.OrdinalIgnoreCase)).SingleOrDefault());
             }
         }
     }

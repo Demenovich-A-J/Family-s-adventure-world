@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using AutoMapper;
+using Core.Infrastructure.Mvc.Jwt.Attributes;
 using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Models;
 using Faw.Web.Api.Models;
@@ -12,6 +13,7 @@ namespace Faw.Web.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+
         public AccountController(
             IUserService userService, 
             IMapper mapper)
@@ -20,18 +22,22 @@ namespace Faw.Web.Api.Controllers
             _mapper = mapper;
         }
 
-
-        [HttpGet]
-        [Route("Hi")]
-        public IHttpActionResult Hi()
+        // POST api/Account/Login
+        [HttpPost]
+        [Route("Login")]
+        public IHttpActionResult Login([FromBody]LoginViewModel model)
         {
-            return Ok(new
-            {
-                Message = "Hi"
-            });
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_userService.Authenticate(model.Login, model.Password))
+                return BadRequest("Password or Login incorrect.");
+
+            return Ok();
         }
 
         // POST api/Account/Register
+        [HttpPost]
         [Route("Register")]
         public IHttpActionResult Register(UserViewModel user)
         {
@@ -47,6 +53,7 @@ namespace Faw.Web.Api.Controllers
         }
 
         // POST api/Account/Verify
+        [JwtAuthentication]
         [Route("Verify")]
         public IHttpActionResult Verify(Guid token)
         {
@@ -68,6 +75,8 @@ namespace Faw.Web.Api.Controllers
         }
 
         // POST api/Account/Edit
+        [JwtAuthentication]
+        [HttpPost]
         [Route("Edit")]
         public IHttpActionResult Edit(UserViewModel user)
         {

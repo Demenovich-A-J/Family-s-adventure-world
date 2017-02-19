@@ -51,7 +51,6 @@ namespace Faw.Web.Api
 
                 GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
 
-
                 return kernel;
             }
             catch
@@ -72,8 +71,6 @@ namespace Faw.Web.Api
             Mapper.Initialize(cfg => cfg.AddProfiles(AppDomain.CurrentDomain.GetAssemblies()));
 
             kernel.Bind<IMapper>().ToMethod(x => Mapper.Configuration.CreateMapper()).InSingletonScope();
-
-            GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
-        }        
+        }     
     }
 }

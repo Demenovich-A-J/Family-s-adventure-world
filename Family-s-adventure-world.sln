@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mehdime.Entity", "Mehdime.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faw.Web.Client", "Faw.Web.Client\Faw.Web.Client.csproj", "{45480A45-CC7F-4FBC-8729-C319847BB9E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infrastructure.Mvc", "Core.Infrastructure.Mvc\Core.Infrastructure.Mvc.csproj", "{29AAFB52-4FDC-439F-9A63-248159B8161E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{45480A45-CC7F-4FBC-8729-C319847BB9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45480A45-CC7F-4FBC-8729-C319847BB9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45480A45-CC7F-4FBC-8729-C319847BB9E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29AAFB52-4FDC-439F-9A63-248159B8161E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AAFB52-4FDC-439F-9A63-248159B8161E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AAFB52-4FDC-439F-9A63-248159B8161E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AAFB52-4FDC-439F-9A63-248159B8161E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +97,6 @@ Global
 		{97E1CDF0-5467-46E9-9F99-CA765E8377FC} = {E91B9266-A071-4280-8465-4794E8BE47B3}
 		{B2E4DC5D-DFE9-4DFE-BF08-BE39DEE5BAB4} = {D093E990-C50E-4942-8396-67CDE68822D7}
 		{4830BAFD-4163-473E-B00F-65F274AC165F} = {E91B9266-A071-4280-8465-4794E8BE47B3}
+		{29AAFB52-4FDC-439F-9A63-248159B8161E} = {13EC7DF3-1B37-4253-8D92-C25F1442CF20}
 	EndGlobalSection
 EndGlobal
