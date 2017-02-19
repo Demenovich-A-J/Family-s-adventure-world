@@ -9,7 +9,7 @@ using Core.Infrastructure.Mvc.Jwt.Extensions;
 
 namespace Core.Infrastructure.Mvc.Jwt.Attributes
 {
-    public class JwtAuthenticationAttribute : System.Attribute, IAuthenticationFilter
+    public class JwtAuthenticationAttribute : IAuthenticationFilter
     {
         public string Realm { get; set; }
         public bool AllowMultiple => false;

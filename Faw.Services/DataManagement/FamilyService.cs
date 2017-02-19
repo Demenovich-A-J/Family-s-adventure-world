@@ -65,7 +65,7 @@ namespace Faw.Services.DataManagement
 
         public void AddNewFamilyMember(Guid familyId, Guid userId)
         {
-            var user = _userQueryService.GetUserById(userId);
+            var user = _userQueryService.Get(userId);
 
             //TODO: Add check if family exists. and user havent been assigned to any family.
             user.FamilyId = familyId;

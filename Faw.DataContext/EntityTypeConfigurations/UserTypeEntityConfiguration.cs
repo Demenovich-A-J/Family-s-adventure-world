@@ -6,6 +6,14 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public UserTypeEntityConfiguration() : base("UserTypeId")
         {
+            HasMany(ut => ut.Claims)
+                .WithMany()
+                .Map(ut =>
+                {
+                    ut.MapLeftKey("UserTypeId");
+                    ut.MapRightKey("ClaimId");
+                    ut.ToTable("UserTypeClaim");
+                });
         }
     }
 }

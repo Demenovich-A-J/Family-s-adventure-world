@@ -114,7 +114,7 @@ namespace Faw.Services.DataManagement
 
         public void Edit(User user)
         {
-            var domainUser = _userQueryService.GetUserById(user.UserId);
+            var domainUser = _userQueryService.Get(user.UserId);
 
             _mapper.Map(user, domainUser);
 

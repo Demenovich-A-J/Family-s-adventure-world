@@ -50,7 +50,7 @@ namespace Faw.DataContext.Tests
 
             userService.Register(serviceUser);
 
-            var resultUser = userQueryService.GetUserById(serviceUser.UserId);
+            var resultUser = userQueryService.Get(serviceUser.UserId);
 
             Assert.IsNotNull(resultUser);
         }

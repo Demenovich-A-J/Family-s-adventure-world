@@ -4,6 +4,6 @@ namespace Faw.Services.Contracts.DataManagement
 {
     public interface IPlayerInfoService
     {
-        void AdjustPlayerExpirience(Guid userId, float expirienceAmount);
+        void AdjustPlayerExpirience(Guid userId, decimal expirienceAmount);
     }
 }

@@ -5,6 +5,7 @@ namespace Faw.Services.Contracts.Query
 {
     public interface IUserQueryService
     {
-        User GetUserById(Guid userId);
+        User Get(Guid userId);
+        User Get(string emailOrLogin);
     }
 }

@@ -6,7 +6,6 @@ using Faw.Web.Api.Models;
 
 namespace Faw.Web.Api.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/Family")]
     public class FamilyController : ApiController
     {

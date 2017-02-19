@@ -3,6 +3,6 @@
     public class PlayerInfo : BaseEntity
     {
         public int Level { get; set; }
-        public float ExpirienceAmount { get; set; }
+        public decimal ExpirienceAmount { get; set; }
     }
 }

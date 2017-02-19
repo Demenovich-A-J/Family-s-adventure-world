@@ -22,20 +22,6 @@ namespace Faw.Web.Api.Controllers
             _mapper = mapper;
         }
 
-        // POST api/Account/Login
-        [HttpPost]
-        [Route("Login")]
-        public IHttpActionResult Login([FromBody]LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (!_userService.Authenticate(model.Login, model.Password))
-                return BadRequest("Password or Login incorrect.");
-
-            return Ok();
-        }
-
         // POST api/Account/Register
         [HttpPost]
         [Route("Register")]
@@ -53,7 +39,6 @@ namespace Faw.Web.Api.Controllers
         }
 
         // POST api/Account/Verify
-        [JwtAuthentication]
         [Route("Verify")]
         public IHttpActionResult Verify(Guid token)
         {
@@ -75,7 +60,6 @@ namespace Faw.Web.Api.Controllers
         }
 
         // POST api/Account/Edit
-        [JwtAuthentication]
         [HttpPost]
         [Route("Edit")]
         public IHttpActionResult Edit(UserViewModel user)

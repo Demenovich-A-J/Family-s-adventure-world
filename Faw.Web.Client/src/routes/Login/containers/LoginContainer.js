@@ -13,12 +13,17 @@ import { actions } from '../modules/login'
 const mapDispatchToProps = {
 	onLoginChanged: actions.loginChangeHandler,
 	onPasswordChanged: actions.passwordChangeHandler,
-	onFormSubmit: actions.formSubmitHandler
+	onFormSubmit: actions.formSubmitHandler,
+	onIsRememberChange: actions.isRememberChangeHandelr
 }
 
 const mapStateToProps = (state) => ({
 	loading: state.login.loading,
-	valid: state.login.valid
+	valid: state.login.valid,
+	user: {
+		login: state.login.login,
+		password: state.login.password
+	}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

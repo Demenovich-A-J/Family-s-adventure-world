@@ -6,6 +6,8 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public PalyerInfoEntityConfiguration() : base("PlayerInfoId")
         {
+            Property(pi => pi.ExpirienceAmount)
+                .HasPrecision(25, 5);
         }
     }
 }

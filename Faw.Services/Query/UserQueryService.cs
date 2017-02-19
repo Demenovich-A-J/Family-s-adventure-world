@@ -19,11 +19,19 @@ namespace Faw.Services.Query
             _userRepository = userRepository;
         }
 
-        public User GetUserById(Guid userId)
+        public User Get(Guid userId)
         {
             using (_contextScopeFactory.CreateReadOnly())
             {
                 return _mapper.Map<User>(_userRepository.GetById(userId));
+            }
+        }
+
+        public User Get(string emailOrLogin)
+        {
+            using (_contextScopeFactory.CreateReadOnly())
+            {
+                return _mapper.Map<User>(_userRepository.Get(emailOrLogin));
             }
         }
     }

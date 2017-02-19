@@ -6,6 +6,6 @@ namespace Faw.Services.Models
     {
         public Guid PlayerInfoId { get; set; }
         public int Level { get; set; }
-        public float ExpirienceAmount { get; set; }
+        public decimal ExpirienceAmount { get; set; }
     }
 }

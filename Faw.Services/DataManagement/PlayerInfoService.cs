@@ -25,9 +25,9 @@ namespace Faw.Services.DataManagement
             _playerInfoRepository = playerInfoRepository;
         }
 
-        public void AdjustPlayerExpirience(Guid userId, float expirienceAmount)
+        public void AdjustPlayerExpirience(Guid userId, decimal expirienceAmount)
         {
-            var user = _userQueryService.GetUserById(userId);
+            var user = _userQueryService.Get(userId);
 
             var playerInfoDomain = _mapper.Map<PlayerInfo>(user.PlayerInfo);
 
