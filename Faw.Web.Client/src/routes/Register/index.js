@@ -1,9 +1,13 @@
 import {
 	injectReducer
 } from '../../store/reducers'
+import {
+	loadGendersOnEnter
+} from '../routeEnter'
 
 export default (store) => ({
 	path: '/Account/Register',
+	onEnter: loadGendersOnEnter(store),
 	/*  Async getComponent is only invoked when route matches   */
 	getComponent(nextState, cb) {
 		/*  Webpack - use 'require.ensure' to create a split point

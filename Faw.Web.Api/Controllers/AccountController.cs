@@ -4,6 +4,7 @@ using AutoMapper;
 using Core.Infrastructure.Mvc.Jwt.Attributes;
 using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Models;
+using Faw.Services.Models.Enums;
 using Faw.Web.Api.Models;
 
 namespace Faw.Web.Api.Controllers
@@ -23,6 +24,7 @@ namespace Faw.Web.Api.Controllers
         }
 
         // POST api/Account/Register
+        [AllowAnonymous]
         [HttpPost]
         [Route("Register")]
         public IHttpActionResult Register(UserViewModel user)
@@ -70,6 +72,18 @@ namespace Faw.Web.Api.Controllers
             _userService.Edit(_mapper.Map<User>(user));
 
             return Ok();
+        }
+
+        // POST api/Account/FetchGendersInfo
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("FetchGendersInfo")]
+        public IHttpActionResult FetchGendersInfo()
+        {
+            return Ok(new
+            {
+                genders = Enum.GetNames(typeof(Gender))
+            });
         }
     }
 }

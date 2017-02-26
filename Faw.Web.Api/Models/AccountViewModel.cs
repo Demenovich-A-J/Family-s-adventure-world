@@ -27,7 +27,7 @@ namespace Faw.Web.Api.Models
 
         public AccountStatus Status { get; set; }
 
-        public string UserType { get; set; }
+        public string UserType { get; set; } = "Admin";
 
         public Guid? Token { get; set; }
 

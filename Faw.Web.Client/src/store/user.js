@@ -110,13 +110,13 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 function getInitialState() {
-	console.log(localStorage);
-	var authInfo = JSON.parse(localStorage.getItem('user'))
+	var authInfo = JSON.parse(localStorage.getItem('user'));
+
 	return {
 		authInfo,
 		userInfo: null,
 		isAuthenticated: authInfo != null
-	}
+	};
 }
 
 const initialState = getInitialState()
