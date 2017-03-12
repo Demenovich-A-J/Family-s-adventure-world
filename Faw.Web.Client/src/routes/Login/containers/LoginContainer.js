@@ -1,6 +1,4 @@
-import {
-	connect
-} from 'react-redux'
+import { connect } from 'react-redux'
 
 import Login from '../components/Login'
 
@@ -11,19 +9,19 @@ import { actions } from '../modules/login'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-	onLoginChanged: actions.loginChangeHandler,
-	onPasswordChanged: actions.passwordChangeHandler,
-	onFormSubmit: actions.formSubmitHandler,
-	onIsRememberChange: actions.isRememberChangeHandelr
+  onLoginChanged: actions.loginChangeHandler,
+  onPasswordChanged: actions.passwordChangeHandler,
+  onFormSubmit: actions.formSubmitHandler,
+  onIsRememberChange: actions.isRememberChangeHandelr
 }
 
 const mapStateToProps = (state) => ({
-	loading: state.login.loading,
-	valid: state.login.valid,
-	user: {
-		login: state.login.login,
-		password: state.login.password
-	}
+  loading: state.login.loading,
+  valid: state.login.valid,
+  user: {
+    login: state.login.login,
+    password: state.login.password
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
