@@ -89,4 +89,18 @@ export const Register = (props) => (
   </Form>
 )
 
+Register.propTypes = {
+  onPasswordChanged: React.PropTypes.func.isRequired,
+  onFormSubmit: React.PropTypes.func.isRequired,
+  onFirstNameChanged: React.PropTypes.func.isRequired,
+  onLastNameChanged: React.PropTypes.func.isRequired,
+  onEmailChanged: React.PropTypes.func.isRequired,
+  onLoginChanged: React.PropTypes.func.isRequired,
+  onBirthDateChanged: React.PropTypes.func.isRequired,
+  onRepeatPasswordChanged: React.PropTypes.func.isRequired,
+  loading: React.PropTypes.bool.isRequired,
+  valid: React.PropTypes.bool.isRequired,
+  genders: React.PropTypes.bool.isRequired
+}
+
 export default Register

@@ -16,4 +16,10 @@ export const ForgotPassword = (props) => (
   </Form>
 )
 
+ForgotPassword.propTypes = {
+  onFormSubmit: React.PropTypes.func.isRequired,
+  onEmailChange: React.PropTypes.func.isRequired,
+  loading: React.PropTypes.bool.isRequired
+}
+
 export default ForgotPassword

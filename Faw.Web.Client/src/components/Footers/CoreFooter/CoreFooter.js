@@ -2,9 +2,9 @@ import React from 'react'
 import { IndexLink } from 'react-router'
 import { Button } from 'react-bootstrap'
 
-import './LoginFooter.scss'
+import './CoreFooter.scss'
 
-export const LoginFooter = (props) => {
+export const CoreFooter = (props) => {
   return (
     <div className='login-footer-section'>
       <div className={props.props.pathname !== '/Account/Login' ? 'hidden' : ''}>
@@ -31,8 +31,8 @@ export const LoginFooter = (props) => {
   )
 }
 
-LoginFooter.propTypes = {
+CoreFooter.propTypes = {
   props: React.PropTypes.element.isRequired
 }
 
-export default LoginFooter
+export default CoreFooter
