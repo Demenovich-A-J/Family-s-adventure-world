@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import Login from '../components/ForgotPassword'
+import ForgotPassword from '../components/ForgotPassword'
 
 import { actions } from '../modules/forgotPassword'
 
@@ -18,4 +18,4 @@ const mapStateToProps = (state) => ({
   email: state.forgotPassword.email
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword)

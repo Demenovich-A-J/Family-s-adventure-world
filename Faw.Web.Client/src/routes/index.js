@@ -9,16 +9,19 @@ import LoginRoute from './Login'
 import RegisterRoute from './Register'
 import ForgotPasswordRoute from './ForgotPassword'
 
+import FamilyRoute from './Family'
+
+
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 export const createRoutes = (store) => ([
   {
     path: '/',
     component: CoreLayout,
-    indexRoute: Home
-    // childRoutes: [
-    //   CounterRoute(store)
-    // ]
+    indexRoute: Home,
+    childRoutes: [
+      FamilyRoute(store)
+    ]
   },
   {
     path: '/Account',

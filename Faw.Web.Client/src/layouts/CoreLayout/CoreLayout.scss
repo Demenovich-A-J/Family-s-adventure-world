@@ -5,4 +5,8 @@
 .faw-body-container{
 	height: 100%;
 	background-color: $faw-body-background-color;
+
+	.faw-page-content-container{
+		margin-top: 20px;
+	}
 }
