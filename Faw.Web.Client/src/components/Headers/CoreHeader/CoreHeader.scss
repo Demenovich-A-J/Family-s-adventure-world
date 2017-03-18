@@ -1,0 +1,97 @@
+@import '../../../styles/variables/colors';
+@import '../../../styles/components/card.scss';
+
+$faw-header-height: 60px;
+$faw-header-content-height: 57px;
+
+.faw-header-container{
+	background-color: $faw-header-background-color;
+	border-top: 3px solid $faw-primary-color-dark;
+	@include material-shadow($z-depth: 2);
+	height: $faw-header-height;
+	box-sizing: border-box;
+	
+	.-content-container{
+		height: $faw-header-content-height;
+    box-sizing: content-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+
+		.-logo-container{
+			box-sizing: content-box;
+			padding: 0 12px;
+			width: 170px;
+			height: $faw-header-content-height;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-align-items: center;
+			align-items: center;
+			background-color: transparent;
+			transition: background-color cubic-bezier(.165, .84, .44, 1) .25s;
+
+			&:hover{
+				background-color: rgba(239,240,241,0.75);
+			}
+
+			.-image{
+			  display: inline-block;
+				text-indent: -9999em;
+				height: 30px;
+				width: 170px;
+				margin-top: -4px;
+				margin-left: 0;
+				background-image: url('../../Headers/CoreHeader/assets/FawLogo.png');
+				background-size: 100%;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+		}
+
+		.-navigation-container{
+			font-size: 14px;
+			max-width: 450px;
+			overflow: hidden;
+			opacity: 1;
+			transform-origin: left center;
+			transition: opacity .35s cubic-bezier(.165, .84, .44, 1),max-width .5s cubic-bezier(.165, .84, .44, 1);
+
+			.-list{
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex-flow: row nowrap;
+				flex-flow: row nowrap;
+				height: $faw-header-content-height;
+
+				.-link{
+					display: inline-block;
+					padding: 0 12px;
+					color: $faw-secondary-text-color;
+					line-height: 58px;
+					text-decoration: none;
+					height: $faw-header-content-height;
+					position: relative;
+					transition: background-color cubic-bezier(.165, .84, .44, 1) .25s,border-bottom-color ease-in-out .25s;
+					box-sizing: border-box;
+
+					&:hover, &:focus{
+						background-color: #eff0f1;
+						text-decoration: none;
+						outline: none;
+						border-bottom: 2px solid $faw-primary-color-dark;
+						color: $faw-primary-text-color;
+					}
+
+					&.--active{
+						border-bottom: 2px solid $faw-primary-color-dark;
+						color: $faw-primary-text-color;
+					}
+				}
+			}
+		}
+	}
+}

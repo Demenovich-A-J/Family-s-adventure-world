@@ -1,0 +1,8 @@
+@import '../../styles/variables/colors';
+@import '../../styles/components/card.scss';
+
+
+.faw-body-container{
+	height: 100%;
+	background-color: $faw-body-background-color;
+}

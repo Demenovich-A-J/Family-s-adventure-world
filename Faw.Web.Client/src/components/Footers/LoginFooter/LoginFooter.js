@@ -32,7 +32,7 @@ export const LoginFooter = (props) => {
 }
 
 LoginFooter.propTypes = {
-  props: React.PropTypes.element.isRequired
+  props: React.PropTypes.object.isRequired
 }
 
 export default LoginFooter

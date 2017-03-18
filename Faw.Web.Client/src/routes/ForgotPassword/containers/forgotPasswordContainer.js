@@ -8,8 +8,14 @@ import { actions } from '../modules/forgotPassword'
     Keys will be passed as props to presentational components. Here we are
     implementing our wrapper around increment; the component doesn't care   */
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  onFormSubmit: actions.formSubmitHandler,
+  onEmailChange: actions.emailChangeHandler
+}
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  loading: state.forgotPassword.loading,
+  email: state.forgotPassword.email
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

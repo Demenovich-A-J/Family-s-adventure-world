@@ -2,27 +2,23 @@ import axios from 'axios'
 
 // ------------------------------------ Constants
 // ------------------------------------
-export const OLD_PASSWORD_CHANGED = 'OLD_PASSWORD_CHANGED'
-export const PASSWORD_CHANGED = 'PASSWORD_CHANGED'
-export const REPEAT_PASSWORD_CHANGED = 'REPEAT_PASSWORD_CHANGED'
-export const PASSWORD_CHANGED_SUCCESS = 'PASSWORD_CHANGED_SUCCESS'
+export const EMAIL_CHANGED = 'EMAIL_CHANGED'
+export const LOADING_CHANGED = 'LOADING_CHANGED'
 
 // ------------------------------------ Actions
 // ------------------------------------
-export const oldPasswordChangeHandler = (e) => {
-  return { type: OLD_PASSWORD_CHANGED, payload: e.target.value }
+export const emailChangeHandler = (e) => {
+  return {
+    type: EMAIL_CHANGED,
+    payload: e.target.value
+  }
 }
 
-export const passwordChangeHandler = (e) => {
-  return { type: PASSWORD_CHANGED, payload: e.target.value }
-}
-
-export const repeatPasswordChangeHandler = (e) => {
-  return { type: REPEAT_PASSWORD_CHANGED, payload: e.target.value }
-}
-
-export const passwordChangeSuccessHandler = () => {
-  return { type: PASSWORD_CHANGED_SUCCESS }
+export const setLoading = (loading) => {
+  return {
+    type: LOADING_CHANGED,
+    payload: loading
+  }
 }
 
 // ------------------------------------ Functions
@@ -43,7 +39,6 @@ export const formSubmitHandler = (e) => {
         RepeatPassword: data.gender
       }
     }).then(function (response) {
-      dispatch(passwordChangeSuccessHandler())
       // browserHistory.push('/Account/Login')
     }).catch(function (error) {
       console.log(error)
@@ -53,24 +48,20 @@ export const formSubmitHandler = (e) => {
 }
 
 export const actions = {
-  oldPasswordChangeHandler,
-  passwordChangeHandler,
-  repeatPasswordChangeHandler,
+  emailChangeHandler,
   formSubmitHandler
 }
 
 // ------------------------------------ Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [OLD_PASSWORD_CHANGED]: (state, action) => Object.assign({}, state, { oldPassword: action.payload }),
-  [PASSWORD_CHANGED]: (state, action) => Object.assign({}, state, { password: action.payload }),
-  [REPEAT_PASSWORD_CHANGED]: (state, action) => Object.assign({}, state, { repeatPassword: action.payload })
+  [EMAIL_CHANGED]: (state, action) => Object.assign({}, state, { email: action.payload }),
+  [LOADING_CHANGED]: (state, action) => Object.assign({}, state, { loading: action.payload })
 }
 
 const initialState = {
-  oldPassword: '',
-  password: '',
-  repeatPassword: ''
+  email: '',
+  loading: false
 }
 
 export default function accountReducer (state = initialState, action) {

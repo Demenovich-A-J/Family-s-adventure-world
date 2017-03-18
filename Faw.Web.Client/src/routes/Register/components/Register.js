@@ -99,8 +99,7 @@ Register.propTypes = {
   onBirthDateChanged: React.PropTypes.func.isRequired,
   onRepeatPasswordChanged: React.PropTypes.func.isRequired,
   loading: React.PropTypes.bool.isRequired,
-  valid: React.PropTypes.bool.isRequired,
-  genders: React.PropTypes.bool.isRequired
+  genders: React.PropTypes.array.isRequired
 }
 
 export default Register

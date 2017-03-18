@@ -9,7 +9,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const register = require('./containers/ForgotPasswordContainer').default
+      const forgotPassword = require('./containers/ForgotPasswordContainer').default
       const reducer = require('./modules/forgotPassword').default
 
       /*  Add the reducer to the store on key 'counter'  */
@@ -19,7 +19,7 @@ export default (store) => ({
       })
 
       /*  Return getComponent   */
-      cb(null, register)
+      cb(null, forgotPassword)
 
     /* Webpack named bundle   */
     }, 'forgotPassword')
