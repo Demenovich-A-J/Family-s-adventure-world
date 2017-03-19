@@ -1,4 +1,5 @@
 import { browserHistory } from 'react-router'
+import axiosUtil from 'infrastructure/utils/axiosUtils'
 import axios from 'axios'
 
 // ------------------------------------
@@ -71,6 +72,7 @@ export function fetchUserInfo () {
           url: '/User/FetchUserInfo'
         }).then(function (response) {
           dispatch(setUserInfo(response.data))
+          localStorage.setItem('userInfo', JSON.stringify(response.data))
         })
       }
     }
@@ -109,10 +111,15 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 function getInitialState () {
   var authInfo = JSON.parse(localStorage.getItem('user'))
+  var userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
+  if (authInfo !== null) {
+    axiosUtil.setBaererToken(authInfo.access_token)
+  }
 
   return {
     authInfo,
-    userInfo: null,
+    userInfo: userInfo,
     isAuthenticated: authInfo != null
   }
 }

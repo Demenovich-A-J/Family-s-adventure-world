@@ -53,8 +53,13 @@ For example:
 */
 body{
 	min-width: 320px;
+	box-sizing: initial;
 }
 
 .full-width{
 	width: 100%;
+}
+
+.no-paddings{
+	padding: 0;
 }

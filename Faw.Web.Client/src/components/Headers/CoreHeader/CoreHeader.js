@@ -1,12 +1,11 @@
 import React from 'react'
-import { Grid } from 'react-bootstrap'
 import { IndexLink, Link } from 'react-router'
 
 import './CoreHeader.scss'
 
 export const CoreHeader = (props) => (
   <div className='faw-header-container mdl-shadow--4dp'>
-    <Grid className='-content-container'>
+    <div className='-content-container container'>
       <a href='/' className='-logo-container'>
         <span className='-image'>Family adwenture world</span>
       </a>
@@ -29,7 +28,7 @@ export const CoreHeader = (props) => (
           </li>
         </ol>
       </nav>
-    </Grid>
+    </div>
   </div>
 )
 

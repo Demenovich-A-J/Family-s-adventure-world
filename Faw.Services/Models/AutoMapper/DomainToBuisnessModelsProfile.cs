@@ -18,7 +18,8 @@ namespace Faw.Services.Models.AutoMapper
                 .ForMember(d => d.ClaimId, o => o.MapFrom(x => x.EntityId));
 
             CreateMap<Faw.Models.Domain.Family, Family>()
-                .ForMember(d => d.FamilyId, o => o.MapFrom(x => x.EntityId));
+                .ForMember(d => d.FamilyId, o => o.MapFrom(x => x.EntityId))
+                .MaxDepth(1);
 
             CreateMap<Faw.Models.Domain.Item, Item>()
                 .ForMember(d => d.ItemId, o => o.MapFrom(x => x.EntityId));

@@ -20,7 +20,7 @@ $faw-header-content-height: 57px;
 
 		.-logo-container{
 			box-sizing: content-box;
-			padding: 0 12px;
+			padding: 0 16px;
 			width: 170px;
 			height: $faw-header-content-height;
 			display: -webkit-flex;
@@ -70,7 +70,7 @@ $faw-header-content-height: 57px;
 					display: inline-block;
 					padding: 0 12px;
 					color: $faw-secondary-text-color;
-					line-height: 58px;
+					line-height: 57px;
 					text-decoration: none;
 					height: $faw-header-content-height;
 					position: relative;

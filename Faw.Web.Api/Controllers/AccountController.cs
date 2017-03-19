@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Http;
 using AutoMapper;
-using Core.Infrastructure.Mvc.Jwt.Attributes;
 using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Models;
 using Faw.Services.Models.Enums;

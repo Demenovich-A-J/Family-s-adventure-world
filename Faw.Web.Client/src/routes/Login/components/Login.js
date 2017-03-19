@@ -7,6 +7,7 @@ export const Login = (props) => (
   <form id='loginForm' onSubmit={props.onFormSubmit}>
     <Textfield
       onChange={props.onLoginChanged}
+      className='full-width'
       label='Login'
       floatingLabel
       pattern='.*'
@@ -14,6 +15,7 @@ export const Login = (props) => (
     />
     <Textfield
       onChange={props.onPasswordChanged}
+      className='full-width'
       label='Password'
       type='password'
       floatingLabel

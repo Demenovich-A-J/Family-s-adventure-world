@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Linq;
 using AutoMapper;
 using Faw.Repositories.Contracts;
 using Faw.Services.Contracts.Query;
@@ -26,6 +28,14 @@ namespace Faw.Services.Query
             using (_contextScopeFactory.CreateReadOnly())
             {
                 return _mapper.Map<Family>(_familyRepository.GetById(familyId));
+            }
+        }
+
+        public Family GetUserFamily(Guid userId)
+        {
+            using (_contextScopeFactory.CreateReadOnly())
+            {
+                return _mapper.Map<Family>(_familyRepository.GetUserFamily(userId));
             }
         }
     }

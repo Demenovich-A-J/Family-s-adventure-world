@@ -1,7 +1,9 @@
 import { injectReducer } from '../../../store/reducers'
+import { fetchUserFamily } from '../../routeEnter'
 
 export default (store) => ({
   path: '/family',
+  onEnter: fetchUserFamily(store),
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point

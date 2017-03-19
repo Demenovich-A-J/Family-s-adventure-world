@@ -16,9 +16,19 @@ namespace Faw.Repositories.EntityFrameworkRepositories
         public override Family GetById(Guid entityId)
         {
             return
-                DbContext.Families.Include(x => x.CreatedBy)
+                DbContext.Families
+                    .Include(x => x.CreatedBy)
                     .Include(x => x.FamilyMemebers)
                     .FirstOrDefault(x => x.EntityId == entityId);
+        }
+
+        public Family GetUserFamily(Guid userId)
+        {
+            return
+                DbContext.Families
+                    .Include(x => x.CreatedBy)
+                    .Include(x => x.FamilyMemebers)
+                    .FirstOrDefault(x => x.CreatedById == userId || x.FamilyMemebers.Any(fm => fm.EntityId == userId));
         }
     }
 }

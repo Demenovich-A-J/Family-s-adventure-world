@@ -22,6 +22,7 @@ namespace Faw.Web.Api.Controllers
 
             return Ok(new
             {
+                userId = user.UserId,
                 userName = $"{user.FirstName}  {user.LastName}",
                 role = user.UserType.Name,
                 claims = user.UserType.Claims,

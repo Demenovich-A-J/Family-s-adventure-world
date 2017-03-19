@@ -102,7 +102,7 @@ const initialState = {
   valid: true,
   login: null,
   password: null,
-  isRemember: false
+  isRemember: true
 }
 
 export default function loginReducer (state = initialState, action) {

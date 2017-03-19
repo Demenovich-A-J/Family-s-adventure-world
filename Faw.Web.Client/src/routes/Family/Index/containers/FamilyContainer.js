@@ -9,10 +9,16 @@ import { actions } from '../modules/family'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
+  onFamilyNameChanged: actions.familyNameChangeHandler,
+  openFamilyDialogHandler: actions.openFamilyDialog,
+  closeFamilyDialogHandler: actions.closeFamilyDialog,
+  onSubmitFamilyFormHandler: actions.formSubmitHandler
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.family.loading
+  family: state.family.family,
+  loading: state.family.loading,
+  openFamilyDialog: state.family.openFamilyDialog
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Family)

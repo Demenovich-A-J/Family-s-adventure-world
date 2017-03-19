@@ -1,0 +1,33 @@
+.faw-family-container{
+	.-member-card{
+		height: 320px;
+		width: 100%;
+
+		.mdl-card__title{
+			 color: #fff;
+			 background: url(http://www.getmdl.io/assets/demos/dog.png) bottom right 15% no-repeat #46B6AC;
+		}
+	}
+
+	.action-button{
+		position: relative;
+		float: right;
+	}
+
+	.search-member{
+		padding: 0;
+		.mdl-button{
+				top: auto;
+				bottom: auto;
+		}
+	}
+	.-family-dialog{
+		width: 30%;
+	}
+	.-famali-name-container{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+	}
+}
