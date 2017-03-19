@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import axiosUtil from 'infrastructure/utils/axiosUtils'
+// import 'react-mdl/extra/material.css'
+import 'react-mdl/extra/material.js'
 
 axiosUtil.setBaseUrl()
 

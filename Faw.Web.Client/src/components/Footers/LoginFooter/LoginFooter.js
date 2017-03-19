@@ -1,6 +1,6 @@
 import React from 'react'
 import { IndexLink } from 'react-router'
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-mdl'
 
 import './LoginFooter.scss'
 
@@ -11,19 +11,19 @@ export const LoginFooter = (props) => {
         <div className='text-center'>
           Not registred? &nbsp;
           <IndexLink to='/Account/Register'>
-            Register
+            <Button ripple primary>Register</Button>
           </IndexLink>
         </div>
         <div className='text-center'>
           <IndexLink to='/Account/ForgotPassword'>
-             Forgot password?
-           </IndexLink>
+            <Button ripple primary>Forgot password?</Button>
+          </IndexLink>
         </div>
       </div>
       <div className={props.props.pathname === '/Account/Login' ? 'hidden' : ''}>
         <div>
           <IndexLink to='/Account/Login'>
-            <Button bsStyle='default' block>Back</Button>
+            <Button className='full-width' raised ripple>Back</Button>
           </IndexLink>
         </div>
       </div>

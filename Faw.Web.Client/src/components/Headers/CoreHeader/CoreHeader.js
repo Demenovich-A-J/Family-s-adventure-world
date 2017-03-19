@@ -5,7 +5,7 @@ import { IndexLink, Link } from 'react-router'
 import './CoreHeader.scss'
 
 export const CoreHeader = (props) => (
-  <div className='faw-header-container'>
+  <div className='faw-header-container mdl-shadow--4dp'>
     <Grid className='-content-container'>
       <a href='/' className='-logo-container'>
         <span className='-image'>Family adwenture world</span>

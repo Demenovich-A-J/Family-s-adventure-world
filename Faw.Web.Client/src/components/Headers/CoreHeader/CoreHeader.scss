@@ -1,4 +1,4 @@
-@import '../../../styles/variables/colors';
+@import '../../../styles/variables/colors.scss';
 @import '../../../styles/components/card.scss';
 
 $faw-header-height: 60px;
@@ -6,8 +6,7 @@ $faw-header-content-height: 57px;
 
 .faw-header-container{
 	background-color: $faw-header-background-color;
-	border-top: 3px solid $faw-primary-color-dark;
-	@include material-shadow($z-depth: 2);
+	border-top: 3px solid $faw-primary-color;
 	height: $faw-header-height;
 	box-sizing: border-box;
 	
@@ -82,12 +81,12 @@ $faw-header-content-height: 57px;
 						background-color: #eff0f1;
 						text-decoration: none;
 						outline: none;
-						border-bottom: 2px solid $faw-primary-color-dark;
+						border-bottom: 2px solid $faw-primary-color;
 						color: $faw-primary-text-color;
 					}
 
 					&.--active{
-						border-bottom: 2px solid $faw-primary-color-dark;
+						border-bottom: 2px solid $faw-primary-color;
 						color: $faw-primary-text-color;
 					}
 				}

@@ -16,6 +16,10 @@ const mapDispatchToProps = {
   onFormSubmit: actions.formSubmitHandler
 }
 
-const mapStateToProps = (state) => ({ genders: state.register.genders, loading: state.register.loading })
+const mapStateToProps = (state) => ({
+  genders: state.register.genders,
+  loading: state.register.loading,
+  gender: state.register.gender
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

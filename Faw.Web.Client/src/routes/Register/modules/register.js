@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router'
 // ------------------------------------ Constants
 // ------------------------------------
 export const SET_GENDERS = 'SET_GENDERS'
+export const SET_GENDER = 'SET_GENDER'
 export const FIRST_NAME_CHANGED = 'FIRST_NAME_CHANGED'
 export const LAST_NAME_CHANGED = 'LAST_NAME_CHANGED'
 export const EMAIL_CHANGED = 'EMAIL_CHANGED'
@@ -20,6 +21,10 @@ export const SET_REGISTER_LOADING = 'SET_REGISTER_LOADING'
 
 export const setGendersInfo = (genders) => {
   return { type: SET_GENDERS, payload: genders }
+}
+
+export const setGender = (gender) => {
+  return { type: SET_GENDER, payload: gender }
 }
 
 export const loginChangeHandler = (e) => {
@@ -106,13 +111,15 @@ export const actions = {
   birthChangeHandler,
   passwordChangeHandler,
   repeatPasswordChangeHandler,
-  formSubmitHandler
+  formSubmitHandler,
+  setGender
 }
 
 // ------------------------------------ Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
   [SET_GENDERS]: (state, action) => Object.assign({}, state, action.payload),
+  [SET_GENDER]: (state, action) => Object.assign({}, state, { gender: action.payload }),
   [FIRST_NAME_CHANGED]: (state, action) => Object.assign({}, state, { firstName: action.payload }),
   [LAST_NAME_CHANGED]: (state, action) => Object.assign({}, state, { lastName: action.payload }),
   [EMAIL_CHANGED]: (state, action) => Object.assign({}, state, { email: action.payload }),

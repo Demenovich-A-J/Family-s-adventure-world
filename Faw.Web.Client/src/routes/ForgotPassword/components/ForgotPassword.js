@@ -1,19 +1,20 @@
 import React from 'react'
-import { Form, FormGroup, FormControl, Button } from 'react-bootstrap'
+import { Button, Textfield } from 'react-mdl'
 
 import './ForgotPassword.scss'
 
 export const ForgotPassword = (props) => (
-  <Form id='registerForm' onSubmit={props.onFormSubmit}>
-    <FormGroup>
-      <FormControl type='text' placeholder='Email' onChange={props.onEmailChange} />
-    </FormGroup>
-    <Button type='submit' bsStyle='primary' disabled={props.loading} block>
+  <form id='registerForm' onSubmit={props.onFormSubmit}>
+    <Textfield
+      type='text'
+      label='Email'
+      onChange={props.onEmailChange} />
+    <Button type='submit' className='full-width' disabled={props.loading} raised primary ripple>
       {
         props.loading ? 'Reset Password...' : 'Reset Password'
       }
     </Button>
-  </Form>
+  </form>
 )
 
 ForgotPassword.propTypes = {

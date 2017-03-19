@@ -9,7 +9,7 @@ import LoginRoute from './Login'
 import RegisterRoute from './Register'
 import ForgotPasswordRoute from './ForgotPassword'
 
-import FamilyRoute from './Family'
+import FamilyRoute from './Family/Index'
 
 
 /*  Note: Instead of using JSX, we recommend using react-router

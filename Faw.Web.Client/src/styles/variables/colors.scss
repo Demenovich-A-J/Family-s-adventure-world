@@ -1,0 +1,30 @@
+$faw-body-background-color: #fff;
+$faw-header-background-color: #fafafb;
+
+$faw-primary-color:         #00BCD4;
+$faw-primary-color-rgb:       '0, 188, 212';
+
+$faw-primary-color-dark:    #0097A7;
+$faw-primary-color-dark-rgb:  '0, 151, 167';
+$faw-primary-color-light:   #B2EBF2;
+$faw-primary-color-light-rgb: '178, 235, 242';
+
+$faw-primary-color-text:    #FFFFFF;
+$faw-primary-color-text-rgb:  '255, 255, 255';
+
+$faw-accent-color:          #FFC107;
+$faw-accent-color-rgb:        '255, 193, 7';
+
+$faw-primary-text-color:    #212121;
+$faw-primary-text-color-rgb:  '33, 33, 33';
+$faw-secondary-text-color:  #757575;
+$faw-secondary-text-color-rgb:'117, 117, 117';
+
+$faw-divider-color:         #BDBDBD;
+$faw-divider-color-rgb:       '189, 189, 189';
+
+$color-primary: $faw-primary-color-rgb;
+$color-primary-dark: $faw-primary-color-dark-rgb;
+$color-accent: $faw-primary-color-light-rgb;
+$color-primary-contrast: $faw-primary-text-color-rgb;
+$color-accent-contrast: $faw-secondary-text-color-rgb;

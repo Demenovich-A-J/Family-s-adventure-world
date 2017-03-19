@@ -1,27 +1,32 @@
 import React from 'react'
 import './Login.scss'
-import { Form, FormGroup, FormControl, Button, Checkbox } from 'react-bootstrap'
+// import { FormGroup, FormControl, Button, Checkbox } from 'react-bootstrap'
+import { Textfield, Checkbox, Button } from 'react-mdl'
 
 export const Login = (props) => (
-  <Form id='loginForm' onSubmit={props.onFormSubmit}>
-    <FormGroup>
-      <FormControl type='text' placeholder='Login' onChange={props.onLoginChanged} />
-    </FormGroup>
-    <FormGroup>
-      <FormControl
-        type='password'
-        placeholder='Password'
-        onChange={props.onPasswordChanged} />
-    </FormGroup>
-    <FormGroup>
-      <Checkbox onChange={props.onIsRememberChange}>Remember me</Checkbox>
-    </FormGroup>
-    <Button type='submit' bsStyle='primary' disabled={props.loading} block>
+  <form id='loginForm' onSubmit={props.onFormSubmit}>
+    <Textfield
+      onChange={props.onLoginChanged}
+      label='Login'
+      floatingLabel
+      pattern='.*'
+      error='Login is required'
+    />
+    <Textfield
+      onChange={props.onPasswordChanged}
+      label='Password'
+      type='password'
+      floatingLabel
+      pattern='.*'
+      error='Password is required'
+    />
+    <Checkbox label='Remember me' ripple defaultChecked onChange={props.onIsRememberChange} />
+    <Button raised primary ripple disabled={props.loading} className='full-width login-button'>
       {
         props.loading ? 'Login...' : 'Login'
       }
     </Button>
-  </Form>
+  </form>
 )
 
 Login.propTypes = {

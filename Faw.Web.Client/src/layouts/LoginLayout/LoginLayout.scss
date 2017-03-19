@@ -1,4 +1,4 @@
-@import '../../styles/variables/colors';
+@import '../../styles/variables/colors.scss';
 
 #loginLayout {
 	display: flex;
@@ -13,5 +13,6 @@
 		padding: 30px;
 		margin: 0 auto;
 		resize: vertical;
+		background: #fff;
 	}
 }

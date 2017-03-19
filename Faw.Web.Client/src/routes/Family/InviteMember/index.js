@@ -1,7 +1,7 @@
-import { injectReducer } from '../../store/reducers'
+import { injectReducer } from '../../../store/reducers'
 
 export default (store) => ({
-  path: '/family',
+  path: '/family/invite',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -9,19 +9,19 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const family = require('./containers/FamilyContainer').default
-      const reducer = require('./modules/family').default
+      const inviteMember = require('./containers/InviteMemberContainer').default
+      const reducer = require('./modules/inviteMember').default
 
       /*  Add the reducer to the store on key 'counter'  */
       injectReducer(store, {
-        key: 'family',
+        key: 'inviteMember',
         reducer
       })
 
       /*  Return getComponent   */
-      cb(null, family)
+      cb(null, inviteMember)
 
     /* Webpack named bundle   */
-    }, 'family')
+    }, 'inviteMember')
   }
 })

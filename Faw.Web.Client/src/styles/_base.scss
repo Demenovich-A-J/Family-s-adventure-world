@@ -1,5 +1,43 @@
-@import './variables/colors';
+@import './variables/base';
 @import './components/base';
+
+@import "~material-design-lite/src/variables";
+@import "~material-design-lite/src/mixins";
+
+// Resets and dependencies
+@import "~material-design-lite/src/resets/resets";
+@import "~material-design-lite/src/typography/typography";
+
+// Components
+@import "~material-design-lite/src/palette/palette";
+@import "~material-design-lite/src/ripple/ripple";
+@import "~material-design-lite/src/animation/animation";
+@import "~material-design-lite/src/badge/badge";
+@import "~material-design-lite/src/button/button";
+@import "~material-design-lite/src/card/card";
+@import "~material-design-lite/src/checkbox/checkbox";
+@import "~material-design-lite/src/data-table/data-table";
+@import "~material-design-lite/src/dialog/dialog";
+@import "~material-design-lite/src/footer/mega_footer";
+@import "~material-design-lite/src/footer/mini_footer";
+@import "~material-design-lite/src/icon-toggle/icon-toggle";
+@import "~material-design-lite/src/list/list";
+@import "~material-design-lite/src/menu/menu";
+@import "~material-design-lite/src/progress/progress";
+@import "~material-design-lite/src/radio/radio";
+@import "~material-design-lite/src/slider/slider";
+@import "~material-design-lite/src/snackbar/snackbar";
+@import "~material-design-lite/src/spinner/spinner";
+@import "~material-design-lite/src/switch/switch";
+@import "~material-design-lite/src/tabs/tabs";
+@import "~material-design-lite/src/textfield/textfield";
+@import "~material-design-lite/src/tooltip/tooltip";
+@import "~material-design-lite/src/shadow/shadow";
+@import "~material-design-lite/src/grid/grid";
+
+
+/* Fixes small screen layout for navbar */
+@import "~react-mdl/extra/layout";
 
 /*
 Application Settings Go Here
@@ -17,8 +55,6 @@ body{
 	min-width: 320px;
 }
 
-.box-shadow {
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+.full-width{
+	width: 100%;
 }

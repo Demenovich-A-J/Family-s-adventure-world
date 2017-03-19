@@ -1,92 +1,79 @@
 import React from 'react'
-import {
-  Form,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  Radio,
-  Button
-} from 'react-bootstrap'
+import { Button, Textfield, RadioGroup, Radio } from 'react-mdl'
 
 import './Register.scss'
 
 export const Register = (props) => (
-  <Form id='registerForm' onSubmit={props.onFormSubmit}>
-    <FormGroup>
-      <FormControl
-        type='text'
-        placeholder='First Name'
-        onChange={props.onFirstNameChanged} />
-    </FormGroup>
-    <FormGroup>
-      <FormControl
-        type='text'
-        placeholder='Last Name'
-        onChange={props.onLastNameChanged} />
-    </FormGroup>
-    <FormGroup>
-      <FormControl type='email' placeholder='Email' onChange={props.onEmailChanged} />
-    </FormGroup>
-    <FormGroup>
-      <FormControl type='text' placeholder='Login' onChange={props.onLoginChanged} />
-    </FormGroup>
-    <FormGroup>
-      <ControlLabel>Gender</ControlLabel>
-      <div>
-        {(() => {
-          if (props.genders) {
-            return props
-              .genders
-              .map((gender, index) => ((index === 0)
-                ? (
-                  <Radio
-                    inline
-                    key={index}
-                    name='gender'
-                    onChange={props.onGenderChanged}
-                    value={gender}
-                    defaultChecked>
-                    {gender}
-                  </Radio>
-                )
-                : (
-                  <Radio
-                    inline
-                    key={index}
-                    name='gender'
-                    onChange={props.onGenderChanged}
-                    value={gender}>
-                    {gender}
-                  </Radio>
-                )))
-          }
-        })()}
-      </div>
-    </FormGroup>
-    <FormGroup>
-      <FormControl
-        type='date'
-        placeholder='Birth Date'
-        onChange={props.onBirthDateChanged} />
-    </FormGroup>
-    <FormGroup>
-      <FormControl
-        type='password'
-        placeholder='Password'
-        onChange={props.onPasswordChanged} />
-    </FormGroup>
-    <FormGroup>
-      <FormControl
-        type='password'
-        placeholder='Repeat Password'
-        onChange={props.onRepeatPasswordChanged} />
-    </FormGroup>
-    <Button type='submit' bsStyle='primary' disabled={props.loading} block>
+  <form id='registerForm' onSubmit={props.onFormSubmit}>
+    <Textfield
+      type='text'
+      label='First Name'
+      disabled={props.loading}
+      onChange={props.onFirstNameChanged} />
+    <Textfield
+      type='text'
+      label='Last Name'
+      disabled={props.loading}
+      onChange={props.onLastNameChanged} />
+    <Textfield
+      type='email'
+      label='Email'
+      disabled={props.loading}
+      onChange={props.onEmailChanged} />
+    <Textfield
+      type='text'
+      label='Login'
+      disabled={props.loading}
+      onChange={props.onLoginChanged} />
+    <label>Gender</label>
+    <div className='-genders-container'>
+      {
+        props.genders.length === 0
+        ? (<div />)
+        : (
+          <RadioGroup
+            name='genders'
+            container='ul'
+            childContainer='li'
+            value={props.gender}
+            onChange={props.onGenderChanged}>
+            {
+              props.genders &&
+              props.genders.map((gender, index) => (
+                <Radio
+                  key={index}
+                  name='gender'
+                  onChange={props.onGenderChanged}
+                  value={gender}>
+                  {gender}
+                </Radio>
+              ))
+            }
+          </RadioGroup>
+        )
+      }
+    </div>
+    <Textfield
+      type='date'
+      label='Birth Date'
+      disabled={props.loading}
+      onChange={props.onBirthDateChanged} />
+    <Textfield
+      type='password'
+      label='Password'
+      disabled={props.loading}
+      onChange={props.onPasswordChanged} />
+    <Textfield
+      type='password'
+      label='Repeat Password'
+      disabled={props.loading}
+      onChange={props.onRepeatPasswordChanged} />
+    <Button type='submit' className='full-width' disabled={props.loading} raised primary ripple>
       {props.loading
         ? 'Register...'
         : 'Register'}
     </Button>
-  </Form>
+  </form>
 )
 
 Register.propTypes = {
@@ -98,8 +85,10 @@ Register.propTypes = {
   onLoginChanged: React.PropTypes.func.isRequired,
   onBirthDateChanged: React.PropTypes.func.isRequired,
   onRepeatPasswordChanged: React.PropTypes.func.isRequired,
+  onGenderChanged: React.PropTypes.func.isRequired,
   loading: React.PropTypes.bool.isRequired,
-  genders: React.PropTypes.array.isRequired
+  genders: React.PropTypes.array.isRequired,
+  gender: React.PropTypes.string.isRequired
 }
 
 export default Register
