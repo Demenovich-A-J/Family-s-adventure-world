@@ -78,6 +78,7 @@
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Enums\AccountStatus.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
+    <Compile Include="Models\Enums\UserQuestStatus.cs" />
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\PlayerInfo.cs" />

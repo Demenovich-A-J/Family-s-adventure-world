@@ -26,13 +26,28 @@ export const checkResetStatusOnEnter = (store) => (nextState, replace) => {
   })
 }
 
+export const fetchQuests = (store) => (nextState, replace) => {
+  store.dispatch(showLoading())
+  var data = store.getState().user
+
+  axios({
+    method: 'Get',
+    url: '/Quest/FetchQuests/' + data.userInfo.userId
+  }).then(function (response) {
+    store.dispatch(hideLoading())
+  }).catch(function (error) {
+    console.log(error)
+    store.dispatch(hideLoading())
+  })
+}
+
 export const fetchUserFamily = (store) => (nextState, replace) => {
   store.dispatch(showLoading())
   var data = store.getState().user
 
   axios({
     method: 'Get',
-    url: '/Family/FetchUserFamily/?userId=' + data.userInfo.userId
+    url: '/Family/FetchUserFamily/' + data.userInfo.userId
   }).then(function (response) {
     if (response.data) {
       store.dispatch(setFamilyName(response.data.name))

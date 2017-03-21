@@ -75,6 +75,8 @@ namespace Faw.Services.Models.AutoMapper
                 .ForMember(dest => dest.EntityId, opt => opt.MapFrom(x => x.UserTypeId));
 
             CreateMap<Gender, Faw.Models.Domain.Enums.Gender>();
+            CreateMap<UserQuestStatus, Faw.Models.Domain.Enums.UserQuestStatus>();
+            CreateMap<AccountStatus, Faw.Models.Domain.Enums.AccountStatus>();
         }
     }
 }

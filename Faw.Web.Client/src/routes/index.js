@@ -10,6 +10,7 @@ import RegisterRoute from './Register'
 import ForgotPasswordRoute from './ForgotPassword'
 
 import FamilyRoute from './Family/Index'
+import QuestsRoute from './Quests/Index'
 
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -20,7 +21,8 @@ export const createRoutes = (store) => ([
     component: CoreLayout,
     indexRoute: Home,
     childRoutes: [
-      FamilyRoute(store)
+      FamilyRoute(store),
+      QuestsRoute(store)
     ]
   },
   {

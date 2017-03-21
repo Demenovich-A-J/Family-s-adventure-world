@@ -57,12 +57,9 @@ namespace Faw.Web.Api.Controllers
 
         // POST api/Family/FetchUserFamily
         [HttpGet]
-        [Route("FetchUserFamily")]
+        [Route("FetchUserFamily/{userId}")]
         public IHttpActionResult FetchUserFamily([FromUri]Guid userId)
         {
-            if (!User.Identity.IsAuthenticated)
-                return BadRequest(ModelState);
-
             var family = _familyQueryService.GetUserFamily(userId);
 
             if (family == null)

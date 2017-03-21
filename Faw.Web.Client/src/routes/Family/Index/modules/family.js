@@ -118,7 +118,7 @@ const initialState = {
   openFamilyDialog: false
 }
 
-export default function accountReducer (state = initialState, action) {
+export default function questsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

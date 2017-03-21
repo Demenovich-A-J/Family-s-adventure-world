@@ -22,6 +22,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
             HasOptional(u => u.Family)
                 .WithMany()
                 .HasForeignKey(u => u.FamilyId);
+
+            HasMany(x => x.Quests)
+                .WithRequired(x => x.CreatedBy)
+                .HasForeignKey(x => x.CreatedById);
         }
     }
 }

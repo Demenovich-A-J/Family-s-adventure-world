@@ -2,30 +2,36 @@ import React from 'react'
 import {
   Grid,
   Cell,
-  DataTable,
-  TableHeader
+  Card,
+  CardTitle,
+  CardText,
+  CardActions,
+  CardMenu,
+  IconButton,
+  Button
 } from 'react-mdl'
 
 import './Home.scss'
 
 export const Home = (props) => (
   <Grid>
-    <Cell col={8}>
-      <DataTable
-        shadow={0}
-        className='full-width'
-        rows={[
-        { name: 'Acrylic (Transparent)', memberType: 'Mom', status: 'Online' },
-        { name: 'Plywood (Birch)', memberType: 'Dad', status: 'Offline' },
-        { name: 'Laminate (Gold on Blue)', memberType: 'Son', status: 'Offline' }
-        ]}
-      >
-        <TableHeader name='name' tooltip='Family member name'>Name</TableHeader>
-        <TableHeader name='memberType' tooltip='Family member type'>Position</TableHeader>
-        <TableHeader name='status' tooltip='Family member status'>Status</TableHeader>
-      </DataTable>
+    <Cell col={4}>
+      <Card shadow={0} style={{ width: '100%', margin: 'auto' }}>
+        <CardTitle style={{ color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover' }}>
+          Family
+        </CardTitle>
+        <CardText>
+          Manage your famaly here. Your family is your house. 
+        </CardText>
+        <CardActions border>
+          <Button colored>Manage</Button>
+        </CardActions>
+        <CardMenu style={{ color: '#fff' }}>
+          <IconButton name='share' />
+        </CardMenu>
+      </Card>
     </Cell>
-    <Cell col={4} />
+    <Cell col={8} />
   </Grid>
 )
 

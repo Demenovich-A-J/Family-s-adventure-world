@@ -9,6 +9,8 @@ namespace Faw.Services.Contracts.Query
         Quest GetById(Guid questId);
 
         /// <param name="userId">Id of user for whom belong quests.</param>
-        IEnumerable<Quest> GetUserQuests(Guid userId);
+        IEnumerable<Quest> GetQuests(Guid userId);
+
+        IEnumerable<UserQuest> GetUserQuests(Guid userId);
     }
 }

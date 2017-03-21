@@ -17,7 +17,7 @@ namespace Faw.Models.Domain
 
         public int RequiredLevel { get; set; }
 
-        public DateTime CreateOn { get; set; }
+        public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
 
         public virtual Quest ParentQuest { get; set; }
