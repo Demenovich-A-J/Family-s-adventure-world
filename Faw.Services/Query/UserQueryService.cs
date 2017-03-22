@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Faw.Repositories.Contracts;
 using Faw.Services.Contracts.Query;
@@ -32,6 +34,16 @@ namespace Faw.Services.Query
             using (_contextScopeFactory.CreateReadOnly())
             {
                 return _mapper.Map<User>(_userRepository.Get(emailOrLogin));
+            }
+        }
+
+        public IEnumerable<User> Find(string searchTerm)
+        {
+            using (_contextScopeFactory.CreateReadOnly())
+            {
+                return
+                    _mapper.Map<IEnumerable<User>>(
+                        _userRepository.Find(searchTerm));
             }
         }
     }

@@ -13,6 +13,7 @@ import {
   Textfield
 } from 'react-mdl'
 import CreateFamilyForm from './CreateFamilyForm'
+import SearchResult from './SearchResult'
 
 import './Family.scss'
 
@@ -21,14 +22,17 @@ export const Family = (props) => (
     <Cell col={12} className='mdl-shadow--2dp'>
       <Grid className='no-paddings'>
         <Cell col={5}>
-          <Textfield
-            onChange={() => {}}
-            disabled={!props.family}
-            className='search-member'
-            label='Expandable Input'
-            expandable
-            expandableIcon='search'
-        />
+          <div className='-user-search-container'>
+            <Textfield
+              disabled={!props.family}
+              className='search-member'
+              label='Expandable Input'
+              expandable
+              expandableIcon='search'
+              onChange={props.onSearchInputHandler}
+            />
+            <SearchResult searchResults={props.searchResults} searchItemClickHandler={props.searchItemClickHandler} />
+          </div>
         </Cell>
         <Cell col={5}>
           {
@@ -55,7 +59,7 @@ export const Family = (props) => (
     </Cell>
     {
       props.family !== null && props.family.familyMembers && props.family.familyMembers.map((familyMember, index) => (
-        <Cell col={3}>
+        <Cell col={3} key={index}>
           <Card shadow={1} className='-member-card'>
             <CardTitle expand>
               {familyMember.name}
@@ -106,9 +110,12 @@ Family.propTypes = {
   closeFamilyDialogHandler: React.PropTypes.func.isRequired,
   onSubmitFamilyFormHandler: React.PropTypes.func.isRequired,
   onFamilyNameChanged: React.PropTypes.func.isRequired,
+  onSearchInputHandler: React.PropTypes.func.isRequired,
+  searchItemClickHandler: React.PropTypes.func.isRequired,
   openFamilyDialog: React.PropTypes.bool.isRequired,
   loading: React.PropTypes.bool.isRequired,
-  family: React.PropTypes.object
+  family: React.PropTypes.object,
+  searchResults: React.PropTypes.array
 }
 
 export default Family

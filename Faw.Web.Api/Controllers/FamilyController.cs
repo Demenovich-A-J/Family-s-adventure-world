@@ -7,6 +7,7 @@ using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Contracts.Query;
 using Faw.Services.Models;
 using Faw.Web.Api.Models;
+using Faw.Web.Api.Models.Helper;
 
 namespace Faw.Web.Api.Controllers
 {
@@ -74,6 +75,15 @@ namespace Faw.Web.Api.Controllers
                 }).ToList(),
                 familyId = family.FamilyId
             });
+        }
+
+        [HttpPut]
+        [Route("AddFamilyMember")]
+        public IHttpActionResult AddFamilyMember([FromBody] AddFamilyMember model)
+        {
+            _familyService.AddNewFamilyMember(model.FamilyId, model.UserId);
+
+            return Ok();
         }
     }
 }

@@ -12,13 +12,16 @@ const mapDispatchToProps = {
   onFamilyNameChanged: actions.familyNameChangeHandler,
   openFamilyDialogHandler: actions.openFamilyDialog,
   closeFamilyDialogHandler: actions.closeFamilyDialog,
-  onSubmitFamilyFormHandler: actions.formSubmitHandler
+  onSubmitFamilyFormHandler: actions.formSubmitHandler,
+  onSearchInputHandler: actions.searchInputHandler,
+  searchItemClickHandler: actions.searchItemClickHandler
 }
 
 const mapStateToProps = (state) => ({
   family: state.family.family,
   loading: state.family.loading,
-  openFamilyDialog: state.family.openFamilyDialog
+  openFamilyDialog: state.family.openFamilyDialog,
+  searchResults: state.family.searchResults
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Family)

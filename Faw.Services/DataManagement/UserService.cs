@@ -124,7 +124,6 @@ namespace Faw.Services.DataManagement
             
             using (var contextScope = _contextScopeFactory.Create())
             {
-                _accountRepository.Update(_mapper.Map<Faw.Models.Domain.Account>(domainUser.Account));
                 _userRepository.Update(_mapper.Map<Faw.Models.Domain.User>(domainUser));
 
                 contextScope.SaveChanges();

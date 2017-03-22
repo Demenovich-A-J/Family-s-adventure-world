@@ -149,6 +149,7 @@
     <Compile Include="Models\AutoMapper\BuisnessModelsToViewProfile.cs" />
     <Compile Include="Models\AutoMapper\ViewModelsToBuisnessProfile.cs" />
     <Compile Include="Models\FamilyViewModel.cs" />
+    <Compile Include="Models\Helper\AddFamilyMember.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PlayerInfoViewModel.cs" />
     <Compile Include="Models\QuestViewModel.cs" />

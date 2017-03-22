@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Faw.Models.Domain;
@@ -37,6 +38,19 @@ namespace Faw.Repositories.EntityFrameworkRepositories
                         x.Account.Login.Equals(emailOrLogin, StringComparison.OrdinalIgnoreCase) ||
                         x.Account.Email.Equals(emailOrLogin, StringComparison.OrdinalIgnoreCase));
 
+        }
+
+        public IEnumerable<User> Find(string searchTerm)
+        {
+            var splited = searchTerm.Split(' ');
+
+            return DbContext.Users
+                .Include(x => x.Account)
+                .Where(
+                    x =>
+                        splited.Any(
+                            s =>
+                                x.FirstName.Contains(s) || x.LastName.Contains(s) || x.Account.Email.Contains(s)));
         }
     }
 }

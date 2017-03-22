@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
 using Faw.Services.Contracts.Query;
 
 namespace Faw.Web.Api.Controllers
@@ -12,6 +13,23 @@ namespace Faw.Web.Api.Controllers
         {
             _userQueryService = userQueryService;
         }
+
+        // Get api/User/Search
+        [HttpGet]
+        [Route("SearchUsersForFamily/{text}")]
+        public IHttpActionResult SearchUsersForFamily([FromUri]string text)
+        {
+            var result = _userQueryService.Find(text);
+
+            return Ok(
+                result.Select(x => new
+                {
+                    userId = x.UserId,
+                    name = $"{x.FirstName} {x.LastName}",
+                    email = x.Account.Email
+                }));
+        }
+
 
         // Get api/User/FetchUserInfo
         [HttpGet]

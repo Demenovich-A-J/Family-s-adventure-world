@@ -8,6 +8,13 @@ namespace Faw.Services.Models.AutoMapper
     {
         public DomainToBuisnessModelsProfile()
         {
+            CreateMap<User, User>()
+                 .ForMember(d => d.UserId, o =>
+                 {
+                     o.Condition(s => s.UserId != Guid.Empty);
+                     o.MapFrom(s => s.UserId);
+                 });
+
             CreateMap<Faw.Models.Domain.User, User>()
                 .ForMember(d => d.UserId, o => o.MapFrom(x => x.EntityId));
 
