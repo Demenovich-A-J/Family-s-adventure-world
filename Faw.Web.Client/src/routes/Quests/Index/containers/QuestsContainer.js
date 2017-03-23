@@ -9,11 +9,18 @@ import { actions } from '../modules/quests'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-
+  closeCreateQuestDialogHandler: actions.closeCreateQuestDialogHandler,
+  openCreateQuestDialogHandler: actions.openCreateQuestDialogHandler,
+  onSubmitCreateQuestFormHandler: actions.onSubmitCreateQuestFormHandler,
+  editInfoNameChangeHandler: actions.editInfoNameChangeHandler,
+  editInfoDescriptionChangeHandler: actions.editInfoDescriptionChangeHandler,
+  editInfoIsPublicChangeHandler: actions.editInfoIsPublicChangeHandler,
+  editInfoRequieredLevelChangeHandler: actions.editInfoRequieredLevelChangeHandler
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.quests.loading
+  loading: state.quests.loading,
+  openCreateQuestDialog: state.quests.openCreateQuestDialog
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quests)

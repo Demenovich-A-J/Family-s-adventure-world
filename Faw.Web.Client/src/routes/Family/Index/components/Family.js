@@ -21,7 +21,7 @@ export const Family = (props) => (
   <Grid className='faw-family-container'>
     <Cell col={12} className='mdl-shadow--2dp'>
       <Grid className='no-paddings'>
-        <Cell col={5}>
+        <Cell col={5} phone={12}>
           <div className='-user-search-container'>
             <Textfield
               disabled={!props.family}
@@ -34,7 +34,7 @@ export const Family = (props) => (
             <SearchResult searchResults={props.searchResults} searchItemClickHandler={props.searchItemClickHandler} />
           </div>
         </Cell>
-        <Cell col={5}>
+        <Cell col={5} phone={12}>
           {
             props.family !== null
             ? (
@@ -47,7 +47,7 @@ export const Family = (props) => (
             )
           }
         </Cell>
-        <Cell col={2}>
+        <Cell col={2} phone={12}>
           <div className='action-button'>
             <IconButton name='more_vert' id='demo-menu-lower-right' />
             <Menu target='demo-menu-lower-right' align='right'>
@@ -59,7 +59,7 @@ export const Family = (props) => (
     </Cell>
     {
       props.family !== null && props.family.familyMembers && props.family.familyMembers.map((familyMember, index) => (
-        <Cell col={3} key={index}>
+        <Cell col={4} tablet={4} phone={12} key={index}>
           <Card shadow={1} className='-member-card'>
             <CardTitle expand>
               {familyMember.name}

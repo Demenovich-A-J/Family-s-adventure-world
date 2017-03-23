@@ -1,12 +1,13 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router'
 
-function setBaseUrl () {
+export const setBaseUrl = () => {
   Object.assign(axios.defaults, {
     baseURL: API_URL
   })
 }
 
-function setBaererToken (token) {
+export const setBaererToken = (token) => {
   Object.assign(axios.defaults, {
     headers: {
       common: {
@@ -16,9 +17,29 @@ function setBaererToken (token) {
   })
 }
 
+export const resetBaererToken = () => {
+  Object.assign(axios.defaults, {
+    headers: {
+      common: {
+        authorization: null
+      }
+    }
+  })
+}
+
+export const setUnAuthorizedHandler = () => {
+  axios.interceptors.response.use(null, function (error) {
+    if (error.response.status === 401) {
+      browserHistory.push('/Account/Login')
+      return Promise.reject(error)
+    }
+  })
+}
 const axiosUtil = {
   setBaseUrl,
-  setBaererToken
+  setBaererToken,
+  resetBaererToken,
+  setUnAuthorizedHandler
 }
 
 export default axiosUtil

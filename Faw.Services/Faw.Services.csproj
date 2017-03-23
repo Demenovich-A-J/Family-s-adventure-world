@@ -69,6 +69,7 @@
     <Compile Include="Contracts\Query\IUserTypeQueryService.cs" />
     <Compile Include="DataManagement\FamilyService.cs" />
     <Compile Include="DataManagement\PlayerInfoService.cs" />
+    <Compile Include="DataManagement\QuestService.cs" />
     <Compile Include="DataManagement\UserService.cs" />
     <Compile Include="DataManagement\UserTypeService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />

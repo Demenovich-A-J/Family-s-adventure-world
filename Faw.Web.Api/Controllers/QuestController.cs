@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
+using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Contracts.Query;
+using Faw.Services.Models;
 
 namespace Faw.Web.Api.Controllers
 { 
@@ -9,10 +11,29 @@ namespace Faw.Web.Api.Controllers
     public class QuestController : ApiController
     {
         private readonly IQuestQueryService _questQueryService;
+        private readonly IQuestService _questService;
 
-        public QuestController(IQuestQueryService questQueryService)
+        public QuestController(
+            IQuestQueryService questQueryService,
+            IQuestService questService)
         {
             _questQueryService = questQueryService;
+            _questService = questService;
+        }
+
+        [HttpPut]
+        [Route("Create")]
+        public IHttpActionResult FetchUserQuests([FromBody] Quest quest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _questService.Create(quest);
+
+            return Ok();
+
         }
 
         [HttpGet]

@@ -1,5 +1,5 @@
 import { browserHistory } from 'react-router'
-import axiosUtil from 'infrastructure/utils/axiosUtils'
+import { setBaererToken, resetBaererToken, setUnAuthorizedHandler } from 'infrastructure/utils/axiosUtils'
 import axios from 'axios'
 
 // ------------------------------------
@@ -113,9 +113,13 @@ function getInitialState () {
   var authInfo = JSON.parse(localStorage.getItem('user'))
   var userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
-  if (authInfo !== null) {
-    axiosUtil.setBaererToken(authInfo.access_token)
+  if (authInfo !== null && new Date(authInfo.expires) > Date.now()) {
+    setBaererToken(authInfo.access_token)
+  } else {
+    resetBaererToken()
   }
+
+  setUnAuthorizedHandler()
 
   return {
     authInfo,
