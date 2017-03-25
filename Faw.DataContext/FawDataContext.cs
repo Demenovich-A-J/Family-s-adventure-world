@@ -37,6 +37,7 @@ namespace Faw.DataContext
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<PlayerInfo> PalyerInfos { get; set; }
         public DbSet<UserQuest> UserQuests { get; set; }
+        public DbSet<Expirience> Expiriences { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -54,6 +55,7 @@ namespace Faw.DataContext
             modelBuilder.Configurations.Add(new UserTypeEntityConfiguration());
             modelBuilder.Configurations.Add(new PalyerInfoEntityConfiguration());
             modelBuilder.Configurations.Add(new UserQuestEntityConfiguration());
+            modelBuilder.Configurations.Add(new ExpirienceEntityConfiguration());
         }
 
         public override int SaveChanges()

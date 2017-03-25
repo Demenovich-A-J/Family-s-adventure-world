@@ -46,7 +46,7 @@ BEGIN
 	CREATE TABLE [dbo].[Family](
 		[FamilyId] [uniqueidentifier] NOT NULL CONSTRAINT DF_FamilyId DEFAULT newsequentialid(),
 		[Name] [nvarchar](100) NOT NULL,
-		[CreatedOn] [timestamp] NOT NULL,
+		[CreatedOn] [datetime] NOT NULL,
 		[UpdatedOn] [datetime] NOT NULL,
 		[CreatedById] [uniqueidentifier] NOT NULL,
 		CONSTRAINT [PK_Family] PRIMARY KEY 
@@ -69,7 +69,7 @@ BEGIN
 		[SiteUrl] [nvarchar](max) NOT NULL,
 		[Cost] [decimal](9, 4) NOT NULL,
 		[CreatedById] [uniqueidentifier] NULL,
-		[CreatedOn] [timestamp] NOT NULL,
+		[CreatedOn] [datetime] NOT NULL,
 		[UpdatedOn] [datetime] NOT NULL,
 		CONSTRAINT [PK_Item] PRIMARY KEY 
 		(
@@ -93,7 +93,7 @@ BEGIN
 		[Expirience] [int] NOT NULL,
 		[Coins] [decimal](10, 2) NOT NULL,
 		[RequiredLVL] [int] NOT NULL,
-		[CreatedOn] [timestamp] NOT NULL,
+		[CreatedOn] [datetime] NOT NULL,
 		[UpdatedOn] [datetime] NOT NULL,
 		CONSTRAINT [PK_Quest] PRIMARY KEY 
 		(
@@ -115,6 +115,19 @@ BEGIN
 		(
 			[SettingId]
 		)
+	)
+END
+
+/*==============================================================*/
+/* Table: Expirience                                            */
+/*==============================================================*/
+IF OBJECT_ID('[dbo].[Expirience]') IS NULL
+BEGIN
+	create table[dbo].[Expirience] (
+	   ExpirienceId         uniqueidentifier     not null,
+	   Level                int                  not null,
+	   ExpirienceAmount     decimal(18,4)        not null,
+	   constraint PK_Expirience primary key (ExpirienceId)
 	)
 END
 

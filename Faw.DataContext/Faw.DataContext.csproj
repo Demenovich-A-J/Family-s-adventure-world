@@ -49,6 +49,7 @@
     <Compile Include="EntityTypeConfigurations\AccountEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\ClaimEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\BaseEntityTypeConfiguration.cs" />
+    <Compile Include="EntityTypeConfigurations\ExpirienceEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\FamilyEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\ItemEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\PalyerInfoEntityConfiguration.cs" />

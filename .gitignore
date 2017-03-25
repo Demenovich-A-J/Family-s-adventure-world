@@ -281,3 +281,4 @@ __pycache__/
 ### VisualStudio Patch ###
 build/
 *.orig
+Faw.Web.Client/.chrome

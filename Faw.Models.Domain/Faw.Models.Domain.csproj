@@ -49,6 +49,7 @@
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Family.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Expirience.cs" />
     <Compile Include="PlayerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />
