@@ -10,9 +10,26 @@ export const EDIT_QUEST_NAME_CHANGED = 'EDIT_QUEST_NAME_CHANGED'
 export const EDIT_QUEST_DESCRIPTION_CHANGED = 'EDIT_QUEST_DESCRIPTION_CHANGED'
 export const EDIT_QUEST_IS_PUBLIC_CHANGED = 'EDIT_QUEST_IS_PUBLIC_CHANGED'
 export const EDIT_QUEST_REQUIERED_LEVEL_CHANGED = 'EDIT_QUEST_REQUIERED_LEVEL_CHANGED'
+export const QUEST_TAB_CHANGED = 'QUEST_TAB_CHANGED'
+export const FAMILY_QUESTS_CHANGED = 'FAMILY_QUESTS_CHANGED'
+export const EDIT_QUEST_COINS_CHANGED = 'EDIT_QUEST_COINS_CHANGED'
 
 // ------------------------------------ Actions
 // ------------------------------------
+export const setFamilyQuest = (familyQuests) => {
+  return {
+    type: FAMILY_QUESTS_CHANGED,
+    payload: familyQuests
+  }
+}
+
+export const setQuestTab = (questTab) => {
+  return {
+    type: QUEST_TAB_CHANGED,
+    payload: questTab
+  }
+}
+
 export const setLoading = (loading) => {
   return {
     type: LOADING_CHANGED,
@@ -59,6 +76,13 @@ export const setQuestRequieredLevel = (level) => {
   return {
     type: EDIT_QUEST_REQUIERED_LEVEL_CHANGED,
     payload: level
+  }
+}
+
+export const setEditQuestCoins = (coins) => {
+  return {
+    type: EDIT_QUEST_COINS_CHANGED,
+    payload: coins
   }
 }
 
@@ -148,6 +172,20 @@ export const editInfoRequieredLevelChangeHandler = (e) => {
   }
 }
 
+export const editInfoCoinsChangeHandler = (e) => {
+  e.preventDefault()
+
+  return (dispatch, getState) => {
+    dispatch(setEditQuestCoins(e.target.value))
+  }
+}
+
+export const questTabHandler = (tabId) => {
+  return (dispatch, getState) => {
+    dispatch(setQuestTab(tabId))
+  }
+}
+
 export const actions = {
   closeCreateQuestDialogHandler,
   openCreateQuestDialogHandler,
@@ -155,16 +193,19 @@ export const actions = {
   editInfoNameChangeHandler,
   editInfoDescriptionChangeHandler,
   editInfoIsPublicChangeHandler,
-  editInfoRequieredLevelChangeHandler
+  editInfoRequieredLevelChangeHandler,
+  editInfoCoinsChangeHandler,
+  questTabHandler,
+  setFamilyQuest
 }
 
 // ------------------------------------ Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
   [LOADING_CHANGED]:
-    (state, action) => Object.assign({}, state, { loading: action.payload }),
+    (state, action) => _.assign({}, state, { loading: action.payload }),
   [OPEN_CREATE_QUEST_DIALOG_CHANGED]:
-    (state, action) => Object.assign({}, state, { openCreateQuestDialog: action.payload }),
+    (state, action) => _.assign({}, state, { openCreateQuestDialog: action.payload }),
   [EDIT_QUEST_ID_CHANGED]:
     (state, action) => _.merge({}, state, { editQuestInfo: { questId: action.payload } }),
   [EDIT_QUEST_NAME_CHANGED]:
@@ -174,19 +215,28 @@ const ACTION_HANDLERS = {
   [EDIT_QUEST_IS_PUBLIC_CHANGED]:
     (state, action) => _.merge({}, state, { editQuestInfo: { isPublic: action.payload } }),
   [EDIT_QUEST_REQUIERED_LEVEL_CHANGED]:
-    (state, action) => _.merge({}, state, { editQuestInfo: { requiredLevel: action.payload } })
+    (state, action) => _.merge({}, state, { editQuestInfo: { requiredLevel: action.payload } }),
+  [EDIT_QUEST_COINS_CHANGED]:
+    (state, action) => _.merge({}, state, { editQuestInfo: { coins: action.payload } }),
+  [QUEST_TAB_CHANGED]:
+    (state, action) => _.assign({}, state, { tabId: action.payload }),
+  [FAMILY_QUESTS_CHANGED]:
+    (state, action) => _.assign({}, state, { familyQuests: action.payload })
 }
 
 const initialState = {
   loading: false,
   openCreateQuestDialog: true,
+  familyQuests: [],
   editQuestInfo: {
     questId: null,
     name: null,
     description: null,
     isPublic: false,
-    requiredLevel: 0
-  }
+    requiredLevel: 0,
+    coins: 0
+  },
+  tabId: 0
 }
 
 export default function questsReducer (state = initialState, action) {

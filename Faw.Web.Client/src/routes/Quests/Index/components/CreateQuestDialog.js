@@ -5,14 +5,16 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  Textfield,
-  Checkbox
+  Textfield
 } from 'react-mdl'
 
 import './Quests.scss'
 
 export const CreateQuestDialog = (props) => (
-  <Dialog open={props.openCreateQuestDialog} onCancel={props.closeCreateQuestDialogHandler} className='-create-quest-dialog'>
+  <Dialog
+    open={props.openCreateQuestDialog}
+    onCancel={props.closeCreateQuestDialogHandler}
+    className='-create-quest-dialog'>
     <DialogTitle>Create family quest</DialogTitle>
     <DialogContent>
       <form>
@@ -31,7 +33,13 @@ export const CreateQuestDialog = (props) => (
           floatingLabel
           onChange={props.editInfoDescriptionChangeHandler}
         />
-        <Checkbox label='Is public' ripple defaultChecked onChange={props.editInfoIsPublicChangeHandler} />
+        <Textfield
+          className='full-width'
+          label='Coins'
+          type='number'
+          floatingLabel
+          onChange={props.editInfoCoinsChangeHandler}
+        />
         <Textfield
           onChange={props.editInfoRequieredLevelChangeHandler}
           className='full-width'
@@ -55,7 +63,8 @@ CreateQuestDialog.propTypes = {
   editInfoNameChangeHandler: React.PropTypes.func.isRequired,
   editInfoDescriptionChangeHandler: React.PropTypes.func.isRequired,
   editInfoIsPublicChangeHandler: React.PropTypes.func.isRequired,
-  editInfoRequieredLevelChangeHandler: React.PropTypes.func.isRequired
+  editInfoRequieredLevelChangeHandler: React.PropTypes.func.isRequired,
+  editInfoCoinsChangeHandler: React.PropTypes.func.isRequired
 }
 
 export default CreateQuestDialog

@@ -15,12 +15,17 @@ const mapDispatchToProps = {
   editInfoNameChangeHandler: actions.editInfoNameChangeHandler,
   editInfoDescriptionChangeHandler: actions.editInfoDescriptionChangeHandler,
   editInfoIsPublicChangeHandler: actions.editInfoIsPublicChangeHandler,
-  editInfoRequieredLevelChangeHandler: actions.editInfoRequieredLevelChangeHandler
+  editInfoRequieredLevelChangeHandler: actions.editInfoRequieredLevelChangeHandler,
+  editInfoCoinsChangeHandler: actions.editInfoCoinsChangeHandler,
+  questTabHandler: actions.questTabHandler,
+  setFamilyQuest: actions.setFamilyQuest
 }
 
 const mapStateToProps = (state) => ({
   loading: state.quests.loading,
-  openCreateQuestDialog: state.quests.openCreateQuestDialog
+  openCreateQuestDialog: state.quests.openCreateQuestDialog,
+  tabId: state.quests.tabId,
+  familyQuests: state.quests.familyQuests
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quests)

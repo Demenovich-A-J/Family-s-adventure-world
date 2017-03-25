@@ -1,5 +1,6 @@
 import { setGendersInfo, setGender } from './Register/modules/register'
 import { setFamilyName, setFamily } from './Family/Index/modules/family'
+import { setFamilyQuest } from './Quests/Index/modules/quests'
 import axios from 'axios'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -34,6 +35,7 @@ export const fetchQuests = (store) => (nextState, replace) => {
     method: 'Get',
     url: '/Quest/FetchQuests/' + data.userInfo.userId
   }).then(function (response) {
+    store.dispatch(setFamilyQuest(response.data.quests))
     store.dispatch(hideLoading())
   }).catch(function (error) {
     console.log(error)
