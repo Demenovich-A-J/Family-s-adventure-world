@@ -5,8 +5,10 @@ namespace Faw.Services.Models
     public class Quest
     {
         public Guid QuestId { get; set; }
+
         public Guid? ParentQuestId { get; set; }
         public Guid CreatedById { get; set; }
+        public Guid FamilyId { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
@@ -23,5 +25,6 @@ namespace Faw.Services.Models
 
         public Quest ParentQuest { get; set; }
         public User CreatedBy { get; set; }
+        public Family Family { get; set; }
     }
 }

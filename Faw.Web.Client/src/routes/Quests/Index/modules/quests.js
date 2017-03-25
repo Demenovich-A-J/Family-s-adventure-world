@@ -129,7 +129,9 @@ export const onSubmitCreateQuestFormHandler = (e) => {
         Name: editQuestInfo.name,
         Description: editQuestInfo.description,
         IsPublic: editQuestInfo.IsPublic,
-        RequiredLevel: editQuestInfo.requiredLevel
+        RequiredLevel: editQuestInfo.requiredLevel,
+        Coins: editQuestInfo.coins,
+        FamilyId: state.family.family.familyId
       }
     }).then(function (response) {
       dispatch(setLoading(false))
@@ -226,7 +228,7 @@ const ACTION_HANDLERS = {
 
 const initialState = {
   loading: false,
-  openCreateQuestDialog: true,
+  openCreateQuestDialog: false,
   familyQuests: [],
   editQuestInfo: {
     questId: null,

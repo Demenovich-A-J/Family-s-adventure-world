@@ -6,7 +6,8 @@ namespace Faw.Models.Domain
     {
         public Guid? ParentQuestId { get; set; }
         public Guid CreatedById { get; set; }
-        
+        public Guid FamilyId { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
 
@@ -22,5 +23,6 @@ namespace Faw.Models.Domain
 
         public virtual Quest ParentQuest { get; set; }
         public virtual User CreatedBy { get; set; }
+        public virtual Family Family { get; set; }
     }
 }

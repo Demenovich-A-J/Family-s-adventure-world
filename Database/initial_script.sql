@@ -89,6 +89,7 @@ BEGIN
 		[Description] [nvarchar](max) NOT NULL,
 		[ParentQuestId] [uniqueidentifier] NULL,
 		[CreatedById] [uniqueidentifier] NOT NULL,
+		[FamilyId] [uniqueidentifier] NOT NULL,
 		[IsPublic] [bit] NOT NULL,
 		[Expirience] [int] NOT NULL,
 		[Coins] [decimal](10, 2) NOT NULL,
@@ -234,6 +235,16 @@ BEGIN
 	)
 END
 GO
+
+IF NOT EXISTS (SELECT * 
+	FROM sys.foreign_keys 
+		WHERE object_id = OBJECT_ID(N'FK_Quest_Family')
+			AND parent_object_id = OBJECT_ID(N'Quest'))
+BEGIN
+	alter table Quest
+	   add constraint FK_Quest_Family foreign key (FamilyId)
+		  references Family (FamilyId)
+END
 
 IF NOT EXISTS (SELECT * 
 	FROM sys.foreign_keys 

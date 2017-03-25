@@ -9,6 +9,10 @@ namespace Faw.DataContext.EntityTypeConfigurations
             HasOptional(x => x.ParentQuest)
                 .WithMany()
                 .HasForeignKey(x => x.ParentQuestId);
+
+            HasRequired(x => x.Family)
+                .WithMany()
+                .HasForeignKey(x => x.FamilyId);
         }
     }
 }

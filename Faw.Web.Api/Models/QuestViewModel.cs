@@ -7,6 +7,7 @@ namespace Faw.Web.Api.Models
         public Guid QuestId { get; set; }
         public Guid? ParentQuestId { get; set; }
         public Guid CreatedById { get; set; }
+        public Guid FamilyId { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
@@ -23,5 +24,6 @@ namespace Faw.Web.Api.Models
 
         public QuestViewModel ParentQuest { get; set; }
         public UserViewModel CreatedBy { get; set; }
+        public FamilyViewModel Family { get; set; }
     }
 }
