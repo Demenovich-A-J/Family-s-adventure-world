@@ -153,6 +153,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PlayerInfoViewModel.cs" />
     <Compile Include="Models\QuestViewModel.cs" />
+    <Compile Include="Models\Quest\AssignUserQuestViewModel.cs" />
     <Compile Include="Models\UserTypeViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

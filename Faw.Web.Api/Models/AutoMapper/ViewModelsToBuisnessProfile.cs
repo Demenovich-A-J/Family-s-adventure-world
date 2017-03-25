@@ -43,7 +43,7 @@ namespace Faw.Web.Api.Models.AutoMapper
                     o.MapFrom(s => s.UserTypeId);
                 });
 
-            CreateMap<QuestViewModel, Quest>()
+            CreateMap<QuestViewModel, Services.Models.Quest>()
                 .ForMember(d => d.QuestId, o =>
                 {
                     o.Condition(s => s.QuestId != Guid.Empty);

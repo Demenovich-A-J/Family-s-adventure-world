@@ -4,6 +4,7 @@ using System.Web.Http;
 using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Contracts.Query;
 using Faw.Services.Models;
+using Faw.Web.Api.Models.Quest;
 
 namespace Faw.Web.Api.Controllers
 { 
@@ -23,7 +24,7 @@ namespace Faw.Web.Api.Controllers
 
         [HttpPut]
         [Route("Create")]
-        public IHttpActionResult FetchUserQuests([FromBody] Quest quest)
+        public IHttpActionResult Create([FromBody] Quest quest)
         {
             if (!ModelState.IsValid)
             {
@@ -34,6 +35,34 @@ namespace Faw.Web.Api.Controllers
 
             return Ok();
 
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public IHttpActionResult Update([FromBody] Quest quest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _questService.Edit(quest);
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("AssignUserQuest")]
+        public IHttpActionResult AssignUserQuest([FromBody] AssignUserQuestViewModel assignUserQuestViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _questService.AssignQuestUser(assignUserQuestViewModel.UserId, assignUserQuestViewModel.QuestId);
+
+            return Ok();
         }
 
         [HttpGet]
@@ -62,6 +91,28 @@ namespace Faw.Web.Api.Controllers
         [HttpGet]
         [Route("FetchQuests/{userId}")]
         public IHttpActionResult FetchQuests([FromUri] Guid userId)
+        {
+            var quests = _questQueryService.GetQuests(userId);
+
+            return Ok(new
+            {
+                quests = quests.Select(x => new
+                {
+                    name = x.Name,
+                    description = x.Description,
+                    isPublic = x.IsPublic,
+                    expirience = x.Expirience,
+                    coins = x.Coins ?? default(decimal),
+                    requiredLevel = x.RequiredLevel,
+                    createdOn = x.CreatedOn,
+                    updatedOn = x.UpdatedOn
+                })
+            });
+        }
+
+        [HttpGet]
+        [Route("FetchFamilyQuests/{userId}/{familyId}")]
+        public IHttpActionResult FetchFamilyQuests([FromUri] Guid userId, [FromUri] Guid familyId)
         {
             var quests = _questQueryService.GetQuests(userId);
 

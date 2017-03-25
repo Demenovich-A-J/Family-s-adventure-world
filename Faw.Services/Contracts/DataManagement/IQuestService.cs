@@ -7,5 +7,7 @@ namespace Faw.Services.Contracts.DataManagement
     {
         void Create(Quest quest);
         void Edit(Quest quest);
+
+        void AssignQuestUser(Guid userId, Guid questId);
     }
 }
