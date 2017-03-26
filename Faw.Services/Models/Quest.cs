@@ -1,9 +1,15 @@
 ﻿using System;
+using Faw.Services.Models.Enums;
 
 namespace Faw.Services.Models
 {
     public class Quest
     {
+        public Quest()
+        {
+            QuestСomplexity = QuestСomplexity.Easy;
+        }
+
         public Guid QuestId { get; set; }
 
         public Guid? ParentQuestId { get; set; }
@@ -19,6 +25,8 @@ namespace Faw.Services.Models
         public decimal? Coins { get; set; }
 
         public int RequiredLevel { get; set; }
+
+        public QuestСomplexity QuestСomplexity { get; set; }
 
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

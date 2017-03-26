@@ -4,7 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{C8342BC9-9758-4124-9289-B32725249D1A}" Name="Faw.Physics" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="Faw.Physics.pdm"/>
+		<Model Expanded="Yes" ID="{C8342BC9-9758-4124-9289-B32725249D1A}" Name="Faw.Physics" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="Faw.Physics.pdm"/>
 		<Model Expanded="Yes" ID="{1DBE5168-3DEE-4458-B1AF-A2D26787E260}" Name="Faw.Logical" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="Faw.Logical.ldm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>

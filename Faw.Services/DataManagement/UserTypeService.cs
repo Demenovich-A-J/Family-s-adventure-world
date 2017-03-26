@@ -22,10 +22,10 @@ namespace Faw.Services.DataManagement
 
         public UserType GetByName(string name)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
                 return
-                    _mapper.Map<UserType>(
+                    Mapper.Map<UserType>(
                         _userTypeRepository.GetWhere(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)));
             }
         }

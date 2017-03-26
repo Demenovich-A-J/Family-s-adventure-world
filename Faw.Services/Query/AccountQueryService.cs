@@ -21,10 +21,10 @@ namespace Faw.Services.Query
         }
         public Account GetByToken(Guid token)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
                 return
-                    _mapper.Map<Account>(
+                    Mapper.Map<Account>(
                         _accountRepository.GetWhere(
                             x =>
                                 x.Token == token));
@@ -33,10 +33,10 @@ namespace Faw.Services.Query
 
         public Account GetByEmailOrLogin(string emailOrlogin)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
                 return
-                    _mapper.Map<Account>(
+                    Mapper.Map<Account>(
                         _accountRepository.GetWhere(
                             x =>
                                 x.Email.Equals(emailOrlogin, StringComparison.OrdinalIgnoreCase) ||

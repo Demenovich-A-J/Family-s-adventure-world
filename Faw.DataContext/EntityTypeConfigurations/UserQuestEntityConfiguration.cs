@@ -17,6 +17,16 @@ namespace Faw.DataContext.EntityTypeConfigurations
             HasOptional(x => x.ParentUserQuest)
                 .WithMany()
                 .HasForeignKey(x => x.ParentUserQuestId);
+
+            Property(u => u.UserQuestStatusString)
+                .HasColumnName("UserQuestStatus");
+
+            Ignore(u => u.UserQuestStatus);
+
+            Property(u => u.QuestСomplexityString)
+                .HasColumnName("QuestСomplexity");
+
+            Ignore(u => u.QuestСomplexity);
         }
     }
 }

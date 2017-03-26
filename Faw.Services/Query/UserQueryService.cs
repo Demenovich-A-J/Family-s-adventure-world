@@ -23,26 +23,26 @@ namespace Faw.Services.Query
 
         public User Get(Guid userId)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<User>(_userRepository.GetById(userId));
+                return Mapper.Map<User>(_userRepository.GetById(userId));
             }
         }
 
         public User Get(string emailOrLogin)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<User>(_userRepository.Get(emailOrLogin));
+                return Mapper.Map<User>(_userRepository.Get(emailOrLogin));
             }
         }
 
         public IEnumerable<User> Find(string searchTerm)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
                 return
-                    _mapper.Map<IEnumerable<User>>(
+                    Mapper.Map<IEnumerable<User>>(
                         _userRepository.Find(searchTerm));
             }
         }

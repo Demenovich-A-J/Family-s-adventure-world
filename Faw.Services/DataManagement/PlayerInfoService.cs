@@ -29,12 +29,12 @@ namespace Faw.Services.DataManagement
         {
             var user = _userQueryService.Get(userId);
 
-            var playerInfoDomain = _mapper.Map<PlayerInfo>(user.PlayerInfo);
+            var playerInfoDomain = Mapper.Map<PlayerInfo>(user.PlayerInfo);
 
             //TODO: Add expirience service to calculate when to player get new level.
             playerInfoDomain.ExpirienceAmount += expirienceAmount;
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
                 _playerInfoRepository.Update(playerInfoDomain);
 

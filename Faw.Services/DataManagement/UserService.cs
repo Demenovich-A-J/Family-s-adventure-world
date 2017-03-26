@@ -19,7 +19,6 @@ namespace Faw.Services.DataManagement
 
         private readonly IUserTypeQueryService _userTypeQueryService;
         private readonly IAccountQueryService _accountQueryService;
-        private readonly IUserQueryService _userQueryService;
 
         public UserService(
             IUserRepository userRepository, 
@@ -28,20 +27,19 @@ namespace Faw.Services.DataManagement
             IDbContextScopeFactory contextScopeFactory,
             IUserTypeQueryService userTypeQueryService, 
             IAccountQueryService accountQueryService,
-            IUserQueryService userQueryService,
-            IPlayerInfoRepository playerInfoRepository) : base(mapper, contextScopeFactory)
+            IPlayerInfoRepository playerInfoRepository) 
+            : base(mapper, contextScopeFactory)
         {
             _userRepository = userRepository;
             _accountRepository = accountRepository;
             _userTypeQueryService = userTypeQueryService;
             _accountQueryService = accountQueryService;
-            _userQueryService = userQueryService;
             _playerInfoRepository = playerInfoRepository;
         }
 
         public Guid Register(User user)
         {
-            var domainUser = _mapper.Map<Faw.Models.Domain.User>(user);
+            var domainUser = Mapper.Map<Faw.Models.Domain.User>(user);
             var sh = new SaltedHash(user.Account.Password);
             var now = DateTime.UtcNow;
 
@@ -70,7 +68,7 @@ namespace Faw.Services.DataManagement
                 Level = 1
             };
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
                 _accountRepository.Insert(domainUser.Account);
                 _playerInfoRepository.Insert(domainUser.PlayerInfo);
@@ -97,14 +95,14 @@ namespace Faw.Services.DataManagement
             if (account.VerifiedOn.HasValue)
                 return UserVerifyResult.AlreadyVerified;
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
                 account.VerifiedOn = DateTime.Now;
                 account.Token = null;
                 account.TokenExpireDate = null;
-                account.Status = AccountStatus.Active;
+                account.Status = Models.Enums.AccountStatus.Active;
 
-                _accountRepository.Update(_mapper.Map<Faw.Models.Domain.Account>(account));
+                _accountRepository.Update(Mapper.Map<Account>(account));
 
                 contextScope.SaveChanges();
             }
@@ -114,17 +112,13 @@ namespace Faw.Services.DataManagement
 
         public void Edit(User user)
         {
-            var domainUser = _userQueryService.Get(user.UserId);
+            var domainUser = GetUserInternal(user.UserId);
 
-            _mapper.Map(user, domainUser);
-
-            //TODO: Prevent player info update when just update user.
-            //Need to use player info service to update it.
-            domainUser.PlayerInfo = null;
+            Mapper.Map(user, domainUser);
             
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
-                _userRepository.Update(_mapper.Map<Faw.Models.Domain.User>(domainUser));
+                _userRepository.Update(Mapper.Map<Faw.Models.Domain.User>(domainUser));
 
                 contextScope.SaveChanges();
             }
@@ -135,6 +129,14 @@ namespace Faw.Services.DataManagement
             var account = _accountQueryService.GetByEmailOrLogin(emailOrlogin);
 
             return account != null && SaltedHash.Verify(password, account.PasswordHash, account.PasswordSalt);
+        }
+
+        private Faw.Models.Domain.User GetUserInternal(Guid userId)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                return _userRepository.GetById(userId);
+            }
         }
     }
 }

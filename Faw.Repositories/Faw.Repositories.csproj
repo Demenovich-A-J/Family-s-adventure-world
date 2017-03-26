@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IExpirienceRepository.cs" />
     <Compile Include="Contracts\IPlayerInfoRepository.cs" />
     <Compile Include="Contracts\IUserQuestRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\ClaimRepository.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Contracts\IUserRepository.cs" />
     <Compile Include="Contracts\IUserTypeRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\AccountRepository.cs" />
+    <Compile Include="EntityFrameworkRepositories\ExpirienceRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\FamilyRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\ItemRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\PlayerInfoRepository.cs" />

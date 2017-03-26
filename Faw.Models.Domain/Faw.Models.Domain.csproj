@@ -47,6 +47,7 @@
     <Compile Include="Claim.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\QuestСomplexity.cs" />
     <Compile Include="Family.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Expirience.cs" />

@@ -28,7 +28,8 @@ namespace Faw.Web.Api.Controllers
             _familyQueryService = familyQueryService;
         }
 
-        // POST api/Family/Create
+        // Put api/Family/Create
+        [HttpPut]
         [Route("Create")]
         public IHttpActionResult Create([FromBody]FamilyViewModel family)
         {
@@ -45,6 +46,7 @@ namespace Faw.Web.Api.Controllers
         }
 
         // POST api/Family/Edit
+        [HttpPost]
         [Route("Edit")]
         public IHttpActionResult Edit([FromBody]FamilyViewModel family)
         {
@@ -56,7 +58,7 @@ namespace Faw.Web.Api.Controllers
             return Ok();
         }
 
-        // POST api/Family/FetchUserFamily
+        // GET api/Family/FetchUserFamily
         [HttpGet]
         [Route("FetchUserFamily/{userId}")]
         public IHttpActionResult FetchUserFamily([FromUri]Guid userId)

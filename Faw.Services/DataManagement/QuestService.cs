@@ -13,28 +13,30 @@ namespace Faw.Services.DataManagement
     {
         private readonly IQuestRepository _questRepository;
         private readonly IUserQuestRepository _userQuestRepository;
-        private readonly IQuestQueryService _questQueryService;
+        private readonly IExpirienceQueryService _expirienceQueryService;
 
         public QuestService(
             IMapper mapper,
             IDbContextScopeFactory contextScopeFactory,
             IQuestRepository questRepository,
-            IQuestQueryService questQueryService,
-            IUserQuestRepository userQuestRepository)
+            IUserQuestRepository userQuestRepository,
+            IExpirienceQueryService expirienceQueryService)
             : base(mapper, contextScopeFactory)
         {
             _questRepository = questRepository;
-            _questQueryService = questQueryService;
             _userQuestRepository = userQuestRepository;
+            _expirienceQueryService = expirienceQueryService;
         }
 
         public void Create(Quest quest)
         {
-            var domainQuest = _mapper.Map<Faw.Models.Domain.Quest>(quest);
+            var domainQuest = Mapper.Map<Faw.Models.Domain.Quest>(quest);
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
                 domainQuest.CreatedOn = domainQuest.UpdatedOn = DateTime.UtcNow;
+                domainQuest.Expirience = _expirienceQueryService.CalculateExpirience(domainQuest.RequiredLevel,
+                    QuestСomplexity.Easy);
 
                 _questRepository.Insert(domainQuest);
 
@@ -44,11 +46,11 @@ namespace Faw.Services.DataManagement
 
         public void Edit(Quest quest)
         {
-            var domainQuest = _mapper.Map<Faw.Models.Domain.Quest>(_questQueryService.GetById(quest.QuestId));
+            var domainQuest = GetQuestInternal(quest.QuestId);
 
-            _mapper.Map(quest, domainQuest);
+            Mapper.Map(quest, domainQuest);
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
                 domainQuest.UpdatedOn = DateTime.UtcNow;
 
@@ -69,11 +71,20 @@ namespace Faw.Services.DataManagement
 
             userQuest.CreatedOn = userQuest.UpdatedOn = DateTime.UtcNow;
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
-                _userQuestRepository.Insert(_mapper.Map<Faw.Models.Domain.UserQuest>(userQuest));
+                _userQuestRepository.Insert(Mapper.Map<Faw.Models.Domain.UserQuest>(userQuest));
 
                 contextScope.SaveChanges();
+            }
+        }
+
+
+        private Faw.Models.Domain.Quest GetQuestInternal(Guid questId)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                return _questRepository.GetById(questId);
             }
         }
     }

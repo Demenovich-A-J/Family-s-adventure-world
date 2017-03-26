@@ -26,25 +26,25 @@ namespace Faw.Services.Query
 
         public Quest GetById(Guid questId)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<Quest>(_questRepository.GetById(questId));
+                return Mapper.Map<Quest>(_questRepository.GetById(questId));
             }
         }
 
         public IEnumerable<UserQuest> GetUserQuests(Guid userId)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<IEnumerable<UserQuest>>(_userQuestRepository.GetWhere(x => x.UserId == userId));
+                return Mapper.Map<IEnumerable<UserQuest>>(_userQuestRepository.GetWhere(x => x.UserId == userId));
             }
         }
 
         public IEnumerable<Quest> GetQuests(Guid userId)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<IEnumerable<Quest>>(_questRepository.GetWhere(x => x.CreatedById == userId));
+                return Mapper.Map<IEnumerable<Quest>>(_questRepository.GetWhere(x => x.CreatedById == userId));
             }
         }
     }

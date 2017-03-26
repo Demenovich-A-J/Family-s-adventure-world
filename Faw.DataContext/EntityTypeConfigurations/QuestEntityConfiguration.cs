@@ -13,6 +13,11 @@ namespace Faw.DataContext.EntityTypeConfigurations
             HasRequired(x => x.Family)
                 .WithMany()
                 .HasForeignKey(x => x.FamilyId);
+
+            Property(u => u.QuestСomplexityString)
+                .HasColumnName("QuestСomplexity");
+
+            Ignore(u => u.QuestСomplexity);
         }
     }
 }

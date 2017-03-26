@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Faw.Services.Models.Enums;
 
 namespace Faw.Services.Models.AutoMapper
@@ -8,13 +7,6 @@ namespace Faw.Services.Models.AutoMapper
     {
         public DomainToBuisnessModelsProfile()
         {
-            CreateMap<User, User>()
-                 .ForMember(d => d.UserId, o =>
-                 {
-                     o.Condition(s => s.UserId != Guid.Empty);
-                     o.MapFrom(s => s.UserId);
-                 });
-
             CreateMap<Faw.Models.Domain.User, User>()
                 .ForMember(d => d.UserId, o => o.MapFrom(x => x.EntityId));
 
@@ -43,9 +35,13 @@ namespace Faw.Services.Models.AutoMapper
             CreateMap<Faw.Models.Domain.UserQuest, UserQuest>()
                 .ForMember(dest => dest.UserQuestId, opt => opt.MapFrom(x => x.EntityId));
 
+            CreateMap<Faw.Models.Domain.Expirience, Expirience>()
+                .ForMember(dest => dest.ExpirienceId, opt => opt.MapFrom(x => x.EntityId));
+
             CreateMap<Faw.Models.Domain.Enums.Gender, Gender>();
             CreateMap<Faw.Models.Domain.Enums.UserQuestStatus, UserQuestStatus>();
             CreateMap<Faw.Models.Domain.Enums.AccountStatus, AccountStatus>();
+            CreateMap<Faw.Models.Domain.Enums.QuestСomplexity, QuestСomplexity>();
         }
     }
 }

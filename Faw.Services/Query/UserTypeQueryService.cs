@@ -21,9 +21,9 @@ namespace Faw.Services.Query
 
         public UserType GetByName(string name)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<UserType>(_userTypeRepository.Get(name));
+                return Mapper.Map<UserType>(_userTypeRepository.Get(name));
             }
         }
     }

@@ -10,7 +10,19 @@ namespace Faw.Models.Domain
         public Guid? ParentUserQuestId { get; set; }
 
         public UserQuestStatus UserQuestStatus { get; set; }
-        public string Status { get; set; }
+        public QuestСomplexity QuestСomplexity { get; set; }
+
+        public string UserQuestStatusString
+        {
+            get { return UserQuestStatus.ToString(); }
+            set { UserQuestStatus = (UserQuestStatus)Enum.Parse(typeof(UserQuestStatus), value); }
+        }
+
+        public string QuestСomplexityString
+        {
+            get { return QuestСomplexity.ToString(); }
+            set { QuestСomplexity = (QuestСomplexity)Enum.Parse(typeof(QuestСomplexity), value); }
+        }
 
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

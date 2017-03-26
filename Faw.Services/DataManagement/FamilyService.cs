@@ -32,9 +32,9 @@ namespace Faw.Services.DataManagement
 
         public void Create(Family family)
         {
-            var domainFamily = _mapper.Map<Faw.Models.Domain.Family>(family);
+            var domainFamily = Mapper.Map<Faw.Models.Domain.Family>(family);
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
                 domainFamily.CreatedOn = domainFamily.UpdatedOn = DateTime.UtcNow;
                 
@@ -51,13 +51,13 @@ namespace Faw.Services.DataManagement
             if (existFamily == null)
                 throw new ArgumentNullException(nameof(existFamily));
 
-            _mapper.Map(family, existFamily);
+            Mapper.Map(family, existFamily);
 
-            using (var contextScope = _contextScopeFactory.Create())
+            using (var contextScope = ContextScopeFactory.Create())
             {
                 existFamily.UpdatedOn = DateTime.UtcNow;
 
-                _familyRepository.Update(_mapper.Map<Faw.Models.Domain.Family>(existFamily));
+                _familyRepository.Update(Mapper.Map<Faw.Models.Domain.Family>(existFamily));
 
                 contextScope.SaveChanges();
             }

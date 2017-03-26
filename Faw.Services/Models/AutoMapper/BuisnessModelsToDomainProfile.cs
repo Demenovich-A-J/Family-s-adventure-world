@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using AutoMapper;
 using Faw.Services.Models.Enums;
 
@@ -13,7 +13,9 @@ namespace Faw.Services.Models.AutoMapper
                 {
                     o.Condition(s => s.UserId != Guid.Empty);
                     o.MapFrom(s => s.UserId);
-                }).MaxDepth(2);
+                })
+                .ForMember(x => x.GenderString, o => o.MapFrom(s => s.Gender))
+                .MaxDepth(2);
 
             CreateMap<Account, Faw.Models.Domain.Account>()
                 .ForMember(d => d.EntityId, o =>
@@ -55,7 +57,8 @@ namespace Faw.Services.Models.AutoMapper
                 {
                     o.Condition(s => s.QuestId != Guid.Empty);
                     o.MapFrom(s => s.QuestId);
-                });
+                })
+                .ForMember(x => x.QuestСomplexityString, o => o.MapFrom(s => s.QuestСomplexity));
 
             CreateMap<PlayerInfo, Faw.Models.Domain.PlayerInfo>()
                 .ForMember(d => d.EntityId, o =>
@@ -72,11 +75,23 @@ namespace Faw.Services.Models.AutoMapper
                 });
 
             CreateMap<UserType, Faw.Models.Domain.UserType>()
-                .ForMember(dest => dest.EntityId, opt => opt.MapFrom(x => x.UserTypeId));
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.UserTypeId != Guid.Empty);
+                    o.MapFrom(s => s.UserTypeId);
+                });
+
+            CreateMap<Expirience, Faw.Models.Domain.Expirience>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.ExpirienceId != Guid.Empty);
+                    o.MapFrom(s => s.ExpirienceId);
+                });
 
             CreateMap<Gender, Faw.Models.Domain.Enums.Gender>();
             CreateMap<UserQuestStatus, Faw.Models.Domain.Enums.UserQuestStatus>();
             CreateMap<AccountStatus, Faw.Models.Domain.Enums.AccountStatus>();
+            CreateMap<QuestСomplexity, Faw.Models.Domain.Enums.QuestСomplexity>();
         }
     }
 }

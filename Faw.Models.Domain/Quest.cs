@@ -1,4 +1,5 @@
 ﻿using System;
+using Faw.Models.Domain.Enums;
 
 namespace Faw.Models.Domain
 {
@@ -16,6 +17,13 @@ namespace Faw.Models.Domain
         public decimal Expirience { get; set; }
         public decimal? Coins { get; set; }
 
+        public QuestСomplexity QuestСomplexity { get; set; }
+
+        public string QuestСomplexityString
+        {
+            get { return QuestСomplexity.ToString(); }
+            set { QuestСomplexity = (QuestСomplexity)Enum.Parse(typeof(QuestСomplexity), value); }
+        }
         public int RequiredLevel { get; set; }
 
         public DateTime CreatedOn { get; set; }

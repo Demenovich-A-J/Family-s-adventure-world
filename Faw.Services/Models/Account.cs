@@ -1,5 +1,5 @@
 ﻿using System;
-using Faw.Models.Domain.Enums;
+using Faw.Services.Models.Enums;
 
 namespace Faw.Services.Models
 {

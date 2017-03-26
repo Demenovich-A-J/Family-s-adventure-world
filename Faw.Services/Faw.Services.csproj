@@ -57,16 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\DataManagement\IExpirienceService.cs" />
     <Compile Include="Contracts\DataManagement\IFamilyService.cs" />
     <Compile Include="Contracts\DataManagement\IPlayerInfoService.cs" />
     <Compile Include="Contracts\DataManagement\IQuestService.cs" />
     <Compile Include="Contracts\Query\IAccountQueryService.cs" />
     <Compile Include="Contracts\DataManagement\IUserService.cs" />
     <Compile Include="Contracts\DataManagement\IUserTypeService.cs" />
+    <Compile Include="Contracts\Query\IExpirienceQueryService.cs" />
     <Compile Include="Contracts\Query\IFamilyQueryService.cs" />
     <Compile Include="Contracts\Query\IQuestQueryService.cs" />
     <Compile Include="Contracts\Query\IUserQueryService.cs" />
     <Compile Include="Contracts\Query\IUserTypeQueryService.cs" />
+    <Compile Include="DataManagement\ExpirienceService.cs" />
     <Compile Include="DataManagement\FamilyService.cs" />
     <Compile Include="DataManagement\PlayerInfoService.cs" />
     <Compile Include="DataManagement\QuestService.cs" />
@@ -78,17 +81,22 @@
     <Compile Include="Models\AutoMapper\DomainToBuisnessModelsProfile.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Enums\AccountStatus.cs" />
+    <Compile Include="Models\Enums\ExpirienceApplayResult.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
+    <Compile Include="Models\Enums\QuestСomplexity.cs" />
     <Compile Include="Models\Enums\UserQuestStatus.cs" />
+    <Compile Include="Models\Expirience.cs" />
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\PlayerInfo.cs" />
     <Compile Include="Models\Quest.cs" />
+    <Compile Include="Models\Results\ApplayExpirienceResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserQuest.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\AccountQueryService.cs" />
+    <Compile Include="Query\ExpirienceQueryService.cs" />
     <Compile Include="Query\FamilyQueryService.cs" />
     <Compile Include="Query\QuestQueryService.cs" />
     <Compile Include="Query\UserQueryService.cs" />

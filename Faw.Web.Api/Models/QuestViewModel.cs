@@ -1,4 +1,5 @@
 ﻿using System;
+using Faw.Services.Models.Enums;
 
 namespace Faw.Web.Api.Models
 {
@@ -18,6 +19,7 @@ namespace Faw.Web.Api.Models
         public decimal? Coins { get; set; }
 
         public int RequiredLevel { get; set; }
+        public QuestСomplexity QuestСomplexity { get; set; }
 
         public DateTime CreateOn { get; set; }
         public DateTime UpdatedOn { get; set; }

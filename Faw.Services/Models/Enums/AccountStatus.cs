@@ -2,6 +2,8 @@
 {
     public enum AccountStatus
     {
-        
+        PendingActivation,
+        ResetPassword,
+        Active
     }
 }

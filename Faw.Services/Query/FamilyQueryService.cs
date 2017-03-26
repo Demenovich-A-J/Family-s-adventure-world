@@ -25,17 +25,17 @@ namespace Faw.Services.Query
 
         public Family Get(Guid familyId)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<Family>(_familyRepository.GetById(familyId));
+                return Mapper.Map<Family>(_familyRepository.GetById(familyId));
             }
         }
 
         public Family GetUserFamily(Guid userId)
         {
-            using (_contextScopeFactory.CreateReadOnly())
+            using (ContextScopeFactory.CreateReadOnly())
             {
-                return _mapper.Map<Family>(_familyRepository.GetUserFamily(userId));
+                return Mapper.Map<Family>(_familyRepository.GetUserFamily(userId));
             }
         }
     }
