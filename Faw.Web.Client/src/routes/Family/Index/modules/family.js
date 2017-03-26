@@ -1,12 +1,12 @@
 import axios from 'axios'
 import _ from 'lodash'
+import { setFamilyInfo } from 'store/familyInfo'
 
 // ------------------------------------ Constants
 // ------------------------------------
 export const LOADING_CHANGED = 'LOADING_CHANGED'
 export const FAMALY_NAME_CHANGED = 'FAMALY_NAME_CHANGED'
 export const OPEN_FAMILY_DIALOG_CHANGED = 'OPEN_FAMILY_DIALOG_CHANGED'
-export const FAMILY_CHANGED = 'FAMILY_CHANGED'
 export const SEARCH_TEXT_CHANGED = 'SEARCH_TEXT_CHANGED'
 export const SEARCH_RESULTS_CHANGED = 'SEARCH_RESULTS_CHANGED'
 export const SEARCHING_USERS_CHANGED = 'SEARCHING_USERS_CHANGED'
@@ -24,13 +24,6 @@ export const setFamilyName = (name) => {
   return {
     type: FAMALY_NAME_CHANGED,
     payload: name
-  }
-}
-
-export const setFamily = (family) => {
-  return {
-    type: FAMILY_CHANGED,
-    payload: family
   }
 }
 
@@ -80,7 +73,7 @@ export const formSubmitHandler = (e) => {
         CreatedById: state.user.userInfo.userId
       }
     }).then(function (response) {
-      dispatch(setFamily(response.data))
+      dispatch(setFamilyInfo(response.data))
       dispatch(setOpenFamilyDialog(false))
       dispatch(setLoading(false))
     }).catch(function (error) {
@@ -175,7 +168,6 @@ export const actions = {
   familyNameChangeHandler,
   openFamilyDialog,
   closeFamilyDialog,
-  setFamily,
   searchInputHandler,
   searchItemClickHandler
 }
@@ -186,7 +178,6 @@ const ACTION_HANDLERS = {
   [LOADING_CHANGED]: (state, action) => Object.assign({}, state, { loading: action.payload }),
   [FAMALY_NAME_CHANGED]: (state, action) => Object.assign({}, state, { familyName: action.payload }),
   [OPEN_FAMILY_DIALOG_CHANGED]: (state, action) => Object.assign({}, state, { openFamilyDialog: action.payload }),
-  [FAMILY_CHANGED]: (state, action) => Object.assign({}, state, { family: action.payload }),
   [SEARCH_TEXT_CHANGED]: (state, action) => Object.assign({}, state, { searchText: action.payload }),
   [SEARCH_RESULTS_CHANGED]: (state, action) => Object.assign({}, state, { searchResults: action.payload }),
   [SEARCHING_USERS_CHANGED]: (state, action) => Object.assign({}, state, { searchingUsers: action.payload })
@@ -194,7 +185,7 @@ const ACTION_HANDLERS = {
 
 const initialState = {
   familyName: '',
-  family: null,
+  familyInfo: null,
   loading: false,
   openFamilyDialog: false,
   searchText: null,

@@ -18,7 +18,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  family: state.family.family,
+  family: state.familyInfo.family,
   loading: state.family.loading,
   openFamilyDialog: state.family.openFamilyDialog,
   searchResults: state.family.searchResults

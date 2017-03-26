@@ -2,6 +2,7 @@
 // CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import LoginLayout from '../layouts/LoginLayout/LoginLayout'
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
+import NotFoundLayoyt from '../layouts/NotFoundLayout/NotFoundLayout'
 
 import Home from './Home'
 
@@ -11,6 +12,8 @@ import ForgotPasswordRoute from './ForgotPassword'
 
 import FamilyRoute from './Family/Index'
 import QuestsRoute from './Quests/Index'
+
+import NotFound from './NotFound'
 
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -32,6 +35,13 @@ export const createRoutes = (store) => ([
       LoginRoute(store),
       RegisterRoute(store),
       ForgotPasswordRoute(store)
+    ]
+  },
+  {
+    path: '*',
+    component: NotFoundLayoyt,
+    indexRoute: NotFound,
+    childRoutes: [
     ]
   }
 ])

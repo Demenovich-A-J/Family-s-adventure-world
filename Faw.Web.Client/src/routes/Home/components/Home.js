@@ -10,6 +10,7 @@ import {
   IconButton,
   Button
 } from 'react-mdl'
+import { Link } from 'react-router'
 
 import './Home.scss'
 
@@ -21,10 +22,12 @@ export const Home = (props) => (
           Family
         </CardTitle>
         <CardText>
-          Manage your famaly here. Your family is your house. 
+          Manage your famaly here. Your family is your house.
         </CardText>
         <CardActions border>
-          <Button colored>Manage</Button>
+          <Link to='/family' className='-link' activeClassName='--active'>
+            <Button colored>Manage</Button>
+          </Link>
         </CardActions>
         <CardMenu style={{ color: '#fff' }}>
           <IconButton name='share' />

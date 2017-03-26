@@ -2,6 +2,7 @@ import axios from 'axios'
 import { browserHistory } from 'react-router'
 import axiosUtil from 'infrastructure/utils/axiosUtils'
 import { saveUserAuthInfo, fetchUserInfo } from 'store/user'
+import { fetchUserFamilyInfo } from 'store/familyInfo'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 // ------------------------------------ Constants
@@ -63,6 +64,7 @@ export const formSubmitHandler = (e) => {
 
       dispatch(saveUserAuthInfo(authInfo, data.isRemember))
       dispatch(fetchUserInfo())
+      dispatch(fetchUserFamilyInfo())
       dispatch(loginLoadingHandler(false))
       dispatch(hideLoading())
 

@@ -1,5 +1,6 @@
 import { injectReducer } from '../../../store/reducers'
 import { fetchQuests } from '../../routeEnter'
+import requireAuthorization from '../../../infrastructure/requireAuthorization'
 
 export default (store) => ({
   path: '/quests',
@@ -11,7 +12,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const quests = require('./containers/QuestsContainer').default
+      const quests = requireAuthorization(require('./containers/QuestsContainer').default)
       const reducer = require('./modules/quests').default
 
       /*  Add the reducer to the store on key 'counter'  */

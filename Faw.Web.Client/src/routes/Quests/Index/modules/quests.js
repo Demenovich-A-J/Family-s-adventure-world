@@ -131,7 +131,7 @@ export const onSubmitCreateQuestFormHandler = (e) => {
         IsPublic: editQuestInfo.IsPublic,
         RequiredLevel: editQuestInfo.requiredLevel,
         Coins: editQuestInfo.coins,
-        FamilyId: state.family.family.familyId
+        FamilyId: state.familyInfo.family.familyId
       }
     }).then(function (response) {
       dispatch(setLoading(false))

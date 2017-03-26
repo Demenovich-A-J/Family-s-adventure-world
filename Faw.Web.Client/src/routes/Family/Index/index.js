@@ -1,5 +1,6 @@
-import { injectReducer } from '../../../store/reducers'
-import { fetchUserFamily } from '../../routeEnter'
+import { injectReducer } from 'store/reducers'
+import { fetchUserFamily } from 'routes/routeEnter'
+import requireAuthorization from 'infrastructure/requireAuthorization'
 
 export default (store) => ({
   path: '/family',
@@ -11,7 +12,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const family = require('./containers/FamilyContainer').default
+      const family = requireAuthorization(require('./containers/FamilyContainer').default)
       const reducer = require('./modules/family').default
 
       /*  Add the reducer to the store on key 'counter'  */
