@@ -1,6 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
-import { setFamilyInfo } from 'store/familyInfo'
+import { fetchUserFamilyInfo } from 'store/familyInfo'
 
 // ------------------------------------ Constants
 // ------------------------------------
@@ -64,16 +64,21 @@ export const formSubmitHandler = (e) => {
     dispatch(setLoading(true))
 
     var state = getState()
+    var url = state.familyInfo.family !== null ? '/Family/Edit' : '/Family/Create'
 
     axios({
       method: 'Post',
-      url: '/Family/Create',
+      url: url,
       data: {
+        FamilyId: state.familyInfo.family.familyId,
         Name: state.family.familyName,
         CreatedById: state.user.userInfo.userId
       }
     }).then(function (response) {
-      dispatch(setFamilyInfo(response.data))
+      // do we need to update family data fetched from server?
+      // all required data will be updated with help of user
+      // may be we need just to refetch user family info?
+      dispatch(fetchUserFamilyInfo())
       dispatch(setOpenFamilyDialog(false))
       dispatch(setLoading(false))
     }).catch(function (error) {

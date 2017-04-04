@@ -43,7 +43,8 @@ namespace Faw.Services.Models.AutoMapper
                 {
                     o.Condition(s => s.FamilyId != Guid.Empty);
                     o.MapFrom(s => s.FamilyId);
-                });
+                })
+                .ForMember(x => x.CreatedOn, o => o.Ignore());
 
             CreateMap<Item, Faw.Models.Domain.Item>()
                 .ForMember(d => d.EntityId, o =>

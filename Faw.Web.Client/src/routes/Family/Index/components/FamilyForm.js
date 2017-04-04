@@ -10,9 +10,15 @@ import {
 
 import './Family.scss'
 
-export const CreateFamilyForm = (props) => (
+export const FamilyForm = (props) => (
   <Dialog open={props.openFamilyDialog} onCancel={props.closeFamilyDialogHandler} className='-family-dialog'>
-    <DialogTitle>Create your family</DialogTitle>
+    <DialogTitle>
+      {
+        !props.familyExist
+         ? 'Create your family'
+         : 'Edit family' + ' - ' + props.familyName
+      }
+    </DialogTitle>
     <DialogContent>
       <form>
         <Textfield
@@ -23,21 +29,30 @@ export const CreateFamilyForm = (props) => (
           floatingLabel
           pattern='.*'
           error='Name is required'
+          defaultValue={props.familyName}
         />
       </form>
     </DialogContent>
     <DialogActions>
-      <Button type='button' onClick={props.onSubmitFamilyFormHandler}>Create</Button>
+      <Button type='button' onClick={props.onSubmitFamilyFormHandler}>
+        {
+          !props.familyExist
+          ? 'Create'
+          : 'Update'
+        }
+      </Button>
       <Button type='button' onClick={props.closeFamilyDialogHandler}>Cancel</Button>
     </DialogActions>
   </Dialog>
 )
 
-CreateFamilyForm.propTypes = {
+FamilyForm.propTypes = {
   closeFamilyDialogHandler: React.PropTypes.func.isRequired,
   onFamilyNameChanged : React.PropTypes.func.isRequired,
   onSubmitFamilyFormHandler: React.PropTypes.func.isRequired,
-  openFamilyDialog: React.PropTypes.bool.isRequired
+  openFamilyDialog: React.PropTypes.bool.isRequired,
+  familyName: React.PropTypes.string.isRequired,
+  familyExist: React.PropTypes.bool.isRequired
 }
 
-export default CreateFamilyForm
+export default FamilyForm

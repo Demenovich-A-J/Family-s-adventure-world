@@ -1,5 +1,6 @@
 import React from 'react'
 import { browserHistory, IndexLink, Link } from 'react-router'
+import { Menu as MdlMenu, MenuItem } from 'react-mdl'
 
 import avatar from './assets/default_avatar.svg'
 import './Menu.scss'
@@ -38,22 +39,26 @@ var Menu = React.createClass({
             {
               this.props.navItems && this.props.navItems.map(this.renderNavItem)
             }
-            <li className='-item'>
-              <div onClick={this.props.logoutUser} className='-link'>
-                Logout
-              </div>
-            </li>
           </ol>
         </nav>
         <div className='-user-info-container'>
-          <Link to='/user/details' className='-link' activeClassName='--active'>
-            <img src={avatar} />
-            <p>
-              {
-                this.props.userInfo.userName
-              }
-            </p>
-          </Link>
+          <p>
+            {
+              this.props.userInfo.userName
+            }
+          </p>
+          <img id='-user-info-image' src={avatar} />
+          <MdlMenu target='-user-info-image' align='right' ripple>
+            <MenuItem className='mdl-menu__item--full-bleed-divider'>
+              <Link to='/user/details' className='-link' activeClassName='--active'>
+                {
+                  this.props.userInfo.userName
+                }
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={this.props.logoutUser}>Logout</MenuItem>
+          </MdlMenu>
+          <div className='-user-info-hover-container mdl-shadow--6dp' />
         </div>
       </div>
     )

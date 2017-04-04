@@ -46,7 +46,7 @@ namespace Faw.Services.DataManagement
 
         public void Edit(Family family)
         {
-            var existFamily = _familyQueryService.Get(family.FamilyId);
+            var existFamily = GetFamilyInternal(family.FamilyId);
 
             if (existFamily == null)
                 throw new ArgumentNullException(nameof(existFamily));
@@ -57,7 +57,7 @@ namespace Faw.Services.DataManagement
             {
                 existFamily.UpdatedOn = DateTime.UtcNow;
 
-                _familyRepository.Update(Mapper.Map<Faw.Models.Domain.Family>(existFamily));
+                _familyRepository.Update(existFamily);
 
                 contextScope.SaveChanges();
             }
@@ -71,6 +71,19 @@ namespace Faw.Services.DataManagement
             user.FamilyId = familyId;
 
             _userService.Edit(user);
+        }
+
+        private Faw.Models.Domain.Family GetFamilyInternal(Guid familyId)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                var result = _familyRepository.GetById(familyId);
+
+                result.CreatedBy = null;
+                result.FamilyMemebers = null;
+
+                return _familyRepository.GetById(familyId);
+            }
         }
     }
 }
