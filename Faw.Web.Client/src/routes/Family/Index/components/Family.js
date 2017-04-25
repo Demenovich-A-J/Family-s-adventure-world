@@ -12,6 +12,8 @@ import {
   MenuItem,
   Textfield
 } from 'react-mdl'
+import { Link } from 'react-router'
+
 import FamilyForm from './FamilyForm'
 import SearchResult from './SearchResult'
 
@@ -74,7 +76,11 @@ export const Family = (props) => (
               Aenan convallis.
             </CardText>
             <CardActions border>
-              <Button colored>Details</Button>
+              <Button colored>
+                <Link to={'/family/member/details/' + familyMember.id} className='-link' activeClassName='--active'>
+                  Details
+                </Link>
+              </Button>
             </CardActions>
           </Card>
         </Cell>

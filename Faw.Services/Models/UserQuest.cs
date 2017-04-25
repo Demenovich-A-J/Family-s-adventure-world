@@ -11,7 +11,7 @@ namespace Faw.Services.Models
         public Guid? ParentUserQuestId { get; set; }
 
         public UserQuestStatus UserQuestStatus { get; set; }
-        public string Status { get; set; }
+        public QuestСomplexity QuestСomplexity { get; set; }
 
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

@@ -8,6 +8,8 @@ namespace Faw.Services.Contracts.Query
 {
     public interface IExpirienceQueryService
     {
+        Expirience GetExpirience(int level);
+
         IOrderedEnumerable<Expirience> GetExpirienceList();
 
         decimal CalculateExpirience(int requiredLevel, QuestСomplexity questСomplexity);

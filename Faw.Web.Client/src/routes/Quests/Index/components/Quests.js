@@ -3,7 +3,9 @@ import {
   Grid,
   Cell,
   Tabs,
-  Tab
+  Tab,
+  FABButton,
+  Icon
 } from 'react-mdl'
 import CreateQuestDialog from './CreateQuestDialog'
 import UserQuestList from './UserQuestList'
@@ -32,6 +34,11 @@ export const Quests = (props) => (
         <Tab>User</Tab>
         <Tab>Family</Tab>
       </Tabs>
+    </Cell>
+    <Cell col={12}>
+      <FABButton colored ripple onClick={props.openCreateQuestDialogHandler}>
+        <Icon name='add' />
+      </FABButton>
     </Cell>
     <Cell col={12}>
       {

@@ -4,6 +4,8 @@ import _ from 'lodash'
 import { setGendersInfo, setGender } from './Register/modules/register'
 import { fetchUserFamilyInfo } from 'store/familyInfo'
 import { setFamilyQuest } from './Quests/Index/modules/quests'
+import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
+
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const loadGendersOnEnter = (store) => (nextState, replace) => {
@@ -58,4 +60,8 @@ export const fetchQuests = (store) => (nextState, replace) => {
 
 export const fetchUserFamily = (store) => (nextState, replace) => {
   store.dispatch(fetchUserFamilyInfo())
+}
+
+export const fetchFamilyMemberDetails = (store) => (nextState, replace) => {
+  store.dispatch(loadFamilyMemberDetails(nextState.params.userId))
 }

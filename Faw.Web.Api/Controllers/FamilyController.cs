@@ -73,7 +73,10 @@ namespace Faw.Web.Api.Controllers
                 name = family.Name,
                 familyMembers = family.FamilyMemebers.Select(x => new
                 {
-                    name = $"{x.FirstName} {x.LastName}"
+                    name = $"{x.FirstName} {x.LastName}",
+                    birthDate = x.BirthDate.ToShortDateString(),
+                    gender = x.Gender.ToString(),
+                    id = x.UserId
                 }).ToList(),
                 familyId = family.FamilyId
             });

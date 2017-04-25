@@ -22,6 +22,7 @@ namespace Faw.Repositories.EntityFrameworkRepositories
                     .Include(x => x.Family)
                     .Include(x => x.UserType)
                     .Include(x => x.UserType.Claims)
+                    .Include(x => x.PlayerInfo)
                     .FirstOrDefault(x => x.EntityId == entityId);
         }
 

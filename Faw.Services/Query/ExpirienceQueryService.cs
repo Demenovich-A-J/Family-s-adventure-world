@@ -24,6 +24,14 @@ namespace Faw.Services.Query
             _expirienceRepository = expirienceRepository;
         }
 
+        public Expirience GetExpirience(int level)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                return Mapper.Map<Expirience>(_expirienceRepository.Get(level));
+            }
+        }
+
         public IOrderedEnumerable<Expirience> GetExpirienceList()
         {
             using (ContextScopeFactory.CreateReadOnly())

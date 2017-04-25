@@ -1,0 +1,57 @@
+.faw-member-details-container{
+	.-section-title{
+		margin: 0;
+		border-bottom: 1px solid #00bcd4;
+	}
+
+	.-label-name{
+		display: inline-block;
+		width: 100px;
+		font-weight: bold;
+	}
+
+	.-user-avatar{
+	}
+	.-quest-autocomplete{
+		width: 100%;
+	}
+
+	.-assign-button-container{
+		padding: 8px 0;
+
+		.-assign-button{
+			float: right;
+		}
+	}
+	.-achivments-container{
+		.-acivment{
+			border: 1px solid #f2f2f2;
+			padding: 8px;
+
+			&:not(:first-child){
+				margin-top: 8px;
+			}
+
+			.-image-container{
+				border: 1px solid #f2f2f2;
+				min-height: 70px;
+				width: 20%;
+				float: left;
+			}
+
+			.-info-container{
+				width: 80%;
+				float: left;
+				padding: 0 8px;
+
+				.-title{
+					margin: 0;
+				}
+
+				.-description{
+
+				}
+			}
+		}
+	}
+}

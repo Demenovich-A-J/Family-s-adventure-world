@@ -11,6 +11,9 @@ import RegisterRoute from './Register'
 import ForgotPasswordRoute from './ForgotPassword'
 
 import FamilyRoute from './Family/Index'
+import FamilyMemberDetailsRoute from './Family/MemberDetails'
+
+
 import QuestsRoute from './Quests/Index'
 
 import NotFound from './NotFound'
@@ -25,6 +28,7 @@ export const createRoutes = (store) => ([
     indexRoute: Home,
     childRoutes: [
       FamilyRoute(store),
+      FamilyMemberDetailsRoute(store),
       QuestsRoute(store)
     ]
   },

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Table, TableHeader } from 'react-mdl'
+import { DataTable, TableHeader } from 'react-mdl'
 
 import './Quests.scss'
 
 export const QuestList = (props) => (
-  <Table
+  <DataTable
     className='full-width'
-    shadow={1}
+    shadow={0}
     rows={props.familyQuests}
   >
     <TableHeader
@@ -40,7 +40,7 @@ export const QuestList = (props) => (
     >
         Created
     </TableHeader>
-  </Table>
+  </DataTable>
 )
 
 QuestList.propTypes = {
