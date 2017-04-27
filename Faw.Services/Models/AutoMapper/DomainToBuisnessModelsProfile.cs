@@ -38,6 +38,12 @@ namespace Faw.Services.Models.AutoMapper
             CreateMap<Faw.Models.Domain.Expirience, Expirience>()
                 .ForMember(dest => dest.ExpirienceId, opt => opt.MapFrom(x => x.EntityId));
 
+            CreateMap<Faw.Models.Domain.Achivment, Achivment>()
+                .ForMember(dest => dest.AchivmentId, opt => opt.MapFrom(x => x.EntityId));
+
+            CreateMap<Faw.Models.Domain.UserAchivment, UserAchivment>()
+                .ForMember(dest => dest.UserAchivmentId, opt => opt.MapFrom(x => x.EntityId));
+
             CreateMap<Faw.Models.Domain.Enums.Gender, Gender>();
             CreateMap<Faw.Models.Domain.Enums.UserQuestStatus, UserQuestStatus>();
             CreateMap<Faw.Models.Domain.Enums.AccountStatus, AccountStatus>();

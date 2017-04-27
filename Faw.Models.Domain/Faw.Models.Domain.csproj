@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="Achivment.cs" />
     <Compile Include="Enums\AccountStatus.cs" />
     <Compile Include="Claim.cs" />
     <Compile Include="BaseEntity.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Quest.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserAchivment.cs" />
     <Compile Include="UserQuest.cs" />
     <Compile Include="Enums\UserQuestStatus.cs" />
     <Compile Include="UserType.cs" />

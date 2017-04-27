@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="EfDbContextFactory.cs" />
     <Compile Include="EntityTypeConfigurations\AccountEntityConfiguration.cs" />
+    <Compile Include="EntityTypeConfigurations\AchivmentEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\ClaimEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\BaseEntityTypeConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\ExpirienceEntityConfiguration.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="EntityTypeConfigurations\PalyerInfoEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\QuestEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\SettingEntityConfiguration.cs" />
+    <Compile Include="EntityTypeConfigurations\UserAchivmentEntiryConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\UserEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\UserQuestEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\UserTypeEntityConfiguration.cs" />

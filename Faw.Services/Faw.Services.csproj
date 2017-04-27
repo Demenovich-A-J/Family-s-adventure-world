@@ -79,6 +79,7 @@
     <Compile Include="DataManagement\UserTypeService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Achivment.cs" />
     <Compile Include="Models\AutoMapper\BuisnessModelsToDomainProfile.cs" />
     <Compile Include="Models\AutoMapper\DomainToBuisnessModelsProfile.cs" />
     <Compile Include="Models\Claim.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Models\Results\ApplayExpirienceResult.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserAchivment.cs" />
     <Compile Include="Models\UserQuest.cs" />
     <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

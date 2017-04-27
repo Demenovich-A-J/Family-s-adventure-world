@@ -50,9 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IAchivmentRepository.cs" />
     <Compile Include="Contracts\IExpirienceRepository.cs" />
     <Compile Include="Contracts\IPlayerInfoRepository.cs" />
     <Compile Include="Contracts\IUserQuestRepository.cs" />
+    <Compile Include="EntityFrameworkRepositories\AchivmentRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\ClaimRepository.cs" />
     <Compile Include="Contracts\IAccountRepository.cs" />
     <Compile Include="Contracts\IClaimRepository.cs" />

@@ -89,6 +89,20 @@ namespace Faw.Services.Models.AutoMapper
                     o.MapFrom(s => s.ExpirienceId);
                 });
 
+            CreateMap<Achivment, Faw.Models.Domain.Achivment>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.AchivmentId != Guid.Empty);
+                    o.MapFrom(s => s.AchivmentId);
+                });
+
+            CreateMap<UserAchivment, Faw.Models.Domain.UserAchivment>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.UserAchivmentId != Guid.Empty);
+                    o.MapFrom(s => s.UserAchivmentId);
+                });
+
             CreateMap<Gender, Faw.Models.Domain.Enums.Gender>();
             CreateMap<UserQuestStatus, Faw.Models.Domain.Enums.UserQuestStatus>();
             CreateMap<AccountStatus, Faw.Models.Domain.Enums.AccountStatus>();

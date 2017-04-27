@@ -22,6 +22,7 @@ namespace Faw.Services.Infrastructure
             Bind<IFamilyQueryService>().To<FamilyQueryService>();
             Bind<IQuestQueryService>().To<QuestQueryService>();
             Bind<IExpirienceQueryService>().To<ExpirienceQueryService>();
+            Bind<IAchivmentsQueryService>().To<AchivmentsQueryService>();
         }
     }
 }
