@@ -8,6 +8,7 @@ BEGIN
 	   CreatedOn            datetime             not null  CONSTRAINT DF_Achivment_CreatedOn DEFAULT getdate(),
 	   UpdatedOn            datetime             not null  CONSTRAINT DF_Achivment_UpdatedOn DEFAULT getdate(),
 	   ImageUrl             nvarchar(2000)       not null,
+	   Enabled				bit					 not null,
 	   constraint PK_Achivment primary key nonclustered (AchivmentId)
 	)
 END

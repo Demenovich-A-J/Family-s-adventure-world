@@ -38,6 +38,10 @@ namespace Faw.DataContext
         public DbSet<PlayerInfo> PalyerInfos { get; set; }
         public DbSet<UserQuest> UserQuests { get; set; }
         public DbSet<Expirience> Expiriences { get; set; }
+        public DbSet<Achivment> Achivments { get; set; }
+        public DbSet<UserAchivment> UserAchivments { get; set; }
+        public DbSet<ExpressionProperty> ExpressionProperties { get; set; }
+        public DbSet<PropertyValue> PropertyValues { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -56,6 +60,10 @@ namespace Faw.DataContext
             modelBuilder.Configurations.Add(new PalyerInfoEntityConfiguration());
             modelBuilder.Configurations.Add(new UserQuestEntityConfiguration());
             modelBuilder.Configurations.Add(new ExpirienceEntityConfiguration());
+            modelBuilder.Configurations.Add(new AchivmentEntityConfiguration());
+            modelBuilder.Configurations.Add(new UserAchivmentEntiryConfiguration());
+            modelBuilder.Configurations.Add(new ExpressionPropertyEntityConfiguration());
+            modelBuilder.Configurations.Add(new PropertyValueEntityConfiguration());
         }
 
         public override int SaveChanges()

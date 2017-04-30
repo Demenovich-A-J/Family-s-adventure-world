@@ -51,9 +51,11 @@
     <Compile Include="EntityTypeConfigurations\ClaimEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\BaseEntityTypeConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\ExpirienceEntityConfiguration.cs" />
+    <Compile Include="EntityTypeConfigurations\ExpressionPropertyEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\FamilyEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\ItemEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\PalyerInfoEntityConfiguration.cs" />
+    <Compile Include="EntityTypeConfigurations\PropertyValueEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\QuestEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\SettingEntityConfiguration.cs" />
     <Compile Include="EntityTypeConfigurations\UserAchivmentEntiryConfiguration.cs" />

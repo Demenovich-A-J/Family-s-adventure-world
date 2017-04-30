@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Faw.Repositories.Contracts;
 using Faw.Services.Contracts.Query;
@@ -31,7 +32,12 @@ namespace Faw.Services.Query
 
         public IEnumerable<Achivment> GetUserAchivments(Guid userId)
         {
-            throw new NotImplementedException();
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                return
+                    Mapper.Map<IEnumerable<Achivment>>(
+                        _achivmentRepository.GetUserAchivment(userId).Select(x => x.Achivment));
+            }
         }
 
         public IEnumerable<Achivment> Get()

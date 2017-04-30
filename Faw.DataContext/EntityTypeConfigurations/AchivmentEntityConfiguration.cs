@@ -6,6 +6,9 @@ namespace Faw.DataContext.EntityTypeConfigurations
     {
         public AchivmentEntityConfiguration() : base("AchivmentId")
         {
+            HasMany(x => x.ExpressionProperties)
+                .WithRequired(x => x.Achivment)
+                .HasForeignKey(x => x.AchivmentId);
         }
     }
 }

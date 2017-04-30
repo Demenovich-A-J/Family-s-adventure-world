@@ -32,6 +32,7 @@ namespace Faw.Repositories.Infrastructure
             Bind<IPlayerInfoRepository>().To<PlayerInfoRepository>();
             Bind<IExpirienceRepository>().To<ExpirienceRepository>();
             Bind<IAchivmentRepository>().To<AchivmentRepository>();
+            Bind<IExpressionPropertyRepository>().To<ExpressionPropertyRepository>();
         }
     }
 }

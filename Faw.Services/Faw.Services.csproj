@@ -62,6 +62,7 @@
     <Compile Include="Contracts\DataManagement\IFamilyService.cs" />
     <Compile Include="Contracts\DataManagement\IPlayerInfoService.cs" />
     <Compile Include="Contracts\DataManagement\IQuestService.cs" />
+    <Compile Include="Contracts\Logic\IConditionExpressionBuilder.cs" />
     <Compile Include="Contracts\Query\IAccountQueryService.cs" />
     <Compile Include="Contracts\DataManagement\IUserService.cs" />
     <Compile Include="Contracts\DataManagement\IUserTypeService.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Contracts\Query\IQuestQueryService.cs" />
     <Compile Include="Contracts\Query\IUserQueryService.cs" />
     <Compile Include="Contracts\Query\IUserTypeQueryService.cs" />
+    <Compile Include="DataManagement\AchivmentsService.cs" />
     <Compile Include="DataManagement\ExpirienceService.cs" />
     <Compile Include="DataManagement\FamilyService.cs" />
     <Compile Include="DataManagement\PlayerInfoService.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="DataManagement\UserService.cs" />
     <Compile Include="DataManagement\UserTypeService.cs" />
     <Compile Include="Infrastructure\NinjectServiceModule.cs" />
+    <Compile Include="Logic\ConditionExpressionBuilder.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Achivment.cs" />
     <Compile Include="Models\AutoMapper\BuisnessModelsToDomainProfile.cs" />

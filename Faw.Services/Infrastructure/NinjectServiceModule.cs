@@ -1,6 +1,8 @@
 ﻿using Faw.Services.Contracts.DataManagement;
+using Faw.Services.Contracts.Logic;
 using Faw.Services.Contracts.Query;
 using Faw.Services.DataManagement;
+using Faw.Services.Logic;
 using Faw.Services.Query;
 using Ninject.Modules;
 
@@ -23,6 +25,8 @@ namespace Faw.Services.Infrastructure
             Bind<IQuestQueryService>().To<QuestQueryService>();
             Bind<IExpirienceQueryService>().To<ExpirienceQueryService>();
             Bind<IAchivmentsQueryService>().To<AchivmentsQueryService>();
+
+            Bind<IConditionExpressionBuilder>().To<ConditionExpressionBuilder>();
         }
     }
 }
