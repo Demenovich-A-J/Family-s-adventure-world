@@ -25,7 +25,9 @@ const mapStateToProps = (state) => ({
   loading: state.quests.loading,
   openCreateQuestDialog: state.quests.openCreateQuestDialog,
   tabId: state.quests.tabId,
-  familyQuests: state.quests.familyQuests
+  familyQuests: state.quests.familyQuests,
+  familyQuestsLoading: state.quests.familyQuestsLoading,
+  userQuestsLoading: state.quests.userQuestsLoading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quests)

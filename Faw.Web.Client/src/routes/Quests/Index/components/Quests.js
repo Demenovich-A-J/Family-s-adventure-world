@@ -5,7 +5,8 @@ import {
   Tabs,
   Tab,
   FABButton,
-  Icon
+  Icon,
+  ProgressBar
 } from 'react-mdl'
 import CreateQuestDialog from './CreateQuestDialog'
 import UserQuestList from './UserQuestList'
@@ -16,10 +17,8 @@ import './Quests.scss'
 function showTabContent (tabId, quests) {
   switch (tabId) {
     case 0:
-      return (<div />)
-    case 1:
       return (<UserQuestList />)
-    case 2:
+    case 1:
       return (<QuestList familyQuests={quests} />)
     default:
       return (<div />)
@@ -30,7 +29,6 @@ export const Quests = (props) => (
   <Grid className='faw-quests-container'>
     <Cell col={12} className='mdl-shadow--2dp'>
       <Tabs activeTab={props.tabId} onChange={props.questTabHandler} ripple>
-        <Tab>All</Tab>
         <Tab>User</Tab>
         <Tab>Family</Tab>
       </Tabs>
@@ -42,7 +40,13 @@ export const Quests = (props) => (
     </Cell>
     <Cell col={12}>
       {
-        showTabContent(props.tabId, props.familyQuests)
+        (props.familyQuestsLoading && props.tabId === 1) || (props.userQuestsLoading && props.tabId === 0)
+        ? (
+          <ProgressBar indeterminate />
+        )
+        : (
+          showTabContent(props.tabId, props.familyQuests)
+        )
       }
     </Cell>
     <Cell col={12}>
@@ -75,7 +79,9 @@ Quests.propTypes = {
   editInfoCoinsChangeHandler: React.PropTypes.func.isRequired,
   questTabHandler: React.PropTypes.func.isRequired,
   tabId: React.PropTypes.number.isRequired,
-  familyQuests: React.PropTypes.array.isRequired
+  familyQuests: React.PropTypes.array.isRequired,
+  familyQuestsLoading: React.PropTypes.bool.isRequired,
+  userQuestsLoading: React.PropTypes.bool.isRequired
 }
 
 export default Quests

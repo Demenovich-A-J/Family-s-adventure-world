@@ -1,8 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
 
-// ------------------------------------ Constants
-// ------------------------------------
 export const LOADING_CHANGED = 'LOADING_CHANGED'
 export const OPEN_CREATE_QUEST_DIALOG_CHANGED = 'OPEN_CREATE_QUEST_DIALOG_CHANGED'
 export const EDIT_QUEST_ID_CHANGED = 'EDIT_QUEST_ID_CHANGED'
@@ -11,15 +9,54 @@ export const EDIT_QUEST_DESCRIPTION_CHANGED = 'EDIT_QUEST_DESCRIPTION_CHANGED'
 export const EDIT_QUEST_IS_PUBLIC_CHANGED = 'EDIT_QUEST_IS_PUBLIC_CHANGED'
 export const EDIT_QUEST_REQUIERED_LEVEL_CHANGED = 'EDIT_QUEST_REQUIERED_LEVEL_CHANGED'
 export const QUEST_TAB_CHANGED = 'QUEST_TAB_CHANGED'
-export const FAMILY_QUESTS_CHANGED = 'FAMILY_QUESTS_CHANGED'
 export const EDIT_QUEST_COINS_CHANGED = 'EDIT_QUEST_COINS_CHANGED'
 
-// ------------------------------------ Actions
-// ------------------------------------
-export const setFamilyQuest = (familyQuests) => {
+export const GET_FAMILY_QUESTS = 'GET_FAMILY_QUESTS'
+export const SET_FAMILY_QUESTS = 'SET_FAMILY_QUESTS'
+
+export const GET_USER_QUESTS = 'GET_USER_QUESTS'
+export const SET_USER_QUESTS = 'SET_USER_QUESTS'
+
+export const SET_FAMILY_QUESTS_LOADING = 'SET_FAMILY_QUESTS_LOADING'
+export const SET_USER_QUESTS_LOADING = 'SET_USER_QUESTS_LOADING'
+
+export const getFamilyQuests = () => {
   return {
-    type: FAMILY_QUESTS_CHANGED,
+    type: GET_FAMILY_QUESTS
+  }
+}
+
+export const setFamilyQuests = (familyQuests) => {
+  return {
+    type: SET_FAMILY_QUESTS,
     payload: familyQuests
+  }
+}
+
+export const setFamilyQuestsLoading = (loading) => {
+  return {
+    type: SET_FAMILY_QUESTS_LOADING,
+    payload: loading
+  }
+}
+
+export const getUserQuests = () => {
+  return {
+    type: GET_USER_QUESTS
+  }
+}
+
+export const setUserQuests = (userQuests) => {
+  return {
+    type: SET_USER_QUESTS,
+    payload: userQuests
+  }
+}
+
+export const setUserQuestsLoading = (loading) => {
+  return {
+    type: SET_USER_QUESTS_LOADING,
+    payload: loading
   }
 }
 
@@ -85,9 +122,6 @@ export const setEditQuestCoins = (coins) => {
     payload: coins
   }
 }
-
-// ------------------------------------ Functions
-// ------------------------------------
 
 export const closeCreateQuestDialogHandler = (e) => {
   e.preventDefault()
@@ -188,6 +222,48 @@ export const questTabHandler = (tabId) => {
   }
 }
 
+export const loadUserQuests = (userId) => {
+  return (dispatch, getState) => {
+    dispatch(getUserQuests())
+    dispatch(setUserQuestsLoading(true))
+
+    axios({
+      method: 'Get',
+      url: '/Quest/FetchUserQuests/' + userId
+    }).then(function (response) {
+      if (response.data) {
+        dispatch(setUserQuests(response.data.quests))
+      }
+
+      dispatch(setUserQuestsLoading(false))
+    }).catch(function (error) {
+      console.log(error)
+      dispatch(setUserQuestsLoading(false))
+    })
+  }
+}
+
+export const loadFamilyQuests = (familyId) => {
+  return (dispatch, getState) => {
+    dispatch(getFamilyQuests())
+    dispatch(setFamilyQuestsLoading(true))
+
+    axios({
+      method: 'Get',
+      url: '/Quest/FetchFamilyQuests/' + familyId
+    }).then(function (response) {
+      if (response.data) {
+        dispatch(setFamilyQuests(response.data.quests))
+      }
+
+      dispatch(setFamilyQuestsLoading(false))
+    }).catch(function (error) {
+      console.log(error)
+      dispatch(setFamilyQuestsLoading(false))
+    })
+  }
+}
+
 export const actions = {
   closeCreateQuestDialogHandler,
   openCreateQuestDialogHandler,
@@ -198,11 +274,11 @@ export const actions = {
   editInfoRequieredLevelChangeHandler,
   editInfoCoinsChangeHandler,
   questTabHandler,
-  setFamilyQuest
+  setFamilyQuests,
+  loadUserQuests,
+  loadFamilyQuests
 }
 
-// ------------------------------------ Action Handlers
-// ------------------------------------
 const ACTION_HANDLERS = {
   [LOADING_CHANGED]:
     (state, action) => _.assign({}, state, { loading: action.payload }),
@@ -222,14 +298,21 @@ const ACTION_HANDLERS = {
     (state, action) => _.merge({}, state, { editQuestInfo: { coins: action.payload } }),
   [QUEST_TAB_CHANGED]:
     (state, action) => _.assign({}, state, { tabId: action.payload }),
-  [FAMILY_QUESTS_CHANGED]:
-    (state, action) => _.assign({}, state, { familyQuests: action.payload })
+  [SET_FAMILY_QUESTS]:
+    (state, action) => _.assign({}, state, { familyQuests: action.payload }),
+  [SET_USER_QUESTS]:
+    (state, action) => _.assign({}, state, { userQuests: action.payload }),
+  [SET_FAMILY_QUESTS_LOADING]:
+    (state, action) => _.assign({}, state, { familyQuestsLoading: action.payload }),
+  [SET_USER_QUESTS_LOADING]:
+    (state, action) => _.assign({}, state, { userQuestsLoading: action.payload })
 }
 
 const initialState = {
   loading: false,
   openCreateQuestDialog: false,
   familyQuests: [],
+  userQuests: [],
   editQuestInfo: {
     questId: null,
     name: null,
@@ -238,7 +321,9 @@ const initialState = {
     requiredLevel: 0,
     coins: 0
   },
-  tabId: 0
+  tabId: 1,
+  familyQuestsLoading: false,
+  userQuestsLoading: false
 }
 
 export default function questsReducer (state = initialState, action) {
