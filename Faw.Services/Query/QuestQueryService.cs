@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using AutoMapper;
 using Faw.Repositories.Contracts;
 using Faw.Services.Contracts.Query;
@@ -36,7 +38,27 @@ namespace Faw.Services.Query
         {
             using (ContextScopeFactory.CreateReadOnly())
             {
-                return Mapper.Map<IEnumerable<UserQuest>>(_userQuestRepository.GetWhere(x => x.UserId == userId));
+                return Mapper.Map<IEnumerable<UserQuest>>(_userQuestRepository.GetUserQuests(userId));
+            }
+        }
+
+        public IEnumerable<Quest> GetFamilyQuests(Guid familyId)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                return Mapper.Map<IEnumerable<Quest>>(_questRepository.GetWhere(x => x.FamilyId == familyId));
+            }
+        }
+
+        public IEnumerable<Quest> GetAvailableFamilyUserQuests(Guid familyId, Guid userId)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                var userQuestIds = _userQuestRepository.GetWhere(x => x.UserId == userId).AsNoTracking().Select(x => x.QuestId).ToList();
+
+                return
+                    Mapper.Map<IEnumerable<Quest>>(
+                        _questRepository.GetWhere(x => x.FamilyId == familyId && !userQuestIds.Contains(x.EntityId)));
             }
         }
 

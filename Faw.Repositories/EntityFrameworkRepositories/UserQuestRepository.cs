@@ -1,4 +1,7 @@
-﻿using Faw.Models.Domain;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
 using Mehdime.Entity;
 
@@ -8,6 +11,12 @@ namespace Faw.Repositories.EntityFrameworkRepositories
     {
         public UserQuestRepository(IAmbientDbContextLocator dataContext) : base(dataContext)
         {
+        }
+
+        public IQueryable<UserQuest> GetUserQuests(Guid userId)
+        {
+            return DbContext.UserQuests.Where(x => x.UserId == userId)
+                .Include(x => x.Quest);
         }
     }
 }

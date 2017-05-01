@@ -12,5 +12,9 @@ namespace Faw.Services.Contracts.Query
         IEnumerable<Quest> GetQuests(Guid userId);
 
         IEnumerable<UserQuest> GetUserQuests(Guid userId);
+
+        IEnumerable<Quest> GetFamilyQuests(Guid familyId);
+
+        IEnumerable<Quest> GetAvailableFamilyUserQuests(Guid familyId, Guid userId);
     }
 }

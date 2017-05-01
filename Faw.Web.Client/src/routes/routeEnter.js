@@ -1,9 +1,8 @@
 import axios from 'axios'
-import _ from 'lodash'
 
 import { setGendersInfo, setGender } from './Register/modules/register'
 import { fetchUserFamilyInfo } from 'store/familyInfo'
-import { setFamilyQuest } from './Quests/Index/modules/quests'
+import { loadUserQuests, loadFamilyQuests } from './Quests/Index/modules/quests'
 import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
@@ -39,23 +38,14 @@ export const checkResetStatusOnEnter = (store) => (nextState, replace) => {
 }
 
 export const fetchQuests = (store) => (nextState, replace) => {
-  store.dispatch(showLoading())
-  var data = store.getState().user
+  var state = store.getState()
 
-  if (!data.isAuthenticated) {
+  if (!state.user.isAuthenticated) {
     return
   }
 
-  axios({
-    method: 'Get',
-    url: '/Quest/FetchQuests/' + data.userInfo.userId
-  }).then(function (response) {
-    store.dispatch(setFamilyQuest(response.data.quests))
-    store.dispatch(hideLoading())
-  }).catch(function (error) {
-    console.log(error)
-    store.dispatch(hideLoading())
-  })
+  store.dispatch(loadFamilyQuests(state.familyInfo.family.familyId))
+  store.dispatch(loadUserQuests(state.user.userInfo.userId))
 }
 
 export const fetchUserFamily = (store) => (nextState, replace) => {

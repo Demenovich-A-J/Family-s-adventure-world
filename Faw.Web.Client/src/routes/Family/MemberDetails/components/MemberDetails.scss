@@ -54,4 +54,12 @@
 			}
 		}
 	}
+
+	#userQuestList{
+		.user-quest-row{
+			&:nth-child(2n){
+				background: #f2f2f2;
+			}
+		}
+	}
 }

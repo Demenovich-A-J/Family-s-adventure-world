@@ -10,26 +10,62 @@ export const SET_FAMILY_MEMBER_ACHIVMENTS = 'SET_FAMILY_MEMBER_ACHIVMENTS'
 export const GET_FAMILY_MEMBER_QUESTS = 'GET_FAMILY_MEMBER_QUESTS'
 export const SET_FAMILY_MEMBER_QUESTS = 'SET_FAMILY_MEMBER_QUESTS'
 
+export const GET_AVAILABLE_QUESTS = 'GET_AVAILABLE_QUESTS'
+export const SET_AVAILABLE_QUESTS = 'SET_AVAILABLE_QUESTS'
+
 export const SET_FAMILY_MEMBER_DETAILS_LOADING = 'SET_FAMILY_MEMBER_DETAILS_LOADING'
 export const SET_FAMILY_MEMBER_ACHIVMENTS_LOADING = 'SET_FAMILY_MEMBER_ACHIVMENTS_LOADING'
 export const SET_FAMILY_MEMBER_QUESTS_LOADING = 'SET_FAMILY_MEMBER_QUESTS_LOADING'
+export const SET_AVAILABLE_QUESTS_LOADING = 'SET_AVAILABLE_QUESTS_LOADING'
 
+export const SET_AVAILABLE_QUEST_SELECTED_ID = 'SET_AVAILABLE_QUEST_SELECTED_ID'
+
+export const SET_QUEST_FOR_USER = 'SET_QUEST_FOR_USER'
+export const SET_QUEST_ASSIGNING = 'SET_QUEST_ASSIGNING'
+
+export const setQuestForUser = () => {
+  return {
+    type: SET_QUEST_FOR_USER
+  }
+}
+
+export const setUserQuestAssigning = (assigning) => {
+  return {
+    type: SET_QUEST_ASSIGNING,
+    payload: assigning
+  }
+}
+
+export const setAvailableQuestsSelectedId = (selectedId) => {
+  return {
+    type: SET_AVAILABLE_QUEST_SELECTED_ID,
+    payload: selectedId
+  }
+}
+
+export const getAvailableQuests = () => {
+  return {
+    type: GET_AVAILABLE_QUESTS
+  }
+}
+
+export const setAvailableQuests = (availableQuest) => {
+  return {
+    type: SET_AVAILABLE_QUESTS,
+    payload: availableQuest
+  }
+}
+
+export const setAvailableQuestsLoading = (loading) => {
+  return {
+    type: SET_AVAILABLE_QUESTS_LOADING,
+    payload: loading
+  }
+}
 
 export const getFamilyMemeberDetails = () => {
   return {
     type: GET_FAMILY_MEMBER_DETAILS
-  }
-}
-
-export const getFamilyMemeberAchivments = () => {
-  return {
-    type: GET_FAMILY_MEMBER_ACHIVMENTS
-  }
-}
-
-export const getFamilyMemeberQuests = () => {
-  return {
-    type: GET_FAMILY_MEMBER_QUESTS
   }
 }
 
@@ -40,20 +76,6 @@ export const setFamilyMemeberDetails = (memberInfo) => {
   }
 }
 
-export const setFamilyMemeberAchivments = (memberAchivments) => {
-  return {
-    type: SET_FAMILY_MEMBER_ACHIVMENTS,
-    payload: memberAchivments
-  }
-}
-
-export const setFamilyMemeberQuests = (memberQuests) => {
-  return {
-    type: SET_FAMILY_MEMBER_QUESTS,
-    payload: memberQuests
-  }
-}
-
 export const setFamilyMemeberDetailsLoading = (loading) => {
   return {
     type: SET_FAMILY_MEMBER_DETAILS_LOADING,
@@ -61,10 +83,36 @@ export const setFamilyMemeberDetailsLoading = (loading) => {
   }
 }
 
+export const getFamilyMemeberAchivments = () => {
+  return {
+    type: GET_FAMILY_MEMBER_ACHIVMENTS
+  }
+}
+
+export const setFamilyMemeberAchivments = (memberAchivments) => {
+  return {
+    type: SET_FAMILY_MEMBER_ACHIVMENTS,
+    payload: memberAchivments
+  }
+}
+
 export const setFamilyMemeberAchivmentsLoading = (loading) => {
   return {
     type: SET_FAMILY_MEMBER_ACHIVMENTS_LOADING,
     payload: loading
+  }
+}
+
+export const getFamilyMemeberQuests = () => {
+  return {
+    type: GET_FAMILY_MEMBER_QUESTS
+  }
+}
+
+export const setFamilyMemeberQuests = (memberQuests) => {
+  return {
+    type: SET_FAMILY_MEMBER_QUESTS,
+    payload: memberQuests
   }
 }
 
@@ -84,7 +132,6 @@ export const loadFamilyMemberDetails = (userId) => {
       method: 'Get',
       url: '/FamilyMember/FamilyUserInfo/' + userId
     }).then(function (response) {
-      console.log(response)
       if (response.data) {
         dispatch(setFamilyMemeberDetails(response.data))
       }
@@ -96,7 +143,8 @@ export const loadFamilyMemberDetails = (userId) => {
     })
 
     dispatch(loadFamilyMemberQuests(userId))
-    dispatch(loadtFamilyMemberAchivments(userId))
+    dispatch(loadFamilyMemberAchivments(userId))
+    dispatch(loadAvailableQuests(userId))
   }
 }
 
@@ -109,7 +157,6 @@ export const loadFamilyMemberQuests = (userId) => {
       method: 'Get',
       url: '/FamilyMember/FamilyUserQuests/' + userId
     }).then(function (response) {
-      console.log(response)
       if (response.data) {
         dispatch(setFamilyMemeberQuests(response.data))
       }
@@ -122,7 +169,7 @@ export const loadFamilyMemberQuests = (userId) => {
   }
 }
 
-export const loadtFamilyMemberAchivments = (userId) => {
+export const loadFamilyMemberAchivments = (userId) => {
   return (dispatch, getState) => {
     dispatch(getFamilyMemeberAchivments())
     dispatch(setFamilyMemeberAchivmentsLoading(true))
@@ -131,9 +178,8 @@ export const loadtFamilyMemberAchivments = (userId) => {
       method: 'Get',
       url: '/FamilyMember/FamilyUserAchivments/' + userId
     }).then(function (response) {
-      console.log(response)
       if (response.data) {
-        dispatch(setFamilyMemeberAchivments(response.data))
+        dispatch(setFamilyMemeberAchivments(response.data.achivmentList))
       }
 
       dispatch(setFamilyMemeberAchivmentsLoading(false))
@@ -144,9 +190,74 @@ export const loadtFamilyMemberAchivments = (userId) => {
   }
 }
 
+export const loadAvailableQuests = (userId) => {
+  return (dispatch, getState) => {
+    dispatch(getAvailableQuests())
+    dispatch(setAvailableQuestsLoading(true))
+
+    axios({
+      method: 'Get',
+      url: '/Quest/UserAvailableQuests/' + getState().familyInfo.family.familyId + '/' + userId
+    }).then(function (response) {
+      if (response.data) {
+        dispatch(setAvailableQuests(response.data.quests))
+      }
+
+      dispatch(setAvailableQuestsLoading(false))
+    }).catch(function (error) {
+      console.log(error)
+      dispatch(setAvailableQuestsLoading(false))
+    })
+  }
+}
+
+export const assignQuestToFamilyMember = () => {
+  return (dispatch, getState) => {
+    dispatch(setQuestForUser())
+    dispatch(setUserQuestAssigning(true))
+    var state = getState()
+    var userId = state.memberDetails.userInfo.userId
+
+    axios({
+      method: 'Put',
+      url: '/Quest/AssignUserQuest',
+      data: {
+        UserId: userId,
+        QuestId: state.memberDetails.availableQuestSelectedId
+      }
+    }).then(function (response) {
+      dispatch(loadAvailableQuests(userId))
+      dispatch(loadFamilyMemberQuests(userId))
+      dispatch(setAvailableQuestsSelectedId(''))
+      dispatch(setUserQuestAssigning(false))
+    }).catch(function (error) {
+      console.log(error)
+      dispatch(setUserQuestAssigning(false))
+    })
+  }
+}
+
+export const onAvailableQuestSelectChanged = (id) => {
+  return (dispatch, getState) => {
+    dispatch(setAvailableQuestsSelectedId(id))
+  }
+}
+
+export const onAssignButtonClick = (e) => {
+  return (dispatch, getState) => {
+    var availableQuestSelectedId = getState().memberDetails.availableQuestSelectedId
+
+    if (availableQuestSelectedId === '') {
+      return
+    }
+    dispatch(assignQuestToFamilyMember())
+  }
+}
 
 export const actions = {
-  loadFamilyMemberDetails
+  loadFamilyMemberDetails,
+  onAvailableQuestSelectChanged,
+  onAssignButtonClick
 }
 
 const ACTION_HANDLERS = {
@@ -161,16 +272,28 @@ const ACTION_HANDLERS = {
   [SET_FAMILY_MEMBER_ACHIVMENTS_LOADING]:
     (state, action) => _.assign({}, state, { userAchivmentsLoading: action.payload }),
   [SET_FAMILY_MEMBER_QUESTS_LOADING]:
-    (state, action) => _.assign({}, state, { userQuestsLoading: action.payload })
+    (state, action) => _.assign({}, state, { userQuestsLoading: action.payload }),
+  [SET_AVAILABLE_QUESTS]:
+    (state, action) => _.assign({}, state, { availableQuests: action.payload }),
+  [SET_AVAILABLE_QUESTS_LOADING]:
+    (state, action) => _.assign({}, state, { availableQuestsLoading: action.payload }),
+  [SET_AVAILABLE_QUEST_SELECTED_ID]:
+    (state, action) => _.assign({}, state, { availableQuestSelectedId: action.payload }),
+  [SET_QUEST_ASSIGNING]:
+    (state, action) => _.assign({}, state, { userQuestAssigning: action.payload })
 }
 
 const initialState = {
   userInfo: {},
-  userAchivments: {},
-  userQuests: {},
+  userAchivments: [],
+  userQuests: [],
+  availableQuests: [],
   userInfoLoading: true,
   userAchivmentsLoading: true,
-  userQuestsLoading: true
+  userQuestsLoading: true,
+  availableQuestsLoading: true,
+  availableQuestSelectedId: '',
+  userQuestAssigning: false
 }
 
 export default function memberDetailsReducer (state = initialState, action) {

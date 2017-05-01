@@ -34,7 +34,6 @@ namespace Faw.Web.Api.Controllers
             _questService.Create(quest);
 
             return Ok();
-
         }
 
         [HttpPost]
@@ -111,15 +110,38 @@ namespace Faw.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("FetchFamilyQuests/{userId}/{familyId}")]
-        public IHttpActionResult FetchFamilyQuests([FromUri] Guid userId, [FromUri] Guid familyId)
+        [Route("FetchFamilyQuests/{familyId}")]
+        public IHttpActionResult FetchFamilyQuests([FromUri] Guid familyId)
         {
-            var quests = _questQueryService.GetQuests(userId);
+            var quests = _questQueryService.GetFamilyQuests(familyId);
 
             return Ok(new
             {
                 quests = quests.Select(x => new
                 {
+                    name = x.Name,
+                    description = x.Description,
+                    isPublic = x.IsPublic,
+                    expirience = x.Expirience,
+                    coins = x.Coins ?? default(decimal),
+                    requiredLevel = x.RequiredLevel,
+                    createdOn = x.CreatedOn,
+                    updatedOn = x.UpdatedOn
+                })
+            });
+        }
+
+        [HttpGet]
+        [Route("UserAvailableQuests/{familyId}/{userId}")]
+        public IHttpActionResult FetchFamilyQuests([FromUri] Guid familyId, [FromUri] Guid userId)
+        {
+            var quests = _questQueryService.GetAvailableFamilyUserQuests(familyId, userId);
+
+            return Ok(new
+            {
+                quests = quests.Select(x => new
+                {
+                    id = x.QuestId,
                     name = x.Name,
                     description = x.Description,
                     isPublic = x.IsPublic,
