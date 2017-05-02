@@ -13,8 +13,9 @@ import ForgotPasswordRoute from './ForgotPassword'
 import FamilyRoute from './Family/Index'
 import FamilyMemberDetailsRoute from './Family/MemberDetails'
 
-
 import QuestsRoute from './Quests/Index'
+
+import UserDetailsRoute from './User/Details'
 
 import NotFound from './NotFound'
 
@@ -29,7 +30,8 @@ export const createRoutes = (store) => ([
     childRoutes: [
       FamilyRoute(store),
       FamilyMemberDetailsRoute(store),
-      QuestsRoute(store)
+      QuestsRoute(store),
+      UserDetailsRoute(store)
     ]
   },
   {

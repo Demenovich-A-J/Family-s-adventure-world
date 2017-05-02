@@ -49,13 +49,13 @@ var Menu = React.createClass({
           </p>
           <img id='-user-info-image' src={avatar} />
           <MdlMenu target='-user-info-image' align='right' ripple>
-            <MenuItem className='mdl-menu__item--full-bleed-divider'>
-              <Link to='/user/details' className='-link' activeClassName='--active'>
+            <Link to={'/user/details/' + this.props.userInfo.userId} className='-link' activeClassName='--active'>
+              <MenuItem className='mdl-menu__item--full-bleed-divider'>
                 {
                   this.props.userInfo.userName
                 }
-              </Link>
-            </MenuItem>
+              </MenuItem>
+            </Link>
             <MenuItem onClick={this.props.logoutUser}>Logout</MenuItem>
           </MdlMenu>
           <div className='-user-info-hover-container mdl-shadow--6dp' />
