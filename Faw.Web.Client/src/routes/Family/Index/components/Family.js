@@ -76,11 +76,11 @@ export const Family = (props) => (
               Aenan convallis.
             </CardText>
             <CardActions border>
-              <Button colored>
-                <Link to={'/family/member/details/' + familyMember.id} className='-link' activeClassName='--active'>
+              <Link to={'/family/member/details/' + familyMember.id} className='-link' activeClassName='--active'>
+                <Button colored>
                   Details
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </CardActions>
           </Card>
         </Cell>

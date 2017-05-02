@@ -76,7 +76,7 @@ namespace Faw.Web.Api.Controllers
                 {
                     name = x.Quest.Name,
                     description = x.Quest.Description,
-                    status = x.UserQuestStatus,
+                    status = x.UserQuestStatus.ToString(),
                     isPublic = x.Quest.IsPublic,
                     expirience = x.Quest.Expirience,
                     coins = x.Quest.Coins ?? default(decimal),

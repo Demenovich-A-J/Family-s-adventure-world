@@ -17,7 +17,7 @@ import './Quests.scss'
 function showTabContent (tabId, quests) {
   switch (tabId) {
     case 0:
-      return (<UserQuestList />)
+      return (<UserQuestList userQuests={quests} />)
     case 1:
       return (<QuestList familyQuests={quests} />)
     default:
@@ -25,9 +25,20 @@ function showTabContent (tabId, quests) {
   }
 }
 
+function getQuests (tabId, userQuests, familyQuests) {
+  switch (tabId) {
+    case 0:
+      return userQuests
+    case 1:
+      return familyQuests
+    default:
+      return userQuests
+  }
+}
+
 export const Quests = (props) => (
-  <Grid className='faw-quests-container'>
-    <Cell col={12} className='mdl-shadow--2dp'>
+  <Grid className='faw-quests-container mdl-shadow--2dp'>
+    <Cell col={12}>
       <Tabs activeTab={props.tabId} onChange={props.questTabHandler} ripple>
         <Tab>User</Tab>
         <Tab>Family</Tab>
@@ -45,12 +56,9 @@ export const Quests = (props) => (
           <ProgressBar indeterminate />
         )
         : (
-          showTabContent(props.tabId, props.familyQuests)
+          showTabContent(props.tabId, getQuests(props.tabId, props.userQuests, props.familyQuests))
         )
       }
-    </Cell>
-    <Cell col={12}>
-      <UserQuestList />
     </Cell>
     <Cell col={12}>
       <CreateQuestDialog
@@ -81,7 +89,8 @@ Quests.propTypes = {
   tabId: React.PropTypes.number.isRequired,
   familyQuests: React.PropTypes.array.isRequired,
   familyQuestsLoading: React.PropTypes.bool.isRequired,
-  userQuestsLoading: React.PropTypes.bool.isRequired
+  userQuestsLoading: React.PropTypes.bool.isRequired,
+  userQuests: React.PropTypes.array.isRequired
 }
 
 export default Quests

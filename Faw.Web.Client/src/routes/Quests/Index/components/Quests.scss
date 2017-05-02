@@ -7,4 +7,11 @@
 	.-create-quest-dialog{
 		width: 30%;
 	}
+
+	#userQuestList{
+
+		.user-quest-row{
+			border-bottom: 1px solid rgba(0,0,0,.12);
+		}
+	}
 }
