@@ -14,4 +14,18 @@
 			border-bottom: 1px solid rgba(0,0,0,.12);
 		}
 	}
+
+	.-quest-list{
+		position: relative;
+
+		.mdl-data-table{
+			border: none;
+		}
+
+		.footer-buttons{
+			position: absolute;
+			bottom: -25px;
+			right: 20px;
+		}
+	}
 }

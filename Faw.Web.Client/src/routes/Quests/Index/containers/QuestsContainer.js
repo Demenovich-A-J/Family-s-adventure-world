@@ -18,7 +18,8 @@ const mapDispatchToProps = {
   editInfoRequieredLevelChangeHandler: actions.editInfoRequieredLevelChangeHandler,
   editInfoCoinsChangeHandler: actions.editInfoCoinsChangeHandler,
   questTabHandler: actions.questTabHandler,
-  setFamilyQuest: actions.setFamilyQuest
+  setFamilyQuest: actions.setFamilyQuest,
+  onEditButtonClick: actions.onEditButtonClick
 }
 
 const mapStateToProps = (state) => ({

@@ -19,44 +19,55 @@ function getStatusClass (status) {
 }
 
 export const UserQuestList = (props) => (
-  <div id='userQuestList'>
-    {
-      props.userQuests && props.userQuests.map((userQuest, index) => (
-        <Grid className='user-quest-row' key={index}>
-          <Cell col={4}>
-            <b>{'Name : '}</b>
-            {userQuest.name}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Expirience : '}</b>
-            {userQuest.expirience}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Required Level : '}</b>
-            {userQuest.requiredLevel}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Status : '}</b>
-            <span className={getStatusClass(userQuest.status)}>
+  <table id='userQuestList'
+    className='mdl-data-table mdl-js-data-table mdl-data-table--selectable full-width mdl-shadow--2dp'>
+    <thead>
+      <tr>
+        <th className='mdl-data-table__cell--non-numeric' />
+        <th className='mdl-data-table__cell--non-numeric'>
+          Name
+        </th>
+        <th className='mdl-data-table__cell--non-numeric'>
+          Status
+        </th>
+        <th className='mdl-data-table__cell--non-numeric'>
+          Expirience
+        </th>
+        <th className='mdl-data-table__cell--non-numeric'>
+          Coins
+        </th>
+        <th className='mdl-data-table__cell--non-numeric'>
+          Created
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        props.userQuests && props.userQuests.map((userQuest, index) => (
+          <tr key={index}>
+            <td>
+              <img src='' className='quest-image' />
+            </td>
+            <td className='mdl-data-table__cell--non-numeric'>
+              {userQuest.name}
+            </td>
+            <td className={getStatusClass(userQuest.status) + ' mdl-data-table__cell--non-numeric'}>
               {userQuest.status}
-            </span>
-          </Cell>
-          <Cell col={4}>
-            <b>{'Coins : '}</b>
-            {`$${userQuest.coins.toFixed(2)}`}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Created : '}</b>
-            {userQuest.createdOn}
-          </Cell>
-          <Cell col={12}>
-            <b>{'Description : '}</b>
-            {userQuest.description}
-          </Cell>
-        </Grid>
-      ))
-    }
-  </div>
+            </td>
+            <td className='mdl-data-table__cell--non-numeric'>
+              {userQuest.expirience}
+            </td>
+            <td className='mdl-data-table__cell--non-numeric'>
+              {`$${userQuest.coins.toFixed(2)}`}
+            </td>
+            <td className='mdl-data-table__cell--non-numeric'>
+              {userQuest.createdOn}
+            </td>
+          </tr>
+          ))
+        }
+    </tbody>
+  </table>
 )
 
 UserQuestList.propTypes = {

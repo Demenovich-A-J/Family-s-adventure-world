@@ -14,12 +14,12 @@ import QuestList from './QuestList'
 
 import './Quests.scss'
 
-function showTabContent (tabId, quests) {
+function showTabContent (tabId, quests, onEditButtonClick) {
   switch (tabId) {
     case 0:
       return (<UserQuestList userQuests={quests} />)
     case 1:
-      return (<QuestList familyQuests={quests} />)
+      return (<QuestList familyQuests={quests} onEditButtonClick={onEditButtonClick} />)
     default:
       return (<div />)
   }
@@ -37,28 +37,39 @@ function getQuests (tabId, userQuests, familyQuests) {
 }
 
 export const Quests = (props) => (
-  <Grid className='faw-quests-container mdl-shadow--2dp'>
+  <Grid className='faw-quests-container'>
     <Cell col={12}>
-      <Tabs activeTab={props.tabId} onChange={props.questTabHandler} ripple>
+      <Tabs activeTab={props.tabId} onChange={props.questTabHandler} ripple className='mdl-shadow--2dp -quest-tabs'>
         <Tab>User</Tab>
         <Tab>Family</Tab>
       </Tabs>
-    </Cell>
-    <Cell col={12}>
-      <FABButton colored ripple onClick={props.openCreateQuestDialogHandler}>
-        <Icon name='add' />
-      </FABButton>
-    </Cell>
-    <Cell col={12}>
-      {
-        (props.familyQuestsLoading && props.tabId === 1) || (props.userQuestsLoading && props.tabId === 0)
-        ? (
-          <ProgressBar indeterminate />
-        )
-        : (
-          showTabContent(props.tabId, getQuests(props.tabId, props.userQuests, props.familyQuests))
-        )
-      }
+      <div className='-quest-list'>
+        {
+          (props.familyQuestsLoading && props.tabId === 1) || (props.userQuestsLoading && props.tabId === 0)
+          ? (
+            <ProgressBar indeterminate />
+          )
+          : (
+            showTabContent(
+              props.tabId,
+              getQuests(props.tabId, props.userQuests, props.familyQuests),
+              props.onEditButtonClick)
+          )
+        }
+        {
+          props.tabId === 1
+          ? (
+            <div className='footer-buttons'>
+              <FABButton primary ripple raised onClick={props.openCreateQuestDialogHandler}>
+                <Icon name='add' />
+              </FABButton>
+            </div>
+          )
+          : (
+            <div />
+          )
+        }
+      </div>
     </Cell>
     <Cell col={12}>
       <CreateQuestDialog
@@ -90,7 +101,8 @@ Quests.propTypes = {
   familyQuests: React.PropTypes.array.isRequired,
   familyQuestsLoading: React.PropTypes.bool.isRequired,
   userQuestsLoading: React.PropTypes.bool.isRequired,
-  userQuests: React.PropTypes.array.isRequired
+  userQuests: React.PropTypes.array.isRequired,
+  onEditButtonClick: React.PropTypes.func.isRequired
 }
 
 export default Quests

@@ -82,7 +82,8 @@ namespace Faw.Web.Api.Controllers
                     coins = x.Quest.Coins ?? default(decimal),
                     requiredLevel = x.Quest.RequiredLevel,
                     createdOn = x.CreatedOn,
-                    updatedOn = x.UpdatedOn
+                    updatedOn = x.UpdatedOn,
+                    id = x.QuestId
                 })
             });
         }
@@ -104,7 +105,8 @@ namespace Faw.Web.Api.Controllers
                     coins = x.Coins ?? default(decimal),
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
-                    updatedOn = x.UpdatedOn
+                    updatedOn = x.UpdatedOn,
+                    id = x.QuestId
                 })
             });
         }
@@ -126,7 +128,8 @@ namespace Faw.Web.Api.Controllers
                     coins = x.Coins ?? default(decimal),
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
-                    updatedOn = x.UpdatedOn
+                    updatedOn = x.UpdatedOn,
+                    id = x.QuestId
                 })
             });
         }

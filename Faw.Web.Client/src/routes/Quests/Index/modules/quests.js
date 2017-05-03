@@ -222,6 +222,12 @@ export const questTabHandler = (tabId) => {
   }
 }
 
+export const onEditButtonClick = (e) => {
+  return (dispatch, getState) => {
+    console.log(e.target.parentElement.dataset.id)
+  }
+}
+
 export const loadUserQuests = (userId) => {
   return (dispatch, getState) => {
     dispatch(getUserQuests())
@@ -264,6 +270,17 @@ export const loadFamilyQuests = (familyId) => {
   }
 }
 
+export const addActionsToQuests = (quests) => {
+  return _.map(quests, function (element) {
+    return _.extend({}, element, {
+      actions : {
+        type: 'edit',
+        id: element.id
+      }
+    })
+  })
+}
+
 export const actions = {
   closeCreateQuestDialogHandler,
   openCreateQuestDialogHandler,
@@ -276,7 +293,8 @@ export const actions = {
   questTabHandler,
   setFamilyQuests,
   loadUserQuests,
-  loadFamilyQuests
+  loadFamilyQuests,
+  onEditButtonClick
 }
 
 const ACTION_HANDLERS = {
@@ -299,9 +317,13 @@ const ACTION_HANDLERS = {
   [QUEST_TAB_CHANGED]:
     (state, action) => _.assign({}, state, { tabId: action.payload }),
   [SET_FAMILY_QUESTS]:
-    (state, action) => _.assign({}, state, { familyQuests: action.payload }),
+    (state, action) => {
+      return _.assign({}, state, { familyQuests: addActionsToQuests(action.payload) })
+    },
   [SET_USER_QUESTS]:
-    (state, action) => _.assign({}, state, { userQuests: action.payload }),
+    (state, action) => {
+      return _.assign({}, state, { userQuests: addActionsToQuests(action.payload) })
+    },
   [SET_FAMILY_QUESTS_LOADING]:
     (state, action) => _.assign({}, state, { familyQuestsLoading: action.payload }),
   [SET_USER_QUESTS_LOADING]:

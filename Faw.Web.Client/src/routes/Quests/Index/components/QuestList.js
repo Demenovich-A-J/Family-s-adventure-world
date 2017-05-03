@@ -1,7 +1,11 @@
 import React from 'react'
-import { DataTable, TableHeader } from 'react-mdl'
+import { DataTable, TableHeader, Button, IconButton } from 'react-mdl'
 
 import './Quests.scss'
+
+const renderEditAction = (actions, onEditButtonClick) => {
+  return <IconButton name='edit' icon='edit' data-id={actions.id} colored onClick={onEditButtonClick} />
+}
 
 export const QuestList = (props) => (
   <DataTable
@@ -13,11 +17,6 @@ export const QuestList = (props) => (
       name='name'
     >
         Name
-    </TableHeader>
-    <TableHeader
-      name='description'
-    >
-        Description
     </TableHeader>
     <TableHeader
       name='expirience'
@@ -40,11 +39,20 @@ export const QuestList = (props) => (
     >
         Created
     </TableHeader>
+    <TableHeader
+      name='actions'
+      cellFormatter={(actions) => {
+        return renderEditAction(actions, props.onEditButtonClick)
+      }}
+    >
+        Action
+    </TableHeader>
   </DataTable>
 )
 
 QuestList.propTypes = {
-  familyQuests: React.PropTypes.array.isRequired
+  familyQuests: React.PropTypes.array.isRequired,
+  onEditButtonClick: React.PropTypes.func.isRequired
 }
 
 export default QuestList
