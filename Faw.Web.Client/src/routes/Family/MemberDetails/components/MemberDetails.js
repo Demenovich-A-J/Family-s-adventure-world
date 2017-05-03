@@ -45,11 +45,11 @@ export const MemberDetails = (props) => (
             className='-quest-autocomplete'
             value={props.availableQuestSelectedId}
             onChange={props.onAvailableQuestSelectChanged}
-            disabled={props.availableQuestsLoading || props.userQuestAssigning}
+            disabled={props.availableQuestsLoading || props.userQuestAssigning || props.availableQuests.length === 0}
           />
           <div className='-assign-button-container clearfix'>
             <Button raised primary ripple className='-assign-button'
-              disabled={props.availableQuestsLoading || props.userQuestAssigning}
+              disabled={props.availableQuestsLoading || props.userQuestAssigning || props.availableQuests.length === 0}
               onClick={props.onAssignButtonClick}>
               Assign
             </Button>
