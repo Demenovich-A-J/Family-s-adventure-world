@@ -1,5 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
+import { browserHistory } from 'react-router'
 
 export const LOADING_CHANGED = 'LOADING_CHANGED'
 export const OPEN_CREATE_QUEST_DIALOG_CHANGED = 'OPEN_CREATE_QUEST_DIALOG_CHANGED'

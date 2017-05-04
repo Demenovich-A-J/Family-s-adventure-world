@@ -42,6 +42,14 @@ namespace Faw.Services.Query
             }
         }
 
+        public UserQuest GetUserQuest(Guid userQuestId)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                return Mapper.Map<UserQuest>(_userQuestRepository.GetUserQuest(userQuestId));
+            }
+        }
+
         public IEnumerable<Quest> GetFamilyQuests(Guid familyId)
         {
             using (ContextScopeFactory.CreateReadOnly())

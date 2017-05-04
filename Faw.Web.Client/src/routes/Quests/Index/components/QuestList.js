@@ -1,7 +1,12 @@
 import React from 'react'
 import { DataTable, TableHeader, Button, IconButton } from 'react-mdl'
+import { Link } from 'react-router'
 
 import './Quests.scss'
+
+const renderDetailsLink = (name, row) => {
+  return <Link to={'/quest/details/' + row.id} className='-link'> {name} </Link>
+}
 
 const renderEditAction = (actions, onEditButtonClick) => {
   return <IconButton name='edit' icon='edit' data-id={actions.id} colored onClick={onEditButtonClick} />
@@ -15,6 +20,7 @@ export const QuestList = (props) => (
   >
     <TableHeader
       name='name'
+      cellFormatter={(name, row) => renderDetailsLink(name, row)}
     >
         Name
     </TableHeader>
@@ -41,9 +47,7 @@ export const QuestList = (props) => (
     </TableHeader>
     <TableHeader
       name='actions'
-      cellFormatter={(actions) => {
-        return renderEditAction(actions, props.onEditButtonClick)
-      }}
+      cellFormatter={(actions, row) => renderEditAction(actions, props.onEditButtonClick)}
     >
         Action
     </TableHeader>

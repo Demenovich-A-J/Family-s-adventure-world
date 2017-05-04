@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Principal;
 using System.Web.Http;
 using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Contracts.Query;
@@ -65,6 +66,48 @@ namespace Faw.Web.Api.Controllers
         }
 
         [HttpGet]
+        [Route("FetchQuest/{questId}")]
+        public IHttpActionResult FetchQuest([FromUri] Guid questId)
+        {
+            var quest = _questQueryService.GetById(questId);
+            return Ok(new
+            {
+                id = quest.QuestId,
+                name = quest.Name,
+                description = quest.Description,
+                isPublic = quest.IsPublic,
+                expirience = quest.Expirience,
+                coins = quest.Coins ?? default(decimal),
+                requiredLevel = quest.RequiredLevel,
+                createdOn = quest.CreatedOn,
+                updatedOn = quest.UpdatedOn,
+            });
+        }
+
+        [HttpGet]
+        [Route("FetchUserQuest/{userQuestId}")]
+        public IHttpActionResult FetchUserQuest([FromUri] Guid userQuestId)
+        {
+            var userQuest = _questQueryService.GetUserQuest(userQuestId);
+
+            return Ok(new
+            {
+                id = userQuest.QuestId,
+                name = userQuest.Quest.Name,
+                description = userQuest.Quest.Description,
+                isPublic = userQuest.Quest.IsPublic,
+                expirience = userQuest.Quest.Expirience,
+                coins = userQuest.Quest.Coins ?? default(decimal),
+                requiredLevel = userQuest.Quest.RequiredLevel,
+                createdOn = userQuest.CreatedOn,
+                updatedOn = userQuest.UpdatedOn,
+                status = userQuest.UserQuestStatus.ToString(),
+                userQuestId = userQuest.UserQuestId
+            });
+        }
+
+
+        [HttpGet]
         [Route("FetchUserQuests/{userId}")]
         public IHttpActionResult FetchUserQuests([FromUri] Guid userId)
         {
@@ -83,7 +126,8 @@ namespace Faw.Web.Api.Controllers
                     requiredLevel = x.Quest.RequiredLevel,
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
-                    id = x.QuestId
+                    id = x.QuestId,
+                    userQuestId = x.UserQuestId
                 })
             });
         }

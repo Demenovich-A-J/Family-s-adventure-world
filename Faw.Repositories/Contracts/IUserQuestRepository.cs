@@ -7,5 +7,6 @@ namespace Faw.Repositories.Contracts
     public interface IUserQuestRepository : IRepository<UserQuest>
     {
         IQueryable<UserQuest> GetUserQuests(Guid userId);
+        UserQuest GetUserQuest(Guid userQuestId);
     }
 }

@@ -14,11 +14,13 @@ import FamilyRoute from './Family/Index'
 import FamilyMemberDetailsRoute from './Family/MemberDetails'
 
 import QuestsRoute from './Quests/Index'
+import QuestsDetailsRoute from './Quests/Details'
 
 import UserDetailsRoute from './User/Details'
 
 import NotFound from './NotFound'
 
+import requireAuth from 'infrastructure/requireAuthInfo'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -27,11 +29,13 @@ export const createRoutes = (store) => ([
     path: '/',
     component: CoreLayout,
     indexRoute: Home,
+    onEnter: requireAuth(store),
     childRoutes: [
       FamilyRoute(store),
       FamilyMemberDetailsRoute(store),
       QuestsRoute(store),
-      UserDetailsRoute(store)
+      UserDetailsRoute(store),
+      QuestsDetailsRoute(store)
     ]
   },
   {

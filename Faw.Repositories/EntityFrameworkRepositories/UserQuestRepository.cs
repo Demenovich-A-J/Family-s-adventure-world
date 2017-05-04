@@ -18,5 +18,10 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             return DbContext.UserQuests.Where(x => x.UserId == userId)
                 .Include(x => x.Quest);
         }
+
+        public UserQuest GetUserQuest(Guid userQuestId)
+        {
+            return DbContext.UserQuests.Include(x => x.Quest).FirstOrDefault(x => x.EntityId == userQuestId);
+        }
     }
 }

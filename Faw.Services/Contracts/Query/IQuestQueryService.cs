@@ -13,6 +13,8 @@ namespace Faw.Services.Contracts.Query
 
         IEnumerable<UserQuest> GetUserQuests(Guid userId);
 
+        UserQuest GetUserQuest(Guid userQuestId);
+
         IEnumerable<Quest> GetFamilyQuests(Guid familyId);
 
         IEnumerable<Quest> GetAvailableFamilyUserQuests(Guid familyId, Guid userId);

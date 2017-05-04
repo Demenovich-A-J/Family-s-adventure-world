@@ -1,8 +1,12 @@
 import axios from 'axios'
 
-import { setGendersInfo, setGender } from './Register/modules/register'
 import { fetchUserFamilyInfo } from 'store/familyInfo'
+
+import { setGendersInfo, setGender } from './Register/modules/register'
+
 import { loadUserQuests, loadFamilyQuests } from './Quests/Index/modules/quests'
+import { loadQuestDetails } from './Quests/Details/modules/details'
+
 import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
@@ -54,4 +58,8 @@ export const fetchUserFamily = (store) => (nextState, replace) => {
 
 export const fetchFamilyMemberDetails = (store) => (nextState, replace) => {
   store.dispatch(loadFamilyMemberDetails(nextState.params.userId))
+}
+
+export const fetchQuestDetails = (store) => (nextState, replace) => {
+  store.dispatch(loadQuestDetails(nextState.params.questId, nextState.params.isUserQuest))
 }

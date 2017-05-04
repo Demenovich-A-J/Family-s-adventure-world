@@ -1,6 +1,6 @@
-import { injectReducer } from '../../../store/reducers'
-import { fetchQuests } from '../../routeEnter'
-import requireAuthorization from '../../../infrastructure/requireAuthorization'
+import { injectReducer } from 'store/reducers'
+import { fetchQuests } from 'routes/routeEnter'
+import requireAuthorization from 'infrastructure/requireAuthorization'
 
 export default (store) => ({
   path: '/quests',

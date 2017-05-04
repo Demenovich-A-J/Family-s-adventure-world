@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Cell, List, ListItem, ListItemContent, ListItemAction, Icon, Button, ProgressBar } from 'react-mdl'
 import { AutoComplete } from 'react-mdl-extra'
 import MemberQuestList from './MemberQuestList'
+import Loading from 'components/Loading'
 
 import avatar from './assets/default_avatar.svg'
 import './MemberDetails.scss'
@@ -13,7 +14,7 @@ export const MemberDetails = (props) => (
       {
         props.userInfoLoading
         ? (
-          <ProgressBar indeterminate />
+          <Loading />
         )
         : (
           <Grid>
@@ -59,7 +60,7 @@ export const MemberDetails = (props) => (
       {
         props.userQuestsLoading
         ? (
-          <ProgressBar indeterminate />
+          <Loading />
         )
         : (
           <Grid>
@@ -76,7 +77,7 @@ export const MemberDetails = (props) => (
       {
         props.userAchivmentsLoading
         ? (
-          <ProgressBar indeterminate />
+          <Loading />
         )
         : (
           <div className='-achivments-container'>
