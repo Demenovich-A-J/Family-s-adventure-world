@@ -1,0 +1,11 @@
+.loading-container{
+	min-height: 200px;
+	height: 200px;
+	display: flex;
+	align-items: center;
+  justify-content: center;
+	.mdl-spinner{
+		width: 68px;
+		height: 68px;
+	}
+}
