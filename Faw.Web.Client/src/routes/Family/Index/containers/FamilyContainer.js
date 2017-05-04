@@ -14,7 +14,9 @@ const mapDispatchToProps = {
   closeFamilyDialogHandler: actions.closeFamilyDialog,
   onSubmitFamilyFormHandler: actions.formSubmitHandler,
   onSearchInputHandler: actions.searchInputHandler,
-  searchItemClickHandler: actions.searchItemClickHandler
+  searchItemClickHandler: actions.searchItemClickHandler,
+  onSearchInputBlur: actions.onSearchInputBlur,
+  searchInputClickHandler: actions.searchInputClickHandler
 }
 
 const mapStateToProps = (state) => ({
@@ -23,7 +25,8 @@ const mapStateToProps = (state) => ({
   familyName: state.family.familyName,
   loading: state.family.loading,
   openFamilyDialog: state.family.openFamilyDialog,
-  searchResults: state.family.searchResults
+  searchResults: state.family.searchResults,
+  searchingUsers: state.family.searchingUsers
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Family)

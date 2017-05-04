@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import Loading from 'components/Loading'
 
 import './Family.scss'
 
@@ -18,6 +19,12 @@ export const SearchResult = (props) => {
         }
       </div>
     )
+  } else if (props.searchingUsers) {
+    return (
+      <div className='-search-result-container mdl-shadow--3dp'>
+        <Loading height={35} />
+      </div>
+    )
   } else {
     return (<div />)
   }
@@ -25,7 +32,8 @@ export const SearchResult = (props) => {
 
 SearchResult.propTypes = {
   searchResults: React.PropTypes.array,
-  searchItemClickHandler: React.PropTypes.func.isRequired
+  searchItemClickHandler: React.PropTypes.func.isRequired,
+  searchingUsers: React.PropTypes.bool.isRequired
 }
 
 export default SearchResult

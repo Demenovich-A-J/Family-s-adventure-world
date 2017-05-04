@@ -120,27 +120,29 @@ export const searchInputHandler = (e) => {
   e.preventDefault()
 
   return (dispatch, getState) => {
-    dispatch(setLoading(true))
     dispatch(setSearchText(e.target.value))
 
     var text = getState().family.searchText
     if (text === '') {
       dispatch(setSearchResults([]))
+      dispatch(setSearchingUsers(false))
+
       return
     }
+
+    dispatch(setSearchingUsers(true))
 
     axios({
       method: 'Get',
       url: '/User/SearchUsersForFamily/' + text
     }).then(function (response) {
-      console.log(response)
       if (response.data) {
         dispatch(setSearchResults(response.data))
       }
-      dispatch(setLoading(false))
+      dispatch(setSearchingUsers(false))
     }).catch(function (error) {
       console.log(error)
-      dispatch(setLoading(false))
+      dispatch(setSearchingUsers(false))
     })
   }
 }
@@ -159,12 +161,23 @@ export const searchItemClickHandler = (e) => {
         FamilyId: getState().family.family.familyId
       }
     }).then(function (response) {
-      console.log(response)
       dispatch(setLoading(false))
     }).catch(function (error) {
       console.log(error)
       dispatch(setLoading(false))
     })
+  }
+}
+
+export const onSearchInputBlur = (e) => {
+  return (dispatch, getState) => {
+    dispatch(setSearchResults([]))
+  }
+}
+
+export const searchInputClickHandler = (e) => {
+  return (dispatch, getState) => {
+    dispatch(searchInputHandler(e))
   }
 }
 
@@ -174,7 +187,9 @@ export const actions = {
   openFamilyDialog,
   closeFamilyDialog,
   searchInputHandler,
-  searchItemClickHandler
+  searchItemClickHandler,
+  onSearchInputBlur,
+  searchInputClickHandler
 }
 
 // ------------------------------------ Action Handlers

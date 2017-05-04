@@ -31,9 +31,11 @@ export const Family = (props) => (
               label='Expandable Input'
               expandable
               expandableIcon='search'
-              onChange={props.onSearchInputHandler}
+              onInput={props.onSearchInputHandler}
+              onBlur={props.onSearchInputBlur}
+              onClick={props.searchInputClickHandler}
             />
-            <SearchResult searchResults={props.searchResults} searchItemClickHandler={props.searchItemClickHandler} />
+            <SearchResult searchResults={props.searchResults} searchItemClickHandler={props.searchItemClickHandler} searchingUsers={props.searchingUsers} />
           </div>
         </Cell>
         <Cell col={5} phone={12}>
@@ -122,7 +124,10 @@ Family.propTypes = {
   family: React.PropTypes.object,
   searchResults: React.PropTypes.array,
   familyName: React.PropTypes.string.isRequired,
-  familyExist: React.PropTypes.bool.isRequired
+  familyExist: React.PropTypes.bool.isRequired,
+  onSearchInputBlur: React.PropTypes.func.isRequired,
+  searchInputClickHandler: React.PropTypes.func.isRequired,
+  searchingUsers: React.PropTypes.bool.isRequired
 }
 
 export default Family
