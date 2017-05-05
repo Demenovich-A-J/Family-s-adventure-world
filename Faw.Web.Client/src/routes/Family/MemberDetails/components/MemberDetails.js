@@ -7,10 +7,16 @@ import Loading from 'components/Loading'
 import avatar from './assets/default_avatar.svg'
 import './MemberDetails.scss'
 
+const getLevelBuffer = (exp, expToGet) => {
+  return exp / expToGet * 100
+}
+
 export const MemberDetails = (props) => (
-  <Grid className='faw-member-details-container mdl-shadow--2dp'>
-    <Cell col={8}>
-      <h4 className='-section-title'>User details</h4>
+  <Grid className='faw-member-details-container'>
+    <Cell col={8} className='mdl-shadow--2dp'>
+      <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
+        User details
+      </Cell>
       {
         props.userInfoLoading
         ? (
@@ -24,7 +30,12 @@ export const MemberDetails = (props) => (
                 <div>
                   <span>Current level {props.userInfo.playerInfo.level}</span>
                 </div>
-                <ProgressBar progress={props.userInfo.playerInfo.expirienceAmount} />
+                <ProgressBar
+                  progress={
+                    getLevelBuffer(
+                      props.userInfo.playerInfo.expirienceAmount,
+                      props.userInfo.playerInfo.expirienceToNextLevel)
+                  } />
               </div>
             </Cell>
             <Cell col={8}>
@@ -35,45 +46,35 @@ export const MemberDetails = (props) => (
           </Grid>
         )
       }
-      <Grid>
-        <Cell col={12}>
-          <h5 className='-section-title'>Quest assignment</h5>
-          <AutoComplete
-            label={'Search quest to assign'}
-            items={props.availableQuests}
-            valueIndex={'id'}
-            dataIndex={'name'}
-            className='-quest-autocomplete'
-            value={props.availableQuestSelectedId}
-            onChange={props.onAvailableQuestSelectChanged}
+      <Cell col={12} className='-section-title mdl-typography--headline' component='h5'>
+        Quest assignment
+      </Cell>
+      <Cell col={12}>
+        <AutoComplete
+          label={'Search quest to assign'}
+          items={props.availableQuests}
+          valueIndex={'id'}
+          dataIndex={'name'}
+          className='-quest-autocomplete'
+          value={props.availableQuestSelectedId}
+          onChange={props.onAvailableQuestSelectChanged}
+          disabled={props.availableQuestsLoading || props.userQuestAssigning || props.availableQuests.length === 0}
+      />
+      </Cell>
+      <Cell col={12}>
+        <div className='-assign-button-container clearfix'>
+          <Button raised primary ripple className='-assign-button'
             disabled={props.availableQuestsLoading || props.userQuestAssigning || props.availableQuests.length === 0}
-          />
-          <div className='-assign-button-container clearfix'>
-            <Button raised primary ripple className='-assign-button'
-              disabled={props.availableQuestsLoading || props.userQuestAssigning || props.availableQuests.length === 0}
-              onClick={props.onAssignButtonClick}>
-              Assign
-            </Button>
-          </div>
-        </Cell>
-      </Grid>
-      {
-        props.userQuestsLoading
-        ? (
-          <Loading />
-        )
-        : (
-          <Grid>
-            <Cell col={12}>
-              <h5 className='-section-title'>User quests list</h5>
-            </Cell>
-            <MemberQuestList userQuests={props.userQuests} />
-          </Grid>
-        )
-      }
+            onClick={props.onAssignButtonClick}>
+            Assign
+          </Button>
+        </div>
+      </Cell>
     </Cell>
-    <Cell col={4}>
-      <h4 className='-section-title'>Recent Achivments list</h4>
+    <Cell col={4} className='mdl-shadow--2dp'>
+      <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
+        Recent Achivments list
+      </Cell>
       {
         props.userAchivmentsLoading
         ? (
@@ -100,6 +101,22 @@ export const MemberDetails = (props) => (
               }
             </List>
           </div>
+        )
+      }
+    </Cell>
+    <Cell col={12} className='mdl-shadow--2dp'>
+      {
+        props.userQuestsLoading
+        ? (
+          <Loading />
+        )
+        : (
+          <Grid>
+            <Cell col={12} className='-section-title mdl-typography--headline' component='h5'>
+              User quests list
+            </Cell>
+            <MemberQuestList userQuests={props.userQuests} />
+          </Grid>
         )
       }
     </Cell>

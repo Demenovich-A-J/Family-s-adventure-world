@@ -12,9 +12,13 @@ namespace Faw.Services.Models
         public Guid? FamilyId { get; set; }
         public Guid PlayerInfoId { get; set; }
 
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public string ImageUrl { get; set; }
+        public string Description { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
 
         public Gender Gender { get; set; }
 

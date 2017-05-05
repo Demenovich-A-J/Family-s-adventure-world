@@ -51,7 +51,10 @@ namespace Faw.Repositories.EntityFrameworkRepositories
                     x =>
                         splited.Any(
                             s =>
-                                x.FirstName.Contains(s) || x.LastName.Contains(s) || x.Account.Email.Contains(s)));
+                                (x.FirstName.Contains(s)
+                                 || x.LastName.Contains(s)
+                                 || x.Account.Email.Contains(s))
+                                && !x.FamilyId.HasValue));
         }
     }
 }

@@ -37,6 +37,8 @@ export const setQuestDetailsLoading = (loading) => {
 
 export const loadQuestDetails = (questId, isUserQuest = false) => {
   return (dispatch, getState) => {
+    isUserQuest = isUserQuest === 'true'
+
     dispatch(getQuestDetails())
     dispatch(setQuestDetailsLoading(true))
     dispatch(setIsUserQuest(isUserQuest))

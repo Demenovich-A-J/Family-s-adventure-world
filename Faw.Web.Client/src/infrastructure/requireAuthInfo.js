@@ -3,7 +3,7 @@ function requireAuth (store) {
     let { authInfo, isAuthenticated } = store.getState().user
 
     if (!authInfo || new Date(authInfo.expires) < Date.now() || !isAuthenticated) {
-      replace({ pathname: 'Account/Login', query: { return_to: nextState.location.pathname } })
+      replace({ pathname: '/Account/Login', query: { return_to: nextState.location.pathname } })
     }
   }
 }

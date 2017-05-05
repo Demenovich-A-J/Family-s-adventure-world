@@ -41,7 +41,9 @@ namespace Faw.Web.Api.Controllers
             return Ok(new
             {
                 name = family.Name,
-                familyId = family.FamilyId
+                familyId = family.FamilyId,
+                description = family.Description,
+                goal = family.Goal
             });
         }
 
@@ -78,7 +80,9 @@ namespace Faw.Web.Api.Controllers
                     gender = x.Gender.ToString(),
                     id = x.UserId
                 }).ToList(),
-                familyId = family.FamilyId
+                familyId = family.FamilyId,
+                description = family.Description,
+                goal = family.Goal
             });
         }
 

@@ -102,7 +102,8 @@ namespace Faw.Web.Api.Controllers
                 createdOn = userQuest.CreatedOn,
                 updatedOn = userQuest.UpdatedOn,
                 status = userQuest.UserQuestStatus.ToString(),
-                userQuestId = userQuest.UserQuestId
+                userQuestId = userQuest.UserQuestId,
+                imageUrl = userQuest.Quest.ImageUrl
             });
         }
 
@@ -127,7 +128,8 @@ namespace Faw.Web.Api.Controllers
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
                     id = x.QuestId,
-                    userQuestId = x.UserQuestId
+                    userQuestId = x.UserQuestId,
+                    imageUrl = x.Quest.ImageUrl
                 })
             });
         }
@@ -150,7 +152,8 @@ namespace Faw.Web.Api.Controllers
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
-                    id = x.QuestId
+                    id = x.QuestId,
+                    imageUrl = x.ImageUrl
                 })
             });
         }
@@ -173,7 +176,8 @@ namespace Faw.Web.Api.Controllers
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
-                    id = x.QuestId
+                    id = x.QuestId,
+                    imageUrl = x.ImageUrl
                 })
             });
         }
@@ -196,7 +200,8 @@ namespace Faw.Web.Api.Controllers
                     coins = x.Coins ?? default(decimal),
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
-                    updatedOn = x.UpdatedOn
+                    updatedOn = x.UpdatedOn,
+                    imageUrl = x.ImageUrl
                 })
             });
         }

@@ -47,7 +47,11 @@ namespace Faw.Web.Api.Controllers
                     expirienceToNextLevel = nextLevel.ExpirienceAmount
                 },
                 gender = user.Gender.ToString(),
-                birthDate = user.BirthDate
+                birthDate = user.BirthDate.ToShortDateString(),
+                imageUrl = user.ImageUrl,
+                description = user.Description,
+                city = user.City,
+                country = user.Country
             });
         }
 

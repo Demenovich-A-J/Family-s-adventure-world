@@ -9,6 +9,8 @@ import { loadQuestDetails } from './Quests/Details/modules/details'
 
 import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
 
+import { loadUserDetails } from './User/Details/modules/userDetails'
+
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const loadGendersOnEnter = (store) => (nextState, replace) => {
@@ -62,4 +64,8 @@ export const fetchFamilyMemberDetails = (store) => (nextState, replace) => {
 
 export const fetchQuestDetails = (store) => (nextState, replace) => {
   store.dispatch(loadQuestDetails(nextState.params.questId, nextState.params.isUserQuest))
+}
+
+export const fetchUserDetails = (store) => (nextState, replace) => {
+  store.dispatch(loadUserDetails(nextState.params.userId))
 }

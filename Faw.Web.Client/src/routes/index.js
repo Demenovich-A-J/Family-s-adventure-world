@@ -1,8 +1,8 @@
-// We only need to import the modules necessary for initial render import
-// CoreLayout from '../layouts/CoreLayout/CoreLayout'
-import LoginLayout from '../layouts/LoginLayout/LoginLayout'
-import CoreLayout from '../layouts/CoreLayout/CoreLayout'
-import NotFoundLayoyt from '../layouts/NotFoundLayout/NotFoundLayout'
+import requireAuth from 'infrastructure/requireAuthInfo'
+
+import LoginLayout from 'layouts/LoginLayout/LoginLayout'
+import CoreLayout from 'layouts/CoreLayout/CoreLayout'
+import NotFoundLayoyt from 'layouts/NotFoundLayout/NotFoundLayout'
 
 import Home from './Home'
 
@@ -20,7 +20,6 @@ import UserDetailsRoute from './User/Details'
 
 import NotFound from './NotFound'
 
-import requireAuth from 'infrastructure/requireAuthInfo'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */

@@ -1,10 +1,10 @@
-import { injectReducer } from '../../../store/reducers'
-import { fetchQuests } from '../../routeEnter'
-import requireAuthorization from '../../../infrastructure/requireAuthorization'
+import { injectReducer } from 'store/reducers'
+import { fetchUserDetails } from 'routes/routeEnter'
+import requireAuthorization from 'infrastructure/requireAuthorization'
 
 export default (store) => ({
   path: '/user/details/:userId',
-  // onEnter: fetchQuests(store),
+  onEnter: fetchUserDetails(store),
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point

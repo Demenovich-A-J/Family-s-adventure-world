@@ -78,7 +78,7 @@ var QuestDetails = (props) => (
       </Cell>
     </Grid>
     <CardActions border>
-      <Button colored onClick={browserHistory.goBack}>Back</Button>
+      <Button colored className='pull-right' onClick={browserHistory.goBack}>Back</Button>
     </CardActions>
   </Card>
 )

@@ -9,10 +9,14 @@ namespace Faw.Web.Api.Controllers
     public class UserController : ApiController
     {
         private readonly IUserQueryService _userQueryService;
+        private readonly IExpirienceQueryService _expirienceQueryService;
 
-        public UserController(IUserQueryService userQueryService)
+        public UserController(
+            IUserQueryService userQueryService,
+            IExpirienceQueryService expirienceQueryService)
         {
             _userQueryService = userQueryService;
+            _expirienceQueryService = expirienceQueryService;
         }
 
         // Get api/User/Search
@@ -53,8 +57,50 @@ namespace Faw.Web.Api.Controllers
                         id = user.Family.FamilyId
                     }
                     : null,
-                gender = user.Gender,
-                birthDate = user.BirthDate
+                gender = user.Gender.ToString(),
+                birthDate = user.BirthDate,
+                imageUrl = user.ImageUrl,
+                description = user.Description,
+                city = user.City,
+                country = user.Country
+            });
+        }
+
+        [HttpGet]
+        [Route("GetUser/{userId}")]
+        public IHttpActionResult GetUser(Guid userId)
+        {
+            var user = _userQueryService.Get(userId);
+            var nextLevel = _expirienceQueryService.GetExpirience(user.PlayerInfo.Level + 1);
+
+            return Ok(new
+            {
+                userId = user.UserId,
+                userName = $"{user.FirstName}  {user.LastName}",
+                role = user.UserType.Name,
+                claims = user.UserType.Claims.Select(x => new
+                {
+                    name = x.Name,
+                    description = x.Description
+                }),
+                playerInfo = new
+                {
+                    level = user.PlayerInfo.Level,
+                    exp = user.PlayerInfo.ExpirienceAmount,
+                    expForNext = nextLevel.ExpirienceAmount
+                },
+                family = user.Family != null
+                    ? new
+                    {
+                        name = user.Family.Name,
+                        id = user.Family.FamilyId
+                    } : null,
+                gender = user.Gender.ToString(),
+                birthDate = user.BirthDate.ToShortDateString(),
+                imageUrl = user.ImageUrl,
+                description = user.Description,
+                city = user.City,
+                country = user.Country
             });
         }
     }
