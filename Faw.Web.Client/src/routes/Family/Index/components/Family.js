@@ -106,8 +106,10 @@ export const Family = (props) => (
       openFamilyDialog={props.openFamilyDialog}
       closeFamilyDialogHandler={props.closeFamilyDialogHandler}
       onSubmitFamilyFormHandler={props.onSubmitFamilyFormHandler}
-      familyName={props.family.name}
+      familyEditInfo={props.familyEditInfo}
       familyExist={props.familyExist}
+      onFamilyGoalChanged={props.onFamilyGoalChanged}
+      onFamilyDescriptionChanged={props.onFamilyDescriptionChanged}
     />
   </Grid>
 )
@@ -123,11 +125,13 @@ Family.propTypes = {
   loading: React.PropTypes.bool.isRequired,
   family: React.PropTypes.object,
   searchResults: React.PropTypes.array,
-  familyName: React.PropTypes.string.isRequired,
+  familyEditInfo: React.PropTypes.object.isRequired,
   familyExist: React.PropTypes.bool.isRequired,
   onSearchInputBlur: React.PropTypes.func.isRequired,
   searchInputClickHandler: React.PropTypes.func.isRequired,
-  searchingUsers: React.PropTypes.bool.isRequired
+  searchingUsers: React.PropTypes.bool.isRequired,
+  onFamilyGoalChanged: React.PropTypes.func.isRequired,
+  onFamilyDescriptionChanged: React.PropTypes.func.isRequired
 }
 
 export default Family

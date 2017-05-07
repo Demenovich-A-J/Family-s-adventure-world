@@ -67,13 +67,17 @@ export function fetchUserInfo () {
       var token = state.user.authInfo.access_token
 
       if (token != null) {
-        axios({
+        var request = axios({
           method: 'Get',
           url: '/User/FetchUserInfo'
-        }).then(function (response) {
+        })
+
+        request.then(function (response) {
           dispatch(setUserInfo(response.data))
           localStorage.setItem('userInfo', JSON.stringify(response.data))
         })
+
+        return request
       }
     }
   }

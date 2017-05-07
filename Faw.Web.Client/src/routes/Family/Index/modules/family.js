@@ -11,8 +11,31 @@ export const SEARCH_TEXT_CHANGED = 'SEARCH_TEXT_CHANGED'
 export const SEARCH_RESULTS_CHANGED = 'SEARCH_RESULTS_CHANGED'
 export const SEARCHING_USERS_CHANGED = 'SEARCHING_USERS_CHANGED'
 
-// ------------------------------------ Actions
-// ------------------------------------
+export const SET_FAMILY_GOAL = 'SET_FAMILY_GOAL'
+export const SET_FAMILY_DESCRIPTION = 'SET_FAMILY_DESCRIPTION'
+
+export const SET_FAMILY_EDIT_INFO = 'SET_FAMILY_EDIT_INFO'
+
+export const familyEditInfo = () => {
+  return {
+    type: SET_FAMILY_EDIT_INFO
+  }
+}
+
+export const setFamilyGoal = (goal) => {
+  return {
+    type: SET_FAMILY_GOAL,
+    payload: goal
+  }
+}
+
+export const setFamilyDescription = (description) => {
+  return {
+    type: SET_FAMILY_DESCRIPTION,
+    payload: description
+  }
+}
+
 export const setLoading = (loading) => {
   return {
     type: LOADING_CHANGED,
@@ -71,8 +94,10 @@ export const formSubmitHandler = (e) => {
       url: url,
       data: {
         FamilyId: state.familyInfo.family.familyId,
-        Name: state.family.familyName,
-        CreatedById: state.user.userInfo.userId
+        Name: state.family.familyEditInfo.name,
+        CreatedById: state.user.userInfo.userId,
+        Description: state.family.familyEditInfo.description,
+        Goal: state.family.familyEditInfo.goal
       }
     }).then(function (response) {
       // do we need to update family data fetched from server?
@@ -92,6 +117,8 @@ export const openFamilyDialog = (e) => {
   e.preventDefault()
 
   return (dispatch, getState) => {
+    dispatch(setFamilyEditInfo())
+
     dispatch(setOpenFamilyDialog(true))
   }
 }
@@ -113,6 +140,20 @@ export const familyNameChangeHandler = (e) => {
 
   return (dispatch, getState) => {
     dispatch(setFamilyName(e.target.value))
+  }
+}
+
+export const onFamilyGoalChanged = (e) => {
+  e.preventDefault()
+
+  return (dispatch, getState) => {
+    dispatch(setFamilyGoal(e.target.value))
+  }
+}
+
+export const onFamilyDescriptionChanged = (e) => {
+  return (dispatch, getState) => {
+    dispatch(setFamilyDescription(e.target.value))
   }
 }
 
@@ -181,6 +222,18 @@ export const searchInputClickHandler = (e) => {
   }
 }
 
+export const setFamilyEditInfo = () => {
+  return (dispatch, getState) => {
+    dispatch(familyEditInfo())
+
+    var familyInfo = getState().familyInfo.family
+
+    dispatch(setFamilyName(familyInfo.name))
+    dispatch(setFamilyGoal(familyInfo.goal === null ? '' : familyInfo.goal))
+    dispatch(setFamilyDescription(familyInfo.description === null ? '' : familyInfo.description))
+  }
+}
+
 export const actions = {
   formSubmitHandler,
   familyNameChangeHandler,
@@ -189,14 +242,34 @@ export const actions = {
   searchInputHandler,
   searchItemClickHandler,
   onSearchInputBlur,
-  searchInputClickHandler
+  searchInputClickHandler,
+  onFamilyGoalChanged,
+  onFamilyDescriptionChanged
 }
 
-// ------------------------------------ Action Handlers
-// ------------------------------------
 const ACTION_HANDLERS = {
   [LOADING_CHANGED]: (state, action) => Object.assign({}, state, { loading: action.payload }),
-  [FAMALY_NAME_CHANGED]: (state, action) => Object.assign({}, state, { familyName: action.payload }),
+  [FAMALY_NAME_CHANGED]: (state, action) => _.merge({}, state, {
+    familyEditInfo: {
+      // goal: state.familyEditInfo.goal,
+      // description: state.familyEditInfo.description,
+      name: action.payload
+    }
+  }),
+  [SET_FAMILY_GOAL]: (state, action) => _.merge({}, state, {
+    familyEditInfo: {
+      // name: state.familyEditInfo.name,
+      // description: state.familyEditInfo.description,
+      goal: action.payload
+    }
+  }),
+  [SET_FAMILY_DESCRIPTION]: (state, action) => _.merge({}, state, {
+    familyEditInfo: {
+      // name: state.familyEditInfo.name,
+      // goal: state.familyEditInfo.goal,
+      description: action.payload
+    }
+  }),
   [OPEN_FAMILY_DIALOG_CHANGED]: (state, action) => Object.assign({}, state, { openFamilyDialog: action.payload }),
   [SEARCH_TEXT_CHANGED]: (state, action) => Object.assign({}, state, { searchText: action.payload }),
   [SEARCH_RESULTS_CHANGED]: (state, action) => Object.assign({}, state, { searchResults: action.payload }),
@@ -204,8 +277,11 @@ const ACTION_HANDLERS = {
 }
 
 const initialState = {
-  familyName: '',
-  familyInfo: null,
+  familyEditInfo: {
+    name: '',
+    description: '',
+    goal: ''
+  },
   loading: false,
   openFamilyDialog: false,
   searchText: null,

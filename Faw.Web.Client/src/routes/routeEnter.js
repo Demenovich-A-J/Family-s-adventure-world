@@ -46,10 +46,6 @@ export const fetchQuests = (store) => (nextState, replace) => {
   store.dispatch(loadUserQuests(state.user.userInfo.userId))
 }
 
-export const fetchUserFamily = (store) => (nextState, replace) => {
-  store.dispatch(fetchUserFamilyInfo())
-}
-
 export const fetchFamilyMemberDetails = (store) => (nextState, replace) => {
   store.dispatch(loadFamilyMemberDetails(nextState.params.userId))
 }

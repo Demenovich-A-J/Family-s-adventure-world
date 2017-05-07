@@ -63,8 +63,11 @@ export const formSubmitHandler = (e) => {
       }
 
       dispatch(saveUserAuthInfo(authInfo, data.isRemember))
-      dispatch(fetchUserInfo())
-      dispatch(fetchUserFamilyInfo())
+
+      dispatch(fetchUserInfo()).then(() => {
+        dispatch(fetchUserFamilyInfo())
+      })
+
       dispatch(loginLoadingHandler(false))
       dispatch(hideLoading())
 

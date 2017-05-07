@@ -16,13 +16,15 @@ const mapDispatchToProps = {
   onSearchInputHandler: actions.searchInputHandler,
   searchItemClickHandler: actions.searchItemClickHandler,
   onSearchInputBlur: actions.onSearchInputBlur,
-  searchInputClickHandler: actions.searchInputClickHandler
+  searchInputClickHandler: actions.searchInputClickHandler,
+  onFamilyGoalChanged: actions.onFamilyGoalChanged,
+  onFamilyDescriptionChanged: actions.onFamilyDescriptionChanged
 }
 
 const mapStateToProps = (state) => ({
   family: state.familyInfo.family,
   familyExist: state.familyInfo.family !== null,
-  familyName: state.family.familyName,
+  familyEditInfo: state.family.familyEditInfo,
   loading: state.family.loading,
   openFamilyDialog: state.family.openFamilyDialog,
   searchResults: state.family.searchResults,

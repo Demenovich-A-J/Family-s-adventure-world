@@ -16,7 +16,7 @@ export const FamilyForm = (props) => (
       {
         !props.familyExist
          ? 'Create your family'
-         : 'Edit family' + ' - ' + props.familyName
+         : 'Edit family' + ' - ' + props.familyEditInfo.name
       }
     </DialogTitle>
     <DialogContent>
@@ -29,7 +29,27 @@ export const FamilyForm = (props) => (
           floatingLabel
           pattern='.*'
           error='Name is required'
-          defaultValue={props.familyName}
+          value={props.familyEditInfo.name}
+        />
+        <Textfield
+          onChange={props.onFamilyGoalChanged}
+          className='full-width'
+          label='Goal'
+          type='text'
+          rows={3}
+          floatingLabel
+          pattern='.*'
+          value={props.familyEditInfo.goal}
+        />
+        <Textfield
+          onChange={props.onFamilyDescriptionChanged}
+          className='full-width'
+          label='Description'
+          type='text'
+          floatingLabel
+          pattern='.*'
+          rows={3}
+          value={props.familyEditInfo.description}
         />
       </form>
     </DialogContent>
@@ -51,8 +71,10 @@ FamilyForm.propTypes = {
   onFamilyNameChanged : React.PropTypes.func.isRequired,
   onSubmitFamilyFormHandler: React.PropTypes.func.isRequired,
   openFamilyDialog: React.PropTypes.bool.isRequired,
-  familyName: React.PropTypes.string.isRequired,
-  familyExist: React.PropTypes.bool.isRequired
+  familyEditInfo: React.PropTypes.object.isRequired,
+  familyExist: React.PropTypes.bool.isRequired,
+  onFamilyGoalChanged: React.PropTypes.func.isRequired,
+  onFamilyDescriptionChanged: React.PropTypes.func.isRequired
 }
 
 export default FamilyForm

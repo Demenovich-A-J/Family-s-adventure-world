@@ -1,10 +1,10 @@
 import { injectReducer } from 'store/reducers'
-import { fetchUserFamily } from 'routes/routeEnter'
+// import { fetchUserFamily } from 'routes/routeEnter'
 import requireAuthorization from 'infrastructure/requireAuthorization'
 
 export default (store) => ({
   path: '/family',
-  onEnter: fetchUserFamily(store),
+  // onEnter: fetchUserFamily(store),
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
