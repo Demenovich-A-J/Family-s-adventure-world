@@ -6,21 +6,25 @@ import './Register.scss'
 export const Register = (props) => (
   <form id='registerForm' onSubmit={props.onFormSubmit}>
     <Textfield
+      className='full-width'
       type='text'
       label='First Name'
       disabled={props.loading}
       onChange={props.onFirstNameChanged} />
     <Textfield
+      className='full-width'
       type='text'
       label='Last Name'
       disabled={props.loading}
       onChange={props.onLastNameChanged} />
     <Textfield
+      className='full-width'
       type='email'
       label='Email'
       disabled={props.loading}
       onChange={props.onEmailChanged} />
     <Textfield
+      className='full-width'
       type='text'
       label='Login'
       disabled={props.loading}
@@ -54,16 +58,19 @@ export const Register = (props) => (
       }
     </div>
     <Textfield
+      className='full-width'
       type='date'
       label='Birth Date'
       disabled={props.loading}
       onChange={props.onBirthDateChanged} />
     <Textfield
+      className='full-width'
       type='password'
       label='Password'
       disabled={props.loading}
       onChange={props.onPasswordChanged} />
     <Textfield
+      className='full-width'
       type='password'
       label='Repeat Password'
       disabled={props.loading}

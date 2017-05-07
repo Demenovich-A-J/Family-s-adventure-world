@@ -1,0 +1,23 @@
+.faw-user-details-container{
+	.-section-title{
+		border-bottom: 1px solid #00bcd4;
+	}
+
+	.-genders-container{
+		padding-bottom: 20px;
+
+		ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	.-button-group{
+		button{
+			&:first-child{
+				margin-left: 5px;
+			}
+		}
+	}
+}

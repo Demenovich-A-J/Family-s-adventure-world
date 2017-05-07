@@ -1,5 +1,5 @@
-import { injectReducer } from '../../store/reducers'
-import { loadGendersOnEnter } from '../routeEnter'
+import { injectReducer } from 'store/reducers'
+import { loadGendersOnEnter } from 'routes/routeEnter'
 
 export default(store) => ({
   path: '/Account/Register',
