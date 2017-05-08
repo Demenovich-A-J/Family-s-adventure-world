@@ -1,11 +1,11 @@
 import { injectReducer } from 'store/reducers'
-// import { fetchUserFamily } from 'routes/routeEnter'
+import { loadFamily } from 'routes/routeEnter'
 import requireAuthorization from 'infrastructure/requireAuthorization'
 import { modelReducer, formReducer } from 'react-redux-form'
 
 export default (store) => ({
   path: '/family',
-  // onEnter: fetchUserFamily(store),
+  onEnter: loadFamily(store),
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point

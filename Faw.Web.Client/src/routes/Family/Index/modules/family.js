@@ -138,7 +138,7 @@ export const searchInputClickHandler = (e) => {
 export const submitFamilyForm = (e) => {
   return (dispatch, getState) => {
     var state = getState()
-    var url = state.familyInfo.family !== null ? '/Family/Edit' : '/Family/Create'
+    var url = state.familyInfo !== null ? '/Family/Edit' : '/Family/Create'
 
     var sendRequest = axios({
       method: 'Post',
@@ -159,7 +159,7 @@ export const submitFamilyForm = (e) => {
 
 export const setFamilyEditInfo = () => {
   return (dispatch, getState) => {
-    var familyInfo = getState().familyInfo.family
+    var familyInfo = getState().familyInfo
     dispatch(reduxFormActions.load('familyEditInfo', {
       familyId: familyInfo.familyId,
       name: familyInfo.name,

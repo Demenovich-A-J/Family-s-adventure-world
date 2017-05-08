@@ -186,10 +186,10 @@ export const submitQuestFormHandler = (model) => {
       method: method,
       url: url,
       data: _.extend({}, questInfo, {
-        familyId: state.familyInfo.family.familyId
+        familyId: state.familyInfo.familyId
       })
     }).then(function (response) {
-      dispatch(loadFamilyQuests(state.familyInfo.family.familyId))
+      dispatch(loadFamilyQuests(state.familyInfo.familyId))
       dispatch(reduxFormActions.load('questInfo', questFormInitialState))
       dispatch(setQuestFormSubmitting(false))
       dispatch(setOpenCreateQuestDialog(false))

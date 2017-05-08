@@ -28,11 +28,15 @@ export const checkResetStatusOnEnter = (store) => (nextState, replace) => {
   axios({ method: 'Get', url: '/Account/ResetPassword/' })
   .then(function (response) {
     store.dispatch(hideLoading())
-    store.dispatch(setGendersInfo(response.data))
   }).catch(function (error) {
     console.log(error)
     store.dispatch(hideLoading())
   })
+}
+
+
+export const loadFamily = (store) => (nextState, replace) => {
+  store.dispatch(fetchUserFamilyInfo())
 }
 
 export const fetchQuests = (store) => (nextState, replace) => {
@@ -42,7 +46,7 @@ export const fetchQuests = (store) => (nextState, replace) => {
     return
   }
 
-  store.dispatch(loadFamilyQuests(state.familyInfo.family.familyId))
+  store.dispatch(loadFamilyQuests(state.familyInfo.familyId))
   store.dispatch(loadUserQuests(state.user.userInfo.userId))
 }
 

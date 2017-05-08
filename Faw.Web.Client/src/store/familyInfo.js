@@ -37,13 +37,11 @@ export const actions = {
 
 const ACTION_HANDLERS = {
   [FAMILY_CHANGED]:
-     (state, action) => _.assign({}, state, { family: action.payload })
+     (state, action) => _.assign({}, state, action.payload)
 }
 
 function _getInitialState () {
-  return {
-    family: JSON.parse(localStorage.getItem('family'))
-  }
+  return JSON.parse(localStorage.getItem('family'))
 }
 
 const initialState = _getInitialState()

@@ -197,7 +197,7 @@ export const loadAvailableQuests = (userId) => {
 
     axios({
       method: 'Get',
-      url: '/Quest/UserAvailableQuests/' + getState().familyInfo.family.familyId + '/' + userId
+      url: '/Quest/UserAvailableQuests/' + getState().familyInfo.familyId + '/' + userId
     }).then(function (response) {
       if (response.data) {
         dispatch(setAvailableQuests(response.data.quests))
