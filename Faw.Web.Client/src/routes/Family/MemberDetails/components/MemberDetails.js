@@ -4,7 +4,7 @@ import { AutoComplete } from 'react-mdl-extra'
 import MemberQuestList from './MemberQuestList'
 import Loading from 'components/Loading'
 
-import avatar from './assets/default_avatar.svg'
+import avatar from 'assets/default_avatar.svg'
 import './MemberDetails.scss'
 
 const getLevelBuffer = (exp, expToGet) => {

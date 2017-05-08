@@ -78,6 +78,8 @@ namespace Faw.Web.Api.Controllers
                     name = $"{x.FirstName} {x.LastName}",
                     birthDate = x.BirthDate.ToShortDateString(),
                     gender = x.Gender.ToString(),
+                    description = x.Description,
+                    imageUrl = x.ImageUrl,
                     id = x.UserId
                 }).ToList(),
                 familyId = family.FamilyId,

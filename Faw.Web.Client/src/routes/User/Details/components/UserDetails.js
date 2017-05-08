@@ -16,7 +16,7 @@ import {
 import Loading from 'components/Loading'
 
 import './UserDetails.scss'
-import avatar from './assets/default_avatar.svg'
+import avatar from 'assets/default_avatar.svg'
 
 const getLevelBuffer = (exp, expToGet) => {
   return exp / expToGet * 100

@@ -2,7 +2,7 @@ import React from 'react'
 import { browserHistory, IndexLink, Link } from 'react-router'
 import { Menu as MdlMenu, MenuItem } from 'react-mdl'
 
-import avatar from './assets/default_avatar.svg'
+import avatar from 'assets/default_avatar.svg'
 import './Menu.scss'
 
 var Menu = React.createClass({

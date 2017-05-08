@@ -3,7 +3,6 @@ import {
   Grid,
   Cell,
   Card,
-  CardTitle,
   CardText,
   CardActions,
   Button,
@@ -18,6 +17,7 @@ import FamilyFormDialog from './FamilyFormDialog'
 import SearchResult from './SearchResult'
 
 import './Family.scss'
+import avatar from 'assets/default_avatar.svg'
 
 export const Family = (props) => (
   <Grid className='faw-family-container'>
@@ -74,16 +74,16 @@ export const Family = (props) => (
       props.familyExist && props.family.familyMembers && props.family.familyMembers.map((familyMember, index) => (
         <Cell col={4} tablet={4} phone={12} key={index}>
           <Card shadow={1} className='-member-card'>
-            <CardTitle expand>
-              {familyMember.name}
-            </CardTitle>
+            <div className='mdl-card__media' style={{ backgroundImage: avatar }}>
+              <span className='-member-name'>{familyMember.name}</span>
+              <img className='article-image' src={avatar} />
+            </div>
             <CardText>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Aenan convallis.
+              {familyMember.description}
             </CardText>
-            <CardActions border>
+            <CardActions className='clearfix' border>
               <Link to={'/family/member/details/' + familyMember.id} className='-link' activeClassName='--active'>
-                <Button colored>
+                <Button colored className='pull-right'>
                   Details
                 </Button>
               </Link>
