@@ -9,26 +9,23 @@ import { actions } from '../modules/family'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
-  onFamilyNameChanged: actions.familyNameChangeHandler,
   openFamilyDialogHandler: actions.openFamilyDialog,
   closeFamilyDialogHandler: actions.closeFamilyDialog,
-  onSubmitFamilyFormHandler: actions.formSubmitHandler,
   onSearchInputHandler: actions.searchInputHandler,
   searchItemClickHandler: actions.searchItemClickHandler,
   onSearchInputBlur: actions.onSearchInputBlur,
   searchInputClickHandler: actions.searchInputClickHandler,
-  onFamilyGoalChanged: actions.onFamilyGoalChanged,
-  onFamilyDescriptionChanged: actions.onFamilyDescriptionChanged
+  submitFamilyForm: actions.submitFamilyForm
 }
 
 const mapStateToProps = (state) => ({
   family: state.familyInfo.family,
   familyExist: state.familyInfo.family !== null,
-  familyEditInfo: state.family.familyEditInfo,
   loading: state.family.loading,
   openFamilyDialog: state.family.openFamilyDialog,
   searchResults: state.family.searchResults,
-  searchingUsers: state.family.searchingUsers
+  searchingUsers: state.family.searchingUsers,
+  familyName: state.familyEditInfo.name
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Family)

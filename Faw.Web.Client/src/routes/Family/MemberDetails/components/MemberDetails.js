@@ -53,7 +53,7 @@ export const MemberDetails = (props) => (
         <AutoComplete
           label={'Search quest to assign'}
           items={props.availableQuests}
-          valueIndex={'id'}
+          valueIndex={'questId'}
           dataIndex={'name'}
           className='-quest-autocomplete'
           value={props.availableQuestSelectedId}

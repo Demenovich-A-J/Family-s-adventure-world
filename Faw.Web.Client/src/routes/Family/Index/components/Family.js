@@ -14,7 +14,7 @@ import {
 } from 'react-mdl'
 import { Link } from 'react-router'
 
-import FamilyForm from './FamilyForm'
+import FamilyFormDialog from './FamilyFormDialog'
 import SearchResult from './SearchResult'
 
 import './Family.scss'
@@ -35,7 +35,11 @@ export const Family = (props) => (
               onBlur={props.onSearchInputBlur}
               onClick={props.searchInputClickHandler}
             />
-            <SearchResult searchResults={props.searchResults} searchItemClickHandler={props.searchItemClickHandler} searchingUsers={props.searchingUsers} />
+            <SearchResult
+              searchResults={props.searchResults}
+              searchItemClickHandler={props.searchItemClickHandler}
+              searchingUsers={props.searchingUsers}
+            />
           </div>
         </Cell>
         <Cell col={5} phone={12}>
@@ -101,15 +105,12 @@ export const Family = (props) => (
         <div />
       )
     }
-    <FamilyForm
-      onFamilyNameChanged={props.onFamilyNameChanged}
+    <FamilyFormDialog
       openFamilyDialog={props.openFamilyDialog}
       closeFamilyDialogHandler={props.closeFamilyDialogHandler}
-      onSubmitFamilyFormHandler={props.onSubmitFamilyFormHandler}
-      familyEditInfo={props.familyEditInfo}
       familyExist={props.familyExist}
-      onFamilyGoalChanged={props.onFamilyGoalChanged}
-      onFamilyDescriptionChanged={props.onFamilyDescriptionChanged}
+      familyName={props.familyName}
+      submitFamilyForm={props.submitFamilyForm}
     />
   </Grid>
 )
@@ -117,21 +118,18 @@ export const Family = (props) => (
 Family.propTypes = {
   openFamilyDialogHandler: React.PropTypes.func.isRequired,
   closeFamilyDialogHandler: React.PropTypes.func.isRequired,
-  onSubmitFamilyFormHandler: React.PropTypes.func.isRequired,
-  onFamilyNameChanged: React.PropTypes.func.isRequired,
+  openFamilyDialog: React.PropTypes.bool.isRequired,
   onSearchInputHandler: React.PropTypes.func.isRequired,
   searchItemClickHandler: React.PropTypes.func.isRequired,
-  openFamilyDialog: React.PropTypes.bool.isRequired,
   loading: React.PropTypes.bool.isRequired,
   family: React.PropTypes.object,
   searchResults: React.PropTypes.array,
-  familyEditInfo: React.PropTypes.object.isRequired,
   familyExist: React.PropTypes.bool.isRequired,
   onSearchInputBlur: React.PropTypes.func.isRequired,
   searchInputClickHandler: React.PropTypes.func.isRequired,
   searchingUsers: React.PropTypes.bool.isRequired,
-  onFamilyGoalChanged: React.PropTypes.func.isRequired,
-  onFamilyDescriptionChanged: React.PropTypes.func.isRequired
+  familyName: React.PropTypes.string.isRequired,
+  submitFamilyForm: React.PropTypes.func.isRequired
 }
 
 export default Family

@@ -1,52 +1,20 @@
 import axios from 'axios'
 import _ from 'lodash'
 import { fetchUserFamilyInfo } from 'store/familyInfo'
+import { actions as reduxFormActions } from 'react-redux-form'
 
 // ------------------------------------ Constants
 // ------------------------------------
 export const LOADING_CHANGED = 'LOADING_CHANGED'
-export const FAMALY_NAME_CHANGED = 'FAMALY_NAME_CHANGED'
 export const OPEN_FAMILY_DIALOG_CHANGED = 'OPEN_FAMILY_DIALOG_CHANGED'
 export const SEARCH_TEXT_CHANGED = 'SEARCH_TEXT_CHANGED'
 export const SEARCH_RESULTS_CHANGED = 'SEARCH_RESULTS_CHANGED'
 export const SEARCHING_USERS_CHANGED = 'SEARCHING_USERS_CHANGED'
 
-export const SET_FAMILY_GOAL = 'SET_FAMILY_GOAL'
-export const SET_FAMILY_DESCRIPTION = 'SET_FAMILY_DESCRIPTION'
-
-export const SET_FAMILY_EDIT_INFO = 'SET_FAMILY_EDIT_INFO'
-
-export const familyEditInfo = () => {
-  return {
-    type: SET_FAMILY_EDIT_INFO
-  }
-}
-
-export const setFamilyGoal = (goal) => {
-  return {
-    type: SET_FAMILY_GOAL,
-    payload: goal
-  }
-}
-
-export const setFamilyDescription = (description) => {
-  return {
-    type: SET_FAMILY_DESCRIPTION,
-    payload: description
-  }
-}
-
 export const setLoading = (loading) => {
   return {
     type: LOADING_CHANGED,
     payload: loading
-  }
-}
-
-export const setFamilyName = (name) => {
-  return {
-    type: FAMALY_NAME_CHANGED,
-    payload: name
   }
 }
 
@@ -80,39 +48,6 @@ export const setSearchingUsers = (searching) => {
 // ------------------------------------ Functions
 // ------------------------------------
 
-export const formSubmitHandler = (e) => {
-  e.preventDefault()
-
-  return (dispatch, getState) => {
-    dispatch(setLoading(true))
-
-    var state = getState()
-    var url = state.familyInfo.family !== null ? '/Family/Edit' : '/Family/Create'
-
-    axios({
-      method: 'Post',
-      url: url,
-      data: {
-        FamilyId: state.familyInfo.family.familyId,
-        Name: state.family.familyEditInfo.name,
-        CreatedById: state.user.userInfo.userId,
-        Description: state.family.familyEditInfo.description,
-        Goal: state.family.familyEditInfo.goal
-      }
-    }).then(function (response) {
-      // do we need to update family data fetched from server?
-      // all required data will be updated with help of user
-      // may be we need just to refetch user family info?
-      dispatch(fetchUserFamilyInfo())
-      dispatch(setOpenFamilyDialog(false))
-      dispatch(setLoading(false))
-    }).catch(function (error) {
-      console.log(error)
-      dispatch(setLoading(false))
-    })
-  }
-}
-
 export const openFamilyDialog = (e) => {
   e.preventDefault()
 
@@ -132,28 +67,6 @@ export const closeFamilyDialog = (e) => {
     if (!loading) {
       dispatch(setOpenFamilyDialog(false))
     }
-  }
-}
-
-export const familyNameChangeHandler = (e) => {
-  e.preventDefault()
-
-  return (dispatch, getState) => {
-    dispatch(setFamilyName(e.target.value))
-  }
-}
-
-export const onFamilyGoalChanged = (e) => {
-  e.preventDefault()
-
-  return (dispatch, getState) => {
-    dispatch(setFamilyGoal(e.target.value))
-  }
-}
-
-export const onFamilyDescriptionChanged = (e) => {
-  return (dispatch, getState) => {
-    dispatch(setFamilyDescription(e.target.value))
   }
 }
 
@@ -222,66 +135,60 @@ export const searchInputClickHandler = (e) => {
   }
 }
 
+export const submitFamilyForm = (e) => {
+  return (dispatch, getState) => {
+    var state = getState()
+    var url = state.familyInfo.family !== null ? '/Family/Edit' : '/Family/Create'
+
+    var sendRequest = axios({
+      method: 'Post',
+      url: url,
+      data: state.familyEditInfo
+    }).then(function (response) {
+      dispatch(fetchUserFamilyInfo())
+      dispatch(setOpenFamilyDialog(false))
+      dispatch(setLoading(false))
+    }).catch(function (error) {
+      console.log(error)
+      dispatch(setLoading(false))
+    })
+
+    dispatch(reduxFormActions.submit('familyEditInfo', sendRequest))
+  }
+}
+
 export const setFamilyEditInfo = () => {
   return (dispatch, getState) => {
-    dispatch(familyEditInfo())
-
     var familyInfo = getState().familyInfo.family
-
-    dispatch(setFamilyName(familyInfo.name))
-    dispatch(setFamilyGoal(familyInfo.goal === null ? '' : familyInfo.goal))
-    dispatch(setFamilyDescription(familyInfo.description === null ? '' : familyInfo.description))
+    dispatch(reduxFormActions.load('familyEditInfo', {
+      familyId: familyInfo.familyId,
+      name: familyInfo.name,
+      description: familyInfo.description,
+      goal: familyInfo.goal,
+      createdById: familyInfo.createdById
+    }))
   }
 }
 
 export const actions = {
-  formSubmitHandler,
-  familyNameChangeHandler,
   openFamilyDialog,
   closeFamilyDialog,
   searchInputHandler,
   searchItemClickHandler,
   onSearchInputBlur,
   searchInputClickHandler,
-  onFamilyGoalChanged,
-  onFamilyDescriptionChanged
+  submitFamilyForm
 }
 
 const ACTION_HANDLERS = {
-  [LOADING_CHANGED]: (state, action) => Object.assign({}, state, { loading: action.payload }),
-  [FAMALY_NAME_CHANGED]: (state, action) => _.merge({}, state, {
-    familyEditInfo: {
-      // goal: state.familyEditInfo.goal,
-      // description: state.familyEditInfo.description,
-      name: action.payload
-    }
-  }),
-  [SET_FAMILY_GOAL]: (state, action) => _.merge({}, state, {
-    familyEditInfo: {
-      // name: state.familyEditInfo.name,
-      // description: state.familyEditInfo.description,
-      goal: action.payload
-    }
-  }),
-  [SET_FAMILY_DESCRIPTION]: (state, action) => _.merge({}, state, {
-    familyEditInfo: {
-      // name: state.familyEditInfo.name,
-      // goal: state.familyEditInfo.goal,
-      description: action.payload
-    }
-  }),
-  [OPEN_FAMILY_DIALOG_CHANGED]: (state, action) => Object.assign({}, state, { openFamilyDialog: action.payload }),
-  [SEARCH_TEXT_CHANGED]: (state, action) => Object.assign({}, state, { searchText: action.payload }),
-  [SEARCH_RESULTS_CHANGED]: (state, action) => Object.assign({}, state, { searchResults: action.payload }),
-  [SEARCHING_USERS_CHANGED]: (state, action) => Object.assign({}, state, { searchingUsers: action.payload })
+  [LOADING_CHANGED]: (state, action) => _.assign({}, state, { loading: action.payload }),
+  [OPEN_FAMILY_DIALOG_CHANGED]: (state, action) => _.assign({}, state, { openFamilyDialog: action.payload }),
+  [SEARCH_TEXT_CHANGED]: (state, action) => _.assign({}, state, { searchText: action.payload }),
+  [SEARCH_RESULTS_CHANGED]: (state, action) => _.assign({}, state, { searchResults: action.payload }),
+  [SEARCHING_USERS_CHANGED]: (state, action) => _.assign({}, state, { searchingUsers: action.payload })
 }
 
 const initialState = {
-  familyEditInfo: {
-    name: '',
-    description: '',
-    goal: ''
-  },
   loading: false,
   openFamilyDialog: false,
   searchText: null,

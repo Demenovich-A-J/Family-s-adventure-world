@@ -73,7 +73,7 @@ namespace Faw.Web.Api.Controllers
             return Ok(new
             {
                 name = family.Name,
-                familyMembers = family.FamilyMemebers.Select(x => new
+                familyMembers = family.FamilyMemebers.Where(x => x.UserId != userId).Select(x => new
                 {
                     name = $"{x.FirstName} {x.LastName}",
                     birthDate = x.BirthDate.ToShortDateString(),
@@ -82,7 +82,8 @@ namespace Faw.Web.Api.Controllers
                 }).ToList(),
                 familyId = family.FamilyId,
                 description = family.Description,
-                goal = family.Goal
+                goal = family.Goal,
+                createdById = family.CreatedById
             });
         }
 
