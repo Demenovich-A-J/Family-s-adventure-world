@@ -11,12 +11,7 @@ import { actions } from '../modules/quests'
 const mapDispatchToProps = {
   closeCreateQuestDialogHandler: actions.closeCreateQuestDialogHandler,
   openCreateQuestDialogHandler: actions.openCreateQuestDialogHandler,
-  onSubmitCreateQuestFormHandler: actions.onSubmitCreateQuestFormHandler,
-  editInfoNameChangeHandler: actions.editInfoNameChangeHandler,
-  editInfoDescriptionChangeHandler: actions.editInfoDescriptionChangeHandler,
-  editInfoIsPublicChangeHandler: actions.editInfoIsPublicChangeHandler,
-  editInfoRequieredLevelChangeHandler: actions.editInfoRequieredLevelChangeHandler,
-  editInfoCoinsChangeHandler: actions.editInfoCoinsChangeHandler,
+  submitQuestFormHandler: actions.submitQuestFormHandler,
   questTabHandler: actions.questTabHandler,
   setFamilyQuest: actions.setFamilyQuest,
   onEditButtonClick: actions.onEditButtonClick
@@ -29,7 +24,11 @@ const mapStateToProps = (state) => ({
   familyQuests: state.quests.familyQuests,
   familyQuestsLoading: state.quests.familyQuestsLoading,
   userQuestsLoading: state.quests.userQuestsLoading,
-  userQuests: state.quests.userQuests
+  userQuests: state.quests.userQuests,
+  editQuestInfo: state.quests.editQuestInfo,
+  questFormSubmitting: state.quests.questFormSubmitting,
+  questInfoLoading: state.quests.questInfoLoading,
+  isQuestInfoEdit: state.questInfo.questId !== null
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quests)

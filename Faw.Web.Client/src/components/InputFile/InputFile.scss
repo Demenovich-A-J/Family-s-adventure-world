@@ -1,0 +1,16 @@
+.faw-file-input-container{
+	width: 100%;
+
+	.mdl-button--file{
+		right: 0;
+	}
+
+	.mdl-textfield {
+		box-sizing: border-box;
+		width: calc(100% - 32px);
+	}
+
+	.file-input{
+		display: none;
+	}
+}

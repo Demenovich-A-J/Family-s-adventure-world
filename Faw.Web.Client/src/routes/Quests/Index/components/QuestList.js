@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import './Quests.scss'
 
 const renderDetailsLink = (name, row) => {
-  return <Link to={'/quest/details/' + row.id} className='-link'> {name} </Link>
+  return <Link to={'/quest/details/' + row.questId} className='-link'> {name} </Link>
 }
 
 const renderEditAction = (actions, onEditButtonClick) => {

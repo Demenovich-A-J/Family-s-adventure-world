@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Principal;
 using System.Web.Http;
 using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Contracts.Query;
@@ -72,15 +71,17 @@ namespace Faw.Web.Api.Controllers
             var quest = _questQueryService.GetById(questId);
             return Ok(new
             {
-                id = quest.QuestId,
-                name = quest.Name,
-                description = quest.Description,
+                questId = quest.QuestId,
+                name = quest.Name ?? string.Empty,
+                description = quest.Description ?? string.Empty,
                 isPublic = quest.IsPublic,
                 expirience = quest.Expirience,
                 coins = quest.Coins ?? default(decimal),
                 requiredLevel = quest.RequiredLevel,
                 createdOn = quest.CreatedOn,
                 updatedOn = quest.UpdatedOn,
+                imageUrl = quest.ImageUrl ?? string.Empty,
+                createdById = quest.CreatedById
             });
         }
 
@@ -92,7 +93,7 @@ namespace Faw.Web.Api.Controllers
 
             return Ok(new
             {
-                id = userQuest.QuestId,
+                questId = userQuest.QuestId,
                 name = userQuest.Quest.Name,
                 description = userQuest.Quest.Description,
                 isPublic = userQuest.Quest.IsPublic,
@@ -103,7 +104,8 @@ namespace Faw.Web.Api.Controllers
                 updatedOn = userQuest.UpdatedOn,
                 status = userQuest.UserQuestStatus.ToString(),
                 userQuestId = userQuest.UserQuestId,
-                imageUrl = userQuest.Quest.ImageUrl
+                imageUrl = userQuest.Quest.ImageUrl,
+                createdById = userQuest.Quest.CreatedById
             });
         }
 
@@ -127,9 +129,10 @@ namespace Faw.Web.Api.Controllers
                     requiredLevel = x.Quest.RequiredLevel,
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
-                    id = x.QuestId,
+                    questId = x.QuestId,
                     userQuestId = x.UserQuestId,
-                    imageUrl = x.Quest.ImageUrl
+                    imageUrl = x.Quest.ImageUrl,
+                    createdById = x.Quest.CreatedById
                 })
             });
         }
@@ -152,8 +155,9 @@ namespace Faw.Web.Api.Controllers
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
-                    id = x.QuestId,
-                    imageUrl = x.ImageUrl
+                    questId = x.QuestId,
+                    imageUrl = x.ImageUrl,
+                    createdById = x.CreatedById
                 })
             });
         }
@@ -176,7 +180,7 @@ namespace Faw.Web.Api.Controllers
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
-                    id = x.QuestId,
+                    questId = x.QuestId,
                     imageUrl = x.ImageUrl
                 })
             });
@@ -192,7 +196,7 @@ namespace Faw.Web.Api.Controllers
             {
                 quests = quests.Select(x => new
                 {
-                    id = x.QuestId,
+                    questId = x.QuestId,
                     name = x.Name,
                     description = x.Description,
                     isPublic = x.IsPublic,
@@ -201,7 +205,8 @@ namespace Faw.Web.Api.Controllers
                     requiredLevel = x.RequiredLevel,
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
-                    imageUrl = x.ImageUrl
+                    imageUrl = x.ImageUrl,
+                    createdById = x.CreatedById
                 })
             });
         }

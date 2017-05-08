@@ -5,8 +5,7 @@ import {
   Tabs,
   Tab,
   FABButton,
-  Icon,
-  ProgressBar
+  Icon
 } from 'react-mdl'
 import CreateQuestDialog from './CreateQuestDialog'
 import UserQuestList from './UserQuestList'
@@ -75,13 +74,11 @@ export const Quests = (props) => (
     <Cell col={12}>
       <CreateQuestDialog
         closeCreateQuestDialogHandler={props.closeCreateQuestDialogHandler}
-        onSubmitCreateQuestFormHandler={props.onSubmitCreateQuestFormHandler}
+        submitQuestFormHandler={props.submitQuestFormHandler}
         openCreateQuestDialog={props.openCreateQuestDialog}
-        editInfoNameChangeHandler={props.editInfoNameChangeHandler}
-        editInfoDescriptionChangeHandler={props.editInfoDescriptionChangeHandler}
-        editInfoIsPublicChangeHandler={props.editInfoIsPublicChangeHandler}
-        editInfoRequieredLevelChangeHandler={props.editInfoRequieredLevelChangeHandler}
-        editInfoCoinsChangeHandler={props.editInfoCoinsChangeHandler}
+        questFormSubmitting={props.questFormSubmitting}
+        questInfoLoading={props.questInfoLoading}
+        isQuestInfoEdit={props.isQuestInfoEdit}
       />
     </Cell>
   </Grid>
@@ -90,20 +87,18 @@ export const Quests = (props) => (
 Quests.propTypes = {
   closeCreateQuestDialogHandler: React.PropTypes.func.isRequired,
   openCreateQuestDialogHandler: React.PropTypes.func.isRequired,
-  onSubmitCreateQuestFormHandler: React.PropTypes.func.isRequired,
+  submitQuestFormHandler: React.PropTypes.func.isRequired,
   openCreateQuestDialog: React.PropTypes.bool.isRequired,
-  editInfoNameChangeHandler: React.PropTypes.func.isRequired,
-  editInfoDescriptionChangeHandler: React.PropTypes.func.isRequired,
-  editInfoIsPublicChangeHandler: React.PropTypes.func.isRequired,
-  editInfoRequieredLevelChangeHandler: React.PropTypes.func.isRequired,
-  editInfoCoinsChangeHandler: React.PropTypes.func.isRequired,
   questTabHandler: React.PropTypes.func.isRequired,
   tabId: React.PropTypes.number.isRequired,
   familyQuests: React.PropTypes.array.isRequired,
   familyQuestsLoading: React.PropTypes.bool.isRequired,
   userQuestsLoading: React.PropTypes.bool.isRequired,
   userQuests: React.PropTypes.array.isRequired,
-  onEditButtonClick: React.PropTypes.func.isRequired
+  onEditButtonClick: React.PropTypes.func.isRequired,
+  questFormSubmitting: React.PropTypes.bool.isRequired,
+  questInfoLoading: React.PropTypes.bool.isRequired,
+  isQuestInfoEdit: React.PropTypes.bool.isRequired
 }
 
 export default Quests

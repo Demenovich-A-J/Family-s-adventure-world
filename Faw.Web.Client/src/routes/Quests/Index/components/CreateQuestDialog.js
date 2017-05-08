@@ -4,67 +4,65 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Button,
-  Textfield
+  Button
 } from 'react-mdl'
+import QuestForm from './QuestForm'
 
 import './Quests.scss'
 
-export const CreateQuestDialog = (props) => (
-  <Dialog
-    open={props.openCreateQuestDialog}
-    onCancel={props.closeCreateQuestDialogHandler}
-    className='-create-quest-dialog'>
-    <DialogTitle>Create family quest</DialogTitle>
-    <DialogContent>
-      <form>
-        <Textfield
-          className='full-width'
-          label='Name'
-          type='text'
-          floatingLabel
-          onChange={props.editInfoNameChangeHandler}
+var form = null
+
+export const CreateQuestDialog = (props) => {
+  function submitForm () {
+    form.dispatchEvent(new Event('submit'))
+  }
+
+  return (
+    <Dialog
+      open={props.openCreateQuestDialog}
+      onCancel={props.closeCreateQuestDialogHandler}
+      className='-create-quest-dialog'>
+      <DialogTitle>Create family quest</DialogTitle>
+      <DialogContent>
+        <QuestForm
+          onSubmit={props.submitQuestFormHandler}
+          getRef={(node) => { form = node }}
+          questInfoLoading={props.questInfoLoading}
+          isQuestInfoEdit={props.isQuestInfoEdit}
+          questFormSubmitting={props.questFormSubmitting}
         />
-        <Textfield
-          className='full-width'
-          label='Description'
-          type='text'
-          rows={3}
-          floatingLabel
-          onChange={props.editInfoDescriptionChangeHandler}
-        />
-        <Textfield
-          className='full-width'
-          label='Coins'
-          type='number'
-          floatingLabel
-          onChange={props.editInfoCoinsChangeHandler}
-        />
-        <Textfield
-          onChange={props.editInfoRequieredLevelChangeHandler}
-          className='full-width'
-          label='Required Level'
-          type='number'
-          floatingLabel
-        />
-      </form>
-    </DialogContent>
-    <DialogActions>
-      <Button type='button' onClick={props.onSubmitCreateQuestFormHandler}>Create</Button>
-      <Button type='button' onClick={props.closeCreateQuestDialogHandler}>Cancel</Button>
-    </DialogActions>
-  </Dialog>
-)
+      </DialogContent>
+      <DialogActions>
+        <Button type='button'
+          onClick={submitForm}
+          disabled={props.questFormSubmitting || props.questInfoLoading}>
+          {
+            props.isQuestInfoEdit
+            ? (
+              'Edit'
+            )
+            : (
+              'Create'
+            )
+          }
+        </Button>
+        <Button type='button'
+          onClick={props.closeCreateQuestDialogHandler}
+          disabled={props.questFormSubmitting || props.questInfoLoading}>
+          Cancel
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
 
 CreateQuestDialog.propTypes = {
   closeCreateQuestDialogHandler: React.PropTypes.func.isRequired,
-  onSubmitCreateQuestFormHandler: React.PropTypes.func.isRequired,
+  submitQuestFormHandler: React.PropTypes.func.isRequired,
   openCreateQuestDialog: React.PropTypes.bool.isRequired,
-  editInfoNameChangeHandler: React.PropTypes.func.isRequired,
-  editInfoDescriptionChangeHandler: React.PropTypes.func.isRequired,
-  editInfoIsPublicChangeHandler: React.PropTypes.func.isRequired,
-  editInfoRequieredLevelChangeHandler: React.PropTypes.func.isRequired,
-  editInfoCoinsChangeHandler: React.PropTypes.func.isRequired
+  questFormSubmitting: React.PropTypes.bool.isRequired,
+  questInfoLoading: React.PropTypes.bool.isRequired,
+  isQuestInfoEdit: React.PropTypes.bool.isRequired
 }
 
 export default CreateQuestDialog
