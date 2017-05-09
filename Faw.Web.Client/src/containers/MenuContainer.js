@@ -13,7 +13,8 @@ const MenuContainer = React.createClass({
     'View' : [
       { to: '/', label:'Home' },
       { to: '/family', label:'Family' },
-      { to: '/quests', label:'Quests' }
+      { to: '/quests', label:'Quests' },
+      { to: '/achivments', label:'Achivments' }
     ]
   },
   getNavItems () {

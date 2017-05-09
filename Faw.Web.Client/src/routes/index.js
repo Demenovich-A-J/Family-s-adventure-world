@@ -18,8 +18,10 @@ import QuestsDetailsRoute from './Quests/Details'
 
 import UserDetailsRoute from './User/Details'
 
-import NotFound from './NotFound'
+import AchivmentRoute from './Achivment/Index'
+import AchivmentDetailsRoute from './Achivment/Details'
 
+import NotFound from './NotFound'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -34,7 +36,9 @@ export const createRoutes = (store) => ([
       FamilyMemberDetailsRoute(store),
       QuestsRoute(store),
       UserDetailsRoute(store),
-      QuestsDetailsRoute(store)
+      QuestsDetailsRoute(store),
+      AchivmentDetailsRoute(store),
+      AchivmentRoute(store)
     ]
   },
   {
