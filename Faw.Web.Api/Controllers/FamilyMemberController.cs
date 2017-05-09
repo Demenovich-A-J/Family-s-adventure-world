@@ -119,8 +119,9 @@ namespace Faw.Web.Api.Controllers
                 expirience = x.Quest.Expirience,
                 coins = x.Quest.Coins ?? default(decimal),
                 requiredLevel = x.Quest.RequiredLevel,
-                createdOn = x.CreatedOn,
-                updatedOn = x.UpdatedOn
+                createdOn = x.CreatedOn.ToShortDateString(),
+                updatedOn = x.UpdatedOn.ToShortDateString(),
+                questId = x.QuestId
             }));
         }
     }

@@ -13,7 +13,7 @@ const getLevelBuffer = (exp, expToGet) => {
 
 export const MemberDetails = (props) => (
   <Grid className='faw-member-details-container'>
-    <Cell col={8} className='mdl-shadow--2dp'>
+    <Cell col={8} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
         User details
       </Cell>
@@ -71,7 +71,7 @@ export const MemberDetails = (props) => (
         </div>
       </Cell>
     </Cell>
-    <Cell col={4} className='mdl-shadow--2dp'>
+    <Cell col={4} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
         Recent Achivments list
       </Cell>
@@ -104,19 +104,19 @@ export const MemberDetails = (props) => (
         )
       }
     </Cell>
-    <Cell col={12} className='mdl-shadow--2dp'>
+    <Cell col={12} shadow={0} className='-quest-list-title-container'>
+      <Cell col={12}className='mdl-typography--headline' component='h5'>
+        User quests list
+      </Cell>
+    </Cell>
+    <Cell col={12} className='-quest-list-container'>
       {
         props.userQuestsLoading
         ? (
           <Loading />
         )
         : (
-          <Grid>
-            <Cell col={12} className='-section-title mdl-typography--headline' component='h5'>
-              User quests list
-            </Cell>
-            <MemberQuestList userQuests={props.userQuests} />
-          </Grid>
+          <MemberQuestList userQuests={props.userQuests} />
         )
       }
     </Cell>

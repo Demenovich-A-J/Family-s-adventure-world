@@ -1,5 +1,10 @@
 import React from 'react'
-import { Grid, Cell } from 'react-mdl'
+import { DataTable, TableHeader } from 'react-mdl'
+import { Link } from 'react-router'
+
+const renderDetailsLink = (name, row) => {
+  return <Link to={'/quest/details/' + row.questId} className='-link'> {name} </Link>
+}
 
 function getStatusClass (status) {
   switch (status) {
@@ -16,45 +21,50 @@ function getStatusClass (status) {
   }
 }
 
+const renderStatus = (status) => {
+  return <span className={getStatusClass(status)}>{status}</span>
+}
 export const MemberQuestList = (props) => (
-  <Cell col={12} id='userQuestList'>
-    {
-      props.userQuests && props.userQuests.map((userQuest, index) => (
-        <Grid className='user-quest-row' key={index}>
-          <Cell col={4}>
-            <b>{'Name : '}</b>
-            {userQuest.name}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Expirience : '}</b>
-            {userQuest.expirience}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Required Level : '}</b>
-            {userQuest.requiredLevel}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Status : '}</b>
-            <span className={getStatusClass(userQuest.status)}>
-              {userQuest.status}
-            </span>
-          </Cell>
-          <Cell col={4}>
-            <b>{'Coins : '}</b>
-            {`$${userQuest.coins.toFixed(2)}`}
-          </Cell>
-          <Cell col={4}>
-            <b>{'Created : '}</b>
-            {userQuest.createdOn}
-          </Cell>
-          <Cell col={12}>
-            <b>{'Description : '}</b>
-            {userQuest.description}
-          </Cell>
-        </Grid>
-      ))
-    }
-  </Cell>
+  <DataTable
+    id='userQuestList'
+    className='full-width'
+    shadow={0}
+    rows={props.userQuests}
+  >
+    <TableHeader
+      name='name'
+      cellFormatter={(name, row) => renderDetailsLink(name, row)}
+    >
+      Name
+    </TableHeader>
+    <TableHeader
+      name='status'
+      cellFormatter={renderStatus}
+    >
+      Status
+    </TableHeader>
+    <TableHeader
+      name='expirience'
+    >
+      Expirience
+    </TableHeader>
+    <TableHeader
+      name='coins'
+      cellFormatter={(coins) => `$${coins.toFixed(2)}`}
+    >
+      Coins
+    </TableHeader>
+    <TableHeader
+      name='requiredLevel'
+    >
+      Required Level
+    </TableHeader>
+    <TableHeader
+      name='createdOn'
+    >
+      Created
+    </TableHeader>
+  </DataTable>
 )
 
 MemberQuestList.propTypes = {

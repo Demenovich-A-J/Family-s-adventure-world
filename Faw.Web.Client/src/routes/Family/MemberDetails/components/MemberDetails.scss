@@ -53,12 +53,17 @@
 			}
 		}
 	}
+	.-quest-list-title-container{
+		margin-bottom: 0;
+		border-bottom: 1px solid #e0e0e0;
+	}
 
-	#userQuestList{
-		.user-quest-row{
-			&:nth-child(2n){
-				background: #f2f2f2;
-			}
+	.-quest-list-container{
+		margin-top: 0;
+
+		#userQuestList{
+			position: relative;
+			border: none;
 		}
 	}
 }
