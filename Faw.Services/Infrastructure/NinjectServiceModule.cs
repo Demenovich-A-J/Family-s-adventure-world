@@ -17,6 +17,7 @@ namespace Faw.Services.Infrastructure
             Bind<IFamilyService>().To<FamilyService>();
             Bind<IPlayerInfoService>().To<PlayerInfoService>();
             Bind<IQuestService>().To<QuestService>();
+            Bind<IAchivmentsService>().To<AchivmentsService>();
 
             Bind<IUserTypeQueryService>().To<UserTypeQueryService>();
             Bind<IUserQueryService>().To<UserQueryService>();

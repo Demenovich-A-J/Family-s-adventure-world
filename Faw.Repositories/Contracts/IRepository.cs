@@ -13,5 +13,7 @@ namespace Faw.Repositories.Contracts
         T GetById(Guid entityId);
 
         IQueryable<T> GetWhere(Func<T, bool> predicate);
+
+        IQueryable<T> Get();
     }
 }

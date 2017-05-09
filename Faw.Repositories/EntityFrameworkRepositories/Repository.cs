@@ -62,6 +62,11 @@ namespace Faw.Repositories.EntityFrameworkRepositories
             return DbContext.Set<TEntity>().Where(predicate).AsQueryable();
         }
 
+        public IQueryable<TEntity> Get()
+        {
+            return DbContext.Set<TEntity>();
+        }
+
         public virtual void Update(TEntity entityToUpdate)
         {
             DbContext.Entry(entityToUpdate).State = EntityState.Modified;

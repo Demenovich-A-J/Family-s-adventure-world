@@ -167,7 +167,6 @@ export const loadQuestInfo = (questId) => {
 
 export const submitQuestFormHandler = (model) => {
   return (dispatch, getState) => {
-    // TODO: change all loading to more concrete
     dispatch(setQuestFormSubmitting(true))
     let url = ''
     let method = ''

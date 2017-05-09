@@ -1,8 +1,9 @@
-import { injectReducer } from '../../../store/reducers'
+import { injectReducer } from 'store/reducers'
+import { fetchAchivments } from 'routes/routeEnter'
 
 export default (store) => ({
   path: '/achivments',
-	// onEnter: funcToExecute(store),
+  onEnter: fetchAchivments(store),
   getComponent (nextState, cb) {
     require.ensure([], (require) => {
       const achivment = require('./containers/AchivmentContainer').default

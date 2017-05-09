@@ -44,7 +44,7 @@ namespace Faw.Services.Query
         {
             using (ContextScopeFactory.CreateReadOnly())
             {
-                return Mapper.Map<IEnumerable<Achivment>>(_achivmentRepository.GetWhere(null));
+                return Mapper.Map<IEnumerable<Achivment>>(_achivmentRepository.Get());
             }
         }
     }

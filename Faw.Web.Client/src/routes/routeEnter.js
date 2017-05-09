@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 
 import { fetchUserFamilyInfo } from 'store/familyInfo'
 import { loadGenders } from 'store/enums'
@@ -11,6 +12,9 @@ import { loadQuestDetails } from './Quests/Details/modules/details'
 import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
 
 import { loadUserDetails } from './User/Details/modules/userDetails'
+
+import { loadAchivments } from './Achivment/Index/modules/achivment'
+import { loadAchivment } from './Achivment/Details/modules/achivmentDetails'
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -59,4 +63,14 @@ export const fetchQuestDetails = (store) => (nextState, replace) => {
 export const fetchUserDetails = (store) => (nextState, replace) => {
   store.dispatch(loadUserDetails(nextState.params.userId))
   store.dispatch(loadGenders())
+}
+
+export const fetchAchivments = (store) => (nextState, replace) => {
+  store.dispatch(loadAchivments())
+}
+
+export const fetchAchivment = (store) => (nextState, replace) => {
+  if (!_.isNil(nextState.params.achivmentId)) {
+    store.dispatch(loadAchivment(nextState.params.achivmentId))
+  }
 }

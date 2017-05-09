@@ -49,6 +49,13 @@ namespace Faw.Web.Api.Models.AutoMapper
                     o.Condition(s => s.QuestId != Guid.Empty);
                     o.MapFrom(s => s.QuestId);
                 });
+
+            CreateMap<AchivmentViewModel, Achivment>()
+                .ForMember(d => d.AchivmentId, o =>
+                {
+                    o.Condition(s => s.AchivmentId != Guid.Empty);
+                    o.MapFrom(s => s.AchivmentId);
+                });
         }
     }
 }
