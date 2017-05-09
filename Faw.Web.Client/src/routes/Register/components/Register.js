@@ -32,29 +32,25 @@ export const Register = (props) => (
     <label>Gender</label>
     <div className='-genders-container'>
       {
-        props.genders.length === 0
-        ? (<div />)
-        : (
-          <RadioGroup
-            name='genders'
-            container='ul'
-            childContainer='li'
-            value={props.gender}
-            onChange={props.onGenderChanged}>
-            {
-              props.genders &&
-              props.genders.map((gender, index) => (
-                <Radio
-                  key={index}
-                  name='gender'
-                  onChange={props.onGenderChanged}
-                  value={gender}>
-                  {gender}
-                </Radio>
-              ))
-            }
-          </RadioGroup>
-        )
+        <RadioGroup
+          name='genders'
+          container='ul'
+          childContainer='li'
+          value={props.gender}
+          onChange={props.onGenderChanged}>
+          {
+            props.genders &&
+            props.genders.map((gender, index) => (
+              <Radio
+                key={index}
+                name='gender'
+                onChange={props.onGenderChanged}
+                value={gender}>
+                {gender}
+              </Radio>
+            ))
+          }
+        </RadioGroup>
       }
     </div>
     <Textfield

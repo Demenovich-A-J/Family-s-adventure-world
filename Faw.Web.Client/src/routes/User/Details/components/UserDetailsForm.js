@@ -35,36 +35,30 @@ export const UserDetailsForm = (props) => (
     />
     <div className='-genders-container'>
       {
-          props.gendersLoading
-          ? (
-            <div />
-          )
-          : (
-            <RadioGroup
-              name='gender'
-              container='ul'
-              childContainer='li'
-              value={props.userGender}
+        <RadioGroup
+          name='gender'
+          container='ul'
+          childContainer='li'
+          value={props.userGender}
           >
-              {
-              props.genders &&
-              props.genders.map((gender, index) => (
-                <label key={index}>
-                  <Control.radio
-                    model='.gender'
-                    component={Radio}
-                    controlProps={{
-                      disabled: !props.editMode,
-                      value: gender
-                    }}
-                    value={gender}>
-                    {gender}
-                  </Control.radio>
-                </label>
-                ))
-              }
-            </RadioGroup>
-          )
+          {
+            props.genders &&
+            props.genders.map((gender, index) => (
+              <label key={index}>
+                <Control.radio
+                  model='.gender'
+                  component={Radio}
+                  controlProps={{
+                    disabled: !props.editMode,
+                    value: gender
+                  }}
+                  value={gender}>
+                  {gender}
+                </Control.radio>
+              </label>
+              ))
+            }
+        </RadioGroup>
         }
     </div>
     <Control
@@ -117,7 +111,6 @@ export const UserDetailsForm = (props) => (
 
 UserDetailsForm.propTypes = {
   editMode: React.PropTypes.bool.isRequired,
-  gendersLoading: React.PropTypes.bool.isRequired,
   genders: React.PropTypes.array.isRequired,
   userGender: React.PropTypes.string
 }

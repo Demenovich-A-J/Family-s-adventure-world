@@ -14,8 +14,7 @@ const mapStateToProps = (state) => ({
   playerInfo: state.userDetails.playerInfo,
   userAchivmentsLoading: state.userDetails.userAchivmentsLoading,
   editMode: state.userDetails.editMode,
-  gendersLoading: state.userDetails.gendersLoading,
-  genders: state.userDetails.genders,
+  genders: state.enums.genders,
   userGender: state.userDetailsInfo.gender
 })
 

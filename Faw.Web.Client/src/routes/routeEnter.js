@@ -1,26 +1,25 @@
 import axios from 'axios'
 
 import { fetchUserFamilyInfo } from 'store/familyInfo'
+import { loadGenders } from 'store/enums'
 
-import { setGendersInfo, setGender } from './Register/modules/register'
+import { setGender } from './Register/modules/register'
 
 import { loadUserQuests, loadFamilyQuests } from './Quests/Index/modules/quests'
 import { loadQuestDetails } from './Quests/Details/modules/details'
 
 import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
 
-import { loadUserDetails, loadGenders } from './User/Details/modules/userDetails'
+import { loadUserDetails } from './User/Details/modules/userDetails'
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const loadGendersOnEnter = (store) => (nextState, replace) => {
-  axios({ method: 'Get', url: '/Account/FetchGendersInfo' })
-  .then(function (response) {
-    store.dispatch(setGendersInfo(response.data))
-    store.dispatch(setGender(response.data.genders[0]))
-  }).catch(function (error) {
-    console.log(error)
-  })
+  store.dispatch(loadGenders()).then(
+    function (response) {
+      store.dispatch(setGender(response.data.genders[0]))
+    }
+  )
 }
 
 export const checkResetStatusOnEnter = (store) => (nextState, replace) => {
@@ -33,7 +32,6 @@ export const checkResetStatusOnEnter = (store) => (nextState, replace) => {
     store.dispatch(hideLoading())
   })
 }
-
 
 export const loadFamily = (store) => (nextState, replace) => {
   store.dispatch(fetchUserFamilyInfo())

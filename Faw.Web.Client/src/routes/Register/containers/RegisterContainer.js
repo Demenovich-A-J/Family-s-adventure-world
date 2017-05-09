@@ -17,7 +17,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  genders: state.register.genders,
+  genders: state.enums.genders,
   loading: state.register.loading,
   gender: state.register.gender
 })

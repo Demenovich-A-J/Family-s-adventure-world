@@ -22,7 +22,7 @@ const getLevelBuffer = (exp, expToGet) => {
 
 export const UserDetails = (props) => (
   <Grid className='faw-user-details-container'>
-    <Cell col={8} className='mdl-shadow--2dp'>
+    <Cell col={8} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
         User details
       </Cell>
@@ -52,7 +52,6 @@ export const UserDetails = (props) => (
                 editMode={props.editMode}
                 genders={props.genders}
                 userGender={props.userGender}
-                gendersLoading={props.gendersLoading}
               />
             </Cell>
           </Grid>
@@ -90,7 +89,7 @@ export const UserDetails = (props) => (
         </div>
       </Cell>
     </Cell>
-    <Cell col={4} className='mdl-shadow--2dp'>
+    <Cell col={4} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
         Recent Achivments list
       </Cell>
@@ -135,7 +134,6 @@ UserDetails.propTypes = {
   editMode: React.PropTypes.bool.isRequired,
   editButtonClick: React.PropTypes.func.isRequired,
   cancelButtonClick: React.PropTypes.func.isRequired,
-  gendersLoading: React.PropTypes.bool.isRequired,
   genders: React.PropTypes.array.isRequired,
   userGender: React.PropTypes.string,
   saveButtonClick: React.PropTypes.func.isRequired

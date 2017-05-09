@@ -9,16 +9,12 @@ export const SET_USER = 'SET_USER'
 export const GET_USER_ACHIVMENTS = 'GET_USER_ACHIVMENTS'
 export const SET_USER_ACHIVMENTS = 'SET_USER_ACHIVMENTS'
 
-export const GET_GENDERS = 'GET_GENDERS'
-export const SET_GENDERS = 'SET_GENDERS'
-
 export const SET_EDIT_MODE = 'SET_EDIT_MODE'
 
 export const SET_PLAYER_INFO = 'SET_PLAYER_INFO'
 
 export const SET_USER_LOADING = 'SET_USER_LOADING'
 export const SET_USER_ACHIVMENTS_LOADING = 'SET_USER_ACHIVMENTS_LOADING'
-export const SET_GENDERS_LOADING = 'SET_GENDERS_LOADING'
 export const SET_USER_DETAILS_INFO_SUBMITTING = 'SET_USER_DETAILS_INFO_SUBMITTING'
 
 export const setUserDetailsInfoSubmitting = (submitting) => {
@@ -32,26 +28,6 @@ export const setPlayerInfo = (playerInfo) => {
   return {
     type: SET_PLAYER_INFO,
     payload: playerInfo
-  }
-}
-
-export const getGenders = (edit) => {
-  return {
-    type: GET_GENDERS
-  }
-}
-
-export const setGenders = (genders) => {
-  return {
-    type: SET_GENDERS,
-    payload: genders
-  }
-}
-
-export const setGendersLoading = (loading) => {
-  return {
-    type: SET_GENDERS_LOADING,
-    payload: loading
   }
 }
 
@@ -161,25 +137,6 @@ export const loadFamilyMemberAchivments = (userId) => {
   }
 }
 
-export const loadGenders = () => {
-  return (dispatch, getState) => {
-    dispatch(getGenders())
-    dispatch(setGendersLoading(true))
-
-    axios({
-      method: 'Get',
-      url: '/Account/FetchGendersInfo'
-    })
-    .then(function (response) {
-      dispatch(setGenders(response.data.genders))
-      dispatch(setGendersLoading(false))
-    }).catch(function (error) {
-      console.log(error)
-      dispatch(setGendersLoading(false))
-    })
-  }
-}
-
 export const saveButtonClick = (e) => {
   return (dispatch, getState) => {
     dispatch(setUserDetailsInfoSubmitting(true))
@@ -207,7 +164,6 @@ export const saveButtonClick = (e) => {
 export const editButtonClick = (e) => {
   return (dispatch, getState) => {
     dispatch(setEditMode(true))
-    dispatch(loadGenders())
   }
 }
 
@@ -223,7 +179,6 @@ export const actions = {
   loadFamilyMemberAchivments,
   editButtonClick,
   cancelButtonClick,
-  loadGenders,
   saveButtonClick
 }
 
@@ -238,10 +193,6 @@ const ACTION_HANDLERS = {
     (state, action) => _.assign({}, state, { userAchivments: action.payload }),
   [SET_EDIT_MODE]:
     (state, action) => _.assign({}, state, { editMode: action.payload }),
-  [SET_GENDERS_LOADING]:
-    (state, action) => _.assign({}, state, { gendersLoading: action.payload }),
-  [SET_GENDERS]:
-    (state, action) => _.assign({}, state, { genders: action.payload }),
   [SET_PLAYER_INFO]:
     (state, action) => _.assign({}, state, { playerInfo: action.payload }),
   [SET_USER_DETAILS_INFO_SUBMITTING]:
@@ -251,11 +202,9 @@ const ACTION_HANDLERS = {
 const initialState = {
   user: {},
   userAchivments: [],
-  genders: [],
   playerInfo: {},
   userLoading: true,
   userAchivmentsLoading: true,
-  gendersLoading: true,
   editMode: false,
   userDetailsInfoSubmitting: false
 }

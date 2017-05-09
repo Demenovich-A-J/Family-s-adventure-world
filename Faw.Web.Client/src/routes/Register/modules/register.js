@@ -1,10 +1,9 @@
 import axios from 'axios'
+import _ from 'lodash'
+
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { browserHistory } from 'react-router'
 
-// ------------------------------------ Constants
-// ------------------------------------
-export const SET_GENDERS = 'SET_GENDERS'
 export const SET_GENDER = 'SET_GENDER'
 export const FIRST_NAME_CHANGED = 'FIRST_NAME_CHANGED'
 export const LAST_NAME_CHANGED = 'LAST_NAME_CHANGED'
@@ -15,13 +14,6 @@ export const BIRTH_DATE_CHANGED = 'BIRTH_DATE_CHANGED'
 export const PASSWORD_CHANGED = 'PASSWORD_CHANGED'
 export const REPEAT_PASSWORD_CHANGED = 'REPEAT_PASSWORD_CHANGED'
 export const SET_REGISTER_LOADING = 'SET_REGISTER_LOADING'
-
-// ------------------------------------ Actions
-// ------------------------------------
-
-export const setGendersInfo = (genders) => {
-  return { type: SET_GENDERS, payload: genders }
-}
 
 export const setGender = (gender) => {
   return { type: SET_GENDER, payload: gender }
@@ -115,24 +107,30 @@ export const actions = {
   setGender
 }
 
-// ------------------------------------ Action Handlers
-// ------------------------------------
 const ACTION_HANDLERS = {
-  [SET_GENDERS]: (state, action) => Object.assign({}, state, action.payload),
-  [SET_GENDER]: (state, action) => Object.assign({}, state, { gender: action.payload }),
-  [FIRST_NAME_CHANGED]: (state, action) => Object.assign({}, state, { firstName: action.payload }),
-  [LAST_NAME_CHANGED]: (state, action) => Object.assign({}, state, { lastName: action.payload }),
-  [EMAIL_CHANGED]: (state, action) => Object.assign({}, state, { email: action.payload }),
-  [LOGIN_CHANGED]: (state, action) => Object.assign({}, state, { login: action.payload }),
-  [GENDER_CHANGED]: (state, action) => Object.assign({}, state, { gender: action.payload }),
-  [BIRTH_DATE_CHANGED]: (state, action) => Object.assign({}, state, { birthDate: action.payload }),
-  [PASSWORD_CHANGED]: (state, action) => Object.assign({}, state, { password: action.payload }),
-  [REPEAT_PASSWORD_CHANGED]: (state, action) => Object.assign({}, state, { repeatPassword: action.payload }),
-  [SET_REGISTER_LOADING]: (state, action) => Object.assign({}, state, { loading: action.payload })
+  [SET_GENDER]:
+    (state, action) => _.assign({}, state, { gender: action.payload }),
+  [FIRST_NAME_CHANGED]:
+    (state, action) => _.assign({}, state, { firstName: action.payload }),
+  [LAST_NAME_CHANGED]:
+    (state, action) => _.assign({}, state, { lastName: action.payload }),
+  [EMAIL_CHANGED]:
+    (state, action) => _.assign({}, state, { email: action.payload }),
+  [LOGIN_CHANGED]:
+    (state, action) => _.assign({}, state, { login: action.payload }),
+  [GENDER_CHANGED]:
+    (state, action) => _.assign({}, state, { gender: action.payload }),
+  [BIRTH_DATE_CHANGED]:
+    (state, action) => _.assign({}, state, { birthDate: action.payload }),
+  [PASSWORD_CHANGED]:
+    (state, action) => _.assign({}, state, { password: action.payload }),
+  [REPEAT_PASSWORD_CHANGED]:
+    (state, action) => _.assign({}, state, { repeatPassword: action.payload }),
+  [SET_REGISTER_LOADING]:
+    (state, action) => _.assign({}, state, { loading: action.payload })
 }
 
 const initialState = {
-  genders: [],
   firstName: '',
   lastName: '',
   login: '',
