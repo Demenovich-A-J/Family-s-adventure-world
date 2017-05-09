@@ -9,7 +9,7 @@ import { loadQuestDetails } from './Quests/Details/modules/details'
 
 import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
 
-import { loadUserDetails } from './User/Details/modules/userDetails'
+import { loadUserDetails, loadGenders } from './User/Details/modules/userDetails'
 
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
@@ -60,4 +60,5 @@ export const fetchQuestDetails = (store) => (nextState, replace) => {
 
 export const fetchUserDetails = (store) => (nextState, replace) => {
   store.dispatch(loadUserDetails(nextState.params.userId))
+  store.dispatch(loadGenders())
 }

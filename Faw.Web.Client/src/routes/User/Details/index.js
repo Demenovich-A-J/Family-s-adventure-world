@@ -1,26 +1,31 @@
 import { injectReducer } from 'store/reducers'
 import { fetchUserDetails } from 'routes/routeEnter'
 import requireAuthorization from 'infrastructure/requireAuthorization'
+import { modelReducer, formReducer } from 'react-redux-form'
 
 export default (store) => ({
   path: '/user/details/:userId',
   onEnter: fetchUserDetails(store),
-  /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
-    /*  Webpack - use 'require.ensure' to create a split point
-        and embed an async module loader (jsonp) when bundling   */
     require.ensure([], (require) => {
-      /*  Webpack - use require callback to define
-          dependencies for bundling   */
       const quests = requireAuthorization(require('./containers/UserDetailsContainer').default)
       const reducer = require('./modules/userDetails').default
+      var model = require('./modules/userDetailsInfoForm').default
 
-      /*  Add the reducer to the store on key 'counter'  */
       injectReducer(store, {
         key: 'userDetails',
         reducer
       })
 
+      injectReducer(store, {
+        key: 'userDetailsInfo',
+        reducer: modelReducer('userDetailsInfo', model)
+      })
+
+      injectReducer(store, {
+        key: 'userDetailsInfoForm',
+        reducer: formReducer('userDetailsInfo', model)
+      })
       /*  Return getComponent   */
       cb(null, quests)
 

@@ -62,7 +62,9 @@ namespace Faw.Web.Api.Controllers
                 imageUrl = user.ImageUrl,
                 description = user.Description,
                 city = user.City,
-                country = user.Country
+                country = user.Country,
+                accountId = user.AccountId,
+                playerInfoId = user.PlayerInfoId
             });
         }
 
@@ -77,6 +79,8 @@ namespace Faw.Web.Api.Controllers
             {
                 userId = user.UserId,
                 userName = $"{user.FirstName}  {user.LastName}",
+                firstName = user.FirstName ?? string.Empty,
+                lastName = user.LastName ?? string.Empty,
                 role = user.UserType.Name,
                 claims = user.UserType.Claims.Select(x => new
                 {
@@ -97,10 +101,14 @@ namespace Faw.Web.Api.Controllers
                     } : null,
                 gender = user.Gender.ToString(),
                 birthDate = user.BirthDate.ToShortDateString(),
-                imageUrl = user.ImageUrl,
-                description = user.Description,
-                city = user.City,
-                country = user.Country
+                imageUrl = user.ImageUrl ?? string.Empty,
+                description = user.Description ?? string.Empty,
+                city = user.City ?? string.Empty,
+                country = user.Country ?? string.Empty,
+                accountId = user.AccountId,
+                playerInfoId = user.PlayerInfoId,
+                userTypeId = user.UserTypeId,
+                familyId = user.FamilyId
             });
         }
     }

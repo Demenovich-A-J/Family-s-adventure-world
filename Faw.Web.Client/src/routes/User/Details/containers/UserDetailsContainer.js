@@ -4,16 +4,19 @@ import { actions } from '../modules/userDetails'
 
 const mapDispatchToProps = {
   editButtonClick: actions.editButtonClick,
-  cancelButtonClick: actions.cancelButtonClick
+  cancelButtonClick: actions.cancelButtonClick,
+  saveButtonClick: actions.saveButtonClick
 }
 const mapStateToProps = (state) => ({
   userLoading: state.userDetails.userLoading,
-  user: state.userDetails.user,
+  user: state.userDetailsInfo,
   userAchivments: state.userDetails.userAchivments,
+  playerInfo: state.userDetails.playerInfo,
   userAchivmentsLoading: state.userDetails.userAchivmentsLoading,
   editMode: state.userDetails.editMode,
   gendersLoading: state.userDetails.gendersLoading,
-  genders: state.userDetails.genders
+  genders: state.userDetails.genders,
+  userGender: state.userDetailsInfo.gender
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetails)

@@ -8,12 +8,10 @@ import {
   Icon,
   ListItem,
   ProgressBar,
-  Button,
-  Textfield,
-  RadioGroup,
-  Radio
+  Button
 } from 'react-mdl'
 import Loading from 'components/Loading'
+import UserDetailsForm from './UserDetailsForm'
 
 import './UserDetails.scss'
 import avatar from 'assets/default_avatar.svg'
@@ -39,92 +37,22 @@ export const UserDetails = (props) => (
               <img src={avatar} className='-user-avatar' />
               <div className='-player-info'>
                 <div>
-                  <span>Current level {props.user.playerInfo.level}</span>
+                  <span>Current level {props.playerInfo.level}</span>
                 </div>
                 <ProgressBar
                   progress={
                     getLevelBuffer(
-                      props.user.playerInfo.exp,
-                      props.user.playerInfo.expForNext)
+                      props.playerInfo.exp,
+                      props.playerInfo.expForNext)
                   } />
               </div>
             </Cell>
             <Cell col={8}>
-              <Textfield
-                className='full-width'
-                type='text'
-                label='User name'
-                floatingLabel
-                disabled={!props.editMode}
-                defaultValue={props.user.userName}
-              />
-              <div className='-genders-container'>
-                {
-                  !props.editMode || props.gendersLoading
-                  ? (
-                    <Radio
-                      name='gender'
-                      value={props.user.gender}
-                      disabled={!props.editMode}
-                      defaultChecked
-                    >
-                      {props.user.gender}
-                    </Radio>
-                  )
-                  : (
-                    <RadioGroup
-                      name='genders'
-                      container='ul'
-                      childContainer='li'
-                      value={props.user.gender}
-                      >
-                      {
-                        props.genders &&
-                        props.genders.map((gender, index) => (
-                          <Radio
-                            key={index}
-                            name='gender'
-                            value={gender}>
-                            {gender}
-                          </Radio>
-                        ))
-                      }
-                    </RadioGroup>
-                  )
-                }
-              </div>
-              <Textfield
-                className='full-width'
-                type='text'
-                label='Birth Date'
-                floatingLabel
-                disabled={!props.editMode}
-                defaultValue={props.user.birthDate}
-              />
-              <Textfield
-                className='full-width'
-                type='text'
-                label='Country'
-                floatingLabel
-                disabled={!props.editMode}
-                defaultValue={props.user.country}
-              />
-              <Textfield
-                className='full-width'
-                type='text'
-                label='City'
-                floatingLabel
-                disabled={!props.editMode}
-                defaultValue={props.user.city}
-              />
-              <Textfield
-                className='full-width'
-                type='text'
-                label='Description'
-                floatingLabel
-                rows={3}
-                disabled={!props.editMode}
-                defaultValue={props.user.description}
+              <UserDetailsForm
+                editMode={props.editMode}
+                genders={props.genders}
+                userGender={props.userGender}
+                gendersLoading={props.gendersLoading}
               />
             </Cell>
           </Grid>
@@ -144,6 +72,7 @@ export const UserDetails = (props) => (
                 </Button>
                 <Button raised primary ripple className='-edit-button btn-success pull-right'
                   disabled={props.userLoading}
+                  onClick={props.saveButtonClick}
                 >
                   Save
                 </Button>
@@ -200,13 +129,16 @@ export const UserDetails = (props) => (
 UserDetails.propTypes = {
   userLoading: React.PropTypes.bool.isRequired,
   user: React.PropTypes.object.isRequired,
+  playerInfo: React.PropTypes.object.isRequired,
   userAchivments: React.PropTypes.array.isRequired,
   userAchivmentsLoading: React.PropTypes.bool.isRequired,
   editMode: React.PropTypes.bool.isRequired,
   editButtonClick: React.PropTypes.func.isRequired,
   cancelButtonClick: React.PropTypes.func.isRequired,
   gendersLoading: React.PropTypes.bool.isRequired,
-  genders: React.PropTypes.array.isRequired
+  genders: React.PropTypes.array.isRequired,
+  userGender: React.PropTypes.string,
+  saveButtonClick: React.PropTypes.func.isRequired
 }
 
 export default UserDetails

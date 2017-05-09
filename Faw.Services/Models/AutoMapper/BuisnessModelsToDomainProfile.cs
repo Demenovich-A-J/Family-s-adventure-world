@@ -14,7 +14,6 @@ namespace Faw.Services.Models.AutoMapper
                     o.Condition(s => s.UserId != Guid.Empty);
                     o.MapFrom(s => s.UserId);
                 })
-                .ForMember(x => x.GenderString, o => o.MapFrom(s => s.Gender))
                 .MaxDepth(2);
 
             CreateMap<Account, Faw.Models.Domain.Account>()

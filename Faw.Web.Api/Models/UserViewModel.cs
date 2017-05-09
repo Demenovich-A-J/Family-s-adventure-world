@@ -11,12 +11,18 @@ namespace Faw.Web.Api.Models
         public Guid AccountId { get; set; }
         public Guid UserTypeId { get; set; }
         public Guid PlayerInfoId { get; set; }
+        public Guid? FamilyId { get; set; }
 
         [Required]
         public string FirstName { get; set; }
 
         [Required]
         public string LastName { get; set; }
+
+        public string ImageUrl { get; set; }
+        public string Description { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
 
         [Required]
         public Gender Gender { get; set; }
@@ -27,6 +33,7 @@ namespace Faw.Web.Api.Models
         public AccountViewModel Account { get; set; }
         public UserTypeViewModel UserType { get; set; }
         public PlayerInfoViewModel PlayerInfo { get; set; }
+        public FamilyViewModel Family { get; set; }
 
         public IList<QuestViewModel> Quests { get; set; }
     }
