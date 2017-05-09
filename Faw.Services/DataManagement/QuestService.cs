@@ -39,7 +39,7 @@ namespace Faw.Services.DataManagement
             {
                 domainQuest.CreatedOn = domainQuest.UpdatedOn = DateTime.UtcNow;
                 domainQuest.Expirience = _expirienceQueryService.CalculateExpirience(domainQuest.RequiredLevel,
-                    QuestСomplexity.Easy);
+                    quest.QuestСomplexity);
 
                 _questRepository.Insert(domainQuest);
 
@@ -56,6 +56,8 @@ namespace Faw.Services.DataManagement
             using (var contextScope = ContextScopeFactory.Create())
             {
                 domainQuest.UpdatedOn = DateTime.UtcNow;
+                domainQuest.Expirience = _expirienceQueryService.CalculateExpirience(domainQuest.RequiredLevel,
+                    quest.QuestСomplexity);
 
                 _questRepository.Update(domainQuest);
 

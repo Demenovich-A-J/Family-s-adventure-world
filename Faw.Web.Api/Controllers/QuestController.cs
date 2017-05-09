@@ -81,7 +81,8 @@ namespace Faw.Web.Api.Controllers
                 createdOn = quest.CreatedOn,
                 updatedOn = quest.UpdatedOn,
                 imageUrl = quest.ImageUrl ?? string.Empty,
-                createdById = quest.CreatedById
+                createdById = quest.CreatedById,
+                questСomplexity = quest.QuestСomplexity.ToString()
             });
         }
 
@@ -105,7 +106,8 @@ namespace Faw.Web.Api.Controllers
                 status = userQuest.UserQuestStatus.ToString(),
                 userQuestId = userQuest.UserQuestId,
                 imageUrl = userQuest.Quest.ImageUrl,
-                createdById = userQuest.Quest.CreatedById
+                createdById = userQuest.Quest.CreatedById,
+                questСomplexity = userQuest.Quest.QuestСomplexity.ToString()
             });
         }
 
@@ -132,7 +134,8 @@ namespace Faw.Web.Api.Controllers
                     questId = x.QuestId,
                     userQuestId = x.UserQuestId,
                     imageUrl = x.Quest.ImageUrl,
-                    createdById = x.Quest.CreatedById
+                    createdById = x.Quest.CreatedById,
+                    questСomplexity = x.Quest.QuestСomplexity.ToString()
                 })
             });
         }
@@ -157,7 +160,8 @@ namespace Faw.Web.Api.Controllers
                     updatedOn = x.UpdatedOn,
                     questId = x.QuestId,
                     imageUrl = x.ImageUrl,
-                    createdById = x.CreatedById
+                    createdById = x.CreatedById,
+                    questСomplexity = x.QuestСomplexity.ToString()
                 })
             });
         }
@@ -181,7 +185,8 @@ namespace Faw.Web.Api.Controllers
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
                     questId = x.QuestId,
-                    imageUrl = x.ImageUrl
+                    imageUrl = x.ImageUrl,
+                    questСomplexity = x.QuestСomplexity.ToString()
                 })
             });
         }
@@ -206,7 +211,8 @@ namespace Faw.Web.Api.Controllers
                     createdOn = x.CreatedOn,
                     updatedOn = x.UpdatedOn,
                     imageUrl = x.ImageUrl,
-                    createdById = x.CreatedById
+                    createdById = x.CreatedById,
+                    questСomplexity = x.QuestСomplexity.ToString()
                 })
             });
         }

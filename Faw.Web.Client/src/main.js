@@ -5,6 +5,7 @@ import AppContainer from './containers/AppContainer'
 import axiosUtil from 'infrastructure/utils/axiosUtils'
 // import 'react-mdl/extra/material.css'
 import 'react-mdl/extra/material.js'
+import 'components/GetMdlSelect/getmdl-select/src/js/getmdl-select.js'
 
 axiosUtil.setBaseUrl()
 

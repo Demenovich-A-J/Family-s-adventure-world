@@ -1,5 +1,6 @@
 export const initialState = {
   questId: null,
+  questСomplexity: '',
   imageUrl: '',
   name: '',
   description: '',

@@ -28,7 +28,9 @@ const mapStateToProps = (state) => ({
   editQuestInfo: state.quests.editQuestInfo,
   questFormSubmitting: state.quests.questFormSubmitting,
   questInfoLoading: state.quests.questInfoLoading,
-  isQuestInfoEdit: state.questInfo.questId !== null
+  isQuestInfoEdit: state.questInfo.questId !== null,
+  questComplexity: state.enums.questСomplexity,
+  questInfoComplexity: state.questInfo.questСomplexity
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quests)

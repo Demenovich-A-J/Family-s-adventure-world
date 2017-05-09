@@ -79,6 +79,8 @@ export const Quests = (props) => (
         questFormSubmitting={props.questFormSubmitting}
         questInfoLoading={props.questInfoLoading}
         isQuestInfoEdit={props.isQuestInfoEdit}
+        questComplexity={props.questComplexity}
+        questInfoComplexity={props.questInfoComplexity}
       />
     </Cell>
   </Grid>
@@ -98,7 +100,9 @@ Quests.propTypes = {
   onEditButtonClick: React.PropTypes.func.isRequired,
   questFormSubmitting: React.PropTypes.bool.isRequired,
   questInfoLoading: React.PropTypes.bool.isRequired,
-  isQuestInfoEdit: React.PropTypes.bool.isRequired
+  isQuestInfoEdit: React.PropTypes.bool.isRequired,
+  questComplexity: React.PropTypes.array.isRequired,
+  questInfoComplexity: React.PropTypes.string.isRequired
 }
 
 export default Quests

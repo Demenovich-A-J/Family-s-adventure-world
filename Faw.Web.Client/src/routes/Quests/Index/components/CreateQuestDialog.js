@@ -30,6 +30,8 @@ export const CreateQuestDialog = (props) => {
           questInfoLoading={props.questInfoLoading}
           isQuestInfoEdit={props.isQuestInfoEdit}
           questFormSubmitting={props.questFormSubmitting}
+          questComplexity={props.questComplexity}
+          questInfoComplexity={props.questInfoComplexity}
         />
       </DialogContent>
       <DialogActions>
@@ -62,7 +64,9 @@ CreateQuestDialog.propTypes = {
   openCreateQuestDialog: React.PropTypes.bool.isRequired,
   questFormSubmitting: React.PropTypes.bool.isRequired,
   questInfoLoading: React.PropTypes.bool.isRequired,
-  isQuestInfoEdit: React.PropTypes.bool.isRequired
+  isQuestInfoEdit: React.PropTypes.bool.isRequired,
+  questComplexity: React.PropTypes.array.isRequired,
+  questInfoComplexity: React.PropTypes.string.isRequired
 }
 
 export default CreateQuestDialog

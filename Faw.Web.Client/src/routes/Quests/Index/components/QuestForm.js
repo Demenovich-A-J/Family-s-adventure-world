@@ -1,11 +1,13 @@
 import React from 'react'
-import { Form, Control } from 'react-redux-form'
+import _ from 'lodash'
 
+import { Form, Control } from 'react-redux-form'
 import {
   Textfield
 } from 'react-mdl'
 
 import InputFile from 'components/InputFile'
+import GetMdlSelect from 'components/GetMdlSelect'
 
 export const QuestForm = (props) => (
   <Form
@@ -23,6 +25,14 @@ export const QuestForm = (props) => (
         className: 'full-width',
         disabled: props.questFormSubmitting || props.questInfoLoading
       }}
+    />
+    <GetMdlSelect
+      model='.questСomplexity'
+      name='questComplexity'
+      label='Quest Complexity'
+      disabled={props.questFormSubmitting || props.questInfoLoading}
+      value={props.questInfoComplexity}
+      items={props.questComplexity}
     />
     <Control
       model='.imageUrl'
@@ -76,7 +86,9 @@ QuestForm.propTypes = {
   onSubmit: React.PropTypes.func.isRequired,
   getRef: React.PropTypes.func.isRequired,
   questFormSubmitting: React.PropTypes.bool.isRequired,
-  questInfoLoading: React.PropTypes.bool.isRequired
+  questInfoLoading: React.PropTypes.bool.isRequired,
+  questComplexity: React.PropTypes.array.isRequired,
+  questInfoComplexity: React.PropTypes.string.isRequired
 }
 
 export default QuestForm
