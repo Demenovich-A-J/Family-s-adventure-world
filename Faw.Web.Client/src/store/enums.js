@@ -94,6 +94,22 @@ const initialState = {
     'Hard',
     'Impossible'
   ],
+  comparer: [
+    'Less',
+    'Equal',
+    'Greater',
+    'LessOrEqual',
+    'GreaterOrEqual'
+  ],
+  connector: [
+    'Or',
+    'And'
+  ],
+  valueType: [
+    'Int',
+    'String',
+    'Double'
+  ],
   questСomplexityLoading: false,
   gendersLoading: false
 }

@@ -4,7 +4,8 @@ export const initialState = {
   name: '',
   description: '',
   imageUrl: '',
-  expression: ''
+  expression: '',
+  expressionProperties: []
 }
 
 export default initialState

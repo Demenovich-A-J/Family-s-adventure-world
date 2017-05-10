@@ -1,3 +1,43 @@
 .faw-achivment-details-conatiner{
+	.-section-title{
+		border-bottom: 1px solid #00bcd4;
+	}
+
+	.mdl-stepper{
+		width: 100%;
+		max-width: 100%;
+	}
 	
+	.-stepper-content{
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		border-radius: 2px;
+	}
+
+	.-stepper-navigation{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		margin-top: 20px;
+	}
+
+	.-comparer-select, .-stepper-editor{
+		width: 100%;
+	}
+
+	.-property-editor{
+		.-property-name{
+			width: 100%;
+		}
+		
+		.-property-value{
+			margin-right: 5px;
+		}
+
+		.-property-value, .-property-type{
+			width: 48%;
+			display: inline-block;
+		}
+	}
 }
