@@ -1,10 +1,11 @@
 ﻿using System;
-using Faw.Models.Domain.Enums;
+using Faw.Services.Models.Enums;
 
-namespace Faw.Models.Domain
+namespace Faw.Services.Models
 {
-    public class ExpressionProperty : BaseEntity
+    public class ExpressionProperty
     {
+        public Guid ExpressionPropertyId { get; set; }
         public Guid AchivmentId { get; set; }
         public Guid LeftPropertyValueId { get; set; }
         public Guid RightPropertyValueId { get; set; }
@@ -15,9 +16,9 @@ namespace Faw.Models.Domain
         public Comparer Comparer { get; set; }
         public Connector? Connector { get; set; }
 
-        public virtual PropertyValue LeftPropertyValue { get; set; }
-        public virtual PropertyValue RightPropertyValue { get; set; }
+        public PropertyValue LeftPropertyValue { get; set; }
+        public PropertyValue RightPropertyValue { get; set; }
 
-        public virtual Achivment Achivment { get; set; }
+        public Achivment Achivment { get; set; }
     }
 }

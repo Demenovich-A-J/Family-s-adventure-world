@@ -40,4 +40,29 @@
 			display: inline-block;
 		}
 	}
+
+	.expression-container{
+		padding: 0 8px;
+
+		&:nth-child(2n+1){
+			background: #eee;
+		}
+
+		.expression{
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+  		align-items: center;
+		}
+	}
+
+	.-achivment-image-container{
+		display: flex;
+		max-height: 67px;
+		.-achivment-image{
+			height: 50px;
+			margin-right: 10px;
+			border: 1px solid;
+		}
+	}
 }

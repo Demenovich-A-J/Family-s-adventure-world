@@ -13,7 +13,10 @@ const mapDispatchToProps = {
   selectComparer: actions.selectComparer,
   propertyNameChanged: actions.propertyNameChanged,
   propertyValueChanged: actions.propertyValueChanged,
-  propertyTypeChanged: actions.propertyTypeChanged
+  propertyTypeChanged: actions.propertyTypeChanged,
+  finish: actions.finish,
+  removeAchivmentExpression: actions.removeAchivmentExpression,
+  editAchivmentExpression: actions.editAchivmentExpression
 }
 const mapStateToProps = (state) => ({
   selectedModelName: state.achivmentDetails.selectedModelName,
@@ -27,7 +30,11 @@ const mapStateToProps = (state) => ({
   max: state.achivmentDetails.max,
   connectors: state.enums.connector,
   comparers: state.enums.comparer,
-  valueTypes: state.enums.valueType
+  valueTypes: state.enums.valueType,
+  expressionProperties: state.achivmentDetailsInfo.expressionProperties,
+  achivmentEnabled: state.achivmentDetailsInfo.enabled,
+  achivmentSubmitting: state.achivmentDetails.achivmentSubmitting,
+  achivmentLoading: state.achivmentDetails.achivmentLoading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AchivmentDetails)

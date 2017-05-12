@@ -5,6 +5,8 @@ import MemberQuestList from './MemberQuestList'
 import Loading from 'components/Loading'
 
 import avatar from 'assets/default_avatar.svg'
+import achivment from 'assets/default_achivment.svg'
+
 import './MemberDetails.scss'
 
 const getLevelBuffer = (exp, expToGet) => {
@@ -88,7 +90,7 @@ export const MemberDetails = (props) => (
                   <ListItem threeLine key={index}>
                     <ListItemContent
                       avatar={
-                        <img src={userAchivment.imageUrl} />
+                        <img src={achivment} />
                       }
                       subtitle={userAchivment.description}>
                       {userAchivment.name}

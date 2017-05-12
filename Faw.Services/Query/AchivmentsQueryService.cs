@@ -24,9 +24,17 @@ namespace Faw.Services.Query
 
         public Achivment Get(Guid achivmentId)
         {
+
             using (ContextScopeFactory.CreateReadOnly())
             {
-                return Mapper.Map<Achivment>(_achivmentRepository.GetById(achivmentId));
+                var res = _achivmentRepository.Get(achivmentId);
+
+                foreach (var expressionProperty in res.ExpressionProperties)
+                {
+                    expressionProperty.Achivment = null;
+                }
+
+                return Mapper.Map<Achivment>(res);
             }
         }
 

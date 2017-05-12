@@ -21,5 +21,14 @@ namespace Faw.Repositories.EntityFrameworkRepositories
                 .Include(x => x.Achivment)
                 .Where(x => x.UserId == userId);
         }
+
+        public Achivment Get(Guid achivmentId)
+        {
+            return DbContext.Achivments
+                .Include(x => x.ExpressionProperties)
+                .Include(x => x.ExpressionProperties.Select(ep => ep.LeftPropertyValue))
+                .Include(x => x.ExpressionProperties.Select(ep => ep.RightPropertyValue))
+                .FirstOrDefault(x => x.EntityId == achivmentId);
+        }
     }
 }

@@ -4,32 +4,44 @@ import { Stepper, Step, SelectField, Option } from 'react-mdl-extra'
 import AchivmentDetailsForm from './AchivmentDetailsForm'
 import PropertyEditor from './PropertyEditor'
 import AchivmentStepperButtons from './AchivmentStepperButtons'
+import AchivmentExpressionList from './AchivmentExpressionList'
 
 import './AchivmentDetails.scss'
 
 export const AchivmentDetails = (props) => (
   <Grid className='faw-achivment-details-conatiner'>
-    <Cell col={8} shadow={0}>
+    <Cell col={7} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
         Achivment Details
       </Cell>
       <Cell col={12}>
-        <AchivmentDetailsForm />
-        <Button raised ripple primary onClick={props.submitAchivmentInfo}>Save</Button>
+        <AchivmentDetailsForm
+          enabled={props.achivmentEnabled}
+          disabled={props.achivmentSubmitting || props.achivmentLoading} />
+        <Button raised ripple primary
+          onClick={props.submitAchivmentInfo}
+          disabled={props.achivmentSubmitting || props.achivmentLoading}>
+            Save
+          </Button>
       </Cell>
     </Cell>
-    <Cell col={4} shadow={0}>
+    <Cell col={5} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
         Achivment condition
       </Cell>
       <Cell col={12}>
-        {'Show result here'}
+        <AchivmentExpressionList
+          expressionProperties={props.expressionProperties}
+          removeAchivmentExpression={props.removeAchivmentExpression}
+          editAchivmentExpression={props.editAchivmentExpression}
+          disabled={props.achivmentSubmitting || props.achivmentLoading} />
       </Cell>
     </Cell>
     <Cell col={12}>
       <Stepper
         activeStep={props.activeStep}
         onStepTitleClick={props.onStepTitleClick}
+        disabled={props.achivmentSubmitting || props.achivmentLoading}
       >
         <Step title={'Introduction'}>
           <div className='-stepper-content'>
@@ -41,7 +53,9 @@ export const AchivmentDetails = (props) => (
               previousStep={props.previousStep}
               nextStep={props.nextStep}
               restart={props.restart}
+              finish={props.finish}
               selectedModelName={props.selectedModelName}
+              disabled={props.achivmentSubmitting || props.achivmentLoading}
             />
           </div>
         </Step>
@@ -53,6 +67,7 @@ export const AchivmentDetails = (props) => (
               label={'Select model name'}
               value={props.selectedModelName}
               onChange={props.selectModelName}
+              disabled={props.achivmentSubmitting || props.achivmentLoading}
             >
               {
                 props.modelNames && props.modelNames.map((name, index) => (
@@ -66,8 +81,8 @@ export const AchivmentDetails = (props) => (
               value={props.selectedConnector}
               onChange={props.selectConnector}
               className='-connector-select'
+              disabled={props.achivmentSubmitting || props.achivmentLoading}
             >
-              <Option value={null} disabled>-- Select value --</Option>
               {
                 props.connectors && props.connectors.map((name, index) => (
                   <Option key={index} value={name}>{name}</Option>
@@ -80,7 +95,9 @@ export const AchivmentDetails = (props) => (
               previousStep={props.previousStep}
               nextStep={props.nextStep}
               restart={props.restart}
+              finish={props.finish}
               selectedModelName={props.selectedModelName}
+              disabled={props.achivmentSubmitting || props.achivmentLoading}
             />
           </div>
         </Step>
@@ -100,6 +117,7 @@ export const AchivmentDetails = (props) => (
                 selectedModelName={props.selectedModelName}
                 side={'left'}
                 valueTypes={props.valueTypes}
+                disabled={props.achivmentSubmitting || props.achivmentLoading}
                 />
               <Cell col={4}>
                 <SelectField
@@ -108,6 +126,7 @@ export const AchivmentDetails = (props) => (
                   value={props.selectedComparer}
                   onChange={props.selectComparer}
                   className='-comparer-select'
+                  disabled={props.achivmentSubmitting || props.achivmentLoading}
                 >
                   {
                     props.comparers && props.comparers.map((name, index) => (
@@ -126,6 +145,7 @@ export const AchivmentDetails = (props) => (
                 selectedModelName={props.selectedModelName}
                 side={'right'}
                 valueTypes={props.valueTypes}
+                disabled={props.achivmentSubmitting || props.achivmentLoading}
                 />
             </Grid>
             <AchivmentStepperButtons
@@ -134,7 +154,9 @@ export const AchivmentDetails = (props) => (
               previousStep={props.previousStep}
               nextStep={props.nextStep}
               restart={props.restart}
+              finish={props.finish}
               selectedModelName={props.selectedModelName}
+              disabled={props.achivmentSubmitting || props.achivmentLoading}
             />
           </div>
         </Step>
@@ -166,7 +188,14 @@ AchivmentDetails.propTypes = {
   propertyValueChanged: React.PropTypes.func.isRequired,
   propertyTypeChanged: React.PropTypes.func.isRequired,
   valueTypes: React.PropTypes.array.isRequired,
-  comparers: React.PropTypes.array.isRequired
+  comparers: React.PropTypes.array.isRequired,
+  finish: React.PropTypes.func.isRequired,
+  expressionProperties: React.PropTypes.array.isRequired,
+  achivmentEnabled: React.PropTypes.bool.isRequired,
+  removeAchivmentExpression: React.PropTypes.func.isRequired,
+  editAchivmentExpression: React.PropTypes.func.isRequired,
+  achivmentSubmitting: React.PropTypes.bool.isRequired,
+  achivmentLoading: React.PropTypes.bool.isRequired
 }
 
 export default AchivmentDetails

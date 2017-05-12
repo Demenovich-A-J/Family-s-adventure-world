@@ -54,6 +54,7 @@
     <Compile Include="Contracts\IExpirienceRepository.cs" />
     <Compile Include="Contracts\IExpressionPropertyRepository.cs" />
     <Compile Include="Contracts\IPlayerInfoRepository.cs" />
+    <Compile Include="Contracts\IPropertyValueRepository.cs" />
     <Compile Include="Contracts\IUserQuestRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\AchivmentRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\ClaimRepository.cs" />
@@ -72,12 +73,14 @@
     <Compile Include="EntityFrameworkRepositories\FamilyRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\ItemRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\PlayerInfoRepository.cs" />
+    <Compile Include="EntityFrameworkRepositories\PropertyValueRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\QuestRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\Repository.cs" />
     <Compile Include="EntityFrameworkRepositories\SettingRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\UserQuestRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\UserRepository.cs" />
     <Compile Include="EntityFrameworkRepositories\UserTypeRepository.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
     <Compile Include="Infrastructure\NinjectRepositoryModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

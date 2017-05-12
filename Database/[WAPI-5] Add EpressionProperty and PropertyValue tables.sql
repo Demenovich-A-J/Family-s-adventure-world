@@ -1,7 +1,7 @@
 IF OBJECT_ID('[dbo].[PropertyValue]') IS NULL
 BEGIN
 	create table PropertyValue (
-	   PropertyValueId      uniqueidentifier     not null default newsequentialid(),
+	   PropertyValueId      uniqueidentifier     not null,
 	   PropertyName         nvarchar(256)        null,
 	   Value                nvarchar(256)        null,
 	   ValueType            int                  null,
@@ -13,7 +13,7 @@ GO
 IF OBJECT_ID('[dbo].[ExpressionProperty]') IS NULL
 BEGIN
 	create table ExpressionProperty (
-	   ExpressionPropertyId uniqueidentifier     not null default newsequentialid(),
+	   ExpressionPropertyId uniqueidentifier     not null,
 	   LeftPropertyValueId  uniqueidentifier     not null,
 	   RightPropertyValueId uniqueidentifier     not null,
 	   AchivmentId          uniqueidentifier     not null,
@@ -49,6 +49,6 @@ IF NOT EXISTS (SELECT *
 BEGIN
 	alter table ExpressionProperty
 	   add constraint FK_ExpressionProperty_RightPropertyValue foreign key (RightPropertyValueId)
-		  references PropertyValue (propertyvalueid)
+		  references PropertyValue (PropertyValueId)
 END
 GO

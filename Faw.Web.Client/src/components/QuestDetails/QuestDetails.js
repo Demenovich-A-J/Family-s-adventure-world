@@ -2,6 +2,8 @@ import React from 'react'
 import { Card, CardTitle, CardText, CardActions, Button, Grid, Cell } from 'react-mdl'
 import { browserHistory } from 'react-router'
 
+import questImage from 'assets/default_quest.svg'
+
 import './QuestDetails.scss'
 
 function getStatusClass (status) {
@@ -26,8 +28,8 @@ var QuestDetails = (props) => (
         { props.quest.name }
       </h2>
     </CardTitle>
-    <div className='mdl-card__media'>
-      <img className='article-image' src='http://www.getmdl.io/assets/demos/dog.png' />
+    <div className='mdl-card__media text-center'>
+      <img className='article-image' src={questImage} />
     </div>
     <CardText>
       <strong>Includes &nbsp;</strong>

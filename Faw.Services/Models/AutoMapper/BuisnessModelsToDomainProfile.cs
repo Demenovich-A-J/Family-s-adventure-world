@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Faw.Services.Models.Enums;
+using ValueType = Faw.Services.Models.Enums.ValueType;
 
 namespace Faw.Services.Models.AutoMapper
 {
@@ -93,7 +94,7 @@ namespace Faw.Services.Models.AutoMapper
                 {
                     o.Condition(s => s.AchivmentId != Guid.Empty);
                     o.MapFrom(s => s.AchivmentId);
-                });
+                }).MaxDepth(2);
 
             CreateMap<UserAchivment, Faw.Models.Domain.UserAchivment>()
                 .ForMember(d => d.EntityId, o =>
@@ -102,10 +103,27 @@ namespace Faw.Services.Models.AutoMapper
                     o.MapFrom(s => s.UserAchivmentId);
                 });
 
+            CreateMap<ExpressionProperty, Faw.Models.Domain.ExpressionProperty>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.ExpressionPropertyId != Guid.Empty);
+                    o.MapFrom(s => s.ExpressionPropertyId);
+                }).MaxDepth(2);
+
+            CreateMap<PropertyValue, Faw.Models.Domain.PropertyValue>()
+                .ForMember(d => d.EntityId, o =>
+                {
+                    o.Condition(s => s.PropertyValueId != Guid.Empty);
+                    o.MapFrom(s => s.PropertyValueId);
+                }).MaxDepth(2);
+
             CreateMap<Gender, Faw.Models.Domain.Enums.Gender>();
             CreateMap<UserQuestStatus, Faw.Models.Domain.Enums.UserQuestStatus>();
             CreateMap<AccountStatus, Faw.Models.Domain.Enums.AccountStatus>();
             CreateMap<QuestСomplexity, Faw.Models.Domain.Enums.QuestСomplexity>();
+            CreateMap<Comparer, Faw.Models.Domain.Enums.Comparer>();
+            CreateMap<Connector, Faw.Models.Domain.Enums.Connector>();
+            CreateMap<ValueType, Faw.Models.Domain.Enums.ValueType>();
         }
     }
 }

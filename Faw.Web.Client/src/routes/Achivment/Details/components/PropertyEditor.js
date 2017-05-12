@@ -18,6 +18,7 @@ export const PropertyEditor = (props) => {
             label={'Property'}
             floatingLabel
             value={props.propertyValue.propertyName}
+            disabled={props.disabled}
             onChange={(val) => {
               props.propertyNameChanged(val, propertyRef)
             }}
@@ -36,13 +37,15 @@ export const PropertyEditor = (props) => {
               className='-property-value'
               label='Property value'
               floatingLabel
-              value={props.propertyValue.propertyValue}
+              value={props.propertyValue.value}
+              disabled={props.disabled}
               onChange={props.propertyValueChanged} />
             <SelectField
               className='-property-type'
               label={'Type'}
               floatingLabel
               value={props.propertyValue.valueType}
+              disabled={props.disabled}
               onChange={(val) => {
                 props.propertyTypeChanged(val, typeRef)
               }}
@@ -75,7 +78,8 @@ PropertyEditor.propTypes = {
   propertyValue: React.PropTypes.object.isRequired,
   selectedModelName: React.PropTypes.string,
   side: React.PropTypes.string.isRequired,
-  valueTypes: React.PropTypes.array.isRequired
+  valueTypes: React.PropTypes.array.isRequired,
+  disabled: React.PropTypes.bool.isRequired
 }
 
 export default PropertyEditor

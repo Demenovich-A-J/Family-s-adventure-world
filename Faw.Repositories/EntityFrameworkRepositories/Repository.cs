@@ -6,11 +6,12 @@ using System.Linq;
 using Faw.DataContext;
 using Faw.Models.Domain;
 using Faw.Repositories.Contracts;
+using Faw.Repositories.Extensions;
 using Mehdime.Entity;
 
 namespace Faw.Repositories.EntityFrameworkRepositories
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
     {
         private readonly IAmbientDbContextLocator _ambientDbContextLocator;
 
@@ -75,6 +76,16 @@ namespace Faw.Repositories.EntityFrameworkRepositories
         private void Delete(TEntity entity)
         {
             DbContext.Entry(entity).State = EntityState.Deleted;
+        }
+
+        public virtual TEntity Save(TEntity entity)
+        {
+            return DbContext.InsertOrUpdate(entity, entity.EntityId);
+        }
+
+        public virtual void DeleteRange(IEnumerable<Guid> guids)
+        {
+            DbContext.Set<TEntity>().RemoveRange(guids);
         }
     }
 }

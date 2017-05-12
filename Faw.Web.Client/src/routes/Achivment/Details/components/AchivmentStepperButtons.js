@@ -9,10 +9,26 @@ export const AchivmentStepperButtons = (props) => {
 
   return (
     <div className='-stepper-navigation'>
-      {showPrev && <Button onClick={props.previousStep}>Prev</Button>}
-      {showNext && <Button primary onClick={props.nextStep}>Next</Button>}
-      {showLast && <Button onClick={props.restart}>Restart</Button>}
-      {showLast && <Button primary>Finish</Button>}
+      {showPrev && <Button
+        onClick={props.previousStep}
+        disabled={props.disabled}>
+          Prev
+        </Button>}
+      {showNext && <Button primary
+        onClick={props.nextStep}
+        disabled={props.disabled}>
+          Next
+        </Button>}
+      {showLast && <Button
+        onClick={props.restart}
+        disabled={props.disabled}>
+          Restart
+        </Button>}
+      {showLast && <Button primary
+        onClick={props.finish}
+        disabled={props.disabled}>
+          Finish
+        </Button>}
     </div>
   )
 }
@@ -23,7 +39,9 @@ AchivmentStepperButtons.propTypes = {
   previousStep: React.PropTypes.func.isRequired,
   nextStep: React.PropTypes.func.isRequired,
   restart: React.PropTypes.func.isRequired,
-  selectedModelName: React.PropTypes.string
+  selectedModelName: React.PropTypes.string,
+  finish: React.PropTypes.func.isRequired,
+  disabled: React.PropTypes.bool.isRequired
 }
 
 export default AchivmentStepperButtons

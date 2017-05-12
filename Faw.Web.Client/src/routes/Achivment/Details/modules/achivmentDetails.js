@@ -1,6 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
-import { actions as reduxFormActions } from 'react-redux-form'
+import { actions as reduxFormActions, track } from 'react-redux-form'
 
 export const SET_ACHIVMENT_SUBMITTING = 'SET_ACHIVMENT_SUBMITTING'
 export const SET_ACHIVMENT_LOADING = 'SET_ACHIVMENT_LOADING'
@@ -32,6 +32,15 @@ export const SET_RIGHT_PROPERTY_NAME = 'SET_RIGHT_PROPERTY_NAME'
 export const SET_RIGHT_PROPERTY_VALUE = 'SET_RIGHT_PROPERTY_VALUE'
 
 export const SET_RIGHT_PROPERTY_TYPE = 'SET_RIGHT_PROPERTY_TYPE'
+
+export const SET_EXPRESSION_PROPERTYID = 'SET_EXPRESSION_PROPERTYID'
+
+export const setExpressionPropertyId = (id) => {
+  return {
+    type: SET_EXPRESSION_PROPERTYID,
+    payload: id
+  }
+}
 
 export const setRightPropertyType = (type) => {
   return {
@@ -170,8 +179,118 @@ export const nextStep = (e) => {
   }
 }
 
+function resetExpression (dispatch) {
+  dispatch(setSelectedConnector(''))
+  dispatch(setSelectedComparer(''))
+  dispatch(setExpressionPropertyId(null))
+
+  dispatch(setRightPropertyName(''))
+  dispatch(setRightPropertyValue(''))
+  dispatch(setRightPropertyType(''))
+
+  dispatch(setLeftPropertyName(''))
+  dispatch(setLeftPropertyValue(''))
+  dispatch(setLeftPropertyType(''))
+}
+
+function applyEditExpression (dispatch, expressionProperty) {
+  dispatch(setSelectedConnector(expressionProperty.connector))
+  dispatch(setSelectedComparer(expressionProperty.comparer))
+  dispatch(setExpressionPropertyId(expressionProperty.expressionPropertyId))
+
+  dispatch(setRightPropertyName(expressionProperty.rightPropertyValue.propertyName))
+  dispatch(setRightPropertyValue(expressionProperty.rightPropertyValue.value))
+  dispatch(setRightPropertyType(expressionProperty.rightPropertyValue.valueType))
+
+  dispatch(setLeftPropertyName(expressionProperty.leftPropertyValue.propertyName))
+  dispatch(setLeftPropertyValue(expressionProperty.leftPropertyValue.value))
+  dispatch(setLeftPropertyType(expressionProperty.leftPropertyValue.valueType))
+}
+
 export const restart = (e) => {
   return (dispatch, getState) => {
+    dispatch(setActiveStep(0))
+    dispatch(setMaxStep(0))
+
+    var achovmentDetails = getState().achivmentDetails
+
+    if (_.isNil(achovmentDetails.expressionPropertyId)) {
+      resetExpression(dispatch)
+    } else {
+      let achivmentDetailsInfo = getState().achivmentDetailsInfo
+      let items = achivmentDetailsInfo.expressionProperties
+
+      let itemIndex = _.findIndex(items, (i) => i.expressionPropertyId === achovmentDetails.expressionPropertyId)
+      let expressionProperty = items[itemIndex]
+
+      applyEditExpression(dispatch, expressionProperty)
+    }
+  }
+}
+
+export const finish = (e) => {
+  return (dispatch, getState) => {
+    let item = {
+      expressionPropertyId: null,
+      achivmentId: null,
+      leftPropertyValueId: null,
+      rightPropertyValueId: null,
+      modelName: null,
+      order: null,
+      comparer: null,
+      connector: null,
+      leftPropertyValue: {
+        propertyName: '',
+        value: '',
+        valueType: ''
+      },
+      rightPropertyValue: {
+        propertyName: '',
+        value: '',
+        valueType: ''
+      }
+    }
+
+    let achivmentDetailsInfo = getState().achivmentDetailsInfo
+    let achivmentDetails = getState().achivmentDetails
+
+    var existItem = _.find(achivmentDetailsInfo.expressionProperties, function (element, index) {
+      return element.expressionPropertyId === achivmentDetails.expressionPropertyId
+    })
+
+    item.expressionPropertyId = achivmentDetails.expressionPropertyId
+    item.achivmentId = achivmentDetailsInfo.achivmentId
+    item.modelName = achivmentDetails.selectedModelName
+    item.comparer = achivmentDetails.selectedComparer
+    item.connector = achivmentDetails.selectedConnector
+
+    _.merge(item, {
+      leftPropertyValue: achivmentDetails.leftPropertyValue
+    })
+
+    _.merge(item, {
+      rightPropertyValue: achivmentDetails.rightPropertyValue
+    })
+
+    if (!_.isNil(existItem)) {
+      item.leftPropertyValueId = existItem.leftPropertyValueId
+      item.rightPropertyValueId = existItem.rightPropertyValueId
+      item.order = existItem.order
+    } else {
+      item.order = achivmentDetailsInfo.expressionProperties.length + 1
+    }
+
+    if (_.isNil(existItem)) {
+      dispatch(reduxFormActions.push('achivmentDetailsInfo.expressionProperties', item))
+    } else {
+      dispatch(reduxFormActions.change(
+          track('achivmentDetailsInfo.expressionProperties', {
+            expressionPropertyId: item.expressionPropertyId
+          }),
+          item))
+    }
+
+    resetExpression(dispatch)
     dispatch(setActiveStep(0))
     dispatch(setMaxStep(0))
   }
@@ -184,6 +303,33 @@ export const onStepTitleClick = (index) => {
     if (index <= state.max) {
       dispatch(setActiveStep(index))
     }
+  }
+}
+
+export const removeAchivmentExpression = (e) => {
+  return (dispatch, getState) => {
+    var id = e.target.dataset.id || e.target.offsetParent.dataset.id
+
+    var items = getState().achivmentDetailsInfo.expressionProperties
+
+    var itemIndex = _.findIndex(items, (i) => i.expressionPropertyId === id)
+
+    dispatch(reduxFormActions.xor('achivmentDetailsInfo.expressionProperties', items[itemIndex]))
+  }
+}
+
+export const editAchivmentExpression = (e) => {
+  return (dispatch, getState) => {
+    var id = e.target.dataset.id || e.target.offsetParent.dataset.id
+
+    var items = getState().achivmentDetailsInfo.expressionProperties
+
+    var itemIndex = _.findIndex(items, (i) => i.expressionPropertyId === id)
+
+    applyEditExpression(dispatch, items[itemIndex])
+
+    dispatch(setActiveStep(2))
+    dispatch(setMaxStep(2))
   }
 }
 
@@ -241,40 +387,10 @@ export const propertyTypeChanged = (val, input) => {
   }
 }
 
-export const submitAchivmentInfoFormHandler = (model) => {
-  return (dispatch, getState) => {
-    dispatch(setSubmitAchivmentInfo())
-    dispatch(setAchivmentSubmitting(true))
-
-    let url = ''
-    let method = ''
-    let state = getState()
-    let achivmentDetailsInfo = state.achivmentDetailsInfo
-
-    if (_.isNil(achivmentDetailsInfo.achivmentId)) {
-      url = '/Achivment/Create'
-      method = 'Put'
-    } else {
-      url = '/Achivment/Update'
-      method = 'Post'
-    }
-
-    axios({
-      method: method,
-      url: url,
-      data: achivmentDetailsInfo
-    }).then(function (response) {
-      dispatch(setEditMode(false))
-      dispatch(setAchivmentSubmitting(false))
-    }).catch(function (error) {
-      console.log(error)
-      dispatch(setAchivmentSubmitting(false))
-    })
-  }
-}
-
 export const submitAchivmentInfo = () => {
   return (dispatch, getState) => {
+    dispatch(setAchivmentSubmitting(true))
+
     let url = ''
     let method = ''
     let state = getState()
@@ -350,7 +466,10 @@ export const actions = {
   selectComparer,
   propertyNameChanged,
   propertyValueChanged,
-  propertyTypeChanged
+  propertyTypeChanged,
+  finish,
+  removeAchivmentExpression,
+  editAchivmentExpression
 }
 
 const ACTION_HANDLERS = {
@@ -379,7 +498,9 @@ const ACTION_HANDLERS = {
   [SET_RIGHT_PROPERTY_VALUE]:
     (state, action) => _.merge({}, state, { rightPropertyValue: { value: action.payload } }),
   [SET_RIGHT_PROPERTY_TYPE]:
-    (state, action) => _.merge({}, state, { rightPropertyValue: { valueType: action.payload } })
+    (state, action) => _.merge({}, state, { rightPropertyValue: { valueType: action.payload } }),
+  [SET_EXPRESSION_PROPERTYID]:
+    (state, action) => _.assign({}, state, { expressionPropertyId: action.payload })
 }
 
 const initialState = {
@@ -398,6 +519,7 @@ const initialState = {
     value: '',
     valueType: ''
   },
+  expressionPropertyId: null,
   selectedModelName: 'Quest',
   selectedComparer: null,
   selectedConnector: null,

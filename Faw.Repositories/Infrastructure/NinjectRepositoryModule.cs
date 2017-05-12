@@ -33,6 +33,7 @@ namespace Faw.Repositories.Infrastructure
             Bind<IExpirienceRepository>().To<ExpirienceRepository>();
             Bind<IAchivmentRepository>().To<AchivmentRepository>();
             Bind<IExpressionPropertyRepository>().To<ExpressionPropertyRepository>();
+            Bind<IPropertyValueRepository>().To<PropertyValueRepository>();
         }
     }
 }

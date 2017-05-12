@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Faw.Services.Models
 {
@@ -14,5 +15,7 @@ namespace Faw.Services.Models
 
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
+
+        public IEnumerable<ExpressionProperty> ExpressionProperties { get; set; }
     }
 }

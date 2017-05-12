@@ -44,10 +44,19 @@ namespace Faw.Services.Models.AutoMapper
             CreateMap<Faw.Models.Domain.UserAchivment, UserAchivment>()
                 .ForMember(dest => dest.UserAchivmentId, opt => opt.MapFrom(x => x.EntityId));
 
+            CreateMap<Faw.Models.Domain.ExpressionProperty, ExpressionProperty>()
+                .ForMember(dest => dest.ExpressionPropertyId, opt => opt.MapFrom(x => x.EntityId));
+
+            CreateMap<Faw.Models.Domain.PropertyValue, PropertyValue>()
+                .ForMember(dest => dest.PropertyValueId, opt => opt.MapFrom(x => x.EntityId));
+
             CreateMap<Faw.Models.Domain.Enums.Gender, Gender>();
             CreateMap<Faw.Models.Domain.Enums.UserQuestStatus, UserQuestStatus>();
             CreateMap<Faw.Models.Domain.Enums.AccountStatus, AccountStatus>();
             CreateMap<Faw.Models.Domain.Enums.QuestСomplexity, QuestСomplexity>();
+            CreateMap<Faw.Models.Domain.Enums.Comparer, Comparer>();
+            CreateMap<Faw.Models.Domain.Enums.Connector, Connector>();
+            CreateMap<Faw.Models.Domain.Enums.ValueType, ValueType>();
         }
     }
 }

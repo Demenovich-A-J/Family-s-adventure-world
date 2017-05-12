@@ -15,6 +15,7 @@ import UserDetailsForm from './UserDetailsForm'
 
 import './UserDetails.scss'
 import avatar from 'assets/default_avatar.svg'
+import achivment from 'assets/default_achivment.svg'
 
 const getLevelBuffer = (exp, expToGet) => {
   return exp / expToGet * 100
@@ -106,7 +107,7 @@ export const UserDetails = (props) => (
                   <ListItem threeLine key={index}>
                     <ListItemContent
                       avatar={
-                        <img src={userAchivment.imageUrl} />
+                        <img src={achivment} />
                       }
                       subtitle={userAchivment.description}>
                       {userAchivment.name}

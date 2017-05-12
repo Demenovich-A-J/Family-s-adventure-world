@@ -60,7 +60,32 @@ namespace Faw.Web.Api.Controllers
                 expression = achivment.Expression,
                 enabled = achivment.Enabled,
                 updatedOn = achivment.UpdatedOn,
-                createdOn = achivment.CreatedOn
+                createdOn = achivment.CreatedOn,
+                expressionProperties = achivment.ExpressionProperties.Select(x => new
+                {
+                    expressionPropertyId = x.ExpressionPropertyId,
+                    achivmentId = x.AchivmentId,
+                    leftPropertyValueId = x.LeftPropertyValueId,
+                    rightPropertyValueId = x.RightPropertyValueId,
+                    modelName = x.ModelName,
+                    order = x.Order,
+                    comparer = x.Comparer.ToString(),
+                    connector = x.Connector.ToString(),
+                    leftPropertyValue = new
+                    {
+                        propertyName = x.LeftPropertyValue.PropertyName,
+                        value = x.LeftPropertyValue.Value,
+                        valueType = x.LeftPropertyValue.ValueType.ToString(),
+
+                    },
+                    rightPropertyValue = new
+                    {
+                        propertyName = x.RightPropertyValue.PropertyName,
+                        value = x.RightPropertyValue.Value,
+                        valueType = x.RightPropertyValue.ValueType.ToString(),
+
+                    }
+                })
             });
 
         }
@@ -83,11 +108,6 @@ namespace Faw.Web.Api.Controllers
         [Route("Update")]
         public IHttpActionResult Update([FromBody] Achivment achivment)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _achivmentsService.Update(achivment);
 
             return Ok();
