@@ -229,11 +229,11 @@ GO
 /*==============================================================*/
 IF OBJECT_ID('[dbo].[PlayerInfo]') IS NULL
 BEGIN
-	CREATE TABLE PalyerInfo (
+	CREATE TABLE PlayerInfo (
 	   PlayerInfoId         uniqueidentifier     not null,
 	   Level                int                  not null,
 	   ExpirienceAmount     float                not null,
-	   CONSTRAINT PK_PALYERINFO primary key nonclustered (PlayerInfoId)
+	   CONSTRAINT PK_PlayerInfo primary key nonclustered (PlayerInfoId)
 	)
 END
 GO
