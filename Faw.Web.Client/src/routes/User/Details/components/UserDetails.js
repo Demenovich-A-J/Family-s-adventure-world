@@ -92,7 +92,7 @@ export const UserDetails = (props) => (
     </Cell>
     <Cell col={4} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
-        Recent Achivments list
+        Recent Achievements list
       </Cell>
       {
         props.userAchivmentsLoading

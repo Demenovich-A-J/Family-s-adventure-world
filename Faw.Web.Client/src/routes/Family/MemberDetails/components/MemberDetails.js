@@ -44,6 +44,9 @@ export const MemberDetails = (props) => (
               <p><span className='-label-name'>User Name</span> { props.userInfo.userName }</p>
               <p><span className='-label-name'>Gender</span> { props.userInfo.gender }</p>
               <p><span className='-label-name'>Birth Date</span> { props.userInfo.birthDate }</p>
+              <p><span className='-label-name'>Country</span> { props.userInfo.country }</p>
+              <p><span className='-label-name'>City</span> { props.userInfo.city }</p>
+              <p><span className='-label-name'>Description</span> { props.userInfo.description }</p>
             </Cell>
           </Grid>
         )
@@ -75,7 +78,7 @@ export const MemberDetails = (props) => (
     </Cell>
     <Cell col={4} shadow={0}>
       <Cell col={12} className='-section-title mdl-typography--headline' component='h4'>
-        Recent Achivments list
+        Recent Achievements list
       </Cell>
       {
         props.userAchivmentsLoading

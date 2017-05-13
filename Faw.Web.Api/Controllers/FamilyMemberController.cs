@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using AutoMapper;
+using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Contracts.Query;
 using Faw.Services.Models;
 
@@ -16,17 +17,20 @@ namespace Faw.Web.Api.Controllers
         private readonly IExpirienceQueryService _expirienceQueryService;
         private readonly IQuestQueryService _questQueryService;
         private readonly IMapper _mapper;
+        private readonly IAchivmentsQueryService _achivmentsQueryService;
 
         public FamilyMemberController(
             IMapper mapper,
             IUserQueryService userQueryService,
             IExpirienceQueryService expirienceQueryService,
-            IQuestQueryService questQueryService)
+            IQuestQueryService questQueryService,
+            IAchivmentsQueryService achivmentsQueryService)
         {
             _mapper = mapper;
             _userQueryService = userQueryService;
             _expirienceQueryService = expirienceQueryService;
             _questQueryService = questQueryService;
+            _achivmentsQueryService = achivmentsQueryService;
         }
 
         [HttpGet]
@@ -59,38 +63,7 @@ namespace Faw.Web.Api.Controllers
         [Route("FamilyUserAchivments/{userId}")]
         public IHttpActionResult FamilyUserAchivments(Guid userId)
         {
-            //TODO: take achivments from db
-
-            var achivmentList = new List<Achivment>
-            {
-                new Achivment
-                {
-                    Name = "Complete 10 quests",
-                    Description =
-                        "Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации существенных финансовых и административных условий. Значимость этих проблем настолько очевидна, что сложившаяся структура организации влечет за собой процесс внедрения и модернизации систем массового участия. Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности обеспечивает широкому кругу (специалистов) участие в формировании соответствующий условий активизации.",
-                    CreatedOn = DateTime.Now.AddDays(-2),
-                    UpdatedOn = DateTime.Now.AddDays(2),
-                    ImageUrl = "https://cdn.pixabay.com/photo/2012/04/01/17/52/eye-23753_960_720.png"
-                },
-                new Achivment
-                {
-                    Name = "Complete 20 quests",
-                    Description =
-                        "Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации существенных финансовых и административных условий. Значимость этих проблем настолько очевидна, что сложившаяся структура организации влечет за собой процесс внедрения и модернизации систем массового участия. Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности обеспечивает широкому кругу (специалистов) участие в формировании соответствующий условий активизации.",
-                    CreatedOn = DateTime.Now.AddDays(-2),
-                    UpdatedOn = DateTime.Now.AddDays(2),
-                    ImageUrl = "https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634_960_720.png"
-                },
-                new Achivment
-                {
-                    Name = "Complete 30 quests",
-                    Description =
-                        "Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности влечет за собой процесс внедрения и модернизации существенных финансовых и административных условий. Значимость этих проблем настолько очевидна, что сложившаяся структура организации влечет за собой процесс внедрения и модернизации систем массового участия. Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности обеспечивает широкому кругу (специалистов) участие в формировании соответствующий условий активизации.",
-                    CreatedOn = DateTime.Now.AddDays(-2),
-                    UpdatedOn = DateTime.Now.AddDays(2),
-                    ImageUrl = "https://cdn.pixabay.com/photo/2017/04/09/22/54/lion-2217152_960_720.jpg"
-                }
-            };
+            var achivmentList = _achivmentsQueryService.GetUserAchivments(userId);
 
             return Ok(new
             {
