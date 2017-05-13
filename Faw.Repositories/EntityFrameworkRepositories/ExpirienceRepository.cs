@@ -15,5 +15,14 @@ namespace Faw.Repositories.EntityFrameworkRepositories
         {
             return DbContext.Expiriences.FirstOrDefault(x => x.Level == level);
         }
+
+        public Expirience GetByExpirience(decimal expirience)
+        {
+            return
+                DbContext.Expiriences
+                    .Where(x => x.ExpirienceAmount <= expirience)
+                    .OrderByDescending(x => x.Level)
+                    .FirstOrDefault();
+        }
     }
 }

@@ -10,6 +10,7 @@ import { loadUserQuests, loadFamilyQuests } from './Quests/Index/modules/quests'
 import { loadQuestDetails } from './Quests/Details/modules/details'
 
 import { loadFamilyMemberDetails } from './Family/MemberDetails/modules/memberDetails'
+import { setFamilyInfoLoading } from './Family/Index/modules/family'
 
 import { loadUserDetails } from './User/Details/modules/userDetails'
 
@@ -38,7 +39,12 @@ export const checkResetStatusOnEnter = (store) => (nextState, replace) => {
 }
 
 export const loadFamily = (store) => (nextState, replace) => {
-  store.dispatch(fetchUserFamilyInfo())
+  store.dispatch(setFamilyInfoLoading(true))
+  store.dispatch(fetchUserFamilyInfo()).then(() => {
+    store.dispatch(setFamilyInfoLoading(false))
+  }).catch(() => {
+    store.dispatch(setFamilyInfoLoading(false))
+  })
 }
 
 export const fetchQuests = (store) => (nextState, replace) => {

@@ -4,7 +4,7 @@ namespace Faw.Services.Models.Results
 {
     public class ApplayExpirienceResult
     {
-        public ExpirienceApplayType ExpirienceApplayType { get; set; }
+        public ExpirienceApplyType ExpirienceApplyType { get; set; }
 
         public int ResultLevel { get; set; }
 

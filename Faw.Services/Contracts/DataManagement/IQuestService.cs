@@ -1,5 +1,6 @@
 ﻿using System;
 using Faw.Services.Models;
+using Faw.Services.Models.Enums;
 
 namespace Faw.Services.Contracts.DataManagement
 {
@@ -9,5 +10,7 @@ namespace Faw.Services.Contracts.DataManagement
         void Edit(Quest quest);
 
         void AssignQuestUser(Guid userId, Guid questId);
+
+        void UpdateQuestStatus(Guid userQuestId, UserQuestStatus status);
     }
 }

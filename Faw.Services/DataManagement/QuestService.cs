@@ -15,6 +15,8 @@ namespace Faw.Services.DataManagement
         private readonly IUserQuestRepository _userQuestRepository;
         private readonly IExpirienceQueryService _expirienceQueryService;
         private readonly IQuestQueryService _questQueryService;
+        private readonly IPlayerInfoService _playerInfoService;
+        private readonly IMapper _mapper;
 
         public QuestService(
             IMapper mapper,
@@ -22,13 +24,17 @@ namespace Faw.Services.DataManagement
             IQuestRepository questRepository,
             IUserQuestRepository userQuestRepository,
             IExpirienceQueryService expirienceQueryService,
-            IQuestQueryService questQueryService)
+            IQuestQueryService questQueryService,
+            IPlayerInfoService playerInfoService,
+            IMapper mapper1)
             : base(mapper, contextScopeFactory)
         {
             _questRepository = questRepository;
             _userQuestRepository = userQuestRepository;
             _expirienceQueryService = expirienceQueryService;
             _questQueryService = questQueryService;
+            _playerInfoService = playerInfoService;
+            _mapper = mapper1;
         }
 
         public void Create(Quest quest)
@@ -84,6 +90,29 @@ namespace Faw.Services.DataManagement
                 _userQuestRepository.Insert(Mapper.Map<Faw.Models.Domain.UserQuest>(userQuest));
 
                 contextScope.SaveChanges();
+            }
+        }
+
+        public void UpdateQuestStatus(Guid userQuestId, UserQuestStatus status)
+        {
+
+            Faw.Models.Domain.UserQuest userQuest;
+
+            using (var contextScope = ContextScopeFactory.Create())
+            {
+                userQuest = _userQuestRepository.GetUserQuest(userQuestId);
+
+                userQuest.UserQuestStatus = _mapper.Map<Faw.Models.Domain.Enums.UserQuestStatus>(status);
+                _userQuestRepository.Save(userQuest);
+
+                contextScope.SaveChanges();
+            }
+
+            switch (status)
+            {
+                case UserQuestStatus.Verified:
+                    _playerInfoService.AdjustPlayerExpirience(userQuest.UserId, userQuest.Quest.Expirience);
+                    break;
             }
         }
 

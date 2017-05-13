@@ -25,7 +25,8 @@ const mapStateToProps = (state) => ({
   openFamilyDialog: state.family.openFamilyDialog,
   searchResults: state.family.searchResults,
   searchingUsers: state.family.searchingUsers,
-  familyName: state.familyEditInfo.name
+  familyName: state.familyEditInfo.name,
+  familyInfoLoading: state.family.familyInfoLoading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Family)

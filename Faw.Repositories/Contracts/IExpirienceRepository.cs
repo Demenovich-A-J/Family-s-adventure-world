@@ -5,5 +5,6 @@ namespace Faw.Repositories.Contracts
     public interface IExpirienceRepository : IRepository<Expirience>
     {
         Expirience Get(int level);
+        Expirience GetByExpirience(decimal expirience);
     }
 }

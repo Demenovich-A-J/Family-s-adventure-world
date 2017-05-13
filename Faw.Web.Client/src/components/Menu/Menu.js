@@ -47,7 +47,7 @@ var Menu = React.createClass({
               this.props.userInfo.userName
             }
           </p>
-          <img id='-user-info-image' src={avatar} />
+          <img id='-user-info-image' src={this.props.userInfo.imageUrl === '' ? avatar : this.props.userInfo.imageUrl} />
           <MdlMenu target='-user-info-image' align='right' ripple>
             <Link to={'/user/details/' + this.props.userInfo.userId} className='-link' activeClassName='--active'>
               <MenuItem className='mdl-menu__item--full-bleed-divider'>

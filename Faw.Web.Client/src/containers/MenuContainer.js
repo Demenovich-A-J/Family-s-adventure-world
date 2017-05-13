@@ -13,8 +13,22 @@ const MenuContainer = React.createClass({
     'View' : [
       { to: '/', label:'Home' },
       { to: '/family', label:'Family' },
-      { to: '/quests', label:'Quests' },
+      { to: '/quests', label:'Quests' }
+    ],
+    'Manage Achivments' : [
       { to: '/achivments', label:'Achivments' }
+    ],
+    'Manage Family' : [
+
+    ],
+    'Assign Quests' : [
+
+    ],
+    'Manage Family Quests' : [
+
+    ],
+    'Manage Member Quests' : [
+
     ]
   },
   getNavItems () {

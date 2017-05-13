@@ -9,7 +9,9 @@ const renderDetailsLink = (name, row) => {
 }
 
 const renderEditAction = (actions, onEditButtonClick) => {
-  return <IconButton name='edit' icon='edit' data-id={actions.id} colored onClick={onEditButtonClick} />
+  return actions && actions.map((a, i) => (
+    <IconButton key={i} name={a.icon} icon={a.icon} data-id={a.id} colored onClick={onEditButtonClick} />
+  ))
 }
 
 export const QuestList = (props) => (

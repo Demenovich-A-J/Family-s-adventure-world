@@ -27,7 +27,7 @@ export const MemberDetails = (props) => (
         : (
           <Grid>
             <Cell col={4}>
-              <img src={avatar} className='-user-avatar' />
+              <img src={props.userInfo.imageUrl === '' ? avatar : props.userInfo.imageUrl} className='-user-avatar' />
               <div className='-player-info'>
                 <div>
                   <span>Current level {props.userInfo.playerInfo.level}</span>

@@ -14,6 +14,7 @@ namespace Faw.Services.DataManagement
         private readonly IFamilyQueryService _familyQueryService;
         private readonly IUserQueryService _userQueryService;
         private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
 
         public FamilyService(
             IMapper mapper, 
@@ -21,13 +22,15 @@ namespace Faw.Services.DataManagement
             IFamilyRepository familyRepository,
             IFamilyQueryService familyQueryService,
             IUserQueryService userQueryService,
-            IUserService userService) 
+            IUserService userService,
+            IUserRepository userRepository) 
             : base(mapper, contextScopeFactory)
         {
             _familyRepository = familyRepository;
             _familyQueryService = familyQueryService;
             _userQueryService = userQueryService;
             _userService = userService;
+            _userRepository = userRepository;
         }
 
         public void Create(Family family)
@@ -38,7 +41,7 @@ namespace Faw.Services.DataManagement
             {
                 domainFamily.CreatedOn = domainFamily.UpdatedOn = DateTime.UtcNow;
                 
-                _familyRepository.Insert(domainFamily);
+                _familyRepository.Save(domainFamily);
 
                 contextScope.SaveChanges();
             }
@@ -65,12 +68,17 @@ namespace Faw.Services.DataManagement
 
         public void AddNewFamilyMember(Guid familyId, Guid userId)
         {
-            var user = _userQueryService.Get(userId);
-
             //TODO: Add check if family exists. and user havent been assigned to any family.
-            user.FamilyId = familyId;
+            using (var contextScope = ContextScopeFactory.Create())
+            {
+                var domainUser = _userRepository.GetById(userId);
 
-            _userService.Edit(user);
+                domainUser.FamilyId = familyId;
+
+                _userRepository.Update(domainUser);
+
+                contextScope.SaveChanges();
+            }
         }
 
         private Faw.Models.Domain.Family GetFamilyInternal(Guid familyId)

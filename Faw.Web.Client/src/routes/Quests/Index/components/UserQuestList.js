@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataTable, TableHeader } from 'react-mdl'
+import { DataTable, TableHeader, IconButton } from 'react-mdl'
 import { Link } from 'react-router'
 
 import './Quests.scss'
@@ -25,6 +25,18 @@ const renderDetailsLink = (name, row) => {
 
 const renderStatus = (status) => {
   return <span className={getStatusClass(status)}>{status}</span>
+}
+
+const renderEditAction = (actions, onNextStatusButtonClick) => {
+  return actions && actions.map((a, i) => (
+    <IconButton key={i}
+      name={a.icon}
+      icon={a.icon}
+      data-id={a.id}
+      data-toStatus={a.toStatus}
+      colored
+      onClick={onNextStatusButtonClick} />
+  ))
 }
 
 export const UserQuestList = (props) => (
@@ -66,11 +78,18 @@ export const UserQuestList = (props) => (
     >
         Created
     </TableHeader>
+    <TableHeader
+      name='actions'
+      cellFormatter={(actions, row) => renderEditAction(actions, props.onNextStatusButtonClick)}
+    >
+        Actions
+    </TableHeader>
   </DataTable>
 )
 
 UserQuestList.propTypes = {
-  userQuests: React.PropTypes.array.isRequired
+  userQuests: React.PropTypes.array.isRequired,
+  onNextStatusButtonClick: React.PropTypes.func.isRequired
 }
 
 export default UserQuestList

@@ -20,6 +20,8 @@ namespace Faw.Services.DataManagement
         private readonly IUserTypeQueryService _userTypeQueryService;
         private readonly IAccountQueryService _accountQueryService;
 
+        private readonly IMapper _mapper;
+
         public UserService(
             IUserRepository userRepository, 
             IMapper mapper, 
@@ -27,7 +29,8 @@ namespace Faw.Services.DataManagement
             IDbContextScopeFactory contextScopeFactory,
             IUserTypeQueryService userTypeQueryService, 
             IAccountQueryService accountQueryService,
-            IPlayerInfoRepository playerInfoRepository) 
+            IPlayerInfoRepository playerInfoRepository,
+            IMapper mapper1) 
             : base(mapper, contextScopeFactory)
         {
             _userRepository = userRepository;
@@ -35,6 +38,7 @@ namespace Faw.Services.DataManagement
             _userTypeQueryService = userTypeQueryService;
             _accountQueryService = accountQueryService;
             _playerInfoRepository = playerInfoRepository;
+            _mapper = mapper1;
         }
 
         public Guid Register(User user)
@@ -68,11 +72,13 @@ namespace Faw.Services.DataManagement
                 Level = 1
             };
 
+            domainUser.PlayerInfoId = domainUser.PlayerInfo.EntityId;
+
             using (var contextScope = ContextScopeFactory.Create())
             {
-                _accountRepository.Insert(domainUser.Account);
-                _playerInfoRepository.Insert(domainUser.PlayerInfo);
-                _userRepository.Insert(domainUser);
+                _userRepository.Save(domainUser);
+                _accountRepository.Save(domainUser.Account);
+                _playerInfoRepository.Save(domainUser.PlayerInfo);
 
                 contextScope.SaveChanges();
             }
@@ -112,13 +118,13 @@ namespace Faw.Services.DataManagement
 
         public void Edit(User user)
         {
-            var domainUser = GetUserInternal(user.UserId);
-
-            Mapper.Map(user, domainUser);
-            
             using (var contextScope = ContextScopeFactory.Create())
             {
-                _userRepository.Update(domainUser);
+                //var domainUser = _userRepository.GetById(user.UserId);
+
+                //Mapper.Map(user, domainUser);
+
+                _userRepository.Save(_mapper.Map<Faw.Models.Domain.User>(user));
 
                 contextScope.SaveChanges();
             }

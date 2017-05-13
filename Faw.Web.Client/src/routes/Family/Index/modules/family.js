@@ -11,6 +11,15 @@ export const SEARCH_TEXT_CHANGED = 'SEARCH_TEXT_CHANGED'
 export const SEARCH_RESULTS_CHANGED = 'SEARCH_RESULTS_CHANGED'
 export const SEARCHING_USERS_CHANGED = 'SEARCHING_USERS_CHANGED'
 
+export const SET_FAMILY_INFO_LOADING = 'SET_FAMILY_INFO_LOADING'
+
+export const setFamilyInfoLoading = (loading) => {
+  return {
+    type: SET_FAMILY_INFO_LOADING,
+    payload: loading
+  }
+}
+
 export const setLoading = (loading) => {
   return {
     type: LOADING_CHANGED,
@@ -52,7 +61,14 @@ export const openFamilyDialog = (e) => {
   e.preventDefault()
 
   return (dispatch, getState) => {
-    dispatch(setFamilyEditInfo())
+    var state = getState()
+    var familyInfo = state.familyInfo
+
+    if (!_.isNil(familyInfo)) {
+      dispatch(setFamilyEditInfo())
+    } else {
+      dispatch(reduxFormActions.change('familyEditInfo.createdById', state.user.userInfo.userId))
+    }
 
     dispatch(setOpenFamilyDialog(true))
   }
@@ -103,7 +119,7 @@ export const searchInputHandler = (e) => {
 
 export const searchItemClickHandler = (e) => {
   e.preventDefault()
-
+  console.log(e)
   return (dispatch, getState) => {
     dispatch(setLoading(true))
 
@@ -112,10 +128,20 @@ export const searchItemClickHandler = (e) => {
       url: '/Family/AddFamilyMember/',
       data: {
         UserId: e.target.dataset.id,
-        FamilyId: getState().family.family.familyId
+        FamilyId: getState().familyInfo.familyId
       }
     }).then(function (response) {
       dispatch(setLoading(false))
+      dispatch(setSearchResults([]))
+      dispatch(setSearchText(''))
+
+      dispatch(setFamilyInfoLoading(true))
+
+      dispatch(fetchUserFamilyInfo()).then(() => {
+        dispatch(setFamilyInfoLoading(false))
+      }).catch(() => {
+        dispatch(setFamilyInfoLoading(false))
+      })
     }).catch(function (error) {
       console.log(error)
       dispatch(setLoading(false))
@@ -125,7 +151,7 @@ export const searchItemClickHandler = (e) => {
 
 export const onSearchInputBlur = (e) => {
   return (dispatch, getState) => {
-    dispatch(setSearchResults([]))
+    // dispatch(setSearchResults([]))
   }
 }
 
@@ -138,10 +164,16 @@ export const searchInputClickHandler = (e) => {
 export const submitFamilyForm = (e) => {
   return (dispatch, getState) => {
     var state = getState()
-    var url = state.familyInfo !== null ? '/Family/Edit' : '/Family/Create'
+    var method = 'Post'
+    var url = '/Family/Edit'
+
+    if (state.familyInfo === null) {
+      method = 'Put'
+      url = '/Family/Create'
+    }
 
     var sendRequest = axios({
-      method: 'Post',
+      method: method,
       url: url,
       data: state.familyEditInfo
     }).then(function (response) {
@@ -185,7 +217,10 @@ const ACTION_HANDLERS = {
   [OPEN_FAMILY_DIALOG_CHANGED]: (state, action) => _.assign({}, state, { openFamilyDialog: action.payload }),
   [SEARCH_TEXT_CHANGED]: (state, action) => _.assign({}, state, { searchText: action.payload }),
   [SEARCH_RESULTS_CHANGED]: (state, action) => _.assign({}, state, { searchResults: action.payload }),
-  [SEARCHING_USERS_CHANGED]: (state, action) => _.assign({}, state, { searchingUsers: action.payload })
+  [SEARCHING_USERS_CHANGED]: (state, action) => _.assign({}, state, { searchingUsers: action.payload }),
+  [SET_FAMILY_INFO_LOADING]:
+    (state, action) => _.assign({}, state, { familyInfoLoading: action.payload })
+
 }
 
 const initialState = {
@@ -193,7 +228,8 @@ const initialState = {
   openFamilyDialog: false,
   searchText: null,
   searchResults: null,
-  searchingUsers: false
+  searchingUsers: false,
+  familyInfoLoading: false
 }
 
 export default function questsReducer (state = initialState, action) {

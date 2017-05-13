@@ -14,8 +14,16 @@ export function fetchUserFamilyInfo () {
   return (dispatch, getState) => {
     var state = getState()
 
+    if (state.familyInfo) {
+      var isFamilyMember = _.some(state.familyInfo.familyMembers, (fm) => fm.id === state.user.userInfo.userId)
+
+      if (!isFamilyMember && state.familyInfo.createdById !== state.user.userInfo.userId) {
+        dispatch(setFamilyInfo(null))
+      }
+    }
+
     if (!_.isNil(state.user.userInfo)) {
-      axios({
+      var request = axios({
         method: 'Get',
         url: '/Family/FetchUserFamily/' + state.user.userInfo.userId
       }).then(function (response) {
@@ -26,6 +34,8 @@ export function fetchUserFamilyInfo () {
       }).catch(function (error) {
         console.log(error)
       })
+
+      return request
     }
   }
 }
@@ -37,7 +47,13 @@ export const actions = {
 
 const ACTION_HANDLERS = {
   [FAMILY_CHANGED]:
-     (state, action) => _.assign({}, state, action.payload)
+     (state, action) => {
+       if (action.payload === null) {
+         return action.payload
+       } else {
+         return _.assign({}, state, action.payload)
+       }
+     }
 }
 
 function _getInitialState () {

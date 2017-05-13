@@ -1,6 +1,6 @@
 ﻿namespace Faw.Services.Models.Enums
 {
-    public enum ExpirienceApplayType
+    public enum ExpirienceApplyType
     {
         Ok,
         LevelUp

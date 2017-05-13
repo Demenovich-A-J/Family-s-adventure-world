@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
+using AutoMapper;
 using Faw.Services.Contracts.DataManagement;
 using Faw.Services.Contracts.Query;
 using Faw.Services.Models;
+using Faw.Web.Api.Models;
+using Faw.Web.Api.Models.Helper;
 using Faw.Web.Api.Models.Quest;
 
 namespace Faw.Web.Api.Controllers
@@ -13,25 +16,28 @@ namespace Faw.Web.Api.Controllers
     {
         private readonly IQuestQueryService _questQueryService;
         private readonly IQuestService _questService;
+        private readonly IMapper _mapper;
 
         public QuestController(
             IQuestQueryService questQueryService,
-            IQuestService questService)
+            IQuestService questService,
+            IMapper mapper)
         {
             _questQueryService = questQueryService;
             _questService = questService;
+            _mapper = mapper;
         }
 
         [HttpPut]
         [Route("Create")]
-        public IHttpActionResult Create([FromBody] Quest quest)
+        public IHttpActionResult Create([FromBody] QuestViewModel quest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _questService.Create(quest);
+            _questService.Create(_mapper.Map<Quest>(quest));
 
             return Ok();
         }
@@ -46,6 +52,20 @@ namespace Faw.Web.Api.Controllers
             }
 
             _questService.Edit(quest);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("UpdateQuestStatus")]
+        public IHttpActionResult UpdateQuestStatus([FromBody] UpdateQuestStatusViewModel updateQuestStatusViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _questService.UpdateQuestStatus(updateQuestStatusViewModel.UserQuestId, updateQuestStatusViewModel.Status);
 
             return Ok();
         }
@@ -107,7 +127,8 @@ namespace Faw.Web.Api.Controllers
                 userQuestId = userQuest.UserQuestId,
                 imageUrl = userQuest.Quest.ImageUrl,
                 createdById = userQuest.Quest.CreatedById,
-                questСomplexity = userQuest.Quest.QuestСomplexity.ToString()
+                questСomplexity = userQuest.Quest.QuestСomplexity.ToString(),
+                assignedOnId = userQuest.UserId
             });
         }
 
@@ -135,7 +156,8 @@ namespace Faw.Web.Api.Controllers
                     userQuestId = x.UserQuestId,
                     imageUrl = x.Quest.ImageUrl,
                     createdById = x.Quest.CreatedById,
-                    questСomplexity = x.Quest.QuestСomplexity.ToString()
+                    questСomplexity = x.Quest.QuestСomplexity.ToString(),
+                    assignedOnId = x.UserId
                 })
             });
         }

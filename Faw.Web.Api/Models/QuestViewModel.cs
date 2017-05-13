@@ -5,7 +5,7 @@ namespace Faw.Web.Api.Models
 {
     public class QuestViewModel
     {
-        public Guid QuestId { get; set; }
+        public Guid? QuestId { get; set; }
         public Guid? ParentQuestId { get; set; }
         public Guid CreatedById { get; set; }
         public Guid FamilyId { get; set; }

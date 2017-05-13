@@ -14,10 +14,10 @@ import Loading from 'components/Loading'
 
 import './Quests.scss'
 
-function showTabContent (tabId, quests, onEditButtonClick) {
+function showTabContent (tabId, quests, onEditButtonClick, onNextStatusButtonClick) {
   switch (tabId) {
     case 0:
-      return (<UserQuestList userQuests={quests} />)
+      return (<UserQuestList userQuests={quests} onNextStatusButtonClick={onNextStatusButtonClick} />)
     case 1:
       return (<QuestList familyQuests={quests} onEditButtonClick={onEditButtonClick} />)
     default:
@@ -53,7 +53,8 @@ export const Quests = (props) => (
             showTabContent(
               props.tabId,
               getQuests(props.tabId, props.userQuests, props.familyQuests),
-              props.onEditButtonClick)
+              props.onEditButtonClick,
+              props.onNextStatusButtonClick)
           )
         }
         {
@@ -102,7 +103,8 @@ Quests.propTypes = {
   questInfoLoading: React.PropTypes.bool.isRequired,
   isQuestInfoEdit: React.PropTypes.bool.isRequired,
   questComplexity: React.PropTypes.array.isRequired,
-  questInfoComplexity: React.PropTypes.string.isRequired
+  questInfoComplexity: React.PropTypes.string.isRequired,
+  onNextStatusButtonClick: React.PropTypes.func.isRequired
 }
 
 export default Quests

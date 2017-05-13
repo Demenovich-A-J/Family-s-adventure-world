@@ -14,7 +14,8 @@ const mapDispatchToProps = {
   submitQuestFormHandler: actions.submitQuestFormHandler,
   questTabHandler: actions.questTabHandler,
   setFamilyQuest: actions.setFamilyQuest,
-  onEditButtonClick: actions.onEditButtonClick
+  onEditButtonClick: actions.onEditButtonClick,
+  onNextStatusButtonClick: actions.onNextStatusButtonClick
 }
 
 const mapStateToProps = (state) => ({

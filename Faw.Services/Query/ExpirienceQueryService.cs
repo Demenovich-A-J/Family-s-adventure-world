@@ -46,20 +46,21 @@ namespace Faw.Services.Query
         {
             var result = new ApplayExpirienceResult
             {
-                ExpirienceApplayType = ExpirienceApplayType.Ok,
-                ResultLevel = playerInfo.Level
+                ExpirienceApplyType = ExpirienceApplyType.Ok,
+                ResultLevel = playerInfo.Level,
+                ResultExpitience = playerInfo.ExpirienceAmount + expirience
             };
 
-            var expirienceCurrentLevel = GetInternal(playerInfo.Level);
+            var expirienceNextLevel = GetInternalByExpirience(result.ResultExpitience);
 
-            result.ResultExpitience = playerInfo.ExpirienceAmount + expirience;
-
-            if (result.ResultExpitience < expirienceCurrentLevel.ExpirienceAmount)
+            if (expirienceNextLevel == null)
+            {
                 return result;
+            }
 
-            result.ResultExpitience = playerInfo.Level + 1;
-            result.ResultExpitience = result.ResultExpitience - expirienceCurrentLevel.ExpirienceAmount;
-            result.ExpirienceApplayType = ExpirienceApplayType.LevelUp;
+            result.ResultLevel = expirienceNextLevel.Level;
+
+            result.ExpirienceApplyType = ExpirienceApplyType.LevelUp;
 
             return result;
         }
@@ -105,6 +106,14 @@ namespace Faw.Services.Query
             using (ContextScopeFactory.CreateReadOnly())
             {
                 return Mapper.Map<Expirience>(_expirienceRepository.Get(level));
+            }
+        }
+
+        private Expirience GetInternalByExpirience(decimal expirience)
+        {
+            using (ContextScopeFactory.CreateReadOnly())
+            {
+                return Mapper.Map<Expirience>(_expirienceRepository.GetByExpirience(expirience));
             }
         }
     }

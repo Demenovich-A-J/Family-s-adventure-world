@@ -1,6 +1,6 @@
 if not exists(select top 1 * from Claim where Name = 'View')
 begin
-	exec InsertOrUpdateClaim 'Admin', 'This claim allows to view default content'
+	exec InsertOrUpdateClaim 'View', 'This claim allows to view default content'
 end
 
 if not exists(select top 1 * from Claim where Name = 'Manage Family')

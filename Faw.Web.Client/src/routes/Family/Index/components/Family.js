@@ -15,6 +15,7 @@ import { Link } from 'react-router'
 
 import FamilyFormDialog from './FamilyFormDialog'
 import SearchResult from './SearchResult'
+import Loading from 'components/Loading'
 
 import './Family.scss'
 import avatar from 'assets/default_avatar.svg'
@@ -51,7 +52,11 @@ export const Family = (props) => (
               </div>
             )
             : (
-              <Button raised accent ripple onClick={props.openFamilyDialogHandler}>Create Family</Button>
+              <Button raised accent ripple
+                onClick={props.openFamilyDialogHandler}
+                disabled={props.familyInfoLoading}>
+                  Create Family
+                </Button>
             )
           }
         </Cell>
@@ -74,9 +79,9 @@ export const Family = (props) => (
       props.familyExist && props.family.familyMembers && props.family.familyMembers.map((familyMember, index) => (
         <Cell col={4} tablet={4} phone={12} key={index}>
           <Card shadow={1} className='-member-card'>
-            <div className='mdl-card__media' style={{ backgroundImage: avatar }}>
+            <div className='mdl-card__media' style={{ backgroundImage: familyMember.imageUrl === '' ? avatar : familyMember.imageUrl }}>
               <span className='-member-name'>{familyMember.name}</span>
-              <img className='article-image' src={avatar} />
+              <img className='article-image' src={familyMember.imageUrl === '' ? avatar : familyMember.imageUrl} />
             </div>
             <CardText>
               {familyMember.description}
@@ -93,12 +98,18 @@ export const Family = (props) => (
       ))
     }
     {
-      !props.familyExist
+      !props.familyExist && !props.familyInfoLoading
       ? (
         <Cell col={12} className='text-center'>
           <h1>Looks like you have not create family.</h1>
           <h4>Use button above to create your best family</h4>
           <i className='material-icons' style={{ fontSize: '200px' }}>sentiment_dissatisfied</i>
+        </Cell>
+      )
+      : props.familyInfoLoading
+      ? (
+        <Cell col={12} className='text-center'>
+          <Loading />
         </Cell>
       )
       : (
@@ -129,7 +140,8 @@ Family.propTypes = {
   searchInputClickHandler: React.PropTypes.func.isRequired,
   searchingUsers: React.PropTypes.bool.isRequired,
   familyName: React.PropTypes.string.isRequired,
-  submitFamilyForm: React.PropTypes.func.isRequired
+  submitFamilyForm: React.PropTypes.func.isRequired,
+  familyInfoLoading: React.PropTypes.bool.isRequired
 }
 
 export default Family

@@ -5,8 +5,8 @@ namespace Faw.Web.Api.Models
 {
     public class FamilyViewModel
     {
-        public Guid FamilyId { get; set; }
-        public Guid CreatedById { get; set; }
+        public Guid? FamilyId { get; set; }
+        public Guid? CreatedById { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }

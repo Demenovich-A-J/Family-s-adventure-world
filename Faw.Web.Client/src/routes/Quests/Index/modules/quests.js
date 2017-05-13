@@ -143,6 +143,33 @@ export const onEditButtonClick = (e) => {
   }
 }
 
+export const onNextStatusButtonClick = (e) => {
+  return (dispatch, getState) => {
+    let id = e.target.parentElement.dataset.id
+    let nextStatus = e.target.parentElement.dataset.tostatus
+    dispatch(updateQuestStatus(id, nextStatus))
+  }
+}
+export const updateQuestStatus = (questId, nextStatus) => {
+  return (dispatch, getState) => {
+    dispatch(setUserQuestsLoading(true))
+
+    axios({
+      method: 'Post',
+      url: '/Quest/UpdateQuestStatus/',
+      data: {
+        UserQuestId: questId,
+        Status: nextStatus
+      }
+    }).then(function (response) {
+      dispatch(loadUserQuests(getState().user.userInfo.userId))
+    }).catch(function (error) {
+      console.log(error)
+      dispatch(setUserQuestsLoading(false))
+    })
+  }
+}
+
 export const loadQuestInfo = (questId) => {
   return (dispatch, getState) => {
     dispatch(getQuestInfo())
@@ -185,7 +212,8 @@ export const submitQuestFormHandler = (model) => {
       method: method,
       url: url,
       data: _.extend({}, questInfo, {
-        familyId: state.familyInfo.familyId
+        familyId: state.familyInfo.familyId,
+        createdById: state.user.userInfo.userId
       })
     }).then(function (response) {
       dispatch(loadFamilyQuests(state.familyInfo.familyId))
@@ -209,7 +237,9 @@ export const loadUserQuests = (userId) => {
       url: '/Quest/FetchUserQuests/' + userId
     }).then(function (response) {
       if (response.data) {
-        dispatch(setUserQuests(response.data.quests))
+        var quests = addActionsToQuests(getState, response.data.quests, true)
+
+        dispatch(setUserQuests(quests))
       }
 
       dispatch(setUserQuestsLoading(false))
@@ -230,7 +260,8 @@ export const loadFamilyQuests = (familyId) => {
       url: '/Quest/FetchFamilyQuests/' + familyId
     }).then(function (response) {
       if (response.data) {
-        dispatch(setFamilyQuests(response.data.quests))
+        var quests = addActionsToQuests(getState, response.data.quests)
+        dispatch(setFamilyQuests(quests))
       }
 
       dispatch(setFamilyQuestsLoading(false))
@@ -241,13 +272,55 @@ export const loadFamilyQuests = (familyId) => {
   }
 }
 
-export const addActionsToQuests = (quests) => {
+export const addActionsToQuests = (getState, quests, userQuest = false) => {
+  var user = getState().user
+
   return _.map(quests, function (element) {
-    return _.extend({}, element, {
-      actions : {
+    let actions = []
+
+    if (!userQuest) {
+      actions.push({
         type: 'edit',
+        icon: 'edit',
         id: element.questId
+      })
+    } else {
+      if (element.status === 'Completed') {
+        if (user.userInfo.role === 'Dad' || user.userInfo.role === 'Mom') {
+          actions.push({
+            type: 'accept',
+            icon: 'thumb_up',
+            toStatus: 'Verified',
+            id: element.userQuestId
+          })
+        }
       }
+
+      if (user.userInfo.role === 'Son' ||
+        user.userInfo.role === 'Daughter' ||
+        element.assignedOnId === user.userInfo.userId) {
+        if (element.status === 'Assigned') {
+          actions.push({
+            type: 'start',
+            icon: 'fast_forward',
+            toStatus: 'InProgress',
+            id: element.userQuestId
+          })
+        }
+
+        if (element.status === 'InProgress') {
+          actions.push({
+            type: 'complete',
+            icon: 'check_circle',
+            toStatus: 'Completed',
+            id: element.userQuestId
+          })
+        }
+      }
+    }
+
+    return _.extend({}, element, {
+      actions : actions
     })
   })
 }
@@ -261,7 +334,8 @@ export const actions = {
   loadUserQuests,
   loadFamilyQuests,
   onEditButtonClick,
-  loadQuestInfo
+  loadQuestInfo,
+  onNextStatusButtonClick
 }
 
 const ACTION_HANDLERS = {
@@ -273,11 +347,11 @@ const ACTION_HANDLERS = {
     (state, action) => _.assign({}, state, { tabId: action.payload }),
   [SET_FAMILY_QUESTS]:
     (state, action) => {
-      return _.assign({}, state, { familyQuests: addActionsToQuests(action.payload) })
+      return _.assign({}, state, { familyQuests: action.payload })
     },
   [SET_USER_QUESTS]:
     (state, action) => {
-      return _.assign({}, state, { userQuests: addActionsToQuests(action.payload) })
+      return _.assign({}, state, { userQuests: action.payload })
     },
   [SET_FAMILY_QUESTS_LOADING]:
     (state, action) => _.assign({}, state, { familyQuestsLoading: action.payload }),
