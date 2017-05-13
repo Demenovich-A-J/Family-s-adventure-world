@@ -398,7 +398,7 @@ export const submitAchivmentInfo = () => {
 
     if (_.isNil(achivmentDetailsInfo.achivmentId)) {
       url = '/Achivment/Create'
-      method = 'Put'
+      method = 'Post'
     } else {
       url = '/Achivment/Update'
       method = 'Post'

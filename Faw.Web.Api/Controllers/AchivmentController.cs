@@ -90,7 +90,7 @@ namespace Faw.Web.Api.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Create")]
         public IHttpActionResult Create([FromBody] AchivmentViewModel achivment)
         {

@@ -28,7 +28,7 @@ namespace Faw.Web.Api.Controllers
         }
 
         // Put api/Family/Create
-        [HttpPut]
+        [HttpPost]
         [Route("Create")]
         public IHttpActionResult Create([FromBody]FamilyViewModel family)
         {
@@ -88,7 +88,7 @@ namespace Faw.Web.Api.Controllers
             });
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("AddFamilyMember")]
         public IHttpActionResult AddFamilyMember([FromBody] AddFamilyMember model)
         {

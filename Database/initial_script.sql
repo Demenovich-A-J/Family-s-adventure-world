@@ -232,7 +232,7 @@ BEGIN
 	CREATE TABLE PlayerInfo (
 	   PlayerInfoId         uniqueidentifier     not null,
 	   Level                int                  not null,
-	   ExpirienceAmount     float                not null,
+	   ExpirienceAmount     decimal(25,5)        not null,
 	   CONSTRAINT PK_PlayerInfo primary key nonclustered (PlayerInfoId)
 	)
 END

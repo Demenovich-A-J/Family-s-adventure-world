@@ -121,7 +121,7 @@ export const MemberDetails = (props) => (
           <Loading />
         )
         : (
-          <MemberQuestList userQuests={props.userQuests} />
+          <MemberQuestList userQuests={props.userQuests} onNextStatusButtonClick={props.onNextStatusButtonClick} />
         )
       }
     </Cell>
@@ -140,7 +140,8 @@ MemberDetails.propTypes = {
   availableQuestSelectedId: React.PropTypes.string.isRequired,
   onAvailableQuestSelectChanged: React.PropTypes.func.isRequired,
   onAssignButtonClick: React.PropTypes.func.isRequired,
-  userQuests: React.PropTypes.array.isRequired
+  userQuests: React.PropTypes.array.isRequired,
+  onNextStatusButtonClick: React.PropTypes.func.isRequired
 }
 
 export default MemberDetails

@@ -5,7 +5,8 @@ import { actions } from '../modules/memberDetails'
 const mapDispatchToProps = {
   // action: actions.SomeAction,
   onAvailableQuestSelectChanged: actions.onAvailableQuestSelectChanged,
-  onAssignButtonClick: actions.onAssignButtonClick
+  onAssignButtonClick: actions.onAssignButtonClick,
+  onNextStatusButtonClick: actions.onNextStatusButtonClick
 }
 const mapStateToProps = (state) => ({
   userInfo: state.memberDetails.userInfo,
@@ -17,7 +18,7 @@ const mapStateToProps = (state) => ({
   availableQuestsLoading: state.memberDetails.availableQuestsLoading,
   availableQuestSelectedId: state.memberDetails.availableQuestSelectedId,
   userQuestAssigning: state.memberDetails.userQuestAssigning,
-  userQuests: state.memberDetails.userQuests
+  userQuests: state.memberDetails.userQuests,
   // variable: state.memberDetails.variableName
 })
 

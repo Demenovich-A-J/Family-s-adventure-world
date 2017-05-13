@@ -202,7 +202,7 @@ export const submitQuestFormHandler = (model) => {
 
     if (_.isNil(questInfo.questId)) {
       url = '/Quest/Create'
-      method = 'Put'
+      method = 'Post'
     } else {
       url = '/Quest/Update'
       method = 'Post'

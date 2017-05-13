@@ -28,7 +28,7 @@ namespace Faw.Web.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Create")]
         public IHttpActionResult Create([FromBody] QuestViewModel quest)
         {
@@ -70,7 +70,7 @@ namespace Faw.Web.Api.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("AssignUserQuest")]
         public IHttpActionResult AssignUserQuest([FromBody] AssignUserQuestViewModel assignUserQuestViewModel)
         {

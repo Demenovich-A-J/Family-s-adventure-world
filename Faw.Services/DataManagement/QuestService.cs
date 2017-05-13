@@ -87,7 +87,7 @@ namespace Faw.Services.DataManagement
 
             using (var contextScope = ContextScopeFactory.Create())
             {
-                _userQuestRepository.Insert(Mapper.Map<Faw.Models.Domain.UserQuest>(userQuest));
+                _userQuestRepository.Insert(_mapper.Map<Faw.Models.Domain.UserQuest>(userQuest));
 
                 contextScope.SaveChanges();
             }

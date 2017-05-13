@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataTable, TableHeader } from 'react-mdl'
+import { DataTable, TableHeader, IconButton } from 'react-mdl'
 import { Link } from 'react-router'
 
 const renderDetailsLink = (name, row) => {
@@ -19,6 +19,18 @@ function getStatusClass (status) {
     default:
       return 'text-info'
   }
+}
+
+const renderEditAction = (actions, onNextStatusButtonClick) => {
+  return actions && actions.map((a, i) => (
+    <IconButton key={i}
+      name={a.icon}
+      icon={a.icon}
+      data-id={a.id}
+      data-toStatus={a.toStatus}
+      colored
+      onClick={onNextStatusButtonClick} />
+  ))
 }
 
 const renderStatus = (status) => {
@@ -64,11 +76,19 @@ export const MemberQuestList = (props) => (
     >
       Created
     </TableHeader>
+    <TableHeader
+      name='actions'
+      cellFormatter={(actions) => {
+        return renderEditAction(actions, props.onNextStatusButtonClick)
+      }}>
+      Actions
+    </TableHeader>
   </DataTable>
 )
 
 MemberQuestList.propTypes = {
-  userQuests: React.PropTypes.array.isRequired
+  userQuests: React.PropTypes.array.isRequired,
+  onNextStatusButtonClick: React.PropTypes.func.isRequired
 }
 
 export default MemberQuestList

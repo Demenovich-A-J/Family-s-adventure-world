@@ -124,7 +124,7 @@ export const searchItemClickHandler = (e) => {
     dispatch(setLoading(true))
 
     axios({
-      method: 'Put',
+      method: 'Post',
       url: '/Family/AddFamilyMember/',
       data: {
         UserId: e.target.dataset.id,
@@ -168,7 +168,7 @@ export const submitFamilyForm = (e) => {
     var url = '/Family/Edit'
 
     if (state.familyInfo === null) {
-      method = 'Put'
+      method = 'Post'
       url = '/Family/Create'
     }
 

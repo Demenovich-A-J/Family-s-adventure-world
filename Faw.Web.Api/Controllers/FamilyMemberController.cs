@@ -94,7 +94,8 @@ namespace Faw.Web.Api.Controllers
                 requiredLevel = x.Quest.RequiredLevel,
                 createdOn = x.CreatedOn.ToShortDateString(),
                 updatedOn = x.UpdatedOn.ToShortDateString(),
-                questId = x.QuestId
+                questId = x.QuestId,
+                userQuestId = x.UserQuestId
             }));
         }
     }

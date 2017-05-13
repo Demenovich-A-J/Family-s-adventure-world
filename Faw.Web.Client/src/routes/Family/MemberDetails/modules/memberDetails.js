@@ -158,7 +158,8 @@ export const loadFamilyMemberQuests = (userId) => {
       url: '/FamilyMember/FamilyUserQuests/' + userId
     }).then(function (response) {
       if (response.data) {
-        dispatch(setFamilyMemeberQuests(response.data))
+        var quests = addActionsToQuests(getState, response.data, true)
+        dispatch(setFamilyMemeberQuests(quests))
       }
 
       dispatch(setFamilyMemeberQuestsLoading(false))
@@ -219,7 +220,7 @@ export const assignQuestToFamilyMember = () => {
     var userId = state.memberDetails.userInfo.userId
 
     axios({
-      method: 'Put',
+      method: 'Post',
       url: '/Quest/AssignUserQuest',
       data: {
         UserId: userId,
@@ -254,10 +255,89 @@ export const onAssignButtonClick = (e) => {
   }
 }
 
+export const onNextStatusButtonClick = (e) => {
+  return (dispatch, getState) => {
+    let id = e.target.parentElement.dataset.id
+    let nextStatus = e.target.parentElement.dataset.tostatus
+    dispatch(updateQuestStatus(id, nextStatus))
+  }
+}
+export const updateQuestStatus = (questId, nextStatus) => {
+  return (dispatch, getState) => {
+
+    axios({
+      method: 'Post',
+      url: '/Quest/UpdateQuestStatus/',
+      data: {
+        UserQuestId: questId,
+        Status: nextStatus
+      }
+    }).then(function (response) {
+      dispatch(loadFamilyMemberDetails(getState().memberDetails.userInfo.userId))
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+}
+
+export const addActionsToQuests = (getState, quests, userQuest = false) => {
+  var user = getState().user
+
+  return _.map(quests, function (element) {
+    let actions = []
+
+    if (!userQuest) {
+      actions.push({
+        type: 'edit',
+        icon: 'edit',
+        id: element.questId
+      })
+    } else {
+      if (element.status === 'Completed') {
+        if (user.userInfo.role === 'Dad' || user.userInfo.role === 'Mom') {
+          actions.push({
+            type: 'accept',
+            icon: 'thumb_up',
+            toStatus: 'Verified',
+            id: element.userQuestId
+          })
+        }
+      }
+
+      if (user.userInfo.role === 'Son' ||
+        user.userInfo.role === 'Daughter' ||
+        element.assignedOnId === user.userInfo.userId) {
+        if (element.status === 'Assigned') {
+          actions.push({
+            type: 'start',
+            icon: 'fast_forward',
+            toStatus: 'InProgress',
+            id: element.userQuestId
+          })
+        }
+
+        if (element.status === 'InProgress') {
+          actions.push({
+            type: 'complete',
+            icon: 'check_circle',
+            toStatus: 'Completed',
+            id: element.userQuestId
+          })
+        }
+      }
+    }
+
+    return _.extend({}, element, {
+      actions : actions
+    })
+  })
+}
+
 export const actions = {
   loadFamilyMemberDetails,
   onAvailableQuestSelectChanged,
-  onAssignButtonClick
+  onAssignButtonClick,
+  onNextStatusButtonClick
 }
 
 const ACTION_HANDLERS = {

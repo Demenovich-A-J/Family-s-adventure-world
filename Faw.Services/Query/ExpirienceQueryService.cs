@@ -58,7 +58,9 @@ namespace Faw.Services.Query
                 return result;
             }
 
-            result.ResultLevel = expirienceNextLevel.Level;
+            result.ResultLevel = expirienceNextLevel.Level == 0
+                ? expirienceNextLevel.Level + 1
+                : expirienceNextLevel.Level;
 
             result.ExpirienceApplyType = ExpirienceApplyType.LevelUp;
 
